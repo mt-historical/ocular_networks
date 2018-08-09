@@ -77,6 +77,13 @@ unified_inventory.register_craft({
 	width = 2,
 })
 
+unified_inventory.register_craft({
+	type = "ocun_melting",
+	items = {"ocular_networks:placeholder_power 1000","ocular_networks:angmallen_block"},
+	output = "ocular_networks:angmallen_source",
+	width = 2,
+})
+
 unified_inventory.register_craft_type("ocun_alloying", {
 	description = "Alloy Centrifuge",
 	icon = "poly_centrifuge.png^poly_frame.png",
@@ -252,8 +259,15 @@ unified_inventory.register_craft({
 	width = 3,
 })
 
+unified_inventory.register_craft_type("ocun_charging", {
+	description = "Charging Station",
+	icon = "default_copper_block.png^poly_frame.png^poly_gui_icon_pwr.png",
+	width = 2,
+	height = 1,
+})
+
 unified_inventory.register_craft({
-	type = "ocun_melting",
+	type = "ocun_charging",
 	items = {"ocular_networks:placeholder_power 300","ocular_networks:uncharged_gem"},
 	output = "ocular_networks:charged_gem",
 	width = 2,

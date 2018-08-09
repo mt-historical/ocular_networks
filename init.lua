@@ -11,6 +11,7 @@ dofile(modpath.."/items.lua")
 dofile(modpath.."/rifle.lua")
 dofile(modpath.."/jetring.lua")
 dofile(modpath.."/armor.lua")
+dofile(modpath.."/upgrade.lua")
 dofile(modpath.."/craft.lua")
 if minetest.get_modpath("unified_inventory") then
 	dofile(modpath.."/ufin_compat.lua")

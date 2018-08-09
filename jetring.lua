@@ -16,11 +16,12 @@ armor:register_armor("ocular_networks:jetring", {
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local inv = minetest.get_inventory({type="detached", name=player:get_player_name().."_armor"})
+		local playerPower = 0
 		if player:get_attribute("personal_ocular_power") then
-			local playerPower = tonumber(player:get_attribute("personal_ocular_power"))
+			playerPower = tonumber(player:get_attribute("personal_ocular_power"))
 		end
 		if inv:contains_item("armor", "ocular_networks:jetring") then
-			if player:get_player_control().jump == true then
+			if player:get_player_control().jump == true and not player:get_player_control().sneak then
 				if playerPower > 0 then
 					local playerPhysics = player:get_physics_override()
 					playerPhysics.gravity=-0.25

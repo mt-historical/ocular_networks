@@ -129,7 +129,7 @@ minetest.register_craftitem("ocular_networks:healer", {
 	inventory_image = "poly_gimble.png",
 	stack_max=1,
 	on_use = function(itemstack, user, pointed_thing)
-		if tonumber(user:get_attribute("personal_ocular_power")) and tonumber(user:get_attribute("personal_ocular_power")) > 99 then
+		if user:get_attribute("personal_ocular_power") and tonumber(user:get_attribute("personal_ocular_power")) > 99 then
 			user:set_attribute("personal_ocular_power", tonumber(user:get_attribute("personal_ocular_power"))-100)
 			user:set_hp(20)
 		end
@@ -148,7 +148,7 @@ minetest.register_tool("ocular_networks:angmallen_hammer", {
 	wield_scale = {x=3.0, y=3.0, z=1.0},
 	tool_capabilities = {
 		full_punch_interval = 0.01,
-		max_drop_level=3,
+		max_drop_level=10,
 		groupcaps={
 			cracky = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
 		},
@@ -164,7 +164,7 @@ minetest.register_tool("ocular_networks:angmallen_axe", {
 	wield_scale = {x=3.0, y=3.0, z=1.0},
 	tool_capabilities = {
 		full_punch_interval = 0.01,
-		max_drop_level=3,
+		max_drop_level=10,
 		groupcaps={
 			choppy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
 		},
@@ -174,16 +174,16 @@ minetest.register_tool("ocular_networks:angmallen_axe", {
 })
 
 minetest.register_tool("ocular_networks:angmallen_sword", {
-	description = minetest.colorize("#00affa", "Angmallen Decapitator\n")..minetest.colorize("#ff0000", "70 Melee Damage"),
+	description = minetest.colorize("#00affa", "Angmallen Decapitator\n")..minetest.colorize("#ff0000", "160 Melee Damage"),
 	inventory_image = "poly_angmallen_sword.png",
 	wield_scale = {x=3.0, y=3.0, z=1.0},
 	tool_capabilities = {
 		full_punch_interval = 1,
-		max_drop_level=3,
+		max_drop_level=10,
 		groupcaps={
 			snappy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
 		},
-		damage_groups = {fleshy=70},
+		damage_groups = {fleshy=160},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })

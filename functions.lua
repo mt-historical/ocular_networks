@@ -89,29 +89,31 @@ end)
 
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
-	if player:get_attribute("personal_ocular_power") then
-		if tonumber(player:get_attribute("personal_ocular_power")) > 1000000000000 then
-			player:set_attribute("personal_ocular_power", 1000000000000)
-		end
-		if player:get_attribute("ocular_networks_hud_power") then
-			player:hud_change(tonumber(player:get_attribute("ocular_networks_hud_power")), "text", "Ocular Power: "..player:get_attribute("personal_ocular_power"))
-		else
-			if player:get_attribute("personal_ocular_power") then
-				local hud = player:hud_add({
-					hud_elem_type="text",
-					position = {x=0.5,y=0.87},
-					number= 0xffffff,
-					scale={x=100,y=100},
-					text="Ocular Power: "..player:get_attribute("personal_ocular_power"),
-					alignment=0,
-					
-				})
-				player:set_attribute("ocular_networks_hud_power", hud)
-			else
-				player:set_attribute("personal_ocular_power", 0)
+		if player:get_attribute("personal_ocular_power") then
+			if tonumber(player:get_attribute("personal_ocular_power")) > 1000000000000 then
+				player:set_attribute("personal_ocular_power", 1000000000000)
 			end
+			if player:get_attribute("ocular_networks_hud_power") then
+				player:hud_change(tonumber(player:get_attribute("ocular_networks_hud_power")), "text", "Ocular Power: "..player:get_attribute("personal_ocular_power"))
+			else
+				if player:get_attribute("personal_ocular_power") then
+				local hud = player:hud_add({
+						hud_elem_type="text",
+						position = {x=0.5,y=0.87},
+						number= 0xffffff,
+						scale={x=100,y=100},
+						text="Ocular Power: "..player:get_attribute("personal_ocular_power"),
+						alignment=0,
+						
+					})
+					player:set_attribute("ocular_networks_hud_power", hud)
+				else
+					player:set_attribute("personal_ocular_power", 0)
+				end
+			end
+		else
+			player:set_attribute("personal_ocular_power", "0")
 		end
-	end
 	end
 end)
 
