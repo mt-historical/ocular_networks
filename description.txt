@@ -1,0 +1,4 @@
+Draw power from luminance, and use it to transmute materials into superfuel, to power useful machines.
+
+Version: a0
+Revision: 5/r1
