@@ -1,3 +1,5 @@
+if minetest.get_modpath("wieldview") then error("please disable wieldview") end
+
 local bone = "Arm_Right"
 local pos = {x=0, y=5.5, z=3}
 local scale = {x=0.25, y=0.25}
