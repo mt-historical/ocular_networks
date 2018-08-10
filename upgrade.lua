@@ -1,3 +1,8 @@
+minetest.register_craftitem("ocular_networks:upgrade", {
+	description = "Armor Upgrade Base\n"..minetest.colorize("#00affa", "Used to make upgrade tokens for the angmallen armor."),
+	inventory_image = "poly_upgrade.png",
+})
+
 minetest.register_craftitem("ocular_networks:upgrade_speed", {
 	description = "Speed Upgrade L1 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "2x speed multiplier"),
 	inventory_image = "poly_upgrade_speed.png",
