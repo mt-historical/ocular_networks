@@ -11,6 +11,8 @@ work. If not, see http://creativecommons.org/licenses/by-sa/4.0/
 -----------------------------
 
 Ocular Networks is a minetest mod implementing a power network system, tools, weapons, and a lot more.
+However, I have done very little optimizing, and the extent of that is removing some checks and redundant files and changes.
+So: LAG WARNING, runs almost fine on a quad core laptop w/ 4 gigs of ram, but still throws 'abm took longer than expected' warnings with over 83 machines running.
 
 Current Features:
 -Power Generation from sunlight
