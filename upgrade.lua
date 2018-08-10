@@ -81,3 +81,17 @@ minetest.register_craftitem("ocular_networks:upgrade_defense3", {
 	groups = {ocp_upgrade=1},
 	stack_max=1
 })
+
+minetest.register_craftitem("ocular_networks:upgrade_heal", {
+	description = "Healing Module\n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "+1 HP/50 OCP"),
+	inventory_image = "poly_upgrade_heal.png",
+	groups = {ocp_upgrade=1},
+	stack_max=1
+})
+
+minetest.register_craftitem("ocular_networks:upgrade_heal2", {
+	description = "Healing Module L2\n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "+2 HP/50 OCP"),
+	inventory_image = "poly_upgrade_heal.png",
+	groups = {ocp_upgrade=1},
+	stack_max=1
+})

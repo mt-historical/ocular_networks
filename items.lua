@@ -130,8 +130,8 @@ minetest.register_craftitem("ocular_networks:healer", {
 	stack_max=1,
 	on_use = function(itemstack, user, pointed_thing)
 		if user:get_attribute("personal_ocular_power") and tonumber(user:get_attribute("personal_ocular_power")) > 99 then
-			user:set_attribute("personal_ocular_power", tonumber(user:get_attribute("personal_ocular_power"))-100)
-			user:set_hp(20)
+			user:set_attribute("personal_ocular_power", tonumber(user:get_attribute("personal_ocular_power"))-10)
+			user:set_hp(user:get_hp()+2)
 		end
 	end
 })
@@ -174,7 +174,7 @@ minetest.register_tool("ocular_networks:angmallen_axe", {
 })
 
 minetest.register_tool("ocular_networks:angmallen_sword", {
-	description = minetest.colorize("#00affa", "Angmallen Decapitator\n")..minetest.colorize("#ff0000", "160 Melee Damage"),
+	description = minetest.colorize("#00affa", "Angmallen Decapitator\n")..minetest.colorize("#ff0000", "290 Melee Damage"),
 	inventory_image = "poly_angmallen_sword.png",
 	wield_scale = {x=3.0, y=3.0, z=1.0},
 	tool_capabilities = {
@@ -183,7 +183,7 @@ minetest.register_tool("ocular_networks:angmallen_sword", {
 		groupcaps={
 			snappy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
 		},
-		damage_groups = {fleshy=160},
+		damage_groups = {fleshy=290},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
