@@ -1,0 +1,8 @@
+a0-5/r1:
+Initial release.
+content:
+- battery for power generation
+- frame for battery multiblock
+- lens for battery multiblock
+- 3 types of distributor node for transfer of power
+- 
