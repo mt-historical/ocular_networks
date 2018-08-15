@@ -1,3 +1,27 @@
+a0-7/r1.6
+Patch for initial release.
+additions:
+- angmallen armor upgrade pendant
+- 3x speed upgrades
+- 3x float upgrades
+- 3x defense upgrades
+- 3x heal upgrades
+- 3x jump boost upgrades
+- wield3d support
+
+a0-6/r1.5:
+Patch for initial release.
+additions:
+- machines:
+-- passive cooler
+-- network uplink
+-- network downlink
+-- power reservoir
+- 3d_armor dependency
+- angmallen metal: (metal block node, ingot item, liquid, bucket of liquid)
+- angmallen armor set: (shield, helmet, chestplate, leggings, boots)
+- angmallen tool set: (sword, axe, hammer)
+
 a0-5/r1:
 Initial release.
 content:
@@ -5,4 +29,16 @@ content:
 - frame for battery multiblock
 - lens for battery multiblock
 - 3 types of distributor node for transfer of power
-- 
+- item processing machines:
+-- melter
+-- fuser
+-- alloyer
+- blaze rifle weapons
+- healing tool
+- inspector tool
+- luminium metal: (metal block node, ingot item, liquid, bucket of liquid)
+- lumigold metal: (metal block node, ingot item, liquid, bucket of liquid)
+- liquids for all metals in the default game
+- buckets for all molten metal liquids
+- misc. crafting items
+- unified_inventory compatibility
