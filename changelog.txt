@@ -1,5 +1,11 @@
 This list is simply a history of changes. For info, visit the wiki.
 
+a0-8/r2
+second release.
+additions:
+- confiuration file added: .config.lua
+- laser drill system added
+
 a0-7/r1.6
 Patch for initial release.
 additions:

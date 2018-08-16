@@ -67,6 +67,13 @@ default.gui_bg_img ..
 "list[context;output;1.5,3.5;5,1;]"..
 "list[current_player;main;0,5;8,4;]"
 
+local chestspec = ""..
+"size[20,10;]"..
+default.gui_bg ..
+default.gui_bg_img ..
+"list[context;output;0,0;20,5;]"..
+"list[current_player;main;6,6;8,4;]"
+
 minetest.register_node("ocular_networks:frame", {
 	description = "Gold Frame\n"..minetest.colorize("#00affa", "Used as a part of most multiblock structures"),
 	drawtype = "glasslike_framed",
@@ -613,7 +620,7 @@ minetest.register_node("ocular_networks:networknode", {
 })
 
 minetest.register_node("ocular_networks:networknode2", {
-	description = "Network Node (Downlink)\n"..minetest.colorize("#00affa", "When placed on a node which has ocular power,\nit will insert the set amount power into the node regardless of the\nway the node operates.\nyou can also press 'use' and rightclick on it to purge all power into the block below."),
+	description = "Network Node (Downlink)\n"..minetest.colorize("#00affa", "When placed on a node which has ocular power,\nit will insert the set amount power into the node regardless of the\nway the node operates."),
 	tiles = {"poly_uplink2.png", "poly_battery_bottom.png", "poly_uplink_side2.png"},
 	is_ground_content = false,
 	sunlight_propagates = true,
@@ -644,34 +651,6 @@ minetest.register_node("ocular_networks:networknode2", {
 		local meta = minetest.get_meta(pos)
 		local owner = meta:get_string("owner")
 		return owner == player:get_player_name()
-	end,
-	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-	if player:get_player_control().aux1 == true then
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
-		local source_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-		local source_power = source_meta:get_int("ocular_power")
-		local source_owner = source_meta:get_string("owner")
-		if source_power then
-			if owner == source_owner then
-				if minetest.get_player_by_name(owner) and player:get_player_name() == owner then
-					if minetest.get_player_by_name(owner):is_player_connected(owner) then
-						local player = minetest.get_player_by_name(owner)
-						if player:get_attribute("personal_ocular_power") then
-							local playerPower = tonumber(player:get_attribute("personal_ocular_power"))
-							source_meta:set_int("ocular_power", source_power+playerPower)
-							player:set_attribute("personal_ocular_power", tostring(0))
-							meta:set_string("infotext", "Owned By: "..owner.."\n"..owner.."'s Power is at: 0")
-						else
-							return 0
-						end
-					end
-				end
-			end
-		end
-		local function b() end
-		minetest.after(1, b)
-		end
 	end,
 	selection_box = {
 		type = "fixed",
@@ -768,6 +747,92 @@ minetest.register_node("ocular_networks:charger", {
 		meta:set_string("owner", owner)
 		meta:set_string("formspec", coolspec)
 		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_node("ocular_networks:laserdrill", {
+	description = "Laser Drill Head\n"..minetest.colorize("#00affa", "When it's multiblock structure is complete,\nit will dig downwards very fast."),
+	tiles = {"poly_laserdrill_top.png", "poly_laserdrill_bottom.png", "poly_laserdrill_side.png"},
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+	on_receive_fields = function(pos, formname, fields, sender)
+		local meta = minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_int("digDistance", 2)
+		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+	on_rightclick=function(pos, node, player, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local distance = meta:set_int("digDistance", 2)
+	end
+})
+
+minetest.register_node("ocular_networks:laserdrillchest", {
+	description = "Laser Drill Controller\n"..minetest.colorize("#00affa", "Can also be used as a normal chest."),
+	tiles = {"poly_laserdrill_chest_top.png", "poly_laserdrill_chest_bottom.png", "poly_laserdrill_chest_side.png"},
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+		on_receive_fields = function(pos, formname, fields, sender)
+		local meta = minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", chestspec)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		local inv = meta:get_inventory()
+		inv:set_list("output", {""})
+		inv:set_size("output", 100)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", chestspec)
+		meta:set_string("infotext", "Owned By: "..owner)
+		meta:set_int("ocular_power", 0)
 	end,
 	can_dig = function(pos, player)
 		local meta = minetest.get_meta(pos)

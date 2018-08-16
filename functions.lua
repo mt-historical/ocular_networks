@@ -10,7 +10,6 @@ local function disallow()
 	end
 end
 
-
 function ocular_networks.tableHasKey(table,key)
 	return table[key] ~= nil
 end
@@ -90,8 +89,8 @@ end)
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		if player:get_attribute("personal_ocular_power") then
-			if tonumber(player:get_attribute("personal_ocular_power")) > 1000000000000 then
-				player:set_attribute("personal_ocular_power", 1000000000000)
+			if tonumber(player:get_attribute("personal_ocular_power")) > ocular_networks.config.live.max_personal_network_power then
+				player:set_attribute("personal_ocular_power", ocular_networks.config.live.max_personal_network_power)
 			end
 			if player:get_attribute("ocular_networks_hud_power") then
 				player:hud_change(tonumber(player:get_attribute("ocular_networks_hud_power")), "text", "Ocular Power: "..player:get_attribute("personal_ocular_power"))
