@@ -675,143 +675,99 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade",
+	output="ocular_networks:pipe_socket",
 	recipe={
-		{"", "ocular_networks:charged_gem", ""},
-		{"", "ocular_networks:angmallen_block_3", ""},
-		{"", "", ""}
-	},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
-})
-
-minetest.register_craft({
-	output="ocular_networks:upgrade_speed",
-	recipe={
-		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:charger", "ocular_networks:upgrade", "ocular_networks:charger"},
-		{"ocular_networks:charger", "ocular_networks:charger", "ocular_networks:charger"}
-	},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
-})
-
-minetest.register_craft({
-	output="ocular_networks:upgrade_speed2",
-	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_speed", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_speed", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_speed"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_speed", "ocular_networks:angmallen_bar"}
+		{"ocular_networks:luminium_bar_3", "default:tin_ingot", "ocular_networks:luminium_bar_3"},
+		{"default:tin_ingot", "", "default:tin_ingot"},
+		{"ocular_networks:luminium_bar_3", "default:tin_ingot", "ocular_networks:luminium_bar_3"}
 	}
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_speed3",
+	output="ocular_networks:pipe_E 10",
 	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_speed2", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_speed2", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_speed2"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_speed2", "ocular_networks:angmallen_bar"}
+		{"", "ocular_networks:pipe_socket", ""},
+		{"ocular_networks:silicotin_bar", "default:chest_locked", "ocular_networks:silicotin_bar"},
+		{"", "ocular_networks:pipe_socket", ""}
 	}
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_jump",
+	output="ocular_networks:laserdrill",
 	recipe={
-		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:piston", "ocular_networks:upgrade", "ocular_networks:piston"},
-		{"ocular_networks:piston", "ocular_networks:piston", "ocular_networks:piston"}
-	},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
-})
-
-minetest.register_craft({
-	output="ocular_networks:upgrade_jump2",
-	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_jump", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_jump", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_jump"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_jump", "ocular_networks:angmallen_bar"}
+		{"ocular_networks:toxic_slate", "ocular_networks:pipe_socket", "ocular_networks:toxic_slate"},
+		{"ocular_networks:silicotin_block", "ocular_networks:charged_gem", "ocular_networks:silicotin_block"},
+		{"ocular_networks:frame", "ocular_networks:charged_gem", "ocular_networks:frame"}
 	}
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_jump3",
+	output="ocular_networks:laserdrillchest",
 	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_jump2", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_jump2", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_jump2"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_jump2", "ocular_networks:angmallen_bar"}
+		{"default:diamondblock", "ocular_networks:distributor", "default:diamondblock"},
+		{"ocular_networks:silicotin_block", "default:chest_locked", "ocular_networks:silicotin_block"},
+		{"ocular_networks:silicotin_block", "ocular_networks:pipe_socket", "ocular_networks:silicotin_block"}
 	}
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_float",
+	output="ocular_networks:pipe_itembuffer 9",
 	recipe={
-		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:gearbox", "ocular_networks:upgrade", "ocular_networks:gearbox"},
-		{"ocular_networks:gearbox", "ocular_networks:gearbox", "ocular_networks:gearbox"}
-	},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
-})
-
-minetest.register_craft({
-	output="ocular_networks:upgrade_float2",
-	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_float", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_float", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_float"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_float", "ocular_networks:angmallen_bar"}
+		{"ocular_networks:lumigold_block", "ocular_networks:pipe_socket", "ocular_networks:lumigold_block"},
+		{"ocular_networks:pipe_socket", "default:chest_locked", "ocular_networks:pipe_socket"},
+		{"ocular_networks:lumigold_block", "ocular_networks:pipe_socket", "ocular_networks:lumigold_block"}
 	}
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_float3",
-	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_float2", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_float2", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_float2"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_float2", "ocular_networks:angmallen_bar"}
-	}
-})
-
-
-minetest.register_craft({
-	output="ocular_networks:upgrade_defense",
-	recipe={
-		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:angmallen_bar", "ocular_networks:angmallen_bar"}
-	},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
+	type="shapeless",
+	output="ocular_networks:pipe_E",
+	recipe={"ocular_networks:pipe_U"},
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_defense2",
-	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_defense", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_defense", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_defense"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_defense", "ocular_networks:angmallen_bar"}
-	}
+	type="shapeless",
+	output="ocular_networks:pipe_U",
+	recipe={"ocular_networks:pipe_E"},
+})
+
+ocular_networks.register_fusion({
+	item_1="default:tin_ingot",
+	item_2="default:glass",
+	output="ocular_networks:silicotin_bar",
+	give_back="",
+	cost=1000
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_defense3",
+	output="ocular_networks:pipe_wrench",
 	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_defense2", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_defense2", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_defense2"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_defense2", "ocular_networks:angmallen_bar"}
+		{"", "ocular_networks:pipe_socket", "ocular_networks:silicotin_bar"},
+		{"", "ocular_networks:silicotin_bar", ""},
+		{"ocular_networks:silicotin_bar", "", ""}
 	}
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_heal",
+	output="ocular_networks:silicotin_block",
 	recipe={
-		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:healer", "ocular_networks:upgrade", "ocular_networks:healer"},
-		{"ocular_networks:healer", "ocular_networks:healer", "ocular_networks:healer"}
-	},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
+		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar"}
+	}
 })
 
 minetest.register_craft({
-	output="ocular_networks:upgrade_heal2",
+	type="shapeless",
+	output="ocular_networks:silicotin_bar 9",
+	recipe={"ocular_networks:silicotin_block"},
+})
+
+minetest.register_craft({
+	output="ocular_networks:pipe_trashextractor",
 	recipe={
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_heal", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:upgrade_heal", "ocular_networks:angmallen_bar", "ocular_networks:upgrade_heal"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade_heal", "ocular_networks:angmallen_bar"}
+		{"ocular_networks:silicotin_bar", "ocular_networks:pipe_socket", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:silicotin_bar", "ocular_networks:melter", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:frame", "ocular_networks:silicotin_bar", "ocular_networks:frame"}
 	}
 })

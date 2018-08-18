@@ -1,13 +1,19 @@
 This list is simply a history of changes. For info, visit the wiki.
 
+a1-9/fr1
+Initial Full release
+- pipe system added
+- all crafts finished
+
+
 a0-8/r2
-second release.
+second prerelease.
 additions:
 - confiuration file added: .config.lua
 - laser drill system added
 
 a0-7/r1.6
-Patch for initial release.
+Patch for initial prerelease.
 additions:
 - angmallen armor upgrade pendant
 - 3x speed upgrades
@@ -18,7 +24,7 @@ additions:
 - wield3d support
 
 a0-6/r1.5:
-Patch for initial release.
+Patch for initial prerelease.
 additions:
 - machines:
 -- passive cooler
@@ -31,7 +37,7 @@ additions:
 - angmallen tool set: (sword, axe, hammer)
 
 a0-5/r1:
-Initial release.
+Initial prerelease.
 content:
 - battery for power generation
 - frame for battery multiblock

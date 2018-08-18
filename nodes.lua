@@ -25,6 +25,13 @@ default.gui_bg_img ..
 "field[1,4.4;8,1;power;power is at:;${ocular_power}]"..
 "button_exit[0.74,5;8,1;save;Save]"
 
+local trashspec = ""..
+"size[10,6]"..
+default.gui_bg ..
+default.gui_bg_img ..
+"field[1,2.7;8,1;items;input items to take:;${items}]"..
+"button_exit[0.74,5;8,1;save;Save]"
+
 local meltspec = ""..
 "size[8,9;]"..
 default.gui_bg ..
@@ -74,6 +81,13 @@ default.gui_bg_img ..
 "list[context;output;0,0;20,5;]"..
 "list[current_player;main;6,6;8,4;]"
 
+local bufferspec = ""..
+"size[20,10;]"..
+default.gui_bg ..
+default.gui_bg_img ..
+"list[context;main;0,0;20,5;]"..
+"list[current_player;main;6,6;8,4;]"
+
 minetest.register_node("ocular_networks:frame", {
 	description = "Gold Frame\n"..minetest.colorize("#00affa", "Used as a part of most multiblock structures"),
 	drawtype = "glasslike_framed",
@@ -96,6 +110,17 @@ minetest.register_node("ocular_networks:frame", {
 			return itemstack
 		end
 	end
+})
+
+minetest.register_node("ocular_networks:silicotin_block", {
+	description = "Glin\n"..minetest.colorize("#00affa", "Tesselates nicely"),
+	drawtype = "glasslike",
+	tiles = {"poly_silicotin_block.png"},
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
 })
 
 minetest.register_node("ocular_networks:frame_lens", {
@@ -831,6 +856,381 @@ minetest.register_node("ocular_networks:laserdrillchest", {
 		inv:set_size("output", 100)
 		meta:set_string("owner", owner)
 		meta:set_string("formspec", chestspec)
+		meta:set_string("infotext", "Owned By: "..owner)
+		meta:set_int("ocular_power", 0)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_node("ocular_networks:pipe_E", {
+	description = "Horizontal Item Pipe\n"..minetest.colorize("#00affa", "The arrow on top indicates the direction, rightclick with wrench to rotate."),
+	tiles = {"poly_pipe_casing_arrow_right.png", "poly_pipe_casing.png", "poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing.png", "poly_pipe_casing.png"},
+	is_ground_content = false,
+	sunlight_propagates = true,
+	drawtype="nodebox",
+	paramtype="light",
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Owned By: "..owner.."\nRightclick with wrench to change direction")
+		local inv = meta:get_inventory()
+		inv:set_size("pipe_buffer", 10)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed =  {	{-1/2, -1/5, -1/5, 1/2, 1/5, 1/5},
+					{3.5/10, -1.5/5, -1.5/5, 1/2, 1.5/5, 1.5/5},
+					{-1/2, -1.5/5, -1.5/5, -3.5/10, 1.5/5, 1.5/5},
+					}
+	},
+	node_box = {
+		type = "fixed",
+		fixed =  {	{-1/2, -1/5, -1/5, 1/2, 1/5, 1/5},
+					{3.5/10, -1.5/5, -1.5/5, 1/2, 1.5/5, 1.5/5},
+					{-1/2, -1.5/5, -1.5/5, -3.5/10, 1.5/5, 1.5/5},
+					}
+	},
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+				minetest.swap_node(pos, {name="ocular_networks:pipe_S"})
+			end
+		end
+	end
+})
+minetest.register_node("ocular_networks:pipe_S", {
+	description = "unav.tile",
+	tiles = {"poly_pipe_casing_arrow_down.png", "poly_pipe_casing2.png", "poly_pipe_casing.png", "poly_pipe_casing.png", "poly_pipe_socket.png", "poly_pipe_socket.png"},
+	is_ground_content = false,
+	sunlight_propagates = true,
+	drop = "ocular_networks:pipe_E",
+	drawtype="nodebox",
+	paramtype="light",
+	groups = {cracky = 3, oddly_breakable_by_hand = 3, not_in_creative_inventory=1},
+	sounds = default.node_sound_metal_defaults(),
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Owned By: "..owner.."\nRightclick with wrench to change direction")
+		local inv = meta:get_inventory()
+		inv:set_size("pipe_buffer", 10)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/5, -1/2, 1/5, 1/5, 1/2},
+					{-1.5/5, -1.5/5, 3.5/10, 1.5/5, 1.5/5, 1/2},
+					{-1.5/5, -1.5/5, -1/2, 1.5/5, 1.5/5, -3.5/10},
+					}
+	},
+	node_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/5, -1/2, 1/5, 1/5, 1/2},
+					{-1.5/5, -1.5/5, 3.5/10, 1.5/5, 1.5/5, 1/2},
+					{-1.5/5, -1.5/5, -1/2, 1.5/5, 1.5/5, -3.5/10},
+					}
+	},
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+				minetest.swap_node(pos, {name="ocular_networks:pipe_W"})
+			end
+		end
+	end
+})
+minetest.register_node("ocular_networks:pipe_W", {
+	description = "unav.tile",
+	tiles = {"poly_pipe_casing_arrow_left.png", "poly_pipe_casing.png", "poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing.png", "poly_pipe_casing.png"},
+	is_ground_content = false,
+	sunlight_propagates = true,
+	drawtype="nodebox",
+	drop = "ocular_networks:pipe_E",
+	paramtype="light",
+	groups = {cracky = 3, oddly_breakable_by_hand = 3, not_in_creative_inventory=1},
+	sounds = default.node_sound_metal_defaults(),
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Owned By: "..owner.."\nRightclick with wrench to change direction")
+		local inv = meta:get_inventory()
+		inv:set_size("pipe_buffer", 10)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed =  {	{-1/2, -1/5, -1/5, 1/2, 1/5, 1/5},
+					{3.5/10, -1.5/5, -1.5/5, 1/2, 1.5/5, 1.5/5},
+					{-1/2, -1.5/5, -1.5/5, -3.5/10, 1.5/5, 1.5/5},
+					}
+	},
+	node_box = {
+		type = "fixed",
+		fixed =  {	{-1/2, -1/5, -1/5, 1/2, 1/5, 1/5},
+					{3.5/10, -1.5/5, -1.5/5, 1/2, 1.5/5, 1.5/5},
+					{-1/2, -1.5/5, -1.5/5, -3.5/10, 1.5/5, 1.5/5},
+					}
+	},
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+				minetest.swap_node(pos, {name="ocular_networks:pipe_N"})
+			end
+		end
+	end
+})
+minetest.register_node("ocular_networks:pipe_N", {
+	description = "unav.tile",
+	tiles = {"poly_pipe_casing_arrow_up.png", "poly_pipe_casing2.png", "poly_pipe_casing.png", "poly_pipe_casing.png", "poly_pipe_socket.png", "poly_pipe_socket.png"},
+	is_ground_content = false,
+	sunlight_propagates = true,
+	drop = "ocular_networks:pipe_E",
+	drawtype="nodebox",
+	paramtype="light",
+	groups = {cracky = 3, oddly_breakable_by_hand = 3, not_in_creative_inventory=1},
+	sounds = default.node_sound_metal_defaults(),
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Owned By: "..owner.."\nRightclick to change direction")
+		local inv = meta:get_inventory()
+		inv:set_size("pipe_buffer", 10)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/5, -1/2, 1/5, 1/5, 1/2},
+					{-1.5/5, -1.5/5, 3.5/10, 1.5/5, 1.5/5, 1/2},
+					{-1.5/5, -1.5/5, -1/2, 1.5/5, 1.5/5, -3.5/10},
+					}
+	},
+	node_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/5, -1/2, 1/5, 1/5, 1/2},
+					{-1.5/5, -1.5/5, 3.5/10, 1.5/5, 1.5/5, 1/2},
+					{-1.5/5, -1.5/5, -1/2, 1.5/5, 1.5/5, -3.5/10},
+					}
+	},
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+				minetest.swap_node(pos, {name="ocular_networks:pipe_E"})
+			end
+		end
+	end
+})
+minetest.register_node("ocular_networks:pipe_U", {
+	description = "Vertical Item Pipe\n"..minetest.colorize("#00affa", "The arrow indicates the direction, rightclick with wrench to flip."),
+	tiles = {"poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing_arrow_up.png", "poly_pipe_casing_arrow_up.png", "poly_pipe_casing_arrow_up.png", "poly_pipe_casing_arrow_up.png"},
+	is_ground_content = false,
+	sunlight_propagates = true,
+	drop = "ocular_networks:pipe_U",
+	drawtype="nodebox",
+	paramtype="light",
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Owned By: "..owner.."\nRightclick with wrench to invert")
+		local inv = meta:get_inventory()
+		inv:set_size("pipe_buffer", 10)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/2, -1/5, 1/5, 1/2, 1/5},
+					{-5 / 16, -0.5, -5 / 16, 5 / 16, -3.5/10, 5 / 16},
+					{-5 / 16, 0.5, -5 / 16, 5 / 16, 3.5/10, 5 / 16}
+					}
+	},
+	node_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/2, -1/5, 1/5, 1/2, 1/5},
+					{-5 / 16, -0.5, -5 / 16, 5 / 16, -3.5/10, 5 / 16},
+					{-5 / 16, 0.5, -5 / 16, 5 / 16, 3.5/10, 5 / 16}
+					}
+	},
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+				minetest.swap_node(pos, {name="ocular_networks:pipe_D"})
+			end
+		end
+	end
+})
+minetest.register_node("ocular_networks:pipe_D", {
+	description = "V",
+	tiles = {"poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing_arrow_down.png", "poly_pipe_casing_arrow_down.png", "poly_pipe_casing_arrow_down.png", "poly_pipe_casing_arrow_down.png"},
+	is_ground_content = false,
+	sunlight_propagates = true,
+	drop = "ocular_networks:pipe_U",
+	drawtype="nodebox",
+	paramtype="light",
+	groups = {cracky = 3, oddly_breakable_by_hand = 3, not_in_creative_inventory=1},
+	sounds = default.node_sound_metal_defaults(),
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Owned By: "..owner.."\nRightclick with wrench to invert")
+		local inv = meta:get_inventory()
+		inv:set_size("pipe_buffer", 10)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/2, -1/5, 1/5, 1/2, 1/5},
+					{-5 / 16, -0.5, -5 / 16, 5 / 16, -3.5/10, 5 / 16},
+					{-5 / 16, 0.5, -5 / 16, 5 / 16, 3.5/10, 5 / 16}
+					}
+	},
+	node_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/2, -1/5, 1/5, 1/2, 1/5},
+					{-5 / 16, -0.5, -5 / 16, 5 / 16, -3.5/10, 5 / 16},
+					{-5 / 16, 0.5, -5 / 16, 5 / 16, 3.5/10, 5 / 16}
+					}
+	},
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+				minetest.swap_node(pos, {name="ocular_networks:pipe_U"})
+			end
+		end
+	end
+})
+minetest.register_node("ocular_networks:pipe_itembuffer", {
+	description = "Pipe-Enabled storage crate\n"..minetest.colorize("#00affa", "Pipes can send items to and from this.\nCan also be used as a normal chest."),
+	tiles = {"poly_centrifuge_side.png^poly_frame.png^poly_pipe_socket.png"},
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+		on_receive_fields = function(pos, formname, fields, sender)
+		local meta = minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", bufferspec)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		local inv = meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 100)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", bufferspec)
+		meta:set_string("infotext", "Owned By: "..owner)
+		meta:set_int("ocular_power", 0)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_node("ocular_networks:pipe_trashextractor", {
+	description = "Filter-Wise Item Destroyer\n"..minetest.colorize("#00affa", "Removes items from pipe-enabled storage crates (or chests)\nbased on filters.\nTakes items from ABOVE"),
+	tiles = {"poly_trash_extractor.png"},
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+		on_receive_fields = function(pos, formname, fields, sender)
+		local meta = minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			meta:set_string("items", fields.items or "default:cobble")
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", trashspec)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		local inv = meta:get_inventory()
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", trashspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 		meta:set_int("ocular_power", 0)
 	end,

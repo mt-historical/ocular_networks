@@ -272,3 +272,10 @@ unified_inventory.register_craft({
 	output = "ocular_networks:charged_gem",
 	width = 2,
 })
+
+unified_inventory.register_craft({
+	type = "ocun_fusing",
+	items = {"ocular_networks:placeholder_power 1000", "default:glass", "default:tin_ingot"},
+	output = "ocular_networks:silicotin_bar",
+	width = 3,
+})

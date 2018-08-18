@@ -199,3 +199,19 @@ minetest.register_craftitem("ocular_networks:charged_gem", {
 	inventory_image = "poly_gem.png",
 	groups = {ocp_gem=1}
 })
+
+minetest.register_craftitem("ocular_networks:pipe_socket", {
+	description = "Pipe Socket\n"..minetest.colorize("#00affa", "A locking plate for pipes."),
+	inventory_image = "poly_pipe_socket_inv.png",
+})
+
+minetest.register_craftitem("ocular_networks:silicotin_bar", {
+	description = "Silicotin Ingot\n"..minetest.colorize("#00affa", "A special version of the alloy SiSn\nresulting from the heat flutuations in the fuser."),
+	inventory_image = "poly_silicotin_ingot.png",
+})
+
+minetest.register_craftitem("ocular_networks:pipe_wrench", {
+	description = "C-Type Square Wrench\n"..minetest.colorize("#00affa", "This wrench can be used to rotate pipes."),
+	inventory_image = "poly_wrench.png",
+	stack_max=1,
+})
