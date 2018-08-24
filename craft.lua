@@ -563,8 +563,8 @@ ocular_networks.register_passive_cool({
 })
 
 ocular_networks.register_fusion({
-	item_1="default:diamondblock 99",
-	item_2="default:mese 99",
+	item_1="default:diamondblock 9",
+	item_2="default:mese 9",
 	output="ocular_networks:uncharged_gem",
 	give_back="",
 	cost=10000
@@ -770,4 +770,12 @@ minetest.register_craft({
 		{"ocular_networks:silicotin_bar", "ocular_networks:melter", "ocular_networks:silicotin_bar"},
 		{"ocular_networks:frame", "ocular_networks:silicotin_bar", "ocular_networks:frame"}
 	}
+})
+
+ocular_networks.register_fusion({
+	item_1="default:dirt_with_grass",
+	item_2="ocular_networks:loomshroom",
+	output="ocular_networks:dirt_with_loomshroom_grass",
+	give_back="",
+	cost=100
 })

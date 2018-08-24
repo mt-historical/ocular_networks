@@ -596,20 +596,89 @@ minetest.register_node("ocular_networks:fuser", {
 minetest.register_node("ocular_networks:loomshroom", {
 	description = minetest.colorize("#00affa", "LuumShroom"),
 	drawtype = "plantlike",
-	waving = 1,
 	tiles = {"poly_loomshroom.png"},
 	inventory_image = "poly_loomshroom.png",
 	wield_image = "poly_loomshroom.png",
 	sunlight_propagates = true,
 	paramtype = "light",
 	walkable = false,
-	buildable_to = true,
 	sounds = default.node_sound_leaves_defaults(),
 	groups={snappy=1, attached_node = 1},
 	selection_box = {
 		type = "fixed",
-		fixed =  {-4 / 16, -0.5, -4 / 16, 4 / 16, -1 / 16, 4 / 16}
+		fixed =  {-4 / 16, -0.5, -4 / 16, 4 / 16, -2 / 16, 4 / 16}
 	}
+})
+
+minetest.register_node("ocular_networks:loomshroom2", {
+	description = minetest.colorize("#00affa", "LuumShroom"),
+	drawtype = "plantlike",
+	tiles = {"poly_loomshroom_cluster.png"},
+	inventory_image = "poly_loomshroom.png",
+	wield_image = "poly_loomshroom.png",
+	sunlight_propagates = true,
+	paramtype = "light",
+	walkable = false,
+	sounds = default.node_sound_leaves_defaults(),
+	groups={snappy=1, attached_node = 1, not_in_creative_inventory=1},
+	selection_box = {
+		type = "fixed",
+		fixed =  {-4 / 16, -0.5, -4 / 16, 4 / 16, -1 / 16, 4 / 16}
+	},
+	drop = "ocular_networks:loomshroom",
+})
+
+minetest.register_node("ocular_networks:loomshroom3", {
+	description = minetest.colorize("#00affa", "LuumShroom"),
+	drawtype = "plantlike",
+	tiles = {"poly_loomshroom_cluster_2.png"},
+	inventory_image = "poly_loomshroom.png",
+	wield_image = "poly_loomshroom.png",
+	sunlight_propagates = true,
+	paramtype = "light",
+	walkable = false,
+	sounds = default.node_sound_leaves_defaults(),
+	groups={snappy=1, attached_node = 1, not_in_creative_inventory=1},
+	selection_box = {
+		type = "fixed",
+		fixed =  {-4 / 16, -0.5, -4 / 16, 4 / 16, -1 / 16, 4 / 16}
+	},
+	drop = "ocular_networks:loomshroom",
+})
+
+minetest.register_node("ocular_networks:loomshroom4", {
+	description = minetest.colorize("#00affa", "LuumShroom"),
+	drawtype = "plantlike",
+	tiles = {"poly_loomshroom_cluster_3.png"},
+	inventory_image = "poly_loomshroom.png",
+	wield_image = "poly_loomshroom.png",
+	sunlight_propagates = true,
+	paramtype = "light",
+	walkable = false,
+	sounds = default.node_sound_leaves_defaults(),
+	groups={snappy=1, attached_node = 1, not_in_creative_inventory=1},
+	selection_box = {
+		type = "fixed",
+		fixed =  {-4 / 16, -0.5, -4 / 16, 4 / 16, -1 / 16, 4 / 16}
+	},
+	drop = "ocular_networks:loomshroom",
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		minetest.set_node(pos, {name="ocular_networks:loomshroom"})
+		minetest.add_item(pos, "ocular_networks:luminium_lump 2")
+	end
+	
+})
+
+minetest.register_node("ocular_networks:dirt_with_loomshroom_grass", {
+	description = "Dirt with Loomshroom Mycelium",
+	tiles = {"poly_loomshroom_grass.png", "default_dirt.png",
+		{name = "default_dirt.png^poly_loomshroom_grass_side.png",
+			tileable_vertical = false}},
+	groups = {crumbly = 3, soil = 1, spreading_dirt_type = 1},
+	drop = 'default:dirt',
+	sounds = default.node_sound_dirt_defaults({
+		footstep = {name = "default_grass_footstep", gain = 0.25},
+	}),
 })
 
 minetest.register_node("ocular_networks:networknode", {

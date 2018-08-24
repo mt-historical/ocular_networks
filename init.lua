@@ -18,9 +18,6 @@ if ocular_networks.config.onRun.load_armor_upgrades then
 	dofile(modpath.."/upgrade.lua")
 end
 dofile(modpath.."/craft.lua")
-if minetest.get_modpath("unified_inventory") then
-	dofile(modpath.."/ufin_compat.lua")
-end
 if minetest.get_modpath("wield3d") then
 	dofile(modpath.."/w3d_compat.lua")
 end

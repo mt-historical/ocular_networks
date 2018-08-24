@@ -962,3 +962,51 @@ minetest.register_abm({
 		end
 	end,
 })
+
+minetest.register_abm({
+    label = "growth",
+	nodenames = {"ocular_networks:loomshroom"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "ocular_networks:dirt_with_loomshroom_grass" then
+			local chance = math.random(1,100)
+			if chance == 37 then
+				minetest.set_node(pos, {name="ocular_networks:loomshroom2"})
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+    label = "growth",
+	nodenames = {"ocular_networks:loomshroom2"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "ocular_networks:dirt_with_loomshroom_grass" then
+			local chance = math.random(1,1000)
+			if chance == 37 then
+				minetest.set_node(pos, {name="ocular_networks:loomshroom3"})
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+    label = "growth",
+	nodenames = {"ocular_networks:loomshroom3"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "ocular_networks:dirt_with_loomshroom_grass" then
+			local chance = math.random(1,1000)
+			if chance == 3 then
+				minetest.set_node(pos, {name="ocular_networks:loomshroom4"})
+			end
+		end
+	end,
+})

@@ -61,25 +61,117 @@ minetest.register_chatcommand("ocun_userpower_set", {
 	end,
 })
 
-ocular_networks.register_meltable=function(def)
-	table.insert(ocular_networks.registered_meltables, {input=def.input, output=def.output, cost=def.cost})
-end
+if minetest.get_modpath("unified_inventory") then
+	
+	unified_inventory.register_craft_type("ocun_melting", {
+		description = "Metal Melter",
+		icon = "poly_battery_bottom.png^poly_frame.png^poly_furnace.png",
+		width = 2,
+		height = 1,
+	})
+	
+	unified_inventory.register_craft_type("ocun_alloying", {
+		description = "Alloy Centrifuge",
+		icon = "poly_centrifuge.png^poly_frame.png",
+		width = 3,
+		height = 1,
+	})
+	
+	unified_inventory.register_craft_type("ocun_fusing", {
+		description = "Fusion Compressor",
+		icon = "poly_compressor.png^poly_frame.png",
+		width = 3,
+		height = 1,
+	})
+	
+	unified_inventory.register_craft_type("ocun_cooling", {
+		description = "Passive Cooler",
+		icon = "default_ice.png^poly_frame.png^poly_furnace.png",
+		width = 1,
+		height = 1,
+	})
+	
+	unified_inventory.register_craft_type("ocun_charging", {
+		description = "Charging Station",
+		icon = "default_copper_block.png^poly_frame.png^poly_gui_icon_pwr.png",
+		width = 2,
+		height = 1,
+	})
+		
+	ocular_networks.register_meltable=function(def)
+		table.insert(ocular_networks.registered_meltables, {input=def.input, output=def.output, cost=def.cost})
+		unified_inventory.register_craft({
+		type = "ocun_melting",
+		items = {"ocular_networks:placeholder_power "..def.cost, def.input},
+		output = def.output,
+		width = 2,
+		})
+	end
 
-ocular_networks.register_alloyable=function(def)
-	table.insert(ocular_networks.registered_alloys, {input1=def.metal_1, input2=def.metal_2, output=def.output, cost=def.cost, _return=def.give_back})
-end
+	ocular_networks.register_alloyable=function(def)
+		table.insert(ocular_networks.registered_alloys, {input1=def.metal_1, input2=def.metal_2, output=def.output, cost=def.cost, _return=def.give_back})
+		unified_inventory.register_craft({
+		type = "ocun_alloying",
+		items = {"ocular_networks:placeholder_power "..def.cost, def.metal_1, def.metal_2},
+		output = def.output,
+		width = 3,
+		})
+	end
 
 
-ocular_networks.register_fusion=function(def)
-	table.insert(ocular_networks.registered_fusions, {input1=def.item_1, input2=def.item_2, output=def.output, cost=def.cost, _return=def.give_back})
-end
+	ocular_networks.register_fusion=function(def)
+		table.insert(ocular_networks.registered_fusions, {input1=def.item_1, input2=def.item_2, output=def.output, cost=def.cost, _return=def.give_back})
+		unified_inventory.register_craft({
+		type = "ocun_fusing",
+		items = {"ocular_networks:placeholder_power "..def.cost, def.item_1, def.item_2},
+		output = def.output,
+		width = 3,
+		})
+	end
 
-ocular_networks.register_passive_cool=function(def)
-	table.insert(ocular_networks.registered_passivecools, {input=def.item, output=def.output})
-end
+	ocular_networks.register_passive_cool=function(def)
+		table.insert(ocular_networks.registered_passivecools, {input=def.item, output=def.output})
+		unified_inventory.register_craft({
+		type = "ocun_cooling",
+		items = {def.item},
+		output = def.output,
+		width = 3,
+		})
+	end
 
-ocular_networks.register_chargeable=function(def)
-	table.insert(ocular_networks.registered_chargeables, {input=def.item, output=def.output, cost=def.cost})
+	ocular_networks.register_chargeable=function(def)
+		table.insert(ocular_networks.registered_chargeables, {input=def.item, output=def.output, cost=def.cost})
+		unified_inventory.register_craft({
+		type = "ocun_charging",
+		items = {"ocular_networks:placeholder_power "..def.cost, def.item},
+		output = def.output,
+		width = 2,
+		})
+	end
+	
+else
+
+	ocular_networks.register_meltable=function(def)
+		table.insert(ocular_networks.registered_meltables, {input=def.input, output=def.output, cost=def.cost})
+	end
+
+	ocular_networks.register_alloyable=function(def)
+		table.insert(ocular_networks.registered_alloys, {input1=def.metal_1, input2=def.metal_2, output=def.output, cost=def.cost, _return=def.give_back})
+	end
+
+
+	ocular_networks.register_fusion=function(def)
+		table.insert(ocular_networks.registered_fusions, {input1=def.item_1, input2=def.item_2, output=def.output, cost=def.cost, _return=def.give_back})
+	end
+
+	ocular_networks.register_passive_cool=function(def)
+		table.insert(ocular_networks.registered_passivecools, {input=def.item, output=def.output})
+	end
+
+	ocular_networks.register_chargeable=function(def)
+		table.insert(ocular_networks.registered_chargeables, {input=def.item, output=def.output, cost=def.cost})
+	end
+
 end
 
 minetest.register_on_joinplayer(function(player)
