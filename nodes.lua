@@ -258,7 +258,7 @@ minetest.register_node("ocular_networks:distributor_2", {
 })
 
 minetest.register_node("ocular_networks:distributor_3", {
-	description = "Distributor MK2\n"..minetest.colorize("#00affa", "Takes power from the set \nposition at a dynamic rate\nand has a higher range (30)"),
+	description = "Distributor MK3\n"..minetest.colorize("#00affa", "Takes power from the set \nposition at a dynamic rate\nand has a higher range (30)"),
 	tiles = {"poly_node_3.png"},
 	is_ground_content = false,
 	groups = {cracky = 3, oddly_breakable_by_hand = 3},
