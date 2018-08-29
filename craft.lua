@@ -772,6 +772,15 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output="ocular_networks:pipe_filtered",
+	recipe={
+		{"", "ocular_networks:pipe_socket", "dye:violet"},
+		{"ocular_networks:silicotin_bar", "ocular_networks:pipe_E", "ocular_networks:silicotin_bar"},
+		{"dye:violet", "ocular_networks:silicotin_bar", ""}
+	}
+})
+
 ocular_networks.register_fusion({
 	item_1="default:dirt_with_grass",
 	item_2="ocular_networks:loomshroom",

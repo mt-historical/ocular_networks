@@ -1301,7 +1301,6 @@ minetest.register_node("ocular_networks:pipe_trashextractor", {
 		meta:set_string("owner", owner)
 		meta:set_string("formspec", trashspec)
 		meta:set_string("infotext", "Owned By: "..owner)
-		meta:set_int("ocular_power", 0)
 	end,
 	can_dig = function(pos, player)
 		local meta = minetest.get_meta(pos)
@@ -1329,4 +1328,60 @@ minetest.register_node("ocular_networks:pipe_trashextractor", {
 			return 0
 		end
 	end,
+})
+
+minetest.register_node("ocular_networks:pipe_filtered", {
+	description = "Filtered Pipe\n"..minetest.colorize("#00affa", "Removes items from nodes with pipe support\nbased on filters.\nTakes items from ABOVE\nAdds items BELOW"),
+	tiles = {"poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing_arrow_down2.png", "poly_pipe_casing_arrow_down2.png", "poly_pipe_casing_arrow_down2.png", "poly_pipe_casing_arrow_down2.png"},
+	is_ground_content = false,
+	sunlight_propagates = true,
+	drop = "ocular_networks:pipe_filtered",
+	drawtype="nodebox",
+	paramtype="light",
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+	on_receive_fields = function(pos, formname, fields, sender)
+		local meta = minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			meta:set_string("items", fields.items or "default:cobble")
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", trashspec)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", trashspec)
+		meta:set_string("infotext", "Owned By: "..owner.."\nFiltered Pipe, only downwards")
+		local inv = meta:get_inventory()
+		inv:set_size("pipe_buffer", 10)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	selection_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/2, -1/5, 1/5, 1/2, 1/5},
+					{-5 / 16, -0.5, -5 / 16, 5 / 16, -3.5/10, 5 / 16},
+					{-5 / 16, 0.5, -5 / 16, 5 / 16, 3.5/10, 5 / 16}
+					}
+	},
+	node_box = {
+		type = "fixed",
+		fixed =  {	{-1/5, -1/2, -1/5, 1/5, 1/2, 1/5},
+					{-5 / 16, -0.5, -5 / 16, 5 / 16, -3.5/10, 5 / 16},
+					{-5 / 16, 0.5, -5 / 16, 5 / 16, 3.5/10, 5 / 16}
+					}
+	},
+	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+				minetest.swap_node(pos, {name="ocular_networks:pipe_U"})
+			end
+		end
+	end
 })
