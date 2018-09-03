@@ -16,5 +16,5 @@ wield3d.location["ocular_networks:inspector"] = {bone, pos, {x=rx, y=135, z=rz},
 --[[
 these are all slight hacks to make absolutely certain that wield3d renders the items big enough.
 I had a case where switching to another item and back breaks stuff; this was the only fix.
-there are also rotation/position rules here forsome stuff.
+there are also rotation/position rules here for some stuff.
 ]]-- 

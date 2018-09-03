@@ -773,7 +773,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:pipe_filtered",
+	output="ocular_networks:pipe_filtered_E",
 	recipe={
 		{"", "ocular_networks:pipe_socket", "dye:violet"},
 		{"ocular_networks:silicotin_bar", "ocular_networks:pipe_E", "ocular_networks:silicotin_bar"},

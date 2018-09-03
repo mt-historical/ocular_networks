@@ -941,7 +941,7 @@ minetest.register_abm({
 
 minetest.register_abm({
     label = "trash extracting",
-	nodenames = {"ocular_networks:pipe_filtered"},
+	nodenames = {"ocular_networks:pipe_filtered_D"},
 	interval = 1,
 	chance = 1,
 	catch_up = true,
@@ -958,6 +958,176 @@ minetest.register_abm({
 		local target_inv = target_meta:get_inventory()
 		local source_node = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
 		local target_node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+		if owner == source_owner or source_owner == "" then
+			if source_inv:get_list("main") then
+				for _,item in ipairs(destroyList) do
+					if source_inv:contains_item("main", item) then
+						source_inv:remove_item("main", item)
+						if target_inv:room_for_item("main", item) then
+							target_inv:add_item("main", item)
+						end
+					end
+				end
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+    label = "trash extracting",
+	nodenames = {"ocular_networks:pipe_filtered_U"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		local destroyList = string.split(meta:get_string("items"), " ")
+		local inv = meta:get_inventory()
+		local source_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+		local source_owner = source_meta:get_string("owner")
+		local target_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+		local target_owner = target_meta:get_string("owner")
+		local source_inv = source_meta:get_inventory()
+		local target_inv = target_meta:get_inventory()
+		local source_node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+		local target_node = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+		if owner == source_owner or source_owner == "" then
+			if source_inv:get_list("main") then
+				for _,item in ipairs(destroyList) do
+					if source_inv:contains_item("main", item) then
+						source_inv:remove_item("main", item)
+						if target_inv:room_for_item("main", item) then
+							target_inv:add_item("main", item)
+						end
+					end
+				end
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+    label = "trash extracting",
+	nodenames = {"ocular_networks:pipe_filtered_N"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		local destroyList = string.split(meta:get_string("items"), " ")
+		local inv = meta:get_inventory()
+		local source_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
+		local source_owner = source_meta:get_string("owner")
+		local target_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
+		local target_owner = target_meta:get_string("owner")
+		local source_inv = source_meta:get_inventory()
+		local target_inv = target_meta:get_inventory()
+		local source_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
+		local target_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
+		if owner == source_owner or source_owner == "" then
+			if source_inv:get_list("main") then
+				for _,item in ipairs(destroyList) do
+					if source_inv:contains_item("main", item) then
+						source_inv:remove_item("main", item)
+						if target_inv:room_for_item("main", item) then
+							target_inv:add_item("main", item)
+						end
+					end
+				end
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+    label = "trash extracting",
+	nodenames = {"ocular_networks:pipe_filtered_S"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		local destroyList = string.split(meta:get_string("items"), " ")
+		local inv = meta:get_inventory()
+		local source_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
+		local source_owner = source_meta:get_string("owner")
+		local target_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
+		local target_owner = target_meta:get_string("owner")
+		local source_inv = source_meta:get_inventory()
+		local target_inv = target_meta:get_inventory()
+		local source_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
+		local target_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
+		if owner == source_owner or source_owner == "" then
+			if source_inv:get_list("main") then
+				for _,item in ipairs(destroyList) do
+					if source_inv:contains_item("main", item) then
+						source_inv:remove_item("main", item)
+						if target_inv:room_for_item("main", item) then
+							target_inv:add_item("main", item)
+						end
+					end
+				end
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+    label = "trash extracting",
+	nodenames = {"ocular_networks:pipe_filtered_E"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		local destroyList = string.split(meta:get_string("items"), " ")
+		local inv = meta:get_inventory()
+		local source_meta = minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
+		local source_owner = source_meta:get_string("owner")
+		local target_meta = minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
+		local target_owner = target_meta:get_string("owner")
+		local source_inv = source_meta:get_inventory()
+		local target_inv = target_meta:get_inventory()
+		local source_node = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
+		local target_node = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
+		if owner == source_owner or source_owner == "" then
+			if source_inv:get_list("main") then
+				for _,item in ipairs(destroyList) do
+					if source_inv:contains_item("main", item) then
+						source_inv:remove_item("main", item)
+						if target_inv:room_for_item("main", item) then
+							target_inv:add_item("main", item)
+						end
+					end
+				end
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+    label = "trash extracting",
+	nodenames = {"ocular_networks:pipe_filtered_W"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		local destroyList = string.split(meta:get_string("items"), " ")
+		local inv = meta:get_inventory()
+		local source_meta = minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
+		local source_owner = source_meta:get_string("owner")
+		local target_meta = minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
+		local target_owner = target_meta:get_string("owner")
+		local source_inv = source_meta:get_inventory()
+		local target_inv = target_meta:get_inventory()
+		local source_node = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
+		local target_node = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("main") then
 				for _,item in ipairs(destroyList) do
