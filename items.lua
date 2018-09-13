@@ -76,12 +76,12 @@ minetest.register_craftitem("ocular_networks:lumigold_rod", {
 })
 
 minetest.register_craftitem("ocular_networks:save_disk", {
-	description = "Metadata Save Disk\n"..minetest.colorize("#00affa", "Sneak and rightclick on a node to \nsave it's metadata.\nright click on a node to load meta to it from the disk.\nhold 'use', sneak and rightclick to view saved meta.\nEXPERIMENTAL"),
+	description = "Metadata Save Disk\n"..minetest.colorize("#00affa", "Sneak and rightclick on a node to \nsave it's metadata.\nhold 'use', sneak and right click on a node to load meta to it from the disk.\nhold 'use', and rightclick to view saved meta.\nEXPERIMENTAL"),
 	inventory_image = "poly_disk.png",
 	not_in_creative_inventory=1,
 	stack_max=1,
 	on_place = function(itemstack, placer, pointed_thing)
-		if placer:get_player_control().aux1 == true and placer:get_player_control().sneak == true then
+		if placer:get_player_control().aux1 == true and placer:get_player_control().sneak == false then
 			if ocular_networks.player_temp_disk[placer:get_player_name()] and ocular_networks.player_temp_disk[placer:get_player_name()].fields then
 				local pseudodata=ocular_networks.player_temp_disk[placer:get_player_name()].fields
 				if pseudodata.formspec then
@@ -92,10 +92,10 @@ minetest.register_craftitem("ocular_networks:save_disk", {
 		else
 			if pointed_thing.type=="node" then
 				local meta = minetest.get_meta(minetest.get_pointed_thing_position(pointed_thing, above))
-				if placer:get_player_control().sneak == true then
+				if placer:get_player_control().sneak == true and placer:get_player_control().aux1 == false then
 					ocular_networks.player_temp_disk[placer:get_player_name()] = meta:to_table()
 					minetest.chat_send_player(placer:get_player_name(),  minetest.colorize("#00affa","NodeMetaRef saved to disk"))
-				else
+				elseif placer:get_player_control().aux1 == true and placer:get_player_control().sneak == true then
 					meta:from_table(ocular_networks.player_temp_disk[placer:get_player_name()])
 					minetest.chat_send_player(placer:get_player_name(),  minetest.colorize("#00affa","NodeMetaRef loaded from disk"))
 				end

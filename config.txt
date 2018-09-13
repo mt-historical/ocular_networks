@@ -1,4 +1,5 @@
-liveConfig = { -- these are the settings that can be changed during the runtime.
+ -- these are the settings that can be changed during the runtime.
+liveConfig = {
 	max_personal_network_power = 1000000000000, -- this is the maximum power a player's personal network can contain at any given time. this will prevent the hud from printig errors. default 1000000000000
 	laserDrill_blacklist = { --nodes that the laserdrill cannot dig.
 		["default:water_source"] = true,
@@ -23,10 +24,7 @@ liveConfig = { -- these are the settings that can be changed during the runtime.
 		["ocular_networks:tin_flowing"] = true,
 		["ocular_networks:angmallen_source"] = true,
 		["ocular_networks:angmallen_flowing"] = true
-	}, 
-	moderator_whitelist = { -- players that can use transport circuits and distributors on nodes regardless of the owner.
-	 ["singleplayer"] = true,
-	},
+	}
 }
 
 startUpConfig = { -- you could also change these during runtime but it will have no effect.

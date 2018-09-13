@@ -1,8 +1,12 @@
 local modpath = minetest.get_modpath("ocular_networks")
+local worldpath = minetest.get_worldpath()
 ocular_networks = {}
 
 minetest.register_privilege("ocular_networks_dbg", {description="Allows players to access OcuN debug commands, VERY dangerous priv to grant.", give_to_singleplayer=false})
-dofile(modpath.."/.config.lua")
+dofile(modpath.."/config.txt")
+if loadfile(worldpath.."/ocular_networks_config.txt") then
+	dofile(worldpath.."/ocular_networks_config.txt")
+end
 dofile(modpath.."/functions.lua")
 dofile(modpath.."/nodes.lua")
 dofile(modpath.."/liquids.lua")

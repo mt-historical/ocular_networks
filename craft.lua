@@ -773,12 +773,24 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:pipe_filtered_E",
+	output="ocular_networks:pipe_filtered_E 5",
 	recipe={
 		{"", "ocular_networks:pipe_socket", "dye:violet"},
 		{"ocular_networks:silicotin_bar", "ocular_networks:pipe_E", "ocular_networks:silicotin_bar"},
 		{"dye:violet", "ocular_networks:silicotin_bar", ""}
 	}
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:pipe_filtered_E",
+	recipe={"ocular_networks:pipe_filtered_D"},
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:pipe_filtered_D",
+	recipe={"ocular_networks:pipe_filtered_E"},
 })
 
 ocular_networks.register_fusion({
