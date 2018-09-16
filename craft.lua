@@ -344,7 +344,7 @@ ocular_networks.register_fusion({
 ocular_networks.register_fusion({
 	item_1="default:stone",
 	item_2="default:gold_ingot",
-	output="default:stone_with_gold 2",
+	output="default:stone_with_gold",
 	give_back="",
 	cost=100
 })
@@ -352,7 +352,7 @@ ocular_networks.register_fusion({
 ocular_networks.register_fusion({
 	item_1="default:stone",
 	item_2="default:copper_ingot",
-	output="default:stone_with_copper 2",
+	output="default:stone_with_copper",
 	give_back="",
 	cost=100
 })
@@ -360,7 +360,7 @@ ocular_networks.register_fusion({
 ocular_networks.register_fusion({
 	item_1="default:stone",
 	item_2="default:steel_ingot",
-	output="default:stone_with_iron 2",
+	output="default:stone_with_iron",
 	give_back="",
 	cost=100
 })
@@ -368,7 +368,7 @@ ocular_networks.register_fusion({
 ocular_networks.register_fusion({
 	item_1="default:stone",
 	item_2="default:tin_ingot",
-	output="default:stone_with_tin 2",
+	output="default:stone_with_tin",
 	give_back="",
 	cost=100
 })
