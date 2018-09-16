@@ -37,7 +37,7 @@ armor:register_armor("ocular_networks:angmallen_boots", {
 	texture = "poly_armor_boots_angmallen",
 	preview = "poly_armor_boots_angmallen_preview.png",
 	groups = {armor_feet=1, armor_use=100, armor_heal=12},
-	armor_groups = {fleshy=30},
+	armor_groups = {fleshy=20},
 	damage_groups = {cracky=3, snappy=3, choppy=3, crumbly=3, level=4},
 	reciprocate_damage = true,
 })
