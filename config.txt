@@ -24,7 +24,8 @@ liveConfig = {
 		["ocular_networks:tin_flowing"] = true,
 		["ocular_networks:angmallen_source"] = true,
 		["ocular_networks:angmallen_flowing"] = true
-	}
+	},
+	moderator_whitelist = {["singleplayer"] = true}
 }
 
 startUpConfig = { -- you could also change these during runtime but it will have no effect.
