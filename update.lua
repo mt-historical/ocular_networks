@@ -1,4 +1,4 @@
-
+ 
 
 minetest.register_abm({
         label = "ocular battery charging",
@@ -14,11 +14,7 @@ minetest.register_abm({
 		meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
 		if node_above.name == "ocular_networks:frame_lens" then
 			if not minetest.find_node_near(pos, 11, ocular_networks.disallowed) then
-				if node_above_light > 10 and node_above_light < 14 then
-					meta:set_int("ocular_power", power+1)
-				elseif node_above_light > 14 then
-					meta:set_int("ocular_power", power+5)
-				end
+				meta:set_int("ocular_power", power+node_above_light)
 			end
 		end
 	end,
