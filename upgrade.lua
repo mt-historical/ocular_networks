@@ -5,13 +5,19 @@ minetest.register_craftitem("ocular_networks:armor_pendant", {
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
 		if inv:get_lists().ocn_armor_upgrades then
-			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades", "size[8,9;]"..default.gui_bg..default.gui_bg_img.."list[current_player;main;0,5;8,4;]label[0,4.2;These upgrades will only take effect if you are wearing a full set of angmallen armor.\nShield upgrade modules will only work if you have the shield.]list[current_player;ocn_armor_upgrades;0,0;8,4;]")
+			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades", "size[8,9;]"..default.gui_bg..default.gui_bg_img.."list[current_player;main;0,5;8,4;]label[0,4.2;These upgrades will only take effect if you are wearing a full set of angmallen armor.\nShield upgrade modules will only work if you have the shield.]list[current_player;ocn_armor_upgrades;1.5,1.5;5,1;]")
 		else
 			inv:set_list("ocn_armor_upgrades", {})
 			inv:set_size("ocn_armor_upgrades", 32)
 		end
 	end
 })
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if formname=="ocn_armor_upgrades" then
+		armor:set_player_armor(player)
+	end
+end)
 
 local function has_armor_prerequisites(p)
 	local inv = minetest.get_inventory({type="detached", name=p:get_player_name().."_armor"})
@@ -20,8 +26,7 @@ end
 
 --prepare for lag if armor enabled
 
-minetest.register_globalstep(function(dtime)
-	for _,player in ipairs(minetest.get_connected_players()) do
+armor:register_on_update(function(player)
 		if has_armor_prerequisites(player) then
 			local inv = player:get_inventory() 
 			local playerPhysics = player:get_physics_override()
@@ -39,11 +44,10 @@ minetest.register_globalstep(function(dtime)
 				player:set_physics_override(playerPhysics)
 			end
 		end
-	end
 end)
 
-minetest.register_globalstep(function(dtime)
-	for _,player in ipairs(minetest.get_connected_players()) do
+
+armor:register_on_update(function(player)
 		if has_armor_prerequisites(player) then
 			local inv = player:get_inventory() 
 			local playerPhysics = player:get_physics_override()
@@ -61,11 +65,9 @@ minetest.register_globalstep(function(dtime)
 				player:set_physics_override(playerPhysics)
 			end
 		end
-	end
 end)
 
-minetest.register_globalstep(function(dtime)
-	for _,player in ipairs(minetest.get_connected_players()) do
+armor:register_on_update(function(player)
 		if has_armor_prerequisites(player) then
 			local inv = player:get_inventory() 
 			local playerPhysics = player:get_physics_override()
@@ -83,7 +85,6 @@ minetest.register_globalstep(function(dtime)
 				player:set_physics_override(playerPhysics)
 			end
 		end
-	end
 end)
 
 minetest.register_craftitem("ocular_networks:angmallen_shield", {
@@ -137,8 +138,7 @@ armor:register_armor("ocular_networks:angmallen_shield3", {
 
 
 
-minetest.register_globalstep(function(dtime)
-	for _,player in ipairs(minetest.get_connected_players()) do
+armor:register_on_update(function(player)
 		local inv2 = minetest.get_inventory({type="detached", name=player:get_player_name().."_armor"})
 		local inv = player:get_inventory()
 		if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense") then
@@ -178,7 +178,6 @@ minetest.register_globalstep(function(dtime)
 				armor:set_player_armor_defense(player)
 			end
 		end
-	end
 end)
 
 ocular_networks.heal_pause = 0

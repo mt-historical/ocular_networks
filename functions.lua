@@ -10,10 +10,6 @@ local function disallow()
 	end
 end
 
-function ocular_networks.tableHasKey(table,key)
-	return table[key] ~= nil
-end
-
 ocular_networks.registered_meltables={}
 ocular_networks.registered_alloys={}
 ocular_networks.registered_fusions={}
