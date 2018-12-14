@@ -11,6 +11,7 @@ dofile(modpath.."/functions.lua")
 dofile(modpath.."/nodes.lua")
 dofile(modpath.."/liquids.lua")
 dofile(modpath.."/items.lua")
+dofile(modpath.."/guide.lua")
 if ocular_networks.config.onRun.load_rifle_weapons then
 	dofile(modpath.."/rifle.lua")
 end
