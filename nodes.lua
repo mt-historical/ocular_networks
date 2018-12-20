@@ -156,7 +156,7 @@ minetest.register_node("ocular_networks:frame_cross", {
 })
 
 minetest.register_node("ocular_networks:battery", {
-	description = "Ocular Battery\n"..minetest.colorize("#00affa", "Place a frame on top, and\nadd a lens to the frame"),
+	description = "Solar Cell Battery\n"..minetest.colorize("#00affa", "Place a frame on top, and\nadd a lens to the frame"),
 	tiles = {"poly_battery_top.png", "poly_battery_bottom.png", "poly_battery_side.png"},
 
 	is_ground_content = false,
@@ -180,7 +180,7 @@ minetest.register_node("ocular_networks:battery", {
 })
 
 minetest.register_node("ocular_networks:distributor", {
-	description = "Distributor\n"..minetest.colorize("#00affa", "Takes power from the set position\nat a fixed rate (has a range of 10)"),
+	description = "Power Collector\n"..minetest.colorize("#00affa", "Takes power from the set position\nat a fixed rate (has a range of 10)"),
 	tiles = {"poly_node.png"},
 	is_ground_content = false,
 	groups = {cracky = 3, oddly_breakable_by_hand = 3},
@@ -218,7 +218,7 @@ minetest.register_node("ocular_networks:distributor", {
 })
 
 minetest.register_node("ocular_networks:distributor_2", {
-	description = "Distributor MK2\n"..minetest.colorize("#00affa", "Takes power from the set \nposition at a dynamic rate\nand has a higher range (20)"),
+	description = "Power Collector MK2\n"..minetest.colorize("#00affa", "Takes power from the set \nposition at a dynamic rate\nand has a higher range (20)"),
 	tiles = {"poly_node_2.png"},
 	is_ground_content = false,
 	groups = {cracky = 3, oddly_breakable_by_hand = 3},
@@ -258,7 +258,7 @@ minetest.register_node("ocular_networks:distributor_2", {
 })
 
 minetest.register_node("ocular_networks:distributor_3", {
-	description = "Distributor MK3\n"..minetest.colorize("#00affa", "Takes power from the set \nposition at a dynamic rate\nand has a higher range (30)"),
+	description = "Power Collector MK3\n"..minetest.colorize("#00affa", "Takes power from the set \nposition at a dynamic rate\nand has a higher range (30)"),
 	tiles = {"poly_node_3.png"},
 	is_ground_content = false,
 	groups = {cracky = 3, oddly_breakable_by_hand = 3},

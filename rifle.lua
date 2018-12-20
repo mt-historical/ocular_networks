@@ -89,7 +89,7 @@ end
 minetest.register_entity("ocular_networks:power_projectile", proj )
 
 minetest.register_tool("ocular_networks:blazerifle_c", {
-	description = "Supercharged OCP Blaze Rifle\n"..minetest.colorize("#00affa", "uses 500 power from your personal network\n(displayed above your health bar)\n")..minetest.colorize("#ff0000", "75 Ranged Damage"),
+	description = "Supercharged OCP Blaze Rifle\n"..minetest.colorize("#00affa", "uses 500 power from your personal network\n(displayed above your health bar)\n")..minetest.colorize("#ff0000", "45 Ranged Damage"),
 	wield_scale = {x=0.75,y=0.75,z=0.85},
 	inventory_image = "poly_blazerifle_c.png",
 	on_secondary_use = function(itemstack, user, pointed_thing)
@@ -137,7 +137,7 @@ proj2.on_step = function(self, dtime)
 		for k, obj in pairs(objs) do
 			if obj:get_luaentity() ~= nil then
 				if obj:get_luaentity().name ~= "ocular_networks:power_projectile_2" and obj:get_luaentity().name ~= "__builtin:item" then
-					local damage = 75
+					local damage = 45
 					obj:punch(self.object, 1.0, {
 						full_punch_interval = 1.0,
 						damage_groups= {fleshy = damage},
@@ -145,7 +145,7 @@ proj2.on_step = function(self, dtime)
 					self.object:remove()
 				end
 			else
-				local damage = 75
+				local damage = 45
 				obj:punch(self.object, 1.0, {
 					full_punch_interval = 1.0,
 					damage_groups= {fleshy = damage},

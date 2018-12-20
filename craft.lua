@@ -439,10 +439,10 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:blazerifle_c",
 	recipe={
-		{"ocular_networks:angmallen_block_3", "ocular_networks:angmallen_block_3", "ocular_networks:angmallen_block_3"},
-		{"ocular_networks:angmallen_block_3", "ocular_networks:blazerifle", "ocular_networks:angmallen_block_3"},
-		{"ocular_networks:angmallen_block_3", "ocular_networks:angmallen_block_3", "ocular_networks:angmallen_block_3"}
-	}
+		{"", "default:copper_ingot", ""},
+		{"ocular_networks:angmallen_bar", "ocular_networks:blazerifle", "ocular_networks:angmallen_bar"},
+		{"", "ocular_networks:charged_gem", ""}},
+	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
 
 minetest.register_craft({
