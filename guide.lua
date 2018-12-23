@@ -120,7 +120,7 @@ ocular_networks.pages["header"]..
 ocular_networks.pagetext[8]=""..
 "Machines: Alloy Centrifuge\n\n"..
 "Alloys metals by spinning them really fast.\n"..
-"The alloy centrifuge takes power from the block above."..
+"The alloy centrifuge takes power from the block above."
 
 ocular_networks.pages[8]=""..
 ocular_networks.pages["header"]..

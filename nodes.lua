@@ -305,6 +305,14 @@ minetest.register_node("ocular_networks:luminium_block", {
 	sounds = default.node_sound_metal_defaults(),
 })
 
+minetest.register_node("ocular_networks:hekatonium_block", {
+	description = minetest.colorize("#00affa", "Hekatonium Block"),
+	tiles = {"poly_hekatonium_block.png"},
+	is_ground_content = false,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_metal_defaults(),
+})
+
 minetest.register_node("ocular_networks:lumigold_block", {
 	description = "Lumigold Block",
 	tiles = {"poly_lumig_blk.png"},
@@ -383,7 +391,27 @@ minetest.register_ore({
 	y_min          = -31000,
 	y_max          = -78,
 })
-	
+
+minetest.register_node("ocular_networks:hekatonium_ore", {
+	description = minetest.colorize("#00affa", "Hekatonium Ore"),
+	tiles = {"default_stone.png^poly_hekatonium_ore.png"},
+	groups = {cracky = 2},
+	drop = "ocular_networks:hekatonium_chunk",
+	sounds = default.node_sound_stone_defaults(),
+	light_source=5
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "ocular_networks:hekatonium_ore",
+	wherein        = "default:stone",
+	clust_scarcity = 15 * 15 * 15,
+	clust_num_ores = 2,
+	clust_size     = 3,
+	y_min          = -31000,
+	y_max          = -10000,
+})
+
 minetest.register_node("ocular_networks:reservoir", {
 	description = "Power Reservoir\n"..minetest.colorize("#00affa", "Provides cheap storage for power."),
 	tiles = {"default_wood.png^poly_frame.png"},

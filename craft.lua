@@ -131,6 +131,21 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:hekatonium_block",
+	recipe={
+		{"ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar"},
+		{"ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar"},
+		{"ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar"}
+	}
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:hekatonium_bar 9",
+	recipe={"ocular_networks:hekatonium_block"}
+})
+
+minetest.register_craft({
 	output="ocular_networks:lumigold_block",
 	recipe={
 		{"ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3"},
@@ -256,6 +271,12 @@ ocular_networks.register_meltable({
 ocular_networks.register_meltable({
 	input="ocular_networks:angmallen_block",
 	output="ocular_networks:angmallen_source",
+	cost=1000
+})
+
+ocular_networks.register_meltable({
+	input="ocular_networks:hekatonium_block",
+	output="ocular_networks:hekatonium_source",
 	cost=1000
 })
 
@@ -799,4 +820,12 @@ ocular_networks.register_fusion({
 	output="ocular_networks:dirt_with_loomshroom_grass",
 	give_back="",
 	cost=100
+})
+
+ocular_networks.register_fusion({
+	item_1="ocular_networks:hekatonium_chunk",
+	item_2="ocular_networks:hekatonium_chunk",
+	output="ocular_networks:hekatonium_bar",
+	give_back="",
+	cost=1000
 })

@@ -40,6 +40,16 @@ minetest.register_craftitem("ocular_networks:luminium_bar", {
 	inventory_image = "poly_luminium_i.png",
 })
 
+minetest.register_craftitem("ocular_networks:hekatonium_chunk", {
+	description = minetest.colorize("#00affa", "Hekatonium Chunk"),
+	inventory_image = "poly_hekatonium_chunk.png",
+})
+
+minetest.register_craftitem("ocular_networks:hekatonium_bar", {
+	description = minetest.colorize("#00affa", "Hekatonic Ingot"),
+	inventory_image = "poly_hekatonium_ingot.png",
+})
+
 minetest.register_craftitem("ocular_networks:piston", {
 	description = "Piston\n"..minetest.colorize("#00affa", "Hydraulic motion!"),
 	inventory_image = "poly_piston.png",
