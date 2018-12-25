@@ -17,6 +17,7 @@ ocular_networks.registered_passivecools={}
 ocular_networks.player_temp_disk={}
 ocular_networks.disallowed={}
 ocular_networks.registered_chargeables={}
+ocular_networks.chunkloaded_areas={}
 
 minetest.register_chatcommand("ocun_exec", {
 	params = "luacode",
@@ -189,7 +190,7 @@ minetest.register_globalstep(function(dtime)
 						position = {x=0.5,y=0.87},
 						number= 0xffffff,
 						scale={x=100,y=100},
-						text="Ocular Power: "..player:get_attribute("personal_ocular_power"),
+						text="Network OCP: "..player:get_attribute("personal_ocular_power"),
 						alignment=0,
 						
 					})
@@ -204,139 +205,4 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
-
 minetest.after(0, disallow)
-
-
-local skin_previews = {}
-local use_player_monoids = minetest.global_exists("player_monoids")
-local use_armor_monoid = minetest.global_exists("armor_monoid")
-local use_pova_mod = minetest.get_modpath("pova")
-local armor_def = setmetatable({}, {
-	__index = function()
-		return setmetatable({
-			groups = setmetatable({}, {
-				__index = function()
-					return 0
-				end})
-			}, {
-			__index = function()
-				return 0
-			end
-		})
-	end,
-})
-local armor_textures = setmetatable({}, {
-	__index = function()
-		return setmetatable({}, {
-			__index = function()
-				return "blank.png"
-			end
-		})
-	end
-})
-
-armor.set_player_armor_defense = function(self, player) -- this stupid hacky script is designed to reload the armor properties but not the physics
-	local name, armor_inv = self:get_valid_player(player, "[set_player_armor]")
-	if not name then
-		return
-	end
-	local state = 0
-	local count = 0
-	local material = {count=1}
-	local preview = armor:get_preview(name)
-	local texture = "3d_armor_trans.png"
-	local textures = {}
-	local attributes = {}
-	local levels = {}
-	local groups = {}
-	local change = {}
-	for _, attr in pairs(self.attributes) do
-		attributes[attr] = 0
-	end
-	for group, _ in pairs(self.registered_groups) do
-		change[group] = 1
-		levels[group] = 0
-	end
-	local list = armor_inv:get_list("armor")
-	if type(list) ~= "table" then
-		return
-	end
-	for i, stack in pairs(list) do
-		if stack:get_count() == 1 then
-			local def = stack:get_definition()
-			for _, element in pairs(self.elements) do
-				if def.groups["armor_"..element] then
-					if def.armor_groups then
-						for group, level in pairs(def.armor_groups) do
-							if levels[group] then
-								levels[group] = levels[group] + level
-							end
-						end
-					else
-						local level = def.groups["armor_"..element]
-						levels["fleshy"] = levels["fleshy"] + level
-					end
-					break
-				end
-				-- DEPRECATED, use armor_groups instead
-				if def.groups["armor_radiation"] and levels["radiation"] then
-					levels["radiation"] = def.groups["armor_radiation"]
-				end
-			end
-			local item = stack:get_name()
-			local tex = def.texture or item:gsub("%:", "_")
-			tex = tex:gsub(".png$", "")
-			local prev = def.preview or tex.."_preview"
-			prev = prev:gsub(".png$", "")
-			texture = texture.."^"..tex..".png"
-			preview = preview.."^"..prev..".png"
-			state = state + stack:get_wear()
-			count = count + 1
-			for _, attr in pairs(self.attributes) do
-				local value = def.groups["armor_"..attr] or 0
-				attributes[attr] = attributes[attr] + value
-			end
-			local mat = string.match(item, "%:.+_(.+)$")
-			if material.name then
-				if material.name == mat then
-					material.count = material.count + 1
-				end
-			else
-				material.name = mat
-			end
-		end
-	end
-	for group, level in pairs(levels) do
-		if level > 0 then
-			level = level * armor.config.level_multiplier
-			if material.name and material.count == #self.elements then
-				level = level * 1.1
-			end
-		end
-		local base = self.registered_groups[group]
-		self.def[name].groups[group] = level
-		if level > base then
-			level = base
-		end
-		groups[group] = base - level
-		change[group] = groups[group] / base
-	end
-	for _, attr in pairs(self.attributes) do
-		local mult = attr == "heal" and self.config.heal_multiplier or 1
-		self.def[name][attr] = attributes[attr] * mult
-	end
-	if use_armor_monoid then
-		armor_monoid.monoid:add_change(player, change, "3d_armor:armor")
-	else
-		player:set_armor_groups(groups)
-	end
-	self.textures[name].armor = texture
-	self.textures[name].preview = preview
-	self.def[name].level = self.def[name].groups.fleshy or 0
-	self.def[name].state = state
-	self.def[name].count = count
-	if unified_inventory.current_page[name] == "armor" then
-		unified_inventory.set_inventory_formspec(player, "armor")
-	end
-end

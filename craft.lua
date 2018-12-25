@@ -324,7 +324,7 @@ ocular_networks.register_meltable({
 
 ocular_networks.register_fusion({
 	item_1="flowers:mushroom_red",
-	item_2="flowers:mushroom_brown",
+	item_2="ocular_networks:luminium_lump",
 	output="ocular_networks:loomshroom",
 	give_back="",
 	cost=100
