@@ -1,5 +1,4 @@
 
-
 minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:silver_dust",
@@ -583,6 +582,11 @@ ocular_networks.register_passive_cool({
 	output="ocular_networks:angmallen_block",
 })
 
+ocular_networks.register_passive_cool({
+	item="ocular_networks:bucket_hekatonium",
+	output="ocular_networks:hekatonium_block",
+})
+
 ocular_networks.register_fusion({
 	item_1="default:diamondblock 9",
 	item_2="default:mese 9",
@@ -661,9 +665,45 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:angmallen_boots",
 	recipe={
-		{"ocular_networks:angmallen_block_2", "", "ocular_networks:angmallen_block_2"},
-		{"ocular_networks:angmallen_block_2", "ocular_networks:charged_gem", "ocular_networks:angmallen_block_2"},
+		{"ocular_networks:hekatonium_block", "", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:hekatonium_block", "ocular_networks:charged_gem", "ocular_networks:hekatonium_block"},
 		{"ocular_networks:piston", "ocular_networks:angmallen_block_4", "ocular_networks:piston"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:hekatonium_helm",
+	recipe={
+		{"ocular_networks:hekatonium_block", "ocular_networks:angmallen_helm", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:hekatonium_block", "ocular_networks:charged_gem", "ocular_networks:hekatonium_block"},
+		{"", "", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:hekatonium_legs",
+	recipe={
+		{"ocular_networks:hekatonium_block", "ocular_networks:angmallen_legs", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:hekatonium_block", "ocular_networks:charged_gem", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:hekatonium_block", "", "ocular_networks:hekatonium_block"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:hekatonium_chest",
+	recipe={
+		{"ocular_networks:hekatonium_block", "", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:hekatonium_block", "ocular_networks:charged_gem", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:hekatonium_block", "ocular_networks:angmallen_chest", "ocular_networks:hekatonium_block"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:hekatonium_boots",
+	recipe={
+		{"ocular_networks:hekatonium_block", "", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:hekatonium_block", "ocular_networks:charged_gem", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:piston", "ocular_networks:angmallen_boots", "ocular_networks:piston"}
 	}
 })
 
@@ -828,4 +868,75 @@ ocular_networks.register_fusion({
 	output="ocular_networks:hekatonium_bar",
 	give_back="",
 	cost=1000
+})
+
+minetest.register_craft({
+	output="ocular_networks:hekaton_hammer",
+	recipe={
+		{"", "ocular_networks:hekatonium_bar", ""},
+		{"ocular_networks:hekatonium_block", "ocular_networks:angmallen_hammer", "ocular_networks:hekatonium_block"},
+		{"", "ocular_networks:erena_sphere", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:hekaton_axe",
+	recipe={
+		{"", "ocular_networks:hekatonium_bar", ""},
+		{"ocular_networks:hekatonium_block", "ocular_networks:angmallen_axe", "ocular_networks:hekatonium_block"},
+		{"", "ocular_networks:erena_sphere", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:hekaton_sword",
+	recipe={
+		{"", "ocular_networks:hekatonium_bar", ""},
+		{"ocular_networks:hekatonium_block", "ocular_networks:angmallen_sword", "ocular_networks:hekatonium_block"},
+		{"", "ocular_networks:erena_sphere", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:erena_sphere",
+	recipe={
+		{"ocular_networks:angmallen_bar", "default:stick", "ocular_networks:angmallen_bar"},
+		{"default:stick", "ocular_networks:charged_gem", "default:stick"},
+		{"ocular_networks:angmallen_bar", "default:stick", "ocular_networks:angmallen_bar"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:barrel",
+	recipe={
+		{"ocular_networks:silicotin_bar", "default:steel_ingot", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:silicotin_block", "ocular_networks:lens", "ocular_networks:pipe_socket"},
+		{"ocular_networks:silicotin_bar", "default:steel_ingot", "ocular_networks:silicotin_bar"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:gun_stock2",
+	recipe={
+		{"ocular_networks:peat", "ocular_networks:peat", "ocular_networks:peat"},
+		{"", "ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar"},
+		{"", "", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:scope",
+	recipe={
+		{"ocular_networks:silicotin_bar", "ocular_networks:hekatonium_bar", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:lens", "ocular_networks:cross", "ocular_networks:lens"},
+		{"ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar"}
+	}
+})
+minetest.register_craft({
+	output="ocular_networks:erena_blaster",
+	recipe={
+		{"ocular_networks:hekatonium_bar", "ocular_networks:scope", "ocular_networks:gearbox"},
+		{"ocular_networks:barrel", "ocular_networks:blazerifle_c", "ocular_networks:gun_stock2"},
+		{"ocular_networks:hekatonium_bar", "ocular_networks:pipe_wrench", "ocular_networks:erena_sphere"}
+	}
 })

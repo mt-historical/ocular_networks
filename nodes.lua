@@ -1,5 +1,4 @@
 
-
 local nodespec = ""..
 "size[10,6]"..
 default.gui_bg ..
@@ -395,7 +394,7 @@ minetest.register_ore({
 minetest.register_node("ocular_networks:hekatonium_ore", {
 	description = minetest.colorize("#00affa", "Hekatonium Ore"),
 	tiles = {"default_stone.png^poly_hekatonium_ore.png"},
-	groups = {cracky = 2},
+	groups = {hekatonium_ore = 1},
 	drop = "ocular_networks:hekatonium_chunk",
 	sounds = default.node_sound_stone_defaults(),
 	light_source=5

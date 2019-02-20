@@ -161,6 +161,7 @@ minetest.register_tool("ocular_networks:angmallen_hammer", {
 		max_drop_level=10,
 		groupcaps={
 			cracky = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
+			hekatonium_ore = {times={[1]=3}, uses=150, maxlevel=10}
 		},
 		damage_groups = {fleshy=19},
 	},
@@ -226,3 +227,69 @@ minetest.register_craftitem("ocular_networks:pipe_wrench", {
 	stack_max=1,
 })
 
+minetest.register_tool("ocular_networks:hekaton_hammer", {
+	description = minetest.colorize("#00affa", "4k Tonne Drumel"),
+	inventory_image = "poly_hekaton_hammer.png",
+	wield_scale = {x=3.0, y=3.0, z=1.0},
+	tool_capabilities = {
+		full_punch_interval = 0.01,
+		max_drop_level=10,
+		groupcaps={
+			cracky = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=500, maxlevel=10},
+			hekatonium_ore = {times={[1]=3}, uses=250, maxlevel=10}
+		},
+		damage_groups = {fleshy=77},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+
+minetest.register_tool("ocular_networks:hekaton_axe", {
+	description = minetest.colorize("#00affa", "Erenic Axaw"),
+	inventory_image = "poly_hekaton_axe.png",
+	wield_scale = {x=3.0, y=3.0, z=1.0},
+	tool_capabilities = {
+		full_punch_interval = 0.01,
+		max_drop_level=10,
+		groupcaps={
+			choppy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=500, maxlevel=10},
+		},
+		damage_groups = {fleshy=80},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("ocular_networks:hekaton_sword", {
+	description = minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "500 Melee Damage"),
+	inventory_image = "poly_hekaton_sword.png",
+	wield_scale = {x=3.0, y=3.0, z=1.0},
+	tool_capabilities = {
+		full_punch_interval = 1,
+		max_drop_level=10,
+		groupcaps={
+			snappy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=500, maxlevel=10},
+		},
+		damage_groups = {fleshy=500},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_craftitem("ocular_networks:erena_sphere", {
+	description = "Stable Erena Core\n"..minetest.colorize("#00affa", "A black hole full of antimatter that keeps it open."),
+	inventory_image = "poly_power_core.png",
+})
+
+minetest.register_craftitem("ocular_networks:barrel", {
+	description = "Focus Barrel\n"..minetest.colorize("#00affa", "Enhances the power of laser shots."),
+	inventory_image = "poly_barrel.png",
+})
+
+minetest.register_craftitem("ocular_networks:gun_stock2", {
+	description = "Grip Stock\n"..minetest.colorize("#00affa", "A synthetic stock"),
+	inventory_image = "poly_stock_2.png",
+})
+
+minetest.register_craftitem("ocular_networks:scope", {
+	description = "Marksman Scope\n"..minetest.colorize("#00affa", "A high-accuracy scope"),
+	inventory_image = "poly_scope.png",
+})

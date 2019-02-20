@@ -1,3 +1,4 @@
+
 local modpath = minetest.get_modpath("ocular_networks")
 local worldpath = minetest.get_worldpath()
 ocular_networks = {worldpath=worldpath, modpath=modpath}
@@ -24,7 +25,7 @@ if ocular_networks.config.onRun.load_armor_upgrades then
 	dofile(modpath.."/upgrade.lua")
 end
 dofile(modpath.."/craft.lua")
-if minetest.get_modpath("wield3d") then
-	dofile(modpath.."/w3d_compat.lua")
-end
+
+dofile(modpath.."/compat.lua")
+
 dofile(modpath.."/update.lua")

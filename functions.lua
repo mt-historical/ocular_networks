@@ -1,5 +1,4 @@
 
-
 local function disallow()
 	for istring,node in pairs(minetest.registered_nodes) do
 		if node.light_source then
@@ -182,7 +181,7 @@ minetest.register_globalstep(function(dtime)
 				player:set_attribute("personal_ocular_power", ocular_networks.config.live.max_personal_network_power)
 			end
 			if player:get_attribute("ocular_networks_hud_power") then
-				player:hud_change(tonumber(player:get_attribute("ocular_networks_hud_power")), "text", "Ocular Power: "..player:get_attribute("personal_ocular_power"))
+				player:hud_change(tonumber(player:get_attribute("ocular_networks_hud_power")), "text", "Network OCP: "..player:get_attribute("personal_ocular_power"))
 			else
 				if player:get_attribute("personal_ocular_power") then
 				local hud = player:hud_add({
@@ -204,5 +203,6 @@ minetest.register_globalstep(function(dtime)
 		end
 	end
 end)
+
 
 minetest.after(0, disallow)

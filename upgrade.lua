@@ -1,3 +1,4 @@
+
 minetest.register_craftitem("ocular_networks:armor_pendant", {
 	description = "Angmallen Armor Upgrade Pendant\n"..minetest.colorize("#00affa", "Click to open your upgrade menu.\nPut Upgrade tokens in the inventory to use them."),
 	inventory_image = "poly_armor_angmallen_a_upgrade_pendant.png",
@@ -5,7 +6,7 @@ minetest.register_craftitem("ocular_networks:armor_pendant", {
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
 		if inv:get_lists().ocn_armor_upgrades then
-			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades", "size[8,9;]"..default.gui_bg..default.gui_bg_img.."list[current_player;main;0,5;8,4;]label[0,4.2;These upgrades will only take effect if you are wearing a full set of angmallen armor.\nShield upgrade modules will only work if you have the shield.]list[current_player;ocn_armor_upgrades;1.5,1.5;5,1;]")
+			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades", "size[8,9;]"..default.gui_bg..default.gui_bg_img.."list[current_player;main;0,5;8,4;]label[0,4.2;These upgrades will only take effect if you are wearing a full set of angmallen or hekatonic armor.\nShield upgrade modules will only work if you have the shield.]list[current_player;ocn_armor_upgrades;1.5,1.5;5,1;]")
 		else
 			inv:set_list("ocn_armor_upgrades", {})
 			inv:set_size("ocn_armor_upgrades", 32)
@@ -21,7 +22,7 @@ end)
 
 local function has_armor_prerequisites(p)
 	local inv = minetest.get_inventory({type="detached", name=p:get_player_name().."_armor"})
-	return inv:contains_item("armor", "ocular_networks:angmallen_helm") and inv:contains_item("armor", "ocular_networks:angmallen_boots") and inv:contains_item("armor", "ocular_networks:angmallen_chest") and inv:contains_item("armor", "ocular_networks:angmallen_legs")
+	return inv:contains_item("armor", "ocular_networks:angmallen_helm") and inv:contains_item("armor", "ocular_networks:angmallen_boots") and inv:contains_item("armor", "ocular_networks:angmallen_chest") and inv:contains_item("armor", "ocular_networks:angmallen_legs") or inv:contains_item("armor", "ocular_networks:hekatonium_helm") and inv:contains_item("armor", "ocular_networks:hekatonium_boots") and inv:contains_item("armor", "ocular_networks:hekatonium_chest") and inv:contains_item("armor", "ocular_networks:hekatonium_legs")
 end
 
 --prepare for lag if armor enabled
@@ -180,6 +181,96 @@ armor:register_on_update(function(player)
 		end
 end)
 
+minetest.register_craftitem("ocular_networks:hekatonium_shield", {
+	description = minetest.colorize("#00affa", "Hekaton Defense Matrix"),
+	inventory_image = "poly_hekatonic_shield.png",
+	texture = "poly_hekatonic_shield_real.png",
+	preview = "poly_hekatonic_shield_preview.png",
+	groups = {armor_shield=1, armor_use=0, armor_heal=12},
+	armor_groups = {fleshy=10},
+	damage_groups = {cracky=3, snappy=3, choppy=3, crumbly=3, level=4},
+	reciprocate_damage = true,
+	stack_max=1,
+})
+
+minetest.register_craftitem("ocular_networks:hekatonium_shield1", {
+	description = minetest.colorize("#00affa", "Hekaton Defense Matrix"),
+	inventory_image = "poly_hekatonic_shield.png",
+	texture = "poly_hekatonic_shield_real.png",
+	preview = "poly_hekatonic_shield_preview.png",
+	groups = {armor_shield=1, armor_use=0, armor_heal=12, not_in_creative_inventory=1},
+	armor_groups = {fleshy=20},
+	damage_groups = {cracky=3, snappy=3, choppy=3, crumbly=3, level=4},
+	reciprocate_damage = true,
+	stack_max=1,
+})
+
+minetest.register_craftitem("ocular_networks:hekatonium_shield2", {
+	description = minetest.colorize("#00affa", "Hekaton Defense Matrix"),
+	inventory_image = "poly_hekatonic_shield.png",
+	texture = "poly_hekatonic_shield_real.png",
+	preview = "poly_hekatonic_shield_preview.png",
+	groups = {armor_shield=1, armor_use=0, armor_heal=12, not_in_creative_inventory=1},
+	armor_groups = {fleshy=40},
+	damage_groups = {cracky=3, snappy=3, choppy=3, crumbly=3, level=4},
+	reciprocate_damage = true,
+	stack_max=1,
+})
+
+minetest.register_craftitem("ocular_networks:hekatonium_shield3", {
+	description = minetest.colorize("#00affa", "Hekaton Defense Matrix"),
+	inventory_image = "poly_hekatonic_shield.png",
+	texture = "poly_hekatonic_shield_real.png",
+	preview = "poly_hekatonic_shield_preview.png",
+	groups = {armor_shield=1, armor_use=0, armor_heal=12, not_in_creative_inventory=1},
+	armor_groups = {fleshy=80},
+	damage_groups = {cracky=3, snappy=3, choppy=3, crumbly=3, level=4},
+	reciprocate_damage = true,
+	stack_max=1,
+})
+
+armor:register_on_update(function(player)
+		local inv2 = minetest.get_inventory({type="detached", name=player:get_player_name().."_armor"})
+		local inv = player:get_inventory()
+		if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense4") then
+			if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
+				inv2:add_item("armor", "ocular_networks:hekatonium_shield1")
+				armor:set_player_armor_defense(player)
+			end
+		elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense5") then
+			if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
+				inv2:add_item("armor", "ocular_networks:hekatonium_shield2")
+				armor:set_player_armor_defense(player)
+			end
+		elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense6") then
+			if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") then
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
+				inv2:add_item("armor", "ocular_networks:hekatonium_shield3")
+				armor:set_player_armor_defense(player)
+			end
+		else
+			if inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
+				inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
+				inv2:add_item("armor", "ocular_networks:hekatonium_shield")
+				armor:set_player_armor_defense(player)
+			end
+		end
+end)
+
 ocular_networks.heal_pause = 0
 
 minetest.register_globalstep(function(dtime)
@@ -322,6 +413,33 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:upgrade_defense4",
+	recipe={
+		{"ocular_networks:angmallen_bar", "ocular_networks:hekatonium_bar", "ocular_networks:angmallen_bar"},
+		{"ocular_networks:hekatonium_bar", "ocular_networks:upgrade_defense3", "ocular_networks:hekatonium_bar"},
+		{"ocular_networks:angmallen_bar", "ocular_networks:hekatonium_bar", "ocular_networks:angmallen_bar"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:upgrade_defense5",
+	recipe={
+		{"ocular_networks:angmallen_bar", "ocular_networks:hekatonium_bar", "ocular_networks:angmallen_bar"},
+		{"ocular_networks:hekatonium_bar", "ocular_networks:upgrade_defense4", "ocular_networks:hekatonium_bar"},
+		{"ocular_networks:angmallen_bar", "ocular_networks:hekatonium_bar", "ocular_networks:angmallen_bar"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:upgrade_defense6",
+	recipe={
+		{"ocular_networks:angmallen_bar", "ocular_networks:hekatonium_bar", "ocular_networks:angmallen_bar"},
+		{"ocular_networks:hekatonium_bar", "ocular_networks:upgrade_defense5", "ocular_networks:hekatonium_bar"},
+		{"ocular_networks:angmallen_bar", "ocular_networks:hekatonium_bar", "ocular_networks:angmallen_bar"}
+	}
+})
+
+minetest.register_craft({
 	output="ocular_networks:upgrade_heal",
 	recipe={
 		{"", "ocular_networks:charged_gem", ""},
@@ -434,6 +552,27 @@ minetest.register_craftitem("ocular_networks:upgrade_defense2", {
 
 minetest.register_craftitem("ocular_networks:upgrade_defense3", {
 	description = "Shield Upgrade L3 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen shield.\n")..minetest.colorize("#ff0000", "+20 defense"),
+	inventory_image = "poly_upgrade_defense.png",
+	groups = {ocp_upgrade=1},
+	stack_max=1
+})
+
+minetest.register_craftitem("ocular_networks:upgrade_defense4", {
+	description = "Shield Upgrade L4 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+20 defense"),
+	inventory_image = "poly_upgrade_defense.png",
+	groups = {ocp_upgrade=1},
+	stack_max=1
+})
+
+minetest.register_craftitem("ocular_networks:upgrade_defense5", {
+	description = "Shield Upgrade L5 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+40 defense"),
+	inventory_image = "poly_upgrade_defense.png",
+	groups = {ocp_upgrade=1},
+	stack_max=1
+})
+
+minetest.register_craftitem("ocular_networks:upgrade_defense6", {
+	description = "Shield Upgrade L6 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+80 defense"),
 	inventory_image = "poly_upgrade_defense.png",
 	groups = {ocp_upgrade=1},
 	stack_max=1
