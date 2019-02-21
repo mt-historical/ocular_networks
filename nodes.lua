@@ -1,8 +1,7 @@
 
 local nodespec = ""..
 "size[10,6]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "label[0.7,0;Source Location:]"..
 "field[1,1;2,1;sourcex;x;${sourceposx}]"..
 "field[4,1;2,1;sourcey;y;${sourceposy}]"..
@@ -13,8 +12,7 @@ default.gui_bg_img ..
 
 local nodespec2 = ""..
 "size[10,6]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "label[0.7,0;Source Location:]"..
 "field[1,1;2,1;sourcex;x;${sourceposx}]"..
 "field[4,1;2,1;sourcey;y;${sourceposy}]"..
@@ -26,30 +24,26 @@ default.gui_bg_img ..
 
 local trashspec = ""..
 "size[10,6]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "field[1,2.7;8,1;items;input items to take:;${items}]"..
 "button_exit[0.74,5;8,1;save;Save]"
 
 local meltspec = ""..
 "size[8,9;]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;input;3.5,2;1,1;]"..
 "list[current_player;main;0,5;8,4;]"
 
 local coolspec = ""..
 "size[8,9;]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;input;3.5,1;1,1;]"..
 "list[context;output;3.5,3;1,1;]"..
 "list[current_player;main;0,5;8,4;]"
 
 local alloyspec = ""..
 "size[8,9;]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;input1;2,1;1,1;]"..
 "list[context;input2;5,1;1,1;]"..
 "list[context;output;3,2;2,2;]"..
@@ -57,8 +51,7 @@ default.gui_bg_img ..
 
 local fusespec = ""..
 "size[8,9;]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;input1;2,1;1,1;]"..
 "list[context;input2;5,1;1,1;]"..
 "list[context;output;3,2;2,2;]"..
@@ -66,8 +59,7 @@ default.gui_bg_img ..
 
 local deconspec = ""..
 "size[8,9;]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;input;3.5,1;1,1;]"..
 "list[context;fuel;3.5,2;1,1;]"..
 "list[context;output;1.5,3.5;5,1;]"..
@@ -75,15 +67,13 @@ default.gui_bg_img ..
 
 local chestspec = ""..
 "size[20,10;]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;output;0,0;20,5;]"..
 "list[current_player;main;6,6;8,4;]"
 
 local bufferspec = ""..
 "size[20,10;]"..
-default.gui_bg ..
-default.gui_bg_img ..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;main;0,0;20,5;]"..
 "list[current_player;main;6,6;8,4;]"
 
@@ -752,7 +742,7 @@ minetest.register_node("ocular_networks:networknode2", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("draw_amount", 0)
-		meta:set_string("formspec", "field[draw;Input Amount to insert per second:;${draw_amount}]")
+		meta:set_string("formspec", "background[0,0;0,0;poly_gui_formbg.png;true]".."field[draw;Input Amount to insert per second:;${draw_amount}]")
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
 		local meta = minetest.get_meta(pos)

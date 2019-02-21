@@ -39,6 +39,7 @@ ocular_networks.pagetext[2]=""..
 "Ocular Networks works on a system of power stored in blocks.\n"..
 "This power is not stored in an 'available/required' network,\n"..
 "but is stored as an actual amount and moves dynamically.\n"..
+"We shall call this power 'OCP'."..
 "Power can only be generated from the sun, and is used for a\n"..
 "variety of applications.\n"..
 "To begin you'll need access to lots of gold, steel and copper.\n"..

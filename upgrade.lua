@@ -6,7 +6,7 @@ minetest.register_craftitem("ocular_networks:armor_pendant", {
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
 		if inv:get_lists().ocn_armor_upgrades then
-			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades", "size[8,9;]"..default.gui_bg..default.gui_bg_img.."list[current_player;main;0,5;8,4;]label[0,4.2;These upgrades will only take effect if you are wearing a full set of angmallen or hekatonic armor.\nShield upgrade modules will only work if you have the shield.]list[current_player;ocn_armor_upgrades;1.5,1.5;5,1;]")
+			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades", "size[8,9;]background[0,0;0,0;poly_gui_formbg.png;true]list[current_player;main;0,5;8,4;]label[0,4.2;These upgrades will only take effect if you are wearing a full set of angmallen or hekatonic armor.\nShield upgrade modules will only work if you have the shield.]list[current_player;ocn_armor_upgrades;1.5,1.5;5,1;]")
 		else
 			inv:set_list("ocn_armor_upgrades", {})
 			inv:set_size("ocn_armor_upgrades", 32)

@@ -28,4 +28,4 @@ dofile(modpath.."/craft.lua")
 
 dofile(modpath.."/compat.lua")
 
-dofile(modpath.."/update.lua")
+dofile(modpath.."/abm.lua")

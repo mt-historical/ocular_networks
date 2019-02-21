@@ -88,4 +88,3 @@ armor:register_armor("ocular_networks:hekatonium_boots", {
 	damage_groups = {cracky=3, snappy=3, choppy=3, crumbly=3, level=4},
 	reciprocate_damage = true,
 })
-

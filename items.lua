@@ -20,7 +20,7 @@ minetest.register_craftitem("ocular_networks:inspector", {
 			if pseudodata.formspec then
 				pseudodata.formspec="omitted"
 			end
-			minetest.show_formspec(placer:get_player_name(), "", "size[7,8;]textarea[0,0.5;7.5,9;arb;Ocular Inspector;"..dump(pseudodata).."]")
+			minetest.show_formspec(placer:get_player_name(), "", "size[7,8;]background[0,0;0,0;poly_gui_formbg.png;true]textarea[0,0.5;7.5,9;arb;Ocular Inspector;"..dump(pseudodata).."]")
 		end
 	end
 })
@@ -97,7 +97,7 @@ minetest.register_craftitem("ocular_networks:save_disk", {
 				if pseudodata.formspec then
 					pseudodata.formspec="omitted"
 				end
-				minetest.show_formspec(placer:get_player_name(), "", "size[7,8;]textarea[0,0.5;7.5,9;arb;experimental metadata transfer disk 3.1;"..dump(pseudodata).."]")
+				minetest.show_formspec(placer:get_player_name(), "", "size[7,8;]background[0,0;0,0;poly_gui_formbg.png;true]textarea[0,0.5;7.5,9;arb;experimental metadata transfer disk 3.1;"..dump(pseudodata).."]")
 			end
 		else
 			if pointed_thing.type=="node" then
