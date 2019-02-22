@@ -1,5 +1,11 @@
 
 minetest.register_craft({
+	output="ocular_networks:guide",
+	type="shapeless",
+	recipe = {"default:book", "default:copper_ingot", "default:glass"},
+})
+
+minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:silver_dust",
 	recipe={"default:silver_sand","default:stick"},
@@ -162,18 +168,18 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:distributor_2",
 	recipe={
-		{"ocular_networks:lumigold_block", "dye:violet", "ocular_networks:lumigold_block"},
+		{"default:mese_crystal", "dye:violet", "default:mese_crystal"},
 		{"dye:red", "ocular_networks:distributor", "dye:red"},
-		{"ocular_networks:lumigold_block", "dye:violet", "ocular_networks:lumigold_block"}
+		{"default:mese_crystal", "dye:violet", "default:mese_crystal"}
 	}
 })
 
 minetest.register_craft({
 	output="ocular_networks:distributor_3",
 	recipe={
-		{"ocular_networks:lumigold_block", "default:diamondblock", "ocular_networks:lumigold_block"},
+		{"ocular_networks:angmallen_bar", "default:diamondblock", "ocular_networks:angmallen_bar"},
 		{"dye:green", "ocular_networks:distributor_2", "dye:blue"},
-		{"ocular_networks:lumigold_block", "dye:cyan", "ocular_networks:lumigold_block"}
+		{"ocular_networks:angmallen_bar", "dye:cyan", "ocular_networks:angmallen_bar"}
 	}
 })
 
@@ -736,7 +742,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:pipe_socket",
+	output="ocular_networks:pipe_socket 10",
 	recipe={
 		{"ocular_networks:luminium_bar_3", "default:tin_ingot", "ocular_networks:luminium_bar_3"},
 		{"default:tin_ingot", "", "default:tin_ingot"},
@@ -938,5 +944,21 @@ minetest.register_craft({
 		{"ocular_networks:hekatonium_bar", "ocular_networks:scope", "ocular_networks:gearbox"},
 		{"ocular_networks:barrel", "ocular_networks:blazerifle_c", "ocular_networks:gun_stock2"},
 		{"ocular_networks:hekatonium_bar", "ocular_networks:pipe_wrench", "ocular_networks:erena_sphere"}
+	}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="bucket:bucket_river_water",
+	recipe="bucket:bucket_water",
+	cooktime=11
+})
+
+minetest.register_craft({
+	output="ocular_networks:boiler",
+	recipe={
+		{"default:copper_ingot", "ocular_networks:pipe_socket", "default:copper_ingot"},
+		{"default:bronze_ingot", "ocular_networks:gearbox", "default:bronze_ingot"},
+		{"default:steel_ingot", "ocular_networks:pipe_socket", "default:steel_ingot"}
 	}
 })

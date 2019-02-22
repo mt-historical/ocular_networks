@@ -5,7 +5,7 @@ minetest.register_abm({
 	nodenames = {"ocular_networks:battery"},
 	interval = 1,
 	chance = 1,
-	catch_up = false,
+	catch_up = true,
 	action = function(pos, node)
 		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
 		local node_above_light = minetest.get_node_light({x=pos.x, y=pos.y+2, z=pos.z})
@@ -15,6 +15,29 @@ minetest.register_abm({
 		if node_above.name == "ocular_networks:frame_lens" then
 			if not minetest.find_node_near(pos, 11, ocular_networks.disallowed) then
 				meta:set_int("ocular_power", power+node_above_light)
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+        label = "steam battery charging",
+	nodenames = {"ocular_networks:boiler"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
+		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local nodes_around = {a=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}), b=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}), c = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}), d = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})}
+		local meta = minetest.get_meta(pos)
+		local power = meta:get_int("ocular_power")
+		meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
+		if node_above.name == "default:lava_source" then
+			if node_below.name == "default:river_water_source" then
+				if nodes_around.a.name == "ocular_networks:frame_cross" and nodes_around.b.name == "ocular_networks:frame_cross" and nodes_around.c.name == "ocular_networks:frame_cross" and nodes_around.d.name == "ocular_networks:frame_cross" then
+					meta:set_int("ocular_power", power+150)
+				end
 			end
 		end
 	end,

@@ -13,19 +13,28 @@ ocular_networks.pages["header"]=""..
 "image_button[13.3,9.5;1,1;poly_abc_guide_arrownext.png;next;]"..
 "image_button[0,9.5;1,1;poly_abc_guide_arrowprev.png;prev;]"
 
+ocular_networks.pages["header2"]=""..
+"size[14,10]"..
+"background[0,0;0,0;poly_abc_guide_page.png;true]"..
+"image_button[0,9.5;1,1;poly_abc_guide_arrowprev.png;prev;]"
+
 ocular_networks.pagetext[1]=""..
 "Ocular Networks Guide\n\n"..
 "This book will provide help with setting up and using Ocular Networks machine systems.\n"..
 "It will NOT, however, show you the recipes for Ocular Networks items.\n(you should use unified_inventory for this)\n"..
 "\n"..
 "CONTENTS\n\n"..
-"Getting Started     -     Page 2\n"..
-"Ores                -     Page 3\n"..
-"Battery             -     Page 4\n"..
-"Power Collector     -     page 5\n"..
-"Network Nodes       -     page 6\n"..
-"Metal Melter        -     page 7\n"..
-"Alloy Centrifuge    -     page 8\n"
+"Getting Started            -        Page 2\n"..
+"Ores                       -        Page 3\n"..
+"Battery                    -        Page 4\n"..
+"Power Collector            -        Page 5\n"..
+"Network Nodes              -        Page 6\n"..
+"Metal Melter               -        Page 7\n"..
+"Alloy Centrifuge           -        Page 8\n"..
+"Fusion Compresser          -        Page 9\n"..
+"Charging Station           -        Page 10\n"..
+"Electrofraction Generator  -        Page 11\n"..
+"Power Cell Packager        -        Page 12\n"
 
 
 ocular_networks.pages[1]=""..
@@ -40,8 +49,6 @@ ocular_networks.pagetext[2]=""..
 "This power is not stored in an 'available/required' network,\n"..
 "but is stored as an actual amount and moves dynamically.\n"..
 "We shall call this power 'OCP'."..
-"Power can only be generated from the sun, and is used for a\n"..
-"variety of applications.\n"..
 "To begin you'll need access to lots of gold, steel and copper.\n"..
 "You will also need a way to get to -1000 y or below."
 
@@ -121,17 +128,63 @@ ocular_networks.pages["header"]..
 
 ocular_networks.pagetext[8]=""..
 "Machines: Alloy Centrifuge\n\n"..
-"Alloys metals by spinning them really fast.\n"..
+"Alloys molten metals by spinning them really fast.\n"..
 "The alloy centrifuge takes power from the block above."
 
 ocular_networks.pages[8]=""..
 ocular_networks.pages["header"]..
 "textarea[1,1;12,8;;"..B(ocular_networks.pagetext[8])..";]"
 
+ocular_networks.pagetext[9]=""..
+"Machines: Fusion Compresser\n\n"..
+"Breaks down items to their basic components and fuses them with others to make new ones.\n"..
+"The fusion compresser takes power from the block above."
+
+ocular_networks.pages[9]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[9])..";]"
+
+ocular_networks.pagetext[10]=""..
+"Machines: Charging Station\n\n"..
+"Will irradiate an item with OCP energy.\n"..
+"The charging station takes power from the block above."
+
+ocular_networks.pages[10]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[10])..";]"
+
+ocular_networks.pagetext[11]=""..
+"Machines: Electrofraction Generator\n\n"..
+"The electrofraction generator turns OCP into EU.\n"..
+"The electrofraction generator takes power from the block below.\n(Only available if technic is installed)"
+
+ocular_networks.pages[11]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[11])..";]"
+
+ocular_networks.pagetext[12]=""..
+"Machines: Power Cell Packager\n\n"..
+"The power cell packager turns OCP into Power Cells.\n"..
+"The power cell packager takes power from the block below.\n(Only available if basic_machines is installed)"
+
+ocular_networks.pages[12]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[12])..";]"
+
+ocular_networks.pagetext[13]=""..
+"Machines: Steam Battery\n\n"..
+"This machine generates power from steam.\n"..
+"It must have a lava block above it, a river water block below, \nand machine structure blocks on all four sides."..
+"Machine structure blocks are made by right-clicking a gold frame with a plated cross."..
+"Once these requirements are met, it will create 150 OCP per second."
+
+ocular_networks.pages[13]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[13])..";]"
 
 
 minetest.register_craftitem("ocular_networks:guide", {
-	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "First Edition"),
+	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Second Edition"),
 	inventory_image = "poly_guide.png",
 	stack_max=1,
 	on_use = function(itemstack, user, pointed_thing)
@@ -144,7 +197,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formnames[1]=="ocn_guide" then
 		local pg = tonumber(formnames[2])
 		if fields.next then
-			minetest.show_formspec(player:get_player_name(), "ocn_guide/"..pg+1, ocular_networks.pages[pg+1])
+			if pg < #ocular_networks.pages then
+				minetest.show_formspec(player:get_player_name(), "ocn_guide/"..pg+1, ocular_networks.pages[pg+1])
+			end
 		elseif fields.prev then
 			minetest.show_formspec(player:get_player_name(), "ocn_guide/"..pg-1, ocular_networks.pages[pg-1])
 		end

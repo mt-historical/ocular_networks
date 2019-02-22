@@ -168,6 +168,29 @@ minetest.register_node("ocular_networks:battery", {
 	end
 })
 
+minetest.register_node("ocular_networks:boiler", {
+	description = "Steam Battery\n"..minetest.colorize("#00affa", "Generates power from natural steam"),
+	tiles = {"poly_boiler_top.png", "poly_boiler_bottom.png", "poly_boiler_side.png"},
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_stone_defaults(),
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_int("ocular_power", 0)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Power Buffer: 0".."\nOwned By: "..owner)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end
+})
+
 minetest.register_node("ocular_networks:distributor", {
 	description = "Power Collector\n"..minetest.colorize("#00affa", "Takes power from the set position\nat a fixed rate (has a range of 10)"),
 	tiles = {"poly_node.png"},
