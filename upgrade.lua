@@ -14,23 +14,25 @@ minetest.register_craftitem("ocular_networks:armor_pendant", {
 	end
 })
 
-minetest.register_craftitem("ocular_networks:armor_controller", {
-	description = "Hekaton Performance Controller\n"..minetest.colorize("#00affa", "Click to open your tweaks menu.\n"),
-	inventory_image = "poly_armor_angmallen_a_upgrade_pendant.png",
+minetest.register_craftitem("ocular_networks:performance_controller", {
+	description = "Performance Controller\n"..minetest.colorize("#00affa", "Click to open your tweaks menu."),
+	inventory_image = "poly_perf_controller.png",
 	stack_max=1,
 	on_use = function(itemstack, user, pointed_thing)
 		local inv = user:get_inventory()
-		if inv:get_lists().ocn_armor_upgrades then
-			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades", "size[8,9;]background[0,0;0,0;poly_gui_formbg.png;true]list[current_player;main;0,5;8,4;]label[0,4.2;These upgrades will only take effect if you are wearing a full set of angmallen or hekatonic armor.\nShield upgrade modules will only work if you have the shield.]list[current_player;ocn_armor_upgrades;1.5,1.5;5,1;]")
+		if inv:get_lists().ocn_armor_upgrades and inv:get_lists().ocn_cyber_upgrades then
+			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades_2", "size[8,9;]background[0,0;0,0;poly_gui_formbg.png;true]list[current_player;main;0,5;8,4;]label[1.5,0.2;Armor Upgrades]list[current_player;ocn_armor_upgrades;1.5,0.6;5,1;]label[1.5,1.7;Cybernetic Upgrades]list[current_player;ocn_cyber_upgrades;1.5,2.1;5,1;]")
 		else
 			inv:set_list("ocn_armor_upgrades", {})
 			inv:set_size("ocn_armor_upgrades", 32)
+			inv:set_list("ocn_cyber_upgrades", {})
+			inv:set_size("ocn_cyber_upgrades", 32)
 		end
 	end
 })
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	if formname=="ocn_armor_upgrades" then
+	if formname=="ocn_armor_upgrades" or formname=="ocn_armor_upgrades_2" then
 		armor:set_player_armor(player)
 	end
 end)
@@ -318,8 +320,8 @@ minetest.register_craft({
 	output="ocular_networks:upgrade_speed",
 	recipe={
 		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:charger", "ocular_networks:upgrade", "ocular_networks:charger"},
-		{"ocular_networks:charger", "ocular_networks:charger", "ocular_networks:charger"}
+		{"default:copper_ingot", "ocular_networks:upgrade", "default:copper_ingot"},
+		{"default:copper_ingot", "default:copper_ingot", "default:copper_ingot"}
 	},
 	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
@@ -346,8 +348,8 @@ minetest.register_craft({
 	output="ocular_networks:upgrade_jump",
 	recipe={
 		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:piston", "ocular_networks:upgrade", "ocular_networks:piston"},
-		{"ocular_networks:piston", "ocular_networks:piston", "ocular_networks:piston"}
+		{"default:tin_ingot", "ocular_networks:upgrade", "default:tin_ingot"},
+		{"default:tin_ingot", "default:tin_ingot", "default:tin_ingot"}
 	},
 	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
@@ -374,8 +376,8 @@ minetest.register_craft({
 	output="ocular_networks:upgrade_float",
 	recipe={
 		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:gearbox", "ocular_networks:upgrade", "ocular_networks:gearbox"},
-		{"ocular_networks:gearbox", "ocular_networks:gearbox", "ocular_networks:gearbox"}
+		{"default:gold_ingot", "ocular_networks:upgrade", "default:gold_ingot"},
+		{"default:gold_ingot", "default:gold_ingot", "default:gold_ingot"}
 	},
 	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
@@ -403,8 +405,8 @@ minetest.register_craft({
 	output="ocular_networks:upgrade_defense",
 	recipe={
 		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:angmallen_bar", "ocular_networks:upgrade", "ocular_networks:angmallen_bar"},
-		{"ocular_networks:angmallen_bar", "ocular_networks:angmallen_bar", "ocular_networks:angmallen_bar"}
+		{"default:steel_ingot", "ocular_networks:upgrade", "default:steel_ingot"},
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"}
 	},
 	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
@@ -458,8 +460,8 @@ minetest.register_craft({
 	output="ocular_networks:upgrade_heal",
 	recipe={
 		{"", "ocular_networks:charged_gem", ""},
-		{"ocular_networks:healer", "ocular_networks:upgrade", "ocular_networks:healer"},
-		{"ocular_networks:healer", "ocular_networks:healer", "ocular_networks:healer"}
+		{"default:apple", "ocular_networks:upgrade", "default:apple"},
+		{"default:apple", "default:apple", "default:apple"}
 	},
 	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
@@ -606,3 +608,101 @@ minetest.register_craftitem("ocular_networks:upgrade_heal2", {
 	groups = {ocp_upgrade=1},
 	stack_max=1
 })
+
+minetest.register_craftitem("ocular_networks:c_arm", {
+	description = "Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm"),
+	inventory_image = "poly_cyber_arm.png",
+})
+
+minetest.register_craft({
+	output="ocular_networks:c_arm",
+	recipe={
+		{"ocular_networks:silicotin_bar", "", ""},
+		{"ocular_networks:silicotin_bar", "", ""},
+		{"ocular_networks:cross", "ocular_networks:silicotin_bar", "default:tin_ingot"}
+	}
+})
+
+minetest.register_craftitem("ocular_networks:c_arm_blade", {
+	description = "Bladed Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a razor-sharp blade.\nEquip in performance controller menu\nClick with empty hand to dash-strike"),
+	inventory_image = "poly_cyber_arm_blade.png",
+	stack_max=1
+})
+
+minetest.register_craft({
+	output="ocular_networks:c_arm_blade",
+	recipe={
+		{"ocular_networks:c_arm", "default:steel_ingot", "default:sword_steel"}
+	}
+})
+
+minetest.register_globalstep(function(dtime)
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if player:get_player_control().LMB then
+			local inv = player:get_inventory() 
+			local power = tonumber(player:get_attribute("personal_ocular_power"))
+			if player:get_wielded_item():get_name() == "" then
+				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") then
+					player:set_wielded_item({name="default:sword_steel"})
+					local userPos = player:get_pos()
+					local userDir = player:get_look_dir()
+					local node = minetest.get_node({x=userPos.x+userDir.x*10, y=userPos.y+userDir.y*10, z=userPos.z+userDir.z*10})
+					if power > 49 then
+						if node.name == "air" then
+							player:set_attribute("personal_ocular_power", power-50)
+							player:set_pos({x=userPos.x+userDir.x*10, y=userPos.y+userDir.y*10, z=userPos.z+userDir.z*10})
+						end
+					end
+					player:set_wielded_item({name=""})
+				end
+			end
+		end
+	end
+end)
+
+minetest.register_craftitem("ocular_networks:c_arm_gun", {
+	description = "Barreled Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a rifle barrel.\nEquip in performance controller menu\nClick with empty hand to fire"),
+	inventory_image = "poly_cyber_arm_gun.png",
+	stack_max=1
+})
+
+minetest.register_craft({
+	output="ocular_networks:c_arm_gun",
+	recipe={
+		{"ocular_networks:c_arm", "group:wood", "ocular_networks:blazerifle"}
+	}
+})
+
+minetest.register_globalstep(function(dtime)
+	for _,player in ipairs(minetest.get_connected_players()) do
+		if player:get_player_control().LMB then
+			local inv = player:get_inventory() 
+			local power = tonumber(player:get_attribute("personal_ocular_power"))
+			if player:get_wielded_item():get_name() == "" then
+				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") then
+					local userPos = player:get_pos()
+					local userDir = player:get_look_dir()
+					if power > 99 then
+						player:set_attribute("personal_ocular_power", power-100)
+						local pos = player:getpos()
+						local dir = player:get_look_dir()
+						local yaw = player:get_look_yaw()
+						if pos and dir and yaw then
+							pos.y = pos.y + 1.6
+							local obj = minetest.add_entity(pos, "ocular_networks:power_projectile")
+							if obj then
+								obj:setvelocity({x=dir.x * 45, y=dir.y * 45, z=dir.z * 45})
+								obj:setacceleration({x=dir.x * 0, y=0, z=dir.z * 0})
+								obj:setyaw(yaw + math.pi)
+								local ent = obj:get_luaentity()
+								if ent then
+									ent.player = ent.player or player
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end)

@@ -714,6 +714,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:performance_controller",
+	recipe={
+		{"ocular_networks:silicotin_bar", "ocular_networks:hekatonium_bar", "ocular_networks:silicotin_bar"},
+		{"default:obsidian", "ocular_networks:inspector", "default:obsidian"},
+		{"default:diamond", "ocular_networks:armor_pendant", "default:diamond"}
+	}
+})
+
+minetest.register_craft({
 	output="ocular_networks:armor_pendant",
 	recipe={
 		{"farming:cotton", "farming:cotton", "farming:cotton"},
