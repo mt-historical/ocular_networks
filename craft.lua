@@ -957,8 +957,17 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:boiler",
 	recipe={
-		{"default:copper_ingot", "ocular_networks:pipe_socket", "default:copper_ingot"},
+		{"default:luminium_bar_3", "ocular_networks:pipe_socket", "default:luminium_bar_3"},
 		{"default:bronze_ingot", "ocular_networks:gearbox", "default:bronze_ingot"},
-		{"default:steel_ingot", "ocular_networks:pipe_socket", "default:steel_ingot"}
+		{"default:luminium_bar_3", "ocular_networks:pipe_socket", "default:luminium_bar_3"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:bolumiary",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "ocular_networks:lens", "ocular_networks:luminium_bar_3"},
+		{"ocular_networks:toxic_slate", "dye:green", "ocular_networks:toxic_slate"},
+		{"ocular_networks:luminium_bar_3", "ocular_networks:cross", "ocular_networks:luminium_bar_3"}
 	}
 })

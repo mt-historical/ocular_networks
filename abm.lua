@@ -44,6 +44,38 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
+        label = "plant battery charging",
+	nodenames = {"ocular_networks:bolumiary"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
+		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local meta = minetest.get_meta(pos)
+		local power = meta:get_int("ocular_power")
+		meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
+		if node_below.name == "ocular_networks:gearbox" then
+			if node_above.name == "default:grass_1" then
+				meta:set_int("ocular_power", power+10)
+			end
+			if node_above.name == "default:grass_2" then
+				meta:set_int("ocular_power", power+20)
+			end
+			if node_above.name == "default:grass_3" then
+				meta:set_int("ocular_power", power+30)
+			end
+			if node_above.name == "default:grass_4" then
+				meta:set_int("ocular_power", power+40)
+			end
+			if node_above.name == "default:grass_5" then
+				meta:set_int("ocular_power", power+50)
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
     label = "ocular node network distribution (draw)",
 	nodenames = {"ocular_networks:distributor"},
 	interval = 1,

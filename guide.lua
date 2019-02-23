@@ -182,6 +182,16 @@ ocular_networks.pages[13]=""..
 ocular_networks.pages["header"]..
 "textarea[1,1;12,8;;"..B(ocular_networks.pagetext[13])..";]"
 
+ocular_networks.pagetext[14]=""..
+"Machines: Photosynthesis Battery\n\n"..
+"This machine generates power from the growth of plants.\n"..
+"It must have a gearbok below it,  and any height of normal grass on top."..
+"Once these requirements are met, it will create OCP at a rate dependent on the height of the grass."
+
+ocular_networks.pages[14]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[14])..";]"
+
 
 minetest.register_craftitem("ocular_networks:guide", {
 	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Second Edition"),
