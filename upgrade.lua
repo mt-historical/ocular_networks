@@ -14,6 +14,21 @@ minetest.register_craftitem("ocular_networks:armor_pendant", {
 	end
 })
 
+minetest.register_craftitem("ocular_networks:armor_controller", {
+	description = "Hekaton Performance Controller\n"..minetest.colorize("#00affa", "Click to open your tweaks menu.\n"),
+	inventory_image = "poly_armor_angmallen_a_upgrade_pendant.png",
+	stack_max=1,
+	on_use = function(itemstack, user, pointed_thing)
+		local inv = user:get_inventory()
+		if inv:get_lists().ocn_armor_upgrades then
+			minetest.show_formspec(user:get_player_name(), "ocn_armor_upgrades", "size[8,9;]background[0,0;0,0;poly_gui_formbg.png;true]list[current_player;main;0,5;8,4;]label[0,4.2;These upgrades will only take effect if you are wearing a full set of angmallen or hekatonic armor.\nShield upgrade modules will only work if you have the shield.]list[current_player;ocn_armor_upgrades;1.5,1.5;5,1;]")
+		else
+			inv:set_list("ocn_armor_upgrades", {})
+			inv:set_size("ocn_armor_upgrades", 32)
+		end
+	end
+})
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname=="ocn_armor_upgrades" then
 		armor:set_player_armor(player)
@@ -559,21 +574,21 @@ minetest.register_craftitem("ocular_networks:upgrade_defense3", {
 
 minetest.register_craftitem("ocular_networks:upgrade_defense4", {
 	description = "Shield Upgrade L4 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+20 defense"),
-	inventory_image = "poly_upgrade_defense.png",
+	inventory_image = "poly_upgrade_defense2.png",
 	groups = {ocp_upgrade=1},
 	stack_max=1
 })
 
 minetest.register_craftitem("ocular_networks:upgrade_defense5", {
 	description = "Shield Upgrade L5 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+40 defense"),
-	inventory_image = "poly_upgrade_defense.png",
+	inventory_image = "poly_upgrade_defense2.png",
 	groups = {ocp_upgrade=1},
 	stack_max=1
 })
 
 minetest.register_craftitem("ocular_networks:upgrade_defense6", {
 	description = "Shield Upgrade L6 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+80 defense"),
-	inventory_image = "poly_upgrade_defense.png",
+	inventory_image = "poly_upgrade_defense2.png",
 	groups = {ocp_upgrade=1},
 	stack_max=1
 })

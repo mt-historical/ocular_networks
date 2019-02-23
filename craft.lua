@@ -671,8 +671,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:angmallen_boots",
 	recipe={
-		{"ocular_networks:hekatonium_block", "", "ocular_networks:hekatonium_block"},
-		{"ocular_networks:hekatonium_block", "ocular_networks:charged_gem", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:angmallen_block_2", "", "ocular_networks:angmallen_block_2"},
+		{"ocular_networks:angmallen_block_2", "ocular_networks:charged_gem", "ocular_networks:angmallen_block_2"},
 		{"ocular_networks:piston", "ocular_networks:angmallen_block_4", "ocular_networks:piston"}
 	}
 })
@@ -718,7 +718,7 @@ minetest.register_craft({
 	recipe={
 		{"farming:cotton", "farming:cotton", "farming:cotton"},
 		{"farming:cotton", "", "farming:cotton"},
-		{"", "ocular_networks:angmallen_block_2", "ocular_networks:charged_gem"}
+		{"", "ocular_networks:angmallen_bar", "ocular_networks:charged_gem"}
 	},
 	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
