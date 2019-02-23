@@ -156,3 +156,72 @@ if minetest.get_modpath("technic") then
 		end,
 	})
 end
+
+if minetest.get_modpath("mobs") then
+	
+	minetest.register_node("ocular_networks:distributor_broken", {
+		description = "Broken Power Collector\n"..minetest.colorize("#00affa", "A distributor wose core has been eaten by a network jammer."),
+		tiles = {"poly_node_coreless.png"},
+		is_ground_content = false,
+		groups = {cracky = 3, oddly_breakable_by_hand = 3},
+		sounds = default.node_sound_metal_defaults(),
+	})
+	
+	minetest.register_craft({
+		type="shapeless",
+		output="ocular_networks:distributor",
+		recipe={"ocular_networks:luminium_bar","ocular_networks:distributor_broken"}
+	})
+	
+	mobs:register_mob("ocular_networks:drone", {
+		nametag="Network Jammer Drone",
+		type="monster",
+		hp_min=50,
+		hp_max=70,
+		armor=90,
+		walk_velocity=3,
+		run_velocity=5,
+		walk_chance=50,
+		fly=true,
+		fly_in="air",
+		view_range=30,
+		damage=4,
+		knock_back=true,
+		water_damage=10,
+		suffocation=false,
+		reach=2,
+		attack_type="dogshoot",
+		arrow="ocular_networks:drone_proj",
+		shoot_interval=1,
+		blood_amount=5,
+		blood_texture="poly_damage_spark.png",
+		pathfinding=1,
+		drops={{name="ocular_networks:luminium_lump", chance=1, min=4, max=32}},
+		visual="cube",
+		collisionbox={-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
+		selectionbox={-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
+		textures={"poly_node.png", "poly_node.png", "poly_node.png", "poly_node.png", "poly_node_angry.png", "poly_node.png"},
+		replace_what = {
+			{"ocular_networks:distributor", "ocular_networks:distributor_broken", -1}
+		},
+		shoot_offset=2,
+	})
+	
+	mobs:register_spawn("ocular_networks:drone", {"default:sand", "default:silver_sand", "default:gravel"}, 15, 5, 5, 1, 47)
+	
+	mobs:register_egg("ocular_networks:drone", "Jammer Drone Deployer", "poly_jammer.png", 0)
+	
+	mobs:register_arrow("ocular_networks:drone_proj", {
+		visual = "sprite",
+		visual_size = {x=0.5, y=0.5},
+		textures = {"poly_power_spark.png"},
+		velocity=5,
+		hit_player=function(self,player)
+			player:punch(self.object, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups= {fleshy = 4},
+			}, nil)
+			self.object:remove()
+		end,
+	})
+end

@@ -229,7 +229,7 @@ minetest.register_tool("ocular_networks:erena_blaster", {
 	end,
 })
 
-local proj2 = {
+local proj3 = {
 	physical = false,
 	timer = 0,
 	visual = "sprite",
@@ -238,7 +238,7 @@ local proj2 = {
 	lastpos= {},
 	collisionbox = {0, 0, 0, 0, 0, 0},
 }
-proj2.on_step = function(self, dtime)
+proj3.on_step = function(self, dtime)
 	self.timer = self.timer + dtime
 	local pos = self.object:getpos()
 	local node = minetest.get_node(pos)
@@ -307,4 +307,4 @@ proj2.on_step = function(self, dtime)
 	})
 end
 
-minetest.register_entity("ocular_networks:power_projectile_3", proj2 )
+minetest.register_entity("ocular_networks:power_projectile_3", proj3 )

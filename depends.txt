@@ -7,3 +7,4 @@ unified_inventory?
 wield3d?
 basic_machines?
 technic?
+mobs?
