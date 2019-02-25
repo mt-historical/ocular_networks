@@ -624,7 +624,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem("ocular_networks:c_arm_blade", {
-	description = "Bladed Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a razor-sharp blade.\nEquip in performance controller menu\nClick with empty hand to dash-strike"),
+	description = "Bladed Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a razor-sharp blade.\nEquip in performance controller menu\nClick with empty hand to dash-strike\nCan be used with other arms"),
 	inventory_image = "poly_cyber_arm_blade.png",
 	stack_max=1
 })
@@ -661,7 +661,7 @@ minetest.register_globalstep(function(dtime)
 end)
 
 minetest.register_craftitem("ocular_networks:c_arm_gun", {
-	description = "Barreled Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a rifle barrel.\nEquip in performance controller menu\nClick with empty hand to fire"),
+	description = "Barreled Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a rifle barrel.\nEquip in performance controller menu\nRightClick with empty hand to fire\nCan not be used with other arms"),
 	inventory_image = "poly_cyber_arm_gun.png",
 	stack_max=1
 })
@@ -675,7 +675,7 @@ minetest.register_craft({
 
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
-		if player:get_player_control().LMB then
+		if player:get_player_control().RMB then
 			local inv = player:get_inventory() 
 			local power = tonumber(player:get_attribute("personal_ocular_power"))
 			if player:get_wielded_item():get_name() == "" then
@@ -706,3 +706,17 @@ minetest.register_globalstep(function(dtime)
 		end
 	end
 end)
+
+minetest.register_craftitem("ocular_networks:c_arm_wrench", {
+	description = "Clamped Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a wrench.\nEquip in performance controller menu\nClick use in place of pipe wrench\nCan be used with other arms"),
+	inventory_image = "poly_cyber_arm_wrench.png",
+	stack_max=1
+})
+
+minetest.register_craft({
+	output="ocular_networks:c_arm_wrench",
+	recipe={
+		{"ocular_networks:c_arm", "group:wood", "ocular_networks:pipe_wrench"}
+	}
+})
+

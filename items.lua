@@ -9,22 +9,6 @@ minetest.register_craftitem("ocular_networks:cross", {
 	inventory_image = "poly_cross.png",
 })
 
-minetest.register_craftitem("ocular_networks:inspector", {
-	description = "Ocular Inspection Tool\n"..minetest.colorize("#00affa", "Sneak and rightclick on a node to \ninspect it"),
-	inventory_image = "poly_inspector.png",
-	stack_max=1,
-	on_place = function(itemstack, placer, pointed_thing)
-		if pointed_thing.type=="node" then
-			local meta = minetest.get_meta(minetest.get_pointed_thing_position(pointed_thing, nil))
-			local pseudodata=meta:to_table().fields
-			if pseudodata.formspec then
-				pseudodata.formspec="omitted"
-			end
-			minetest.show_formspec(placer:get_player_name(), "", "size[7,8;]background[0,0;0,0;poly_gui_formbg.png;true]textarea[0,0.5;7.5,9;arb;Ocular Inspector;"..dump(pseudodata).."]")
-		end
-	end
-})
-
 minetest.register_craftitem("ocular_networks:luminium_lump", {
 	description = "Luminium Lump\n"..minetest.colorize("#00affa", "Smelt it to obtain a luminium ingot,\na very useful material"),
 	inventory_image = "poly_luminium_l.png",
@@ -85,37 +69,8 @@ minetest.register_craftitem("ocular_networks:lumigold_rod", {
 	inventory_image = "poly_lumigold_rod.png",
 })
 
-minetest.register_craftitem("ocular_networks:save_disk", {
-	description = "Metadata Save Disk\n"..minetest.colorize("#00affa", "Sneak and rightclick on a node to \nsave it's metadata.\nhold 'use', sneak and right click on a node to load meta to it from the disk.\nhold 'use', and rightclick to view saved meta.\nEXPERIMENTAL"),
-	inventory_image = "poly_disk.png",
-	not_in_creative_inventory=1,
-	stack_max=1,
-	on_place = function(itemstack, placer, pointed_thing)
-		if placer:get_player_control().aux1 == true and placer:get_player_control().sneak == false then
-			if ocular_networks.player_temp_disk[placer:get_player_name()] and ocular_networks.player_temp_disk[placer:get_player_name()].fields then
-				local pseudodata=ocular_networks.player_temp_disk[placer:get_player_name()].fields
-				if pseudodata.formspec then
-					pseudodata.formspec="omitted"
-				end
-				minetest.show_formspec(placer:get_player_name(), "", "size[7,8;]background[0,0;0,0;poly_gui_formbg.png;true]textarea[0,0.5;7.5,9;arb;experimental metadata transfer disk 3.1;"..dump(pseudodata).."]")
-			end
-		else
-			if pointed_thing.type=="node" then
-				local meta = minetest.get_meta(minetest.get_pointed_thing_position(pointed_thing, above))
-				if placer:get_player_control().sneak == true and placer:get_player_control().aux1 == false then
-					ocular_networks.player_temp_disk[placer:get_player_name()] = meta:to_table()
-					minetest.chat_send_player(placer:get_player_name(),  minetest.colorize("#00affa","NodeMetaRef saved to disk"))
-				elseif placer:get_player_control().aux1 == true and placer:get_player_control().sneak == true then
-					meta:from_table(ocular_networks.player_temp_disk[placer:get_player_name()])
-					minetest.chat_send_player(placer:get_player_name(),  minetest.colorize("#00affa","NodeMetaRef loaded from disk"))
-				end
-			end
-		end
-	end
-})
-
 minetest.register_craftitem("ocular_networks:crud", {
-	description = "Crud\n"..minetest.colorize("#00affa", "'Trash, rubbish, waste.'"),
+	description = "Crud\n"..minetest.colorize("#00affa", "'Trash, rubbish, waste.'\nProduced by the fuser"),
 	inventory_image = "poly_crud.png",
 })
 
@@ -134,69 +89,11 @@ minetest.register_craftitem("ocular_networks:gun_stock", {
 	inventory_image = "poly_stock.png",
 })
 
-minetest.register_craftitem("ocular_networks:healer", {
-	description = "Suspicious Healing Gimble\n"..minetest.colorize("#00affa", "click to heal yourself, uses personal power network.\nIt looks suspicious, like it has more to it."),
-	inventory_image = "poly_gimble.png",
-	stack_max=1,
-	on_use = function(itemstack, user, pointed_thing)
-		if user:get_attribute("personal_ocular_power") and tonumber(user:get_attribute("personal_ocular_power")) > 99 then
-			user:set_attribute("personal_ocular_power", tonumber(user:get_attribute("personal_ocular_power"))-10)
-			user:set_hp(user:get_hp()+2)
-		end
-	end
-})
 
 minetest.register_craftitem("ocular_networks:placeholder_power", {
 	description = "OcularNetworks Power\n"..minetest.colorize("#00affa", "Recipe requires this much OCP"),
 	inventory_image = "poly_gui_icon_pwr.png",
 	groups = {not_in_creative_inventory=1}
-})
-
-minetest.register_tool("ocular_networks:angmallen_hammer", {
-	description = minetest.colorize("#00affa", "Angmallen Destroyer"),
-	inventory_image = "poly_angmallen_hammer.png",
-	wield_scale = {x=3.0, y=3.0, z=1.0},
-	tool_capabilities = {
-		full_punch_interval = 0.01,
-		max_drop_level=10,
-		groupcaps={
-			cracky = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
-			hekatonium_ore = {times={[1]=3}, uses=150, maxlevel=10}
-		},
-		damage_groups = {fleshy=19},
-	},
-	sound = {breaks = "default_tool_breaks"},
-})
-
-
-minetest.register_tool("ocular_networks:angmallen_axe", {
-	description = minetest.colorize("#00affa", "Angmallen Deforester"),
-	inventory_image = "poly_angmallen_axe.png",
-	wield_scale = {x=3.0, y=3.0, z=1.0},
-	tool_capabilities = {
-		full_punch_interval = 0.01,
-		max_drop_level=10,
-		groupcaps={
-			choppy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
-		},
-		damage_groups = {fleshy=20},
-	},
-	sound = {breaks = "default_tool_breaks"},
-})
-
-minetest.register_tool("ocular_networks:angmallen_sword", {
-	description = minetest.colorize("#00affa", "Angmallen Decapitator\n")..minetest.colorize("#ff0000", "290 Melee Damage"),
-	inventory_image = "poly_angmallen_sword.png",
-	wield_scale = {x=3.0, y=3.0, z=1.0},
-	tool_capabilities = {
-		full_punch_interval = 1,
-		max_drop_level=10,
-		groupcaps={
-			snappy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
-		},
-		damage_groups = {fleshy=290},
-	},
-	sound = {breaks = "default_tool_breaks"},
 })
 
 minetest.register_craftitem("ocular_networks:uncharged_gem", {
@@ -219,59 +116,6 @@ minetest.register_craftitem("ocular_networks:pipe_socket", {
 minetest.register_craftitem("ocular_networks:silicotin_bar", {
 	description = "Silicotin Ingot\n"..minetest.colorize("#00affa", "A special version of the alloy SiSn\nresulting from the heat flutuations in the fuser."),
 	inventory_image = "poly_silicotin_ingot.png",
-})
-
-minetest.register_craftitem("ocular_networks:pipe_wrench", {
-	description = "C-Type Square Wrench\n"..minetest.colorize("#00affa", "This wrench can be used to rotate pipes."),
-	inventory_image = "poly_wrench.png",
-	stack_max=1,
-})
-
-minetest.register_tool("ocular_networks:hekaton_hammer", {
-	description = minetest.colorize("#00affa", "4k Tonne Drumel"),
-	inventory_image = "poly_hekaton_hammer.png",
-	wield_scale = {x=3.0, y=3.0, z=1.0},
-	tool_capabilities = {
-		full_punch_interval = 0.01,
-		max_drop_level=10,
-		groupcaps={
-			cracky = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=500, maxlevel=10},
-			hekatonium_ore = {times={[1]=3}, uses=250, maxlevel=10}
-		},
-		damage_groups = {fleshy=77},
-	},
-	sound = {breaks = "default_tool_breaks"},
-})
-
-
-minetest.register_tool("ocular_networks:hekaton_axe", {
-	description = minetest.colorize("#00affa", "Erenic Axaw"),
-	inventory_image = "poly_hekaton_axe.png",
-	wield_scale = {x=3.0, y=3.0, z=1.0},
-	tool_capabilities = {
-		full_punch_interval = 0.01,
-		max_drop_level=10,
-		groupcaps={
-			choppy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=500, maxlevel=10},
-		},
-		damage_groups = {fleshy=80},
-	},
-	sound = {breaks = "default_tool_breaks"},
-})
-
-minetest.register_tool("ocular_networks:hekaton_sword", {
-	description = minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "500 Melee Damage"),
-	inventory_image = "poly_hekaton_sword.png",
-	wield_scale = {x=3.0, y=3.0, z=1.0},
-	tool_capabilities = {
-		full_punch_interval = 1,
-		max_drop_level=10,
-		groupcaps={
-			snappy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=500, maxlevel=10},
-		},
-		damage_groups = {fleshy=500},
-	},
-	sound = {breaks = "default_tool_breaks"},
 })
 
 minetest.register_craftitem("ocular_networks:erena_sphere", {

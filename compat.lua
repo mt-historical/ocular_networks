@@ -174,7 +174,6 @@ if minetest.get_modpath("mobs") then
 	})
 	
 	mobs:register_mob("ocular_networks:drone", {
-		nametag="Network Jammer Drone",
 		type="monster",
 		hp_min=50,
 		hp_max=70,
@@ -184,7 +183,7 @@ if minetest.get_modpath("mobs") then
 		walk_chance=50,
 		fly=true,
 		fly_in="air",
-		view_range=30,
+		view_range=20,
 		damage=4,
 		knock_back=true,
 		water_damage=10,

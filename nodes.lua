@@ -1057,7 +1057,7 @@ minetest.register_node("ocular_networks:pipe_E", {
 	},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_S"})
 			end
 		end
@@ -1102,7 +1102,7 @@ minetest.register_node("ocular_networks:pipe_S", {
 	},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_W"})
 			end
 		end
@@ -1147,7 +1147,7 @@ minetest.register_node("ocular_networks:pipe_W", {
 	},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_N"})
 			end
 		end
@@ -1192,7 +1192,7 @@ minetest.register_node("ocular_networks:pipe_N", {
 	},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_E"})
 			end
 		end
@@ -1237,7 +1237,7 @@ minetest.register_node("ocular_networks:pipe_U", {
 	},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_D"})
 			end
 		end
@@ -1282,7 +1282,7 @@ minetest.register_node("ocular_networks:pipe_D", {
 	},
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if itemstack:get_name() == "ocular_networks:pipe_wrench" then
+			if itemstack:get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_U"})
 			end
 		end
@@ -1487,7 +1487,7 @@ minetest.register_node("ocular_networks:pipe_filtered_E", {
 	},
 	on_punch = function(pos, node, player, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" then
+			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_filtered_S"})
 			end
 		end
@@ -1543,7 +1543,7 @@ minetest.register_node("ocular_networks:pipe_filtered_S", {
 	},
 	on_punch = function(pos, node, player, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" then
+			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_filtered_W"})
 			end
 		end
@@ -1598,8 +1598,8 @@ minetest.register_node("ocular_networks:pipe_filtered_W", {
 					}
 	},
 	on_punch = function(pos, node, player, pointed_thing)
-		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" then
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner")then
+			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_filtered_N"})
 			end
 		end
@@ -1655,7 +1655,7 @@ minetest.register_node("ocular_networks:pipe_filtered_N", {
 	},
 	on_punch = function(pos, node, player, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" then
+			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_filtered_E"})
 			end
 		end
@@ -1711,7 +1711,7 @@ minetest.register_node("ocular_networks:pipe_filtered_D", {
 	},
 	on_punch = function(pos, node, player, itemstack, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" then
+			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_filtered_U"})
 			end
 		end
@@ -1767,7 +1767,7 @@ minetest.register_node("ocular_networks:pipe_filtered_U", {
 	},
 	on_punch = function(pos, node, player, pointed_thing)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then
-			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" then
+			if player:get_wielded_item():get_name() == "ocular_networks:pipe_wrench" or player:get_inventory():contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_wrench") then
 				minetest.swap_node(pos, {name="ocular_networks:pipe_filtered_D"})
 			end
 		end

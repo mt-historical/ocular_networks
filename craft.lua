@@ -980,3 +980,113 @@ minetest.register_craft({
 		{"ocular_networks:luminium_bar_3", "ocular_networks:cross", "ocular_networks:luminium_bar_3"}
 	}
 })
+
+--
+
+minetest.register_craft({
+	output="ocular_networks:luminium_pick",
+	recipe={
+		{"ocular_networks:luminium_bar", "ocular_networks:luminium_bar", "ocular_networks:luminium_bar"},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:lumigold_pick",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3"},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:silicotin_pick",
+	recipe={
+		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar"},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:luminium_axe",
+	recipe={
+		{"ocular_networks:luminium_bar", "ocular_networks:luminium_bar", ""},
+		{"ocular_networks:luminium_bar", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:lumigold_axe",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3", ""},
+		{"ocular_networks:luminium_bar_3", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:silicotin_axe",
+	recipe={
+		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", ""},
+		{"ocular_networks:silicotin_bar", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:luminium_shovel",
+	recipe={
+		{"", "ocular_networks:luminium_bar", ""},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:lumigold_shovel",
+	recipe={
+		{"", "ocular_networks:luminium_bar_3", ""},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:silicotin_shovel",
+	recipe={
+		{"", "ocular_networks:silicotin_bar", ""},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:luminium_sword",
+	recipe={
+		{"", "ocular_networks:luminium_bar", ""},
+		{"", "ocular_networks:luminium_bar", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:lumigold_sword",
+	recipe={
+		{"", "ocular_networks:luminium_bar_3", ""},
+		{"", "ocular_networks:luminium_bar_3", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:silicotin_sword",
+	recipe={
+		{"", "ocular_networks:silicotin_bar", ""},
+		{"", "ocular_networks:silicotin_bar", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
