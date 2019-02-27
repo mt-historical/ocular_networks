@@ -231,6 +231,35 @@ minetest.register_abm({
 
 
 minetest.register_abm({
+    label = "shroom infusing",
+	nodenames = {"ocular_networks:shroom_planter"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		local inv = meta:get_inventory()
+		local source_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+		local source_power = tonumber(source_meta:get_int("ocular_power")) 
+		local source_owner = source_meta:get_string("owner")
+		if source_power then
+			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+				for _,recipe in ipairs(ocular_networks.registered_shrooms) do
+					if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == recipe.input then
+						if source_power > recipe.cost-1 then
+							source_meta:set_int("ocular_power", source_power-recipe.cost)
+							inv:add_item("output", recipe.output)
+						end
+					end
+				end
+			end
+		end
+		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+})
+
+minetest.register_abm({
     label = "alloyer",
 	nodenames = {"ocular_networks:alloyer"},
 	interval = 1,

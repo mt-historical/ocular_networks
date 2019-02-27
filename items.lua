@@ -137,3 +137,8 @@ minetest.register_craftitem("ocular_networks:scope", {
 	description = "Marksman Scope\n"..minetest.colorize("#00affa", "A high-accuracy scope"),
 	inventory_image = "poly_scope.png",
 })
+
+minetest.register_craftitem("ocular_networks:shimmering_bar", {
+	description = "Shimmering Alloy Ingot\n"..minetest.colorize("#00affa", "A shiny silver ingot."),
+	inventory_image = "poly_shimmering_ingot.png",
+})

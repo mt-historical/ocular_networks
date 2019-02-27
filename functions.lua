@@ -17,6 +17,7 @@ ocular_networks.player_temp_disk={}
 ocular_networks.disallowed={}
 ocular_networks.registered_chargeables={}
 ocular_networks.chunkloaded_areas={}
+ocular_networks.registered_shrooms={}
 
 minetest.register_chatcommand("ocun_exec", {
 	params = "luacode",
@@ -93,6 +94,13 @@ if minetest.get_modpath("unified_inventory") then
 		width = 2,
 		height = 1,
 	})
+	
+	unified_inventory.register_craft_type("ocun_shrooming", {
+		description = "Mycorrhizal Infusing",
+		icon = "poly_fertilizer_side.png",
+		width = 2,
+		height = 1,
+	})
 		
 	ocular_networks.register_meltable=function(def)
 		table.insert(ocular_networks.registered_meltables, {input=def.input, output=def.output, cost=def.cost})
@@ -145,6 +153,16 @@ if minetest.get_modpath("unified_inventory") then
 		})
 	end
 	
+	ocular_networks.register_shroomable=function(def)
+		table.insert(ocular_networks.registered_shrooms, {input=def.node, output=def.output, cost=def.cost})
+		unified_inventory.register_craft({
+		type = "ocun_shrooming",
+		items = {"ocular_networks:placeholder_power "..def.cost, def.node},
+		output = def.output,
+		width = 2,
+		})
+	end
+	
 else
 
 	ocular_networks.register_meltable=function(def)
@@ -167,7 +185,11 @@ else
 	ocular_networks.register_chargeable=function(def)
 		table.insert(ocular_networks.registered_chargeables, {input=def.item, output=def.output, cost=def.cost})
 	end
-
+	
+	ocular_networks.register_shroomable=function(def)
+		table.insert(ocular_networks.registered_shrooms, {input=def.node, output=def.output, cost=def.cost})
+	end
+	
 end
 
 minetest.register_on_joinplayer(function(player)

@@ -166,6 +166,21 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:shimmering_block",
+	recipe={
+		{"ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar"},
+		{"ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar"},
+		{"ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar"}
+	}
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:shimmering_bar 9",
+	recipe={"ocular_networks:shimmering_block"}
+})
+
+minetest.register_craft({
 	output="ocular_networks:distributor_2",
 	recipe={
 		{"default:mese_crystal", "dye:violet", "default:mese_crystal"},
@@ -397,6 +412,14 @@ ocular_networks.register_fusion({
 	output="default:stone_with_tin",
 	give_back="",
 	cost=100
+})
+
+ocular_networks.register_fusion({
+	item_1="ocular_networks:silver_dust",
+	item_2="default:steel_ingot",
+	output="ocular_networks:shimmering_bar",
+	give_back="",
+	cost=1000
 })
 
 minetest.register_craft({
@@ -1011,6 +1034,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:shimmering_pick",
+	recipe={
+		{"ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar"},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
 	output="ocular_networks:luminium_axe",
 	recipe={
 		{"ocular_networks:luminium_bar", "ocular_networks:luminium_bar", ""},
@@ -1033,6 +1065,15 @@ minetest.register_craft({
 	recipe={
 		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", ""},
 		{"ocular_networks:silicotin_bar", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:shimmering_axe",
+	recipe={
+		{"ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar", ""},
+		{"ocular_networks:shimmering_bar", "ocular_networks:lumigold_rod", ""},
 		{"", "ocular_networks:lumigold_rod", ""}
 	}
 })
@@ -1065,6 +1106,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:shimmering_shovel",
+	recipe={
+		{"", "ocular_networks:shimmering_bar", ""},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
 	output="ocular_networks:luminium_sword",
 	recipe={
 		{"", "ocular_networks:luminium_bar", ""},
@@ -1089,4 +1139,40 @@ minetest.register_craft({
 		{"", "ocular_networks:silicotin_bar", ""},
 		{"", "ocular_networks:lumigold_rod", ""}
 	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:shimmering_sword",
+	recipe={
+		{"", "ocular_networks:shimmering_bar", ""},
+		{"", "ocular_networks:shimmering_bar", ""},
+		{"", "ocular_networks:lumigold_rod", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:composite_scythe",
+	recipe={
+		{"ocular_networks:shimmering_bar", "ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar"},
+		{"", "ocular_networks:lumigold_rod", ""},
+		{"ocular_networks:silicotin_bar", "", ""}
+	}
+})
+
+ocular_networks.register_shroomable({
+	node="ocular_networks:loomshroom",
+	output="ocular_networks:luminium_lump 3",
+	cost=1000,
+})
+
+ocular_networks.register_shroomable({
+	node="flowers:mushroom_red",
+	output="flowers:mushroom_red 2",
+	cost=500,
+})
+
+ocular_networks.register_shroomable({
+	node="flowers:mushroom_brown",
+	output="flowers:mushroom_brown 2",
+	cost=500,
 })

@@ -34,6 +34,12 @@ local meltspec = ""..
 "list[context;input;3.5,2;1,1;]"..
 "list[current_player;main;0,5;8,4;]"
 
+local shroomspec = ""..
+"size[8,9;]"..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
+"list[context;output;0,0;8,4;]"..
+"list[current_player;main;0,5;8,4;]"
+
 local coolspec = ""..
 "size[8,9;]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
@@ -214,6 +220,8 @@ minetest.register_node("ocular_networks:bolumiary", {
 	end
 })
 
+
+
 minetest.register_node("ocular_networks:distributor", {
 	description = "Power Collector\n"..minetest.colorize("#00affa", "Takes power from the set position\nat a fixed rate (has a range of 10)"),
 	tiles = {"poly_node.png"},
@@ -351,6 +359,14 @@ minetest.register_node("ocular_networks:hekatonium_block", {
 minetest.register_node("ocular_networks:lumigold_block", {
 	description = "Lumigold Block",
 	tiles = {"poly_lumig_blk.png"},
+	is_ground_content = false,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_metal_defaults(),
+})
+
+minetest.register_node("ocular_networks:shimmering_block", {
+	description = "Shimmering Alloy Block",
+	tiles = {"poly_shimmering_block.png"},
 	is_ground_content = false,
 	groups = {cracky = 1, level = 2},
 	sounds = default.node_sound_metal_defaults(),
@@ -742,6 +758,60 @@ minetest.register_node("ocular_networks:dirt_with_loomshroom_grass", {
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name = "default_grass_footstep", gain = 0.25},
 	}),
+})
+
+minetest.register_node("ocular_networks:shroom_planter", {
+	description = "Mycorrhizal Infuser\n"..minetest.colorize("#00affa", "Speeds up the growth of mushrooms placed on top\nCollects the crops when grown\nTakes Power From Below"),
+	tiles = {"poly_fertilizer_top.png", "poly_fertilizer_bottom.png", "poly_fertilizer_side.png"},
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+	on_receive_fields = function(pos, formname, fields, sender)
+		local meta = minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", shroomspec)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		local inv = meta:get_inventory()
+		inv:set_list("output", {""})
+		inv:set_size("output", 32)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", shroomspec)
+		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
 })
 
 minetest.register_node("ocular_networks:networknode", {

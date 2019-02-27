@@ -642,7 +642,7 @@ minetest.register_globalstep(function(dtime)
 			local inv = player:get_inventory() 
 			local power = tonumber(player:get_attribute("personal_ocular_power"))
 			if player:get_wielded_item():get_name() == "" then
-				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") then
+				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_inspector") then
 					player:set_wielded_item({name="default:sword_steel"})
 					local userPos = player:get_pos()
 					local userDir = player:get_look_dir()
@@ -679,7 +679,7 @@ minetest.register_globalstep(function(dtime)
 			local inv = player:get_inventory() 
 			local power = tonumber(player:get_attribute("personal_ocular_power"))
 			if player:get_wielded_item():get_name() == "" then
-				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") then
+				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_inspector") then
 					local userPos = player:get_pos()
 					local userDir = player:get_look_dir()
 					if power > 99 then
@@ -719,4 +719,3 @@ minetest.register_craft({
 		{"ocular_networks:c_arm", "group:wood", "ocular_networks:pipe_wrench"}
 	}
 })
-

@@ -149,7 +149,26 @@ minetest.register_tool("ocular_networks:hekaton_axe", {
 })
 
 minetest.register_tool("ocular_networks:hekaton_sword", {
-	description = minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "500 Melee Damage"),
+	description = minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "20 Melee Damage")..minetest.colorize("#00affa", "\nRightclick to enable"),
+	inventory_image = "poly_hekaton_sword_off.png",
+	wield_scale = {x=3.0, y=3.0, z=1.0},
+	tool_capabilities = {
+		full_punch_interval = 1,
+		max_drop_level=10,
+		groupcaps={
+			snappy = {times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=500, maxlevel=10},
+		},
+		damage_groups = {fleshy=20},
+	},
+	sound = {breaks = "default_tool_breaks"},
+	on_secondary_use = function(itemstack, user, pointed_thing)
+		itemstack:set_name("ocular_networks:hekaton_sword_on")
+		return itemstack
+	end
+})
+
+minetest.register_tool("ocular_networks:hekaton_sword_on", {
+	description = minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "500 Melee Damage")..minetest.colorize("#00affa", "\nRightclick to disable"),
 	inventory_image = "poly_hekaton_sword.png",
 	wield_scale = {x=3.0, y=3.0, z=1.0},
 	tool_capabilities = {
@@ -160,7 +179,12 @@ minetest.register_tool("ocular_networks:hekaton_sword", {
 		},
 		damage_groups = {fleshy=500},
 	},
+	groups={not_in_creative_inventory=1},
 	sound = {breaks = "default_tool_breaks"},
+	on_secondary_use = function(itemstack, user, pointed_thing)
+		itemstack:set_name("ocular_networks:hekaton_sword")
+		return itemstack
+	end
 })
 
 --
@@ -300,7 +324,7 @@ minetest.register_tool("ocular_networks:silicotin_pick", {
 minetest.register_tool("ocular_networks:silicotin_shovel", {
 	description = "Silicotin Shovel",
 	inventory_image = "poly_shovel_silicotin.png",
-	wield_image = "poly_shovel_lumig.png^[transformR90",
+	wield_image = "poly_shovel_silicotin.png^[transformR90",
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=3,
@@ -336,6 +360,80 @@ minetest.register_tool("ocular_networks:silicotin_sword", {
 			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=40, maxlevel=3},
 		},
 		damage_groups = {fleshy=11},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+--
+
+minetest.register_tool("ocular_networks:shimmering_pick", {
+	description = "Shimmering Alloy Pickaxe",
+	inventory_image = "poly_pick_shimmering.png",
+	tool_capabilities = {
+		full_punch_interval = 0.9,
+		max_drop_level=3,
+		groupcaps={
+			cracky = {times={[1]=2.4, [2]=1.2, [3]=0.60}, uses=25, maxlevel=3},
+		},
+		damage_groups = {fleshy=5},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("ocular_networks:shimmering_shovel", {
+	description = "Shimmering Alloy Shovel",
+	inventory_image = "poly_shovel_shimmering.png",
+	wield_image = "poly_shovel_shimmering.png^[transformR90",
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=3,
+		groupcaps={
+			crumbly = {times={[1]=1.20, [2]=0.60, [3]=0.30}, uses=25, maxlevel=3},
+		},
+		damage_groups = {fleshy=4},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("ocular_networks:shimmering_axe", {
+	description = "Shimmering Alloy Axe",
+	inventory_image = "poly_axe_shimmering.png",
+	tool_capabilities = {
+		full_punch_interval = 0.9,
+		max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=2.20, [2]=1.00, [3]=0.60}, uses=25, maxlevel=3},
+		},
+		damage_groups = {fleshy=6},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("ocular_networks:shimmering_sword", {
+	description = "Shimmering Alloy Rapier",
+	inventory_image = "poly_sword_shimmering.png",
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=40, maxlevel=3},
+		},
+		damage_groups = {fleshy=11},
+	},
+	sound = {breaks = "default_tool_breaks"},
+})
+
+minetest.register_tool("ocular_networks:composite_scythe", {
+	description = "Composite Alloy Scythe",
+	inventory_image = "poly_composite_scythe.png",
+	wield_scale = {x=2.0, y=2.0, z=1.0},
+	tool_capabilities = {
+		full_punch_interval = 0.7,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=40, maxlevel=3},
+		},
+		damage_groups = {fleshy=27},
 	},
 	sound = {breaks = "default_tool_breaks"},
 })
