@@ -1,4 +1,1 @@
-Draw power from sunlight, and use it to power useful machines.
-
-Version: a0
-Revision: 6/r1.5
+Draw power from the world, and use it to power useful machines and tools.

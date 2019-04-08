@@ -1,5 +1,6 @@
 
 
+
 minetest.register_abm({
         label = "ocular battery charging",
 	nodenames = {"ocular_networks:battery"},
@@ -557,7 +558,7 @@ minetest.register_abm({
 						local inv = source_meta:get_inventory()
 						if minetest.get_node({x=pos.x, y=pos.y-distance, z=pos.z}).name == "air" then
 							meta:set_int("digDistance", distance+1)
-						elseif not ocular_networks.config.live.laserDrill_blacklist[minetest.get_node({x=pos.x, y=pos.y-distance, z=pos.z}).name] then
+						elseif not ocular_networks.get_config("live", "laserDrill_blacklist")[minetest.get_node({x=pos.x, y=pos.y-distance, z=pos.z}).name] then
 							if source_power and source_power > 599 then
 								if inv:room_for_item("output", minetest.registered_nodes[minetest.get_node({x=pos.x, y=pos.y-distance, z=pos.z}).name].drop) then
 									minetest.emerge_area({x=pos.x, y=pos.y-distance, z=pos.z}, {x=pos.x, y=pos.y-distance+10, z=pos.z})

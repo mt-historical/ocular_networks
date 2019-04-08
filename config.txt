@@ -1,6 +1,6 @@
  -- these are the settings that can be changed during the runtime.
 liveConfig = {
-	max_personal_network_power = 1000000000000, -- this is the maximum power a player's personal network can contain at any given time. this will prevent the hud from printig errors. default 1000000000000
+	max_personal_network_power = 1000000000000, -- this is the maximum power a player's personal network can contain at any given time. this will prevent the hud from printing errors. default 1000000000000
 	laserDrill_blacklist = { --nodes that the laserdrill cannot dig.
 		["default:water_source"] = true,
 		["default:water_flowing"] = true,
@@ -23,15 +23,18 @@ liveConfig = {
 		["ocular_networks:tin_source"] = true,
 		["ocular_networks:tin_flowing"] = true,
 		["ocular_networks:angmallen_source"] = true,
-		["ocular_networks:angmallen_flowing"] = true
+		["ocular_networks:angmallen_flowing"] = true,
+		["ocular_networks:hekatonium_source"] = true,
+		["ocular_networks:hekatonium_flowing"] = true
 	},
-	moderator_whitelist = {["singleplayer"] = true}
 }
 
 startUpConfig = { -- you could also change these during runtime but it will have no effect.
 	load_armor_upgrades = true, -- setting this to false disables the upgrade pendant and upgrade items for the angmallen armor, default true.
 	load_flight_ring = true, -- setting this to false disables the flight ring, default true.
 	load_rifle_weapons = true, -- setting this to false disables the blaze rifle weapons, default true.
+	moderator_whitelist = {["singleplayer"] = true},
 }
 
 ocular_networks.config = {live = liveConfig, onRun = startUpConfig}
+return ocular_networks.config

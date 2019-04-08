@@ -15,14 +15,14 @@ dofile(modpath.."/liquids.lua")
 dofile(modpath.."/items.lua")
 dofile(modpath.."/tools.lua")
 dofile(modpath.."/guide.lua")
-if ocular_networks.config.onRun.load_rifle_weapons then
+if ocular_networks.get_config("onRun", "load_rifle_weapons") then
 	dofile(modpath.."/rifle.lua")
 end
-if ocular_networks.config.onRun.load_flight_ring then
+if ocular_networks.get_config("onRun", "load_flight_ring") then
 	dofile(modpath.."/jetring.lua")
 end
 dofile(modpath.."/armor.lua")
-if ocular_networks.config.onRun.load_armor_upgrades then
+if ocular_networks.get_config("onRun", "load_armor_upgrades") then
 	dofile(modpath.."/upgrade.lua")
 end
 dofile(modpath.."/craft.lua")
