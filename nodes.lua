@@ -413,6 +413,14 @@ minetest.register_node("ocular_networks:luminium_ore", {
 	light_source=2
 })
 
+minetest.register_node("ocular_networks:zweinium_ore", {
+	description = "Zweinium Ore",
+	tiles = {"poly_zweinium_ore.png"},
+	groups = {cracky = 2},
+	drop = "ocular_networks:zweinium_crystal_chunk",
+	sounds = default.node_sound_stone_defaults()
+})
+
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "ocular_networks:luminium_ore",
@@ -437,10 +445,21 @@ minetest.register_ore({
 	ore            = "ocular_networks:toxic_slate",
 	wherein        = "default:desert_stone",
 	clust_scarcity = 5 * 5 * 5,
+	clust_num_ores = 16,
+	clust_size     = 5,
+	y_min          = -31000,
+	y_max          = -78,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "ocular_networks:zweinium_ore",
+	wherein        = "ocular_networks:toxic_slate",
+	clust_scarcity = 5 * 5 * 5,
 	clust_num_ores = 2,
 	clust_size     = 3,
 	y_min          = -31000,
-	y_max          = -78,
+	y_max          = 31000,
 })
 
 minetest.register_node("ocular_networks:hekatonium_ore", {

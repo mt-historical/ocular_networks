@@ -34,8 +34,17 @@ ocular_networks.pagetext[1]=""..
 "Fusion Compresser          -        Page 9\n"..
 "Charging Station           -        Page 10\n"..
 "Electrofraction Generator  -        Page 11\n"..
-"Power Cell Packager        -        Page 12\n"
-
+"Power Cell Packager        -        Page 12\n"..
+"Steam Battery              -        Page 13\n"..
+"Photosynthesis Battery     -        Page 14\n"..
+"Laser Drill                -        Page 15\n"..
+"Mycorrhizal Infuser        -        Page 16\n"..
+"Pipe System                -        Page 17\n"..
+"Luminium & Lumigold        -        Page 18\n"..
+"Angmallen                  -        Page 19\n"..
+"Silicotin                  -        Page 20\n"..
+"Shimmering Alloy           -        Page 21\n"..
+"Zweinium                   -        Page 22\n"
 
 ocular_networks.pages[1]=""..
 "size[14,10]"..
@@ -192,9 +201,117 @@ ocular_networks.pages[14]=""..
 ocular_networks.pages["header"]..
 "textarea[1,1;12,8;;"..B(ocular_networks.pagetext[14])..";]"
 
+ocular_networks.pagetext[15]=""..
+"Machines: Laser Drill\n\n"..
+"The Laser Drill is a very useful machine for the automation of mining.\n"..
+"It requires three parts:\n"..
+"The Head, Which collects solids from te drill shaft,\n"..
+"The Controller, Which stores power and items,\n"..
+"And the lens, which allows the head to function.\n"..
+"\n"..
+"Place a frame embedded one block in the ground.\n"..
+"Place a lens in the frame.\n"..
+"Place the laser drill head above it.\n"..
+"Place the controller above the head, and power it in some way.\n"..
+"The laser drill should now be functional. You can export its items using pipes."
+
+ocular_networks.pages[15]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[15])..";]"
+
+ocular_networks.pagetext[16]=""..
+"Machines: Mycorrhizal Infuser\n\n"..
+"If a power source is present below and a growable fungus is on top,\n"..
+"The Mycorrhizal Infuser will use the power to grow a new fruiting body\n"..
+"of the same type as the parent fungus.\n"..
+"The resultant materials will be added to the Infuser's inventory."
+
+ocular_networks.pages[16]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[16])..";]"
+
+ocular_networks.pagetext[17]=""..
+"Machines: Pipe System\n\n"..
+"Pipes can be used to transport and sort materials.\n"..
+"Pipes do not need power or fuel.\n"..
+"They do not automatically connect and must be rotated to fit their use case.\n"..
+"The pipe wrench or pipe wrench cybernetic upgrade are required to rotate a pipe."
+
+ocular_networks.pages[17]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[17])..";]"
+
+ocular_networks.pagetext[18]=""..
+"Metals: Luminium & Lumigold\n\n"..
+"Luminium is a light blue superconductive metal.\n"..
+"Armor: No\n"..
+"Sword: Yes\n"..
+"Pick: Yes\n"..
+"Axe: Yes\n"..
+"Shovel: Yes\n"..
+"\n"..
+"Lumigold is a shiny yellow conductive metal.\n"..
+"Armor: No\n"..
+"Sword: Yes\n"..
+"Pick: Yes\n"..
+"Axe: Yes\n"..
+"Shovel: Yes\n"
+
+ocular_networks.pages[18]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[18])..";]"
+
+ocular_networks.pagetext[19]=""..
+"Metals: Angmallen\n\n"..
+"Angmallen is a strong, heavy orange metal.\n"..
+"Armor: Yes\n"..
+"Sword: Yes\n"..
+"Pick: Yes\n"..
+"Axe: Yes\n"..
+"Shovel: No\n"
+
+ocular_networks.pages[19]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[19])..";]"
+
+ocular_networks.pagetext[20]=""..
+"Metals: Silicotin\n\n"..
+"Silicotin is a dark grey-blue light metal.\n"..
+"Armor: No\n"..
+"Sword: Yes\n"..
+"Pick: Yes\n"..
+"Axe: Yes\n"..
+"Shovel: Yes\n"
+
+ocular_networks.pages[20]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[20])..";]"
+
+ocular_networks.pagetext[21]=""..
+"Metals: Shimmering Alloy\n\n"..
+"Shimmering Alloy is a shiny steel alloy.\n"..
+"Armor: No\n"..
+"Sword: Yes\n"..
+"Pick: Yes\n"..
+"Axe: Yes\n"..
+"Shovel: Yes\n"
+
+ocular_networks.pages[21]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[21])..";]"
+
+ocular_networks.pagetext[22]=""..
+"Zweinium\n\n"..
+"Zweinium is a bluish-green crystal.\n"..
+"It can be used to make capacitors, but has better applications than that."
+
+ocular_networks.pages[21]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[22])..";]"
+
 
 minetest.register_craftitem("ocular_networks:guide", {
-	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Second Edition"),
+	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Third Edition"),
 	inventory_image = "poly_guide.png",
 	stack_max=1,
 	on_use = function(itemstack, user, pointed_thing)

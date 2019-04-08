@@ -1004,6 +1004,15 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output="ocular_networks:shroom_planter",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "ocular_networks:loomshroom", "ocular_networks:luminium_bar_3"},
+		{"ocular_networks:toxic_slate", "ocular_networks:luminium_bar", "ocular_networks:toxic_slate"},
+		{"ocular_networks:frame", "ocular_networks:cross", "ocular_networks:frame"}
+	}
+})
+
 --
 
 minetest.register_craft({
@@ -1175,4 +1184,10 @@ ocular_networks.register_shroomable({
 	node="flowers:mushroom_brown",
 	output="flowers:mushroom_brown 2",
 	cost=500,
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="ocular_networks:zweinium_crystal",
+	recipe="ocular_networks:zweinium_crystal_chunk",
 })

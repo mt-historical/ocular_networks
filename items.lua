@@ -142,3 +142,13 @@ minetest.register_craftitem("ocular_networks:shimmering_bar", {
 	description = "Shimmering Alloy Ingot\n"..minetest.colorize("#00affa", "A shiny silver ingot."),
 	inventory_image = "poly_shimmering_ingot.png",
 })
+
+minetest.register_craftitem("ocular_networks:zweinium_crystal_chunk", {
+	description = "Zweinium Crystal Chunk",
+	inventory_image = "poly_zweinium_crystal.png",
+})
+
+minetest.register_craftitem("ocular_networks:zweinium_crystal", {
+	description = "Pure Zweinium Crystal",
+	inventory_image = "poly_zweinium_crystal_pure.png",
+})
