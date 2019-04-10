@@ -44,7 +44,11 @@ ocular_networks.pagetext[1]=""..
 "Angmallen                  -        Page 19\n"..
 "Silicotin                  -        Page 20\n"..
 "Shimmering Alloy           -        Page 21\n"..
-"Zweinium                   -        Page 22\n"
+"Zweinium                   -        Page 22\n"..
+"Hekatonium                 -        Page 23\n"..
+"Charged Crystals           -        Page 24\n"..
+"Armor & Cybernetics        -        Page 25\n"..
+"Jammer Drones              -        Page 26\n"
 
 ocular_networks.pages[1]=""..
 "size[14,10]"..
@@ -92,7 +96,8 @@ ocular_networks.pagetext[4]=""..
 "Once you have placed the frame atop the battery, you should craft silver sand with\n"..
 "a stick. Craft the resulting silver dust with Glass Fragments, and you will get a lens.\n"..
 "Rightclick on the golden frame while holding the Silver Lens to fit it to the frame,\n"..
-"And the battery under the frame should begin to produce power.\n(Check this by looking at the battery.)"
+"And the battery under the frame should begin to produce power.\n"..
+"(Check this by looking at the battery.)"
 
 ocular_networks.pages[4]=""..
 ocular_networks.pages["header"]..
@@ -106,7 +111,8 @@ ocular_networks.pagetext[5]=""..
 "An internal GUI that allows you to set a source position. This is not an absolute position,\n"..
 "but rather a relative position. This means that setting 1,0,0 on a Power Collector at 3,7,2\n"..
 "will attempt to draw power from 4,7,2.\n"..
-"Power Collectors can draw power from any node with Ocular Networks power, including other Collectors."
+"Power Collectors can draw power from any node with Ocular Networks power, including other\n"..
+"Collectors."
 
 ocular_networks.pages[5]=""..
 ocular_networks.pages["header"]..
@@ -118,7 +124,8 @@ ocular_networks.pagetext[6]=""..
 "There are two types of network nodes:\n"..
 "Uplink nodes, which take power from the block below it and adds the power to your network,\n"..
 "and downlink nodes, which take power from your network and add it to the block below.\n"..
-"You must set the amount of power per second for the downlink node, but the uplink node will just take all."
+"You must set the amount of power per second for the downlink node, but the uplink node will just take\n"..
+"all."
 
 ocular_networks.pages[6]=""..
 ocular_networks.pages["header"]..
@@ -128,8 +135,9 @@ ocular_networks.pagetext[7]=""..
 "Machines: Metal Melter\n\n"..
 "The metal melter will turn blocks of metal into a liquid form, which can then be mixed to form alloys,\n"..
 "or cooled back into blocks of metal using the passive cooler.\n"..
-"it takes power from above, so the use of a power reservoir is recommended."..
-"There must be an empty, accessible block below the melter, as this is where the liquid metal will form"
+"it takes power from above, so the use of a power reservoir is recommended.\n"..
+"There must be an empty, accessible block below the melter, as this is where \n"..
+"the liquid metal will form"
 
 ocular_networks.pages[7]=""..
 ocular_networks.pages["header"]..
@@ -165,7 +173,8 @@ ocular_networks.pages["header"]..
 ocular_networks.pagetext[11]=""..
 "Machines: Electrofraction Generator\n\n"..
 "The electrofraction generator turns OCP into EU.\n"..
-"The electrofraction generator takes power from the block below.\n(Only available if technic is installed)"
+"The electrofraction generator takes power from the block below.\n"..
+"(Only available if technic is installed)"
 
 ocular_networks.pages[11]=""..
 ocular_networks.pages["header"]..
@@ -174,7 +183,8 @@ ocular_networks.pages["header"]..
 ocular_networks.pagetext[12]=""..
 "Machines: Power Cell Packager\n\n"..
 "The power cell packager turns OCP into Power Cells.\n"..
-"The power cell packager takes power from the block below.\n(Only available if basic_machines is installed)"
+"The power cell packager takes power from the block below.\n"..
+"(Only available if basic_machines is installed)"
 
 ocular_networks.pages[12]=""..
 ocular_networks.pages["header"]..
@@ -183,8 +193,9 @@ ocular_networks.pages["header"]..
 ocular_networks.pagetext[13]=""..
 "Machines: Steam Battery\n\n"..
 "This machine generates power from steam.\n"..
-"It must have a lava block above it, a river water block below, \nand machine structure blocks on all four sides."..
-"Machine structure blocks are made by right-clicking a gold frame with a plated cross."..
+"It must have a lava block above it, a river water block below,\n"..
+"and machine structure blocks on all four sides.\n"..
+"Machine structure blocks are made by right-clicking a gold frame with a plated cross.\n"..
 "Once these requirements are met, it will create 150 OCP per second."
 
 ocular_networks.pages[13]=""..
@@ -194,8 +205,9 @@ ocular_networks.pages["header"]..
 ocular_networks.pagetext[14]=""..
 "Machines: Photosynthesis Battery\n\n"..
 "This machine generates power from the growth of plants.\n"..
-"It must have a gearbok below it,  and any height of normal grass on top."..
-"Once these requirements are met, it will create OCP at a rate dependent on the height of the grass."
+"It must have a gearbok below it,  and any height of normal grass on top.\n"..
+"Once these requirements are met, it will create OCP at a rate \n"..
+"dependent on the height of the grass."
 
 ocular_networks.pages[14]=""..
 ocular_networks.pages["header"]..
@@ -302,13 +314,57 @@ ocular_networks.pages["header"]..
 
 ocular_networks.pagetext[22]=""..
 "Zweinium\n\n"..
-"Zweinium is a bluish-green crystal.\n"..
-"It can be used to make capacitors, but has better applications than that."
+"Zweinium is a bluish-green crystal found in toxic slate.\n"..
+"It can be used to make capacitors, but has better applications than that.\n"..
+"Fusing a pure zweinium crystal with a silver lens results in a zweinium lens.\n"..
+"This lens will output 5x the power of a normal lens."
 
-ocular_networks.pages[21]=""..
+ocular_networks.pages[22]=""..
 ocular_networks.pages["header"]..
 "textarea[1,1;12,8;;"..B(ocular_networks.pagetext[22])..";]"
 
+
+ocular_networks.pagetext[23]=""..
+"Metals: Hekatonium\n\n"..
+"Hekatonium is a dark blue metal with purple oxide.\nWhen smelted, it becomes a dark purple color.\nHekatonium weighs 430 kilograms per cubic centimeter, but can be lifted with ease under special \nconditions.\n"..
+"Armor: Yes\n"..
+"Sword: Yes\n"..
+"Pick: Yes\n"..
+"Axe: Yes\n"..
+"Shovel: No\n"
+
+ocular_networks.pages[23]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[23])..";]"
+
+ocular_networks.pagetext[24]=""..
+"Charged Crystal\n\n"..
+"The charged crystal is a way of transferring power using the craft grid.\n"..
+"It is created when vast amounts of Diamond, Mese and OCP meet in the fuser.\n"..
+"You can recharge it in the charger."
+
+ocular_networks.pages[24]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[24])..";]"
+
+ocular_networks.pagetext[25]=""..
+"Armor Upgrades and Cybernetics\n\n"..
+"Angmallen and hekatonium armors can be upgraded using the upgrade pendant or performance controller.\n"..
+"Different upgrade tokens can be made do give the desired effect, such as speed or healing.\n\n"..
+"You can also use the performance controller to install cybernetic upgrades to your body.\n"..
+"Robotic arms such as 'Wrench' or 'Gun' can be installed, giving you special powers."
+
+ocular_networks.pages[25]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[25])..";]"
+
+ocular_networks.pagetext[26]=""..
+"Jammer Drones\n\n"..
+"These menacing little machines fly around and shoot lasers at people.\nThey also tend to steal the luminium cores from network nodes,\nwhich you can get back by killing them."
+
+ocular_networks.pages[26]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[26])..";]"
 
 minetest.register_craftitem("ocular_networks:guide", {
 	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Third Edition"),

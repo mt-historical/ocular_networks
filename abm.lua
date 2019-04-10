@@ -1,28 +1,31 @@
 
-
-
 minetest.register_abm({
-        label = "ocular battery charging",
+    label = "ocular battery charging",
 	nodenames = {"ocular_networks:battery"},
 	interval = 1,
 	chance = 1,
 	catch_up = true,
 	action = function(pos, node)
 		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
-		local node_above_light = minetest.get_node_light({x=pos.x, y=pos.y+2, z=pos.z})
 		local meta = minetest.get_meta(pos)
 		local power = meta:get_int("ocular_power")
 		meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
 		if node_above.name == "ocular_networks:frame_lens" then
+			local node_above_light = minetest.get_node_light({x=pos.x, y=pos.y+2, z=pos.z})
 			if not minetest.find_node_near(pos, 11, ocular_networks.disallowed) then
 				meta:set_int("ocular_power", power+node_above_light)
+			end
+		elseif node_above.name == "ocular_networks:frame_lens_z" then
+			local node_above_light = minetest.get_node_light({x=pos.x, y=pos.y+2, z=pos.z})
+			if not minetest.find_node_near(pos, 11, ocular_networks.disallowed) then
+				meta:set_int("ocular_power", power+(node_above_light*5))
 			end
 		end
 	end,
 })
 
 minetest.register_abm({
-        label = "steam battery charging",
+    label = "steam battery charging",
 	nodenames = {"ocular_networks:boiler"},
 	interval = 1,
 	chance = 1,

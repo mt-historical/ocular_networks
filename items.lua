@@ -152,3 +152,8 @@ minetest.register_craftitem("ocular_networks:zweinium_crystal", {
 	description = "Pure Zweinium Crystal",
 	inventory_image = "poly_zweinium_crystal_pure.png",
 })
+
+minetest.register_craftitem("ocular_networks:zweinium_lens", {
+	description = "Zweinium Crystal Lens",
+	inventory_image = "poly_zweinium_crystal_lens.png",
+})

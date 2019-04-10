@@ -1191,3 +1191,26 @@ minetest.register_craft({
 	output="ocular_networks:zweinium_crystal",
 	recipe="ocular_networks:zweinium_crystal_chunk",
 })
+
+ocular_networks.register_fusion({
+	item_1="ocular_networks:lens",
+	item_2="ocular_networks:zweinium_crystal",
+	output="ocular_networks:zweinium_lens",
+	give_back="",
+	cost=1000
+})
+
+minetest.register_craft({
+	output="ocular_networks:zweinium_block",
+	recipe={
+		{"ocular_networks:zweinium_crystal", "ocular_networks:zweinium_crystal", "ocular_networks:zweinium_crystal"},
+		{"ocular_networks:zweinium_crystal", "ocular_networks:zweinium_crystal", "ocular_networks:zweinium_crystal"},
+		{"ocular_networks:zweinium_crystal", "ocular_networks:zweinium_crystal", "ocular_networks:zweinium_crystal"}
+	}
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:zweinium_crystal 9",
+	recipe={"ocular_networks:zweinium_block"}
+})

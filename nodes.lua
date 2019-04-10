@@ -99,6 +99,11 @@ minetest.register_node("ocular_networks:frame", {
 			itemstack:take_item()
 			return itemstack
 		end
+		if itemstack:get_name() == "ocular_networks:zweinium_lens" then
+			minetest.set_node(pos, {name="ocular_networks:frame_lens_z"})
+			itemstack:take_item()
+			return itemstack
+		end
 		if itemstack:get_name() == "ocular_networks:cross" then
 			minetest.set_node(pos, {name="ocular_networks:frame_cross"})
 			itemstack:take_item()
@@ -118,6 +123,18 @@ minetest.register_node("ocular_networks:silicotin_block", {
 	sounds = default.node_sound_metal_defaults(),
 })
 
+minetest.register_node("ocular_networks:zweinium_block", {
+	description = "Zweinium Crystal Block\n"..minetest.colorize("#00affa", "Tesselates nicely"),
+	drawtype = "glasslike",
+	tiles = {"poly_zweinium_crystal_block.png"},
+	paramtype = "light",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+})
+
+
 minetest.register_node("ocular_networks:frame_lens", {
 	description = "Gold Frame (Lens)",
 	drawtype = "glasslike_framed",
@@ -133,6 +150,23 @@ minetest.register_node("ocular_networks:frame_lens", {
 	end,
 	drop = "ocular_networks:frame",
 })
+
+minetest.register_node("ocular_networks:frame_lens_z", {
+	description = "Gold Frame (Zweinium Lens)",
+	drawtype = "glasslike_framed",
+	tiles = {"poly_frame.png", "poly_zweinium_crystal_lens.png"},
+	paramtype = "light",
+	paramtype2 = "glasslikeliquidlevel",
+	sunlight_propagates = true,
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3, not_in_creative_inventory = 1},
+	sounds = default.node_sound_metal_defaults(),
+	on_destruct = function(pos)
+		minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, "ocular_networks:zweinium_lens")
+	end,
+	drop = "ocular_networks:frame",
+})
+
 
 minetest.register_node("ocular_networks:frame_cross", {
 	description = "Gold Frame (Plate Cross)",
