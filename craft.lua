@@ -217,7 +217,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:fuel",
+	output="ocular_networks:fuel 9",
 	recipe={
 		{"ocular_networks:crud", "ocular_networks:crud", "ocular_networks:crud"},
 		{"ocular_networks:crud", "default:coalblock", "ocular_networks:crud"},
@@ -459,7 +459,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:peat",
+	output="ocular_networks:peat 9",
 	recipe={
 		{"ocular_networks:fuel", "ocular_networks:fuel", "ocular_networks:fuel"},
 		{"ocular_networks:fuel", "default:coalblock", "ocular_networks:fuel"},
@@ -513,7 +513,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:firebrick",
+	output="ocular_networks:firebrick 9",
 	recipe={
 		{"default:brick", "ocular_networks:peat", "default:brick"},
 		{"ocular_networks:peat", "default:brick", "ocular_networks:peat"},
@@ -1213,4 +1213,62 @@ minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:zweinium_crystal 9",
 	recipe={"ocular_networks:zweinium_block"}
+})
+
+ocular_networks.register_fusion({
+	item_1="bucket:bucket_empty",
+	item_2="ocular_networks:zweinium_block",
+	output="ocular_networks:bucket_zweinium",
+	give_back="",
+	cost=100
+})
+
+minetest.register_craft({
+	output="ocular_networks:bucket_coolant",
+	recipe={
+		{"ocular_networks:nitrogen", "ocular_networks:nitrogen", "ocular_networks:nitrogen"},
+		{"ocular_networks:nitrogen", "ocular_networks:bucket_zweinium", "ocular_networks:nitrogen"},
+		{"ocular_networks:nitrogen", "ocular_networks:nitrogen", "ocular_networks:nitrogen"}
+	}
+})
+
+ocular_networks.register_dessicable({
+	material="default:dirt",
+	cost=100,
+	output="ocular_networks:nitrogen"
+})
+
+ocular_networks.register_dessicable({
+	material="default:dirt",
+	cost=100,
+	output="ocular_networks:nitrogen 50"
+})
+
+minetest.register_craft({
+	output="ocular_networks:ton_core",
+	recipe={
+		{"ocular_networks:hekatonium_block", "ocular_networks:frame", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:gearbox", "ocular_networks:erena_sphere", "ocular_networks:gearbox"},
+		{"ocular_networks:hekatonium_block", "ocular_networks:distributor_3", "ocular_networks:hekatonium_block"}
+	}
+})
+
+ocular_networks.register_dessicable({
+	material="default:coal_lump",
+	cost=100,
+	output="ocular_networks:carbon 99"
+})
+
+ocular_networks.register_fusion({
+	item_1="ocular_networks:carbon 8",
+	item_2="ocular_networks:fuel",
+	output="ocular_networks:superfuel",
+	give_back="",
+	cost=100
+})
+
+ocular_networks.register_dessicable({
+	material="ocular_networks:placeholder_any_item",
+	cost=10,
+	output="ocular_networks:crud"
 })

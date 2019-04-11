@@ -91,8 +91,14 @@ minetest.register_craftitem("ocular_networks:gun_stock", {
 
 
 minetest.register_craftitem("ocular_networks:placeholder_power", {
-	description = "OcularNetworks Power\n"..minetest.colorize("#00affa", "Recipe requires this much OCP"),
+	description = "Ocular Networks Power\n"..minetest.colorize("#00affa", "Recipe requires this much OCP"),
 	inventory_image = "poly_gui_icon_pwr.png",
+	groups = {not_in_creative_inventory=1}
+})
+
+minetest.register_craftitem("ocular_networks:placeholder_any_item", {
+	description = "Any item\n"..minetest.colorize("#00affa", "Any item"),
+	inventory_image = "poly_item.png",
 	groups = {not_in_creative_inventory=1}
 })
 
@@ -156,4 +162,19 @@ minetest.register_craftitem("ocular_networks:zweinium_crystal", {
 minetest.register_craftitem("ocular_networks:zweinium_lens", {
 	description = "Zweinium Crystal Lens",
 	inventory_image = "poly_zweinium_crystal_lens.png",
+})
+
+minetest.register_craftitem("ocular_networks:nitrogen", {
+	description = "Stabilized Nitrogen",
+	inventory_image = "poly_nitrogen.png",
+})
+
+minetest.register_craftitem("ocular_networks:carbon", {
+	description = "Stabilized Carbon",
+	inventory_image = "poly_carbon.png",
+})
+
+minetest.register_craftitem("ocular_networks:superfuel", {
+	description = "Superfuel",
+	inventory_image = "poly_fuel_2.png",
 })

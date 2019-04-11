@@ -95,7 +95,7 @@ minetest.register_abm({
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
 			if source_power > 4 then
-				if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 					if x > -11 and x < 11 and y > -11 and y < 11 and z > -11 and z < 11 then
 						local nom = 1
 						if x == 0 or x == nil then
@@ -136,7 +136,7 @@ minetest.register_abm({
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
 			if source_power > draw-1 then
-				if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 					if x > -21 and x < 21 and y > -21 and y < 21 and z > -21 and z < 21 then
 						local nom = 1
 						if x == 0 or x == nil then
@@ -177,7 +177,7 @@ minetest.register_abm({
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
 			if source_power > draw-1 then
-				if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 					if x > -31 and x < 31 and y > -31 and y < 31 and z > -31 and z < 31 then
 						local nom = 1
 						if x == 0 or x == nil then
@@ -215,7 +215,7 @@ minetest.register_abm({
 		local source_power = source_meta:get_int("ocular_power")
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
-			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 				for _,recipe in ipairs(ocular_networks.registered_meltables) do
 					if inv:contains_item("input", recipe.input) then
 						if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
@@ -248,7 +248,7 @@ minetest.register_abm({
 		local source_power = tonumber(source_meta:get_int("ocular_power")) 
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
-			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 				for _,recipe in ipairs(ocular_networks.registered_shrooms) do
 					if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == recipe.input then
 						if source_power > recipe.cost-1 then
@@ -277,7 +277,7 @@ minetest.register_abm({
 		local source_power = source_meta:get_int("ocular_power")
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
-			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 				for _,recipe in ipairs(ocular_networks.registered_alloys) do
 					if inv:contains_item("input1", recipe.input1) and inv:contains_item("input2", recipe.input2) then
 						if source_power > recipe.cost-1 then
@@ -329,7 +329,7 @@ minetest.register_abm({
 		local source_power = source_meta:get_int("ocular_power")
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
-			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 				for _,recipe in ipairs(ocular_networks.registered_fusions) do
 					if inv:contains_item("input1", recipe.input1) and inv:contains_item("input2", recipe.input2) then
 						if source_power > recipe.cost-1 then
@@ -355,7 +355,7 @@ minetest.register_abm({
 									inv:add_item("output", recipe._return)
 									inv:remove_item("input1", recipe.input2)
 									inv:remove_item("input2", recipe.input1)
-									minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, "ocular_networks:crud")
+									minetest.add_item({x=pos.x, y=pos.y-1, z=pos.z}, "ocular_networks:crud")
 								else
 									inv:remove_item("output", recipe.output)
 								end
@@ -398,7 +398,7 @@ minetest.register_abm({
 		local source_power = source_meta:get_int("ocular_power")
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
-			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 				if minetest.get_player_by_name(owner) then
 					if minetest.get_player_by_name(owner):is_player_connected(owner) then
 						local player = minetest.get_player_by_name(owner)
@@ -433,7 +433,7 @@ minetest.register_abm({
 		local source_owner = source_meta:get_string("owner")
 		local rate = meta:get_int("draw_amount")
 		if source_power then
-			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 				if minetest.get_player_by_name(owner) then
 					if minetest.get_player_by_name(owner):is_player_connected(owner) then
 						local player = minetest.get_player_by_name(owner)
@@ -507,7 +507,7 @@ minetest.register_abm({
 		local source_power = source_meta:get_int("ocular_power")
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
-			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 				for _,recipe in ipairs(ocular_networks.registered_chargeables) do
 					if inv:contains_item("input", recipe.input) then
 						if inv:room_for_item("output", recipe.output) then
@@ -555,7 +555,7 @@ minetest.register_abm({
 		local source_power = source_meta:get_int("ocular_power")
 		local source_owner = source_meta:get_string("owner")
 		if source_power then
-			if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
 				if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "ocular_networks:laserdrillchest" then
 					if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "ocular_networks:frame_lens" then
 						local inv = source_meta:get_inventory()
@@ -1294,6 +1294,74 @@ minetest.register_abm({
 			local chance = math.random(1,1000)
 			if chance == 3 then
 				minetest.set_node(pos, {name="ocular_networks:loomshroom4"})
+			end
+		end
+	end,
+})
+
+minetest.register_abm({
+    label = "chemical oven",
+	nodenames = {"ocular_networks:chem_oven"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		local inv = meta:get_inventory()
+		local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+		local source_power = source_meta:get_int("ocular_power")
+		local source_owner = source_meta:get_string("owner")
+		if source_power then
+			if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				for _,recipe in ipairs(ocular_networks.registered_dessicables) do
+					if inv:contains_item("input", recipe.input) then
+						if inv:contains_item("fuel", "ocular_networks:peat") then
+							if source_power > recipe.cost-1 then
+								source_meta:set_int("ocular_power", source_power-recipe.cost)
+								inv:remove_item("input", recipe.input)
+								inv:remove_item("fuel", "ocular_networks:peat")
+								inv:add_item("output", recipe.output)
+							end
+						end
+					end
+				end
+				if not inv:get_stack("input", 1):is_empty() then
+					if source_power > 9 and inv:contains_item("fuel", "ocular_networks:peat") then
+						source_meta:set_int("ocular_power", source_power-10)
+						inv:remove_item("fuel", "ocular_networks:peat")
+						inv:add_item("output", "ocular_networks:crud "..inv:get_stack("input", 1):get_count())
+						inv:set_stack("input", 1, "")
+					end
+				end
+			end
+		end
+		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+})
+
+minetest.register_abm({
+    label = "heka battery charging",
+	nodenames = {"ocular_networks:ton_core"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
+		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local inv=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z}):get_inventory()
+		local nodes_around = {a=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}), b=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}), c = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}), d = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})}
+		local meta = minetest.get_meta(pos)
+		local power = meta:get_int("ocular_power")
+		meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
+		if node_above.name == "ocular_networks:pipe_itembuffer" then
+			if node_below.name == "ocular_networks:firebrick" then
+				if inv:contains_item("main", "ocular_networks:superfuel") then
+					if nodes_around.a.name == "ocular_networks:firebrick" and nodes_around.b.name == "ocular_networks:firebrick" and nodes_around.c.name == "ocular_networks:firebrick" and nodes_around.d.name == "ocular_networks:firebrick" then
+						meta:set_int("ocular_power", power+500)
+						inv:remove_item("main", "ocular_networks:superfuel")
+					end
+				end
 			end
 		end
 	end,

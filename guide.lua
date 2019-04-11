@@ -366,6 +366,16 @@ ocular_networks.pages[26]=""..
 ocular_networks.pages["header"]..
 "textarea[1,1;12,8;;"..B(ocular_networks.pagetext[26])..";]"
 
+ocular_networks.pagetext[27]=""..
+"Chemical Oven\n\n"..
+"The chemical oven breaks items down into their basic elements.\n"..
+"It requires power and fuel.\n"..
+"It takes power from Above, and uses peat for fuel."
+
+ocular_networks.pages[27]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[26])..";]"
+
 minetest.register_craftitem("ocular_networks:guide", {
 	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Third Edition"),
 	inventory_image = "poly_guide.png",

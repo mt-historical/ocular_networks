@@ -790,3 +790,174 @@ bucket.register_liquid(
 	"bucket.png^poly_hekatonium_bliq.png",
 	"Bucket of Molten Hekatonium"
 )
+
+
+minetest.register_node("ocular_networks:zweinium_source", {
+	description = "Unstable Zweinium Source",
+	drawtype = "liquid",
+	tiles = {
+		{
+			name = "poly_zweinium_flux.png",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 3.0,
+			},
+		},
+	},
+	paramtype = "light",
+	light_source = default.LIGHT_MAX - 1,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	drop = "",
+	drowning = 1,
+	liquidtype = "source",
+	liquid_alternative_flowing = "ocular_networks:zweinium_flowing",
+	liquid_alternative_source = "ocular_networks:zweinium_source",
+	liquid_viscosity = 0,
+	liquid_renewable = false,
+	post_effect_color = {a = 100, r = 68, g = 246, b = 92},
+	groups = {liquid = 2},
+})
+
+minetest.register_node("ocular_networks:zweinium_flowing", {
+	description = "Flowing Unstable Zweinium",
+	drawtype = "flowingliquid",
+	tiles = {"poly_zweinium_flux_b.png"},
+	special_tiles = {
+		{
+			name = "poly_zweinium_flux_flowing.png",
+			backface_culling = false,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 3.3,
+			},
+		},
+		{
+			name = "poly_zweinium_flux_flowing.png",
+			backface_culling = true,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 3.3,
+			},
+		},
+	},
+	paramtype = "light",
+	paramtype2 = "flowingliquid",
+	light_source = default.LIGHT_MAX - 1,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	drop = "",
+	drowning = 1,
+	liquidtype = "flowing",
+	liquid_alternative_flowing = "ocular_networks:zweinium_flowing",
+	liquid_alternative_source = "ocular_networks:zweinium_source",
+	liquid_viscosity = 0,
+	liquid_renewable = false,
+	post_effect_color = {a = 100, r = 68, g = 246, b = 92},
+	groups = {liquid = 2,	not_in_creative_inventory = 1},
+})
+
+bucket.register_liquid(
+	"ocular_networks:zweinium_source",
+	"ocular_networks:zweinium_flowing",
+	"ocular_networks:bucket_zweinium",
+	"bucket.png^poly_zwei_bliq.png",
+	"Bucket of Unstable Zweinium"
+)
+
+minetest.register_node("ocular_networks:coolant_source", {
+	description = "Nitrogen Coolant Source",
+	drawtype = "liquid",
+	tiles = {
+		{
+			name = "poly_coolant.png",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 3.0,
+			},
+		},
+	},
+	paramtype = "light",
+	light_source = default.LIGHT_MAX - 1,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	drop = "",
+	drowning = 1,
+	liquidtype = "source",
+	liquid_alternative_flowing = "ocular_networks:coolant_flowing",
+	liquid_alternative_source = "ocular_networks:coolant_source",
+	liquid_viscosity = 0,
+	liquid_renewable = false,
+	post_effect_color = {a = 100, r = 68, g = 246, b = 92},
+	groups = {liquid = 2},
+})
+
+minetest.register_node("ocular_networks:coolant_flowing", {
+	description = "Flowing Nitrogen Coolant",
+	drawtype = "flowingliquid",
+	tiles = {"poly_coolant_b.png"},
+	special_tiles = {
+		{
+			name = "poly_coolant_flowing.png",
+			backface_culling = false,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 3.3,
+			},
+		},
+		{
+			name = "poly_coolant_flowing.png",
+			backface_culling = true,
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 3.3,
+			},
+		},
+	},
+	paramtype = "light",
+	paramtype2 = "flowingliquid",
+	light_source = default.LIGHT_MAX - 1,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	is_ground_content = false,
+	drop = "",
+	drowning = 1,
+	liquidtype = "flowing",
+	liquid_alternative_flowing = "ocular_networks:coolant_flowing",
+	liquid_alternative_source = "ocular_networks:coolant_source",
+	liquid_viscosity = 0,
+	liquid_renewable = false,
+	post_effect_color = {a = 100, r = 68, g = 246, b = 92},
+	groups = {liquid = 2,	not_in_creative_inventory = 1},
+})
+
+bucket.register_liquid(
+	"ocular_networks:coolant_source",
+	"ocular_networks:coolant_flowing",
+	"ocular_networks:bucket_coolant",
+	"bucket.png^poly_coolant_bliq.png",
+	"Bucket of Nitrogen Coolant"
+)

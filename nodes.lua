@@ -34,6 +34,14 @@ local meltspec = ""..
 "list[context;input;3.5,2;1,1;]"..
 "list[current_player;main;0,5;8,4;]"
 
+local chemspec = ""..
+"size[8,9;]"..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
+"list[context;input;2.5,1.5;1,1;]"..
+"list[context;fuel;2.5,2.5;1,1;]"..
+"list[context;output;4.5,2;1,1;]"..
+"list[current_player;main;0,5;8,4;]"
+
 local shroomspec = ""..
 "size[8,9;]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
@@ -217,6 +225,40 @@ minetest.register_node("ocular_networks:boiler", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Power Buffer: 0".."\nOwned By: "..owner)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end
+})
+
+minetest.register_node("ocular_networks:ton_core", {
+	description = "Hekaton Reactor Core\n"..minetest.colorize("#00affa", "Generates power from composite fuel\nRequires a multiblock structure\nCheck manual for how to build"),
+	tiles = {
+		{
+			name = "poly_hekaton_core.png",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 3.0,
+			},
+		},
+	},
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_stone_defaults(),
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_int("ocular_power", 0)
+		meta:set_int("heat", 0)
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		local meta = minetest.get_meta(pos)
@@ -1895,4 +1937,62 @@ minetest.register_node("ocular_networks:pipe_filtered_U", {
 			end
 		end
 	end
+})
+
+minetest.register_node("ocular_networks:chem_oven", {
+	description = "Chemical Oven\n"..minetest.colorize("#00affa", "Renders items down to their basic chemicals\nUses peat blocks\nTakes Power From ABOVE"),
+	tiles = {"poly_chem_oven_side.png", "poly_chem_oven_side.png", "poly_chem_oven_side.png", "poly_chem_oven_side.png", "poly_chem_oven_side.png", "poly_chem_oven_front.png"},
+	paramtype2 = "facedir",
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+	on_receive_fields = function(pos, formname, fields, sender)
+		local meta = minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", chemspec)
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		local inv = meta:get_inventory()
+		inv:set_list("input", {""})
+		inv:set_size("input", 1)
+		inv:set_list("fuel", {""})
+		inv:set_size("fuel", 1)
+		inv:set_list("output", {""})
+		inv:set_size("output", 1)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", chemspec)
+		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
 })
