@@ -1353,13 +1353,24 @@ minetest.register_abm({
 		local nodes_around = {a=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}), b=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}), c = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}), d = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})}
 		local meta = minetest.get_meta(pos)
 		local power = meta:get_int("ocular_power")
-		meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
+		meta:set_string("infotext", "Power Buffer: "..power.."\nHeat: "..meta:get_int("heat").."\nOwned By: "..meta:get_string("owner"))
 		if node_above.name == "ocular_networks:pipe_itembuffer" then
 			if node_below.name == "ocular_networks:firebrick" then
 				if inv:contains_item("main", "ocular_networks:superfuel") then
 					if nodes_around.a.name == "ocular_networks:firebrick" and nodes_around.b.name == "ocular_networks:firebrick" and nodes_around.c.name == "ocular_networks:firebrick" and nodes_around.d.name == "ocular_networks:firebrick" then
 						meta:set_int("ocular_power", power+500)
 						inv:remove_item("main", "ocular_networks:superfuel")
+						meta:set_int("heat", meta:get_int("heat")+1)
+						if meta:get_int("heat") > 49 then
+							if inv:contains_item("main", "ocular_networks:bucket_coolant") then
+								inv:remove_item("main", "ocular_networks:bucket_coolant")
+								inv:add_item("main", "bucket:bucket_empty")
+								meta:set_int("heat", 0)
+							else
+								tnt.boom(pos, {10, 30})
+								meta:set_int("heat", 0)
+							end
+						end
 					end
 				end
 			end

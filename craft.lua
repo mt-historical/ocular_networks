@@ -1215,33 +1215,26 @@ minetest.register_craft({
 	recipe={"ocular_networks:zweinium_block"}
 })
 
-ocular_networks.register_fusion({
-	item_1="bucket:bucket_empty",
-	item_2="ocular_networks:zweinium_block",
-	output="ocular_networks:bucket_zweinium",
-	give_back="",
-	cost=100
+
+ocular_networks.register_meltable({
+	input="ocular_networks:zweinium_block",
+	output="ocular_networks:zweinium_source",
+	cost=10
 })
 
 minetest.register_craft({
 	output="ocular_networks:bucket_coolant",
 	recipe={
-		{"ocular_networks:nitrogen", "ocular_networks:nitrogen", "ocular_networks:nitrogen"},
-		{"ocular_networks:nitrogen", "ocular_networks:bucket_zweinium", "ocular_networks:nitrogen"},
-		{"ocular_networks:nitrogen", "ocular_networks:nitrogen", "ocular_networks:nitrogen"}
+		{"ocular_networks:freeElem_nitrogen", "ocular_networks:freeElem_nitrogen", "ocular_networks:freeElem_nitrogen"},
+		{"ocular_networks:freeElem_nitrogen", "ocular_networks:bucket_zweinium", "ocular_networks:freeElem_nitrogen"},
+		{"ocular_networks:freeElem_nitrogen", "ocular_networks:freeElem_nitrogen", "ocular_networks:freeElem_nitrogen"}
 	}
 })
 
 ocular_networks.register_dessicable({
 	material="default:dirt",
 	cost=100,
-	output="ocular_networks:nitrogen"
-})
-
-ocular_networks.register_dessicable({
-	material="default:dirt",
-	cost=100,
-	output="ocular_networks:nitrogen 50"
+	output="ocular_networks:freeElem_nitrogen 50"
 })
 
 minetest.register_craft({
@@ -1256,11 +1249,11 @@ minetest.register_craft({
 ocular_networks.register_dessicable({
 	material="default:coal_lump",
 	cost=100,
-	output="ocular_networks:carbon 99"
+	output="ocular_networks:freeElem_carbon 99"
 })
 
 ocular_networks.register_fusion({
-	item_1="ocular_networks:carbon 8",
+	item_1="ocular_networks:freeElem_carbon 8",
 	item_2="ocular_networks:fuel",
 	output="ocular_networks:superfuel",
 	give_back="",
@@ -1271,4 +1264,47 @@ ocular_networks.register_dessicable({
 	material="ocular_networks:placeholder_any_item",
 	cost=10,
 	output="ocular_networks:crud"
+})
+
+ocular_networks.register_dessicable({
+	material="default:leaves",
+	cost=10,
+	output="ocular_networks:freeElem_hydrogen 60"
+})
+
+ocular_networks.register_dessicable({
+	material="default:obsidian_shard",
+	cost=10,
+	output="ocular_networks:freeElem_sulfur 15"
+})
+
+ocular_networks.register_dessicable({
+	material="default:iron_lump",
+	cost=10,
+	output="ocular_networks:freeElem_iron 99"
+})
+
+ocular_networks.register_dessicable({
+	material="default:gold_lump",
+	cost=10,
+	output="ocular_networks:freeElem_gold 99"
+})
+
+ocular_networks.register_dessicable({
+	material="default:copper_lump",
+	cost=10,
+	output="ocular_networks:freeElem_copper 99"
+})
+
+ocular_networks.register_dessicable({
+	material="default:tin_lump",
+	cost=10,
+	output="ocular_networks:freeElem_tin 99"
+})
+
+
+ocular_networks.register_dessicable({
+	material="default:silver_sand",
+	cost=10,
+	output="ocular_networks:freeElem_silicon 50"
 })

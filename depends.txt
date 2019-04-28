@@ -8,3 +8,4 @@ wield3d?
 basic_machines?
 technic?
 mobs?
+tnt

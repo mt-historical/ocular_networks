@@ -164,15 +164,51 @@ minetest.register_craftitem("ocular_networks:zweinium_lens", {
 	inventory_image = "poly_zweinium_crystal_lens.png",
 })
 
-minetest.register_craftitem("ocular_networks:nitrogen", {
+minetest.register_craftitem("ocular_networks:freeElem_nitrogen", {
 	description = "Stabilized Nitrogen",
-	inventory_image = "poly_nitrogen.png",
+	inventory_image = "poly_element.png",
 })
 
-minetest.register_craftitem("ocular_networks:carbon", {
+minetest.register_craftitem("ocular_networks:freeElem_carbon", {
 	description = "Stabilized Carbon",
-	inventory_image = "poly_carbon.png",
+	inventory_image = "poly_element.png",
 })
+
+minetest.register_craftitem("ocular_networks:freeElem_hydrogen", {
+	description = "Stabilized Hydrogen",
+	inventory_image = "poly_element.png",
+})
+
+minetest.register_craftitem("ocular_networks:freeElem_sulfur", {
+	description = "Stabilized Sulfur",
+	inventory_image = "poly_element.png",
+})
+
+minetest.register_craftitem("ocular_networks:freeElem_silicon", {
+	description = "Stabilized Silicon",
+	inventory_image = "poly_element.png",
+})
+
+minetest.register_craftitem("ocular_networks:freeElem_iron", {
+	description = "Stabilized Iron",
+	inventory_image = "poly_element.png",
+})
+
+minetest.register_craftitem("ocular_networks:freeElem_gold", {
+	description = "Stabilized Gold",
+	inventory_image = "poly_element.png",
+})
+
+minetest.register_craftitem("ocular_networks:freeElem_copper", {
+	description = "Stabilized Copper",
+	inventory_image = "poly_element.png",
+})
+
+minetest.register_craftitem("ocular_networks:freeElem_tin", {
+	description = "Stabilized Tin",
+	inventory_image = "poly_element.png",
+})
+
 
 minetest.register_craftitem("ocular_networks:superfuel", {
 	description = "Superfuel",
