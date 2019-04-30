@@ -145,7 +145,7 @@ minetest.register_craftitem("ocular_networks:scope", {
 })
 
 minetest.register_craftitem("ocular_networks:shimmering_bar", {
-	description = "Shimmering Alloy Ingot\n"..minetest.colorize("#00affa", "A shiny silver ingot."),
+	description = "Shimmering Alloy Ingot\n"..minetest.colorize("#00affa", "A shiny silvery ingot."),
 	inventory_image = "poly_shimmering_ingot.png",
 })
 
