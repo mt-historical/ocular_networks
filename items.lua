@@ -214,3 +214,38 @@ minetest.register_craftitem("ocular_networks:superfuel", {
 	description = "Superfuel",
 	inventory_image = "poly_fuel_2.png",
 })
+
+minetest.register_craftitem("ocular_networks:hammer", {
+	description = "Compound Hammer",
+	inventory_image = "poly_hammer.png",
+})
+
+minetest.register_craftitem("ocular_networks:dust_luminium", {
+	description = "Luminium Dust",
+	inventory_image = "poly_luminium_dust.png",
+})
+
+minetest.register_craftitem("ocular_networks:dust_lumigold", {
+	description = "Lumigold Dust",
+	inventory_image = "poly_lumigold_dust.png",
+})
+
+minetest.register_craftitem("ocular_networks:dust_angmallen", {
+	description = "Angmallen Dust",
+	inventory_image = "poly_angmallen_dust.png",
+})
+
+minetest.register_craftitem("ocular_networks:dust_silicotin", {
+	description = "Silicotin Dust",
+	inventory_image = "poly_silicotin_dust.png",
+})
+
+minetest.register_craftitem("ocular_networks:dust_shimmering", {
+	description = "Shimmering Dust",
+	inventory_image = "poly_shimmering_dust.png",
+})
+
+minetest.register_craftitem("ocular_networks:dust_zweinium", {
+	description = "Zweinium Dust",
+	inventory_image = "poly_zweinium_dust.png",
+})

@@ -614,6 +614,11 @@ minetest.register_craftitem("ocular_networks:c_arm", {
 	inventory_image = "poly_cyber_arm.png",
 })
 
+minetest.register_craftitem("ocular_networks:c_core", {
+	description = "Cybernetic Core\n"..minetest.colorize("#00affa", "A cybernetic core"),
+	inventory_image = "poly_cyber_core.png",
+})
+
 minetest.register_craft({
 	output="ocular_networks:c_arm",
 	recipe={

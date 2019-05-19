@@ -121,6 +121,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:hammer",
+	recipe={
+		{"", "ocular_networks:silicotin_bar", "ocular_networks:toxic_slate_chip"},
+		{"", "ocular_networks:lumigold_rod", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:lumigold_rod", "", ""}
+	}
+})
+
+minetest.register_craft({
 	output="ocular_networks:luminium_block",
 	recipe={
 		{"ocular_networks:luminium_bar", "ocular_networks:luminium_bar", "ocular_networks:luminium_bar"},
@@ -1307,4 +1316,82 @@ ocular_networks.register_dessicable({
 	material="default:silver_sand",
 	cost=10,
 	output="ocular_networks:freeElem_silicon 50"
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:dust_luminium",
+	recipe={"ocular_networks:luminium_bar","ocular_networks:hammer"},
+	replacements={{"ocular_networks:hammer","ocular_networks:hammer"}}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="ocular_networks:luminium_bar",
+	recipe="ocular_networks:dust_luminium",
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:dust_lumigold",
+	recipe={"ocular_networks:luminium_bar_3","ocular_networks:hammer"},
+	replacements={{"ocular_networks:hammer","ocular_networks:hammer"}}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="ocular_networks:luminium_bar_3",
+	recipe="ocular_networks:dust_lumigold",
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:dust_angmallen",
+	recipe={"ocular_networks:angmallen_bar","ocular_networks:hammer"},
+	replacements={{"ocular_networks:hammer","ocular_networks:hammer"}}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="ocular_networks:angmallen_bar",
+	recipe="ocular_networks:dust_angmallen",
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:dust_shimmering",
+	recipe={"ocular_networks:shimmering_bar","ocular_networks:hammer"},
+	replacements={{"ocular_networks:hammer","ocular_networks:hammer"}}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="ocular_networks:shimmering_bar",
+	recipe="ocular_networks:dust_shimmering",
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:dust_silicotin",
+	recipe={"ocular_networks:silicotin_bar","ocular_networks:hammer"},
+	replacements={{"ocular_networks:hammer","ocular_networks:hammer"}}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="ocular_networks:silicotin_bar",
+	recipe="ocular_networks:dust_silicotin",
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:dust_zweinium",
+	recipe={"ocular_networks:zweinium_crystal","ocular_networks:hammer"},
+	replacements={{"ocular_networks:hammer","ocular_networks:hammer"}}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="ocular_networks:zweinium_crystal",
+	recipe="ocular_networks:dust_zweinium",
 })

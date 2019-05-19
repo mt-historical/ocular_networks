@@ -155,12 +155,52 @@ if minetest.get_modpath("technic") then
 			end
 		end,
 	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:zweinium_crystal"},
+		output="ocular_networks:dust_zweinium"
+	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:zweinium_crystal_chunk"},
+		output="ocular_networks:dust_zweinium 2"
+	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:silicotin_bar"},
+		output="ocular_networks:dust_silicotin"
+	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:shimmering_bar"},
+		output="ocular_networks:dust_shimmering"
+	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:angmallen_bar"},
+		output="ocular_networks:dust_angmallen"
+	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:luminium_bar_3"},
+		output="ocular_networks:dust_lumigold"
+	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:luminium_bar"},
+		output="ocular_networks:dust_luminium"
+	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:luminium_lump"},
+		output="ocular_networks:dust_luminium 2"
+	})
 end
 
 if minetest.get_modpath("mobs") then
 	
 	minetest.register_node("ocular_networks:distributor_broken", {
-		description = "Broken Power Collector\n"..minetest.colorize("#00affa", "A distributor wose core has been eaten by a network jammer."),
+		description = "Broken Power Collector\n"..minetest.colorize("#00affa", "A distributor whose core has been eaten by a network jammer."),
 		tiles = {"poly_node_coreless.png"},
 		is_ground_content = false,
 		groups = {cracky = 3, oddly_breakable_by_hand = 3},

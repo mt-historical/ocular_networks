@@ -22,11 +22,13 @@ if ocular_networks.get_config("onRun", "load_flight_ring") then
 	dofile(modpath.."/jetring.lua")
 end
 dofile(modpath.."/armor.lua")
-if ocular_networks.get_config("onRun", "load_armor_upgrades") then
-	dofile(modpath.."/upgrade.lua")
-end
+
 dofile(modpath.."/craft.lua")
 
 dofile(modpath.."/compat.lua")
 
 dofile(modpath.."/abm.lua")
+
+if ocular_networks.get_config("onRun", "load_armor_upgrades") then
+	dofile(modpath.."/upgrade.lua")
+end
