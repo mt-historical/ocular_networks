@@ -1045,10 +1045,12 @@ minetest.register_abm({
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("main") then
 				for _,item in ipairs(destroyList) do
-					if source_inv:contains_item("main", item) then
-						source_inv:remove_item("main", item)
-						if target_inv:room_for_item("main", item) then
-							target_inv:add_item("main", item)
+					for i, stack in ipairs(source_inv:get_list("main")) do
+						if stack:get_name()==item then
+							if target_inv:room_for_item("main", item) then
+								source_inv:set_stack("main", i, {})
+								target_inv:add_item("main", stack)
+							end
 						end
 					end
 				end
@@ -1079,10 +1081,12 @@ minetest.register_abm({
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("main") then
 				for _,item in ipairs(destroyList) do
-					if source_inv:contains_item("main", item) then
-						source_inv:remove_item("main", item)
-						if target_inv:room_for_item("main", item) then
-							target_inv:add_item("main", item)
+					for i, stack in ipairs(source_inv:get_list("main")) do
+						if stack:get_name()==item then
+							if target_inv:room_for_item("main", item) then
+								source_inv:set_stack("main", i, {})
+								target_inv:add_item("main", stack)
+							end
 						end
 					end
 				end
@@ -1113,10 +1117,12 @@ minetest.register_abm({
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("main") then
 				for _,item in ipairs(destroyList) do
-					if source_inv:contains_item("main", item) then
-						source_inv:remove_item("main", item)
-						if target_inv:room_for_item("main", item) then
-							target_inv:add_item("main", item)
+					for i, stack in ipairs(source_inv:get_list("main")) do
+						if stack:get_name()==item then
+							if target_inv:room_for_item("main", item) then
+								source_inv:set_stack("main", i, {})
+								target_inv:add_item("main", stack)
+							end
 						end
 					end
 				end
@@ -1147,10 +1153,12 @@ minetest.register_abm({
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("main") then
 				for _,item in ipairs(destroyList) do
-					if source_inv:contains_item("main", item) then
-						source_inv:remove_item("main", item)
-						if target_inv:room_for_item("main", item) then
-							target_inv:add_item("main", item)
+					for i, stack in ipairs(source_inv:get_list("main")) do
+						if stack:get_name()==item then
+							if target_inv:room_for_item("main", item) then
+								source_inv:set_stack("main", i, {})
+								target_inv:add_item("main", stack)
+							end
 						end
 					end
 				end
@@ -1181,10 +1189,12 @@ minetest.register_abm({
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("main") then
 				for _,item in ipairs(destroyList) do
-					if source_inv:contains_item("main", item) then
-						source_inv:remove_item("main", item)
-						if target_inv:room_for_item("main", item) then
-							target_inv:add_item("main", item)
+					for i, stack in ipairs(source_inv:get_list("main")) do
+						if stack:get_name()==item then
+							if target_inv:room_for_item("main", item) then
+								source_inv:set_stack("main", i, {})
+								target_inv:add_item("main", stack)
+							end
 						end
 					end
 				end
@@ -1215,10 +1225,12 @@ minetest.register_abm({
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("main") then
 				for _,item in ipairs(destroyList) do
-					if source_inv:contains_item("main", item) then
-						source_inv:remove_item("main", item)
-						if target_inv:room_for_item("main", item) then
-							target_inv:add_item("main", item)
+					for i, stack in ipairs(source_inv:get_list("main")) do
+						if stack:get_name()==item then
+							if target_inv:room_for_item("main", item) then
+								source_inv:set_stack("main", i, {})
+								target_inv:add_item("main", stack)
+							end
 						end
 					end
 				end
@@ -1244,7 +1256,11 @@ minetest.register_abm({
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("main") then
 				for _,item in ipairs(destroyList) do
-					source_inv:remove_item("main", item.." 65535")
+					for i, stack in ipairs(source_inv:get_list("main")) do
+						if stack:get_name()==item then
+							source_inv:set_stack("main", i, {})
+						end
+					end
 				end
 			end
 		end
