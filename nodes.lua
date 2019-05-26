@@ -202,6 +202,7 @@ minetest.register_node("ocular_networks:battery", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		local meta = minetest.get_meta(pos)
@@ -225,6 +226,7 @@ minetest.register_node("ocular_networks:boiler", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		local meta = minetest.get_meta(pos)
@@ -258,6 +260,7 @@ minetest.register_node("ocular_networks:ton_core", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
 		meta:set_int("heat", 0)
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
@@ -282,6 +285,7 @@ minetest.register_node("ocular_networks:bolumiary", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		local meta = minetest.get_meta(pos)
@@ -307,6 +311,7 @@ minetest.register_node("ocular_networks:distributor", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", nodespec)
 		meta:set_int("sourceposx", 0)
 		meta:set_int("sourceposy", 0)
@@ -345,6 +350,7 @@ minetest.register_node("ocular_networks:distributor_2", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", nodespec2)
 		meta:set_int("sourceposx", 0)
 		meta:set_int("sourceposy", 0)
@@ -385,6 +391,7 @@ minetest.register_node("ocular_networks:distributor_3", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", nodespec2)
 		meta:set_int("sourceposx", 0)
 		meta:set_int("sourceposy", 0)
@@ -427,6 +434,14 @@ minetest.register_node("ocular_networks:luminium_block", {
 minetest.register_node("ocular_networks:hekatonium_block", {
 	description = minetest.colorize("#00affa", "Hekatonium Block"),
 	tiles = {"poly_hekatonium_block.png"},
+	is_ground_content = false,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_metal_defaults(),
+})
+
+minetest.register_node("ocular_networks:erenic_block", {
+	description = minetest.colorize("#00affa", "Block of Erena"),
+	tiles = {"poly_power_core_block.png"},
 	is_ground_content = false,
 	groups = {cracky = 1, level = 2},
 	sounds = default.node_sound_metal_defaults(),
@@ -567,6 +582,7 @@ minetest.register_node("ocular_networks:reservoir", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
 	end,
 	after_place_node = function(pos, placer, itemstack, pointed_thing)
 		local meta = minetest.get_meta(pos)
@@ -620,6 +636,7 @@ minetest.register_node("ocular_networks:melter", {
 		inv:set_list("input", {""})
 		inv:set_size("input", 1)
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", meltspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
@@ -678,6 +695,7 @@ minetest.register_node("ocular_networks:alloyer", {
 		inv:set_list("output", {""})
 		inv:set_size("output", 4)
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", alloyspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
@@ -736,6 +754,7 @@ minetest.register_node("ocular_networks:fuser", {
 		inv:set_list("output", {""})
 		inv:set_size("output", 4)
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", fusespec)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
@@ -878,6 +897,7 @@ minetest.register_node("ocular_networks:shroom_planter", {
 		inv:set_list("output", {""})
 		inv:set_size("output", 32)
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", shroomspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
@@ -922,6 +942,7 @@ minetest.register_node("ocular_networks:networknode", {
 		local meta = minetest.get_meta(pos)
 		local owner = placer:get_player_name()
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
 	can_dig = function(pos, player)
@@ -953,6 +974,7 @@ minetest.register_node("ocular_networks:networknode2", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_int("draw_amount", 0)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", "background[0,0;0,0;poly_gui_formbg.png;true]".."field[draw;Input Amount to insert per second:;${draw_amount}]")
 	end,
 	on_receive_fields = function(pos, formname, fields, sender)
@@ -1011,6 +1033,7 @@ minetest.register_node("ocular_networks:passive_cooler", {
 		inv:set_list("output", {""})
 		inv:set_size("output", 1)
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", coolspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
@@ -1067,6 +1090,7 @@ minetest.register_node("ocular_networks:charger", {
 		inv:set_list("output", {""})
 		inv:set_size("output", 1)
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", coolspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
@@ -1121,6 +1145,7 @@ minetest.register_node("ocular_networks:laserdrill", {
 		local meta = minetest.get_meta(pos)
 		local owner = placer:get_player_name()
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_int("digDistance", 2)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
@@ -1152,6 +1177,7 @@ minetest.register_node("ocular_networks:laserdrillchest", {
 		inv:set_list("output", {""})
 		inv:set_size("output", 100)
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", chestspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 		meta:set_int("ocular_power", 0)
@@ -1572,6 +1598,7 @@ minetest.register_node("ocular_networks:pipe_trashextractor", {
 		local owner = placer:get_player_name()
 		local inv = meta:get_inventory()
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", trashspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,
@@ -1626,6 +1653,7 @@ minetest.register_node("ocular_networks:pipe_filtered_E", {
 		local meta = minetest.get_meta(pos)
 		local owner = placer:get_player_name()
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", trashspec)
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate.")
 		local inv = meta:get_inventory()
@@ -1682,6 +1710,7 @@ minetest.register_node("ocular_networks:pipe_filtered_S", {
 		local meta = minetest.get_meta(pos)
 		local owner = placer:get_player_name()
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", trashspec)
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate.")
 		local inv = meta:get_inventory()
@@ -1738,6 +1767,7 @@ minetest.register_node("ocular_networks:pipe_filtered_W", {
 		local meta = minetest.get_meta(pos)
 		local owner = placer:get_player_name()
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", trashspec)
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate.")
 		local inv = meta:get_inventory()
@@ -1794,6 +1824,7 @@ minetest.register_node("ocular_networks:pipe_filtered_N", {
 		local meta = minetest.get_meta(pos)
 		local owner = placer:get_player_name()
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", trashspec)
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate.")
 		local inv = meta:get_inventory()
@@ -1850,6 +1881,7 @@ minetest.register_node("ocular_networks:pipe_filtered_D", {
 		local meta = minetest.get_meta(pos)
 		local owner = placer:get_player_name()
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", trashspec)
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to flip.")
 		local inv = meta:get_inventory()
@@ -1914,6 +1946,7 @@ minetest.register_node("ocular_networks:pipe_filtered_U", {
 	can_dig = function(pos, player)
 		local meta = minetest.get_meta(pos)
 		local owner = meta:get_string("owner")
+		meta:set_string("enabled", "true")
 		return owner == player:get_player_name()
 	end,
 	selection_box = {
@@ -1966,6 +1999,7 @@ minetest.register_node("ocular_networks:chem_oven", {
 		inv:set_list("output", {""})
 		inv:set_size("output", 1)
 		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
 		meta:set_string("formspec", chemspec)
 		meta:set_string("infotext", "Owned By: "..owner)
 	end,

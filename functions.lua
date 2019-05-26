@@ -224,6 +224,10 @@ minetest.register_on_joinplayer(function(player)
 	player:set_attribute("ocular_networks_hud_power", nil)
 end)
 
+ocular_networks.register_probeCommand=function(def)
+	table.insert(ocular_networks.netCommands, {desc=def.description, func=def.func})
+end
+
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		if player:get_attribute("personal_ocular_power") then

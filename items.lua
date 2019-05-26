@@ -64,6 +64,12 @@ minetest.register_craftitem("ocular_networks:toxic_slate_chip", {
 	inventory_image = "poly_slate.png",
 })
 
+
+minetest.register_craftitem("ocular_networks:toxic_slate_rod", {
+	description = "Toxic Slate Rod\n"..minetest.colorize("#00affa", "A rod of poisonous stone that becomes safe near\nclose-to-pure carbon compounds"),
+	inventory_image = "poly_slate_rod.png",
+})
+
 minetest.register_craftitem("ocular_networks:lumigold_rod", {
 	description = "Lumigold Rod\n"..minetest.colorize("#00affa", "A hardy rod of luminium-gold alloy"),
 	inventory_image = "poly_lumigold_rod.png",

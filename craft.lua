@@ -1250,8 +1250,17 @@ minetest.register_craft({
 	output="ocular_networks:ton_core",
 	recipe={
 		{"ocular_networks:hekatonium_block", "ocular_networks:frame", "ocular_networks:hekatonium_block"},
-		{"ocular_networks:gearbox", "ocular_networks:erena_sphere", "ocular_networks:gearbox"},
+		{"ocular_networks:gearbox", "ocular_networks:erenic_block", "ocular_networks:gearbox"},
 		{"ocular_networks:hekatonium_block", "ocular_networks:distributor_3", "ocular_networks:hekatonium_block"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:erenic_block",
+	recipe={
+		{"ocular_networks:erena_sphere", "ocular_networks:erena_sphere", "ocular_networks:erena_sphere"},
+		{"ocular_networks:erena_sphere", "ocular_networks:erena_sphere", "ocular_networks:erena_sphere"},
+		{"ocular_networks:erena_sphere", "ocular_networks:erena_sphere", "ocular_networks:erena_sphere"}
 	}
 })
 
@@ -1394,4 +1403,12 @@ minetest.register_craft({
 	type="cooking",
 	output="ocular_networks:zweinium_crystal",
 	recipe="ocular_networks:dust_zweinium",
+})
+
+ocular_networks.register_fusion({
+	item_1="ocular_networks:toxic_slate_chip",
+	item_2="ocular_networks:toxic_slate_chip",
+	output="ocular_networks:toxic_slate_rod",
+	give_back="",
+	cost=100
 })
