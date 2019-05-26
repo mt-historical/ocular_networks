@@ -35,3 +35,6 @@ end
 if ocular_networks.get_config("onRun", "load_probe_toolkit") and minetest.get_modpath("mesecons") then
 	dofile(modpath.."/probe.lua")
 end
+if ocular_networks.get_config("onRun", "load_forceloader") then
+	dofile(modpath.."/chload.lua")
+end

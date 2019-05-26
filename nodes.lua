@@ -255,7 +255,7 @@ minetest.register_node("ocular_networks:ton_core", {
 		},
 	},
 	is_ground_content = false,
-	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	groups = {cracky = 3},
 	sounds = default.node_sound_stone_defaults(),
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -2029,39 +2029,4 @@ minetest.register_node("ocular_networks:chem_oven", {
 			return 0
 		end
 	end,
-})
-
-minetest.register_node("ocular_networks:tether", {
-	description = minetest.colorize("#00affa", "Universe Tether"),
-	tiles = {
-		{
-			name = "poly_hekaton_core.png",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 3.0,
-			},
-		},
-	},
-	is_ground_content = false,
-	groups = {cracky = 3, oddly_breakable_by_hand = 3, not_in_creative_inventory=1},
-	sounds = default.node_sound_stone_defaults(),
-	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
-		meta:set_int("ocular_power", 0)
-		meta:set_string("enabled", "true")
-		meta:set_int("heat", 0)
-	end,
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		local meta = minetest.get_meta(pos)
-		local owner = placer:get_player_name()
-		meta:set_string("owner", owner)
-		meta:set_string("infotext", "Power Buffer: 0".."\nOwned By: "..owner)
-	end,
-	can_dig = function(pos, player)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
-		return owner == player:get_player_name()
-	end
 })
