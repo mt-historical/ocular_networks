@@ -34,7 +34,7 @@ startUpConfig = { -- you could also change these during runtime but it will have
 	load_flight_ring = true, -- setting this to false disables the flight ring, default true.
 	load_rifle_weapons = true, -- setting this to false disables the blaze rifle weapons, default true.
 	load_probe_toolkit = true, -- Whether or not to load the probe logic unit.
-	load_forceloader = false-- Whether to load the lag machine (chunkloader).
+	load_forceloader = false, -- Whether to load the lag machine (chunkloader).
 	moderator_whitelist = {["singleplayer"] = true},
 }
 
