@@ -48,7 +48,9 @@ ocular_networks.pagetext[1]=""..
 "Hekatonium                 -        Page 23\n"..
 "Charged Crystals           -        Page 24\n"..
 "Armor & Cybernetics        -        Page 25\n"..
-"Jammer Drones              -        Page 26\n"
+"Jammer Drones              -        Page 26\n"..
+"Chemical Oven              -        Page 27\n"..
+"Wireless Network Control   -        Page 28\n"
 
 ocular_networks.pages[1]=""..
 "size[14,10]"..
@@ -374,7 +376,25 @@ ocular_networks.pagetext[27]=""..
 
 ocular_networks.pages[27]=""..
 ocular_networks.pages["header"]..
-"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[26])..";]"
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[27])..";]"
+
+ocular_networks.pagetext[28]=""..
+"Wireless logic, Remote control, and Mesecon Support\n\n"..
+"Within the Ocular Networks mod, there exist two network systems.\n"..
+"One of these networks is the OCP power network, which exists as meta values in blocks.\n"..
+"The other is the Probe Message Service, a series of user-defined channels that can contain almost\nanything.\n"..
+"To use this network, you must first create a Ocular Logistics Controller,\n"..
+"And click while it is in your hand. A window will then open up, with a text field and a button.\n"..
+"You can enter commands in the field (try 'help') and press the button to execute them.\n"..
+"Next you will need to make a green 'Uplink' network probe.\n"..
+"This node can read fields from the node below, such as the content of a list or the name of the node,\n"..
+"and send them to a specified channel.\n"..
+"You can also create a downlink node capable of reading a channel and sending a mesecon signal\n"..
+"or turning off the node below."
+
+ocular_networks.pages[28]=""..
+ocular_networks.pages["header"]..
+"textarea[1,1;12,8;;"..B(ocular_networks.pagetext[28])..";]"
 
 minetest.register_craftitem("ocular_networks:guide", {
 	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Third Edition"),

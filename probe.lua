@@ -72,7 +72,7 @@ ocular_networks.netCommands={
 }
 
 local st={
-	description = "Ocular Logistics-Engineering Probe\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the probe message service."),
+	description = "Ocular Logistics Controller\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the probe message service."),
 	inventory_image = "poly_disk2.png",
 	not_in_creative_inventory=1,
 	stack_max=1,
@@ -145,7 +145,7 @@ local nodespec = ""..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe", {
-	description = "Network Probe (Uplink)\n"..minetest.colorize("#00affa", "Can be configured to read fields from the node below."),
+	description = "Network Probe (Uplink)\n"..minetest.colorize("#00affa", "Can be configured to read fields from the node below, and send them to the channel network."),
 	tiles = {"poly_uplink3.png", "poly_battery_bottom.png", "poly_uplink_side3.png"},
 	is_ground_content = false,
 	sunlight_propagates = true,
