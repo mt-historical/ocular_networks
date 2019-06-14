@@ -1445,3 +1445,52 @@ minetest.register_abm({
 		end
 	end,
 })
+
+minetest.register_abm({
+    label = "omni-insertion",
+	nodenames = {"ocular_networks:insertor"},
+	interval = 1,
+	chance = 1,
+	catch_up = true,
+	action = function(pos, node)
+		local meta = minetest.get_meta(pos)
+		if meta:get_string("enabled")=="true" then
+			local owner = meta:get_string("owner")
+			local x, y, z = meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
+			local source_meta = minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
+			local source_owner = source_meta:get_string("owner")
+				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+					print("A")
+					if x > -2 and x < 2 and y > -2 and y < 2 and z > -2 and z < 2 then
+						print("b")
+						local nom = 1
+						if x == 0 or x == nil then
+							nom = nom+1
+						end
+						if y == 0 or y == nil then
+							nom = nom+1
+						end
+						if z == 0 or z == nil then
+							nom = nom+1
+						end
+						if nom < 4 then
+							print("c")
+							if source_meta:get_inventory():get_list(meta:get_string("ainv")) then
+								print("1")
+								local subinv = source_meta:get_inventory()
+								for i, stack in ipairs(meta:get_inventory():get_list("main")) do
+									print("2")
+									if subinv:room_for_item(meta:get_string("ainv"), stack) then
+										print("3")
+										meta:get_inventory():set_stack("main", i, {})
+										subinv:add_item(meta:get_string("ainv"), stack)
+									end
+								end
+							end
+						end
+					end
+				end
+			meta:set_string("infotext", "\nOwned By: "..owner)
+		end
+	end,
+})

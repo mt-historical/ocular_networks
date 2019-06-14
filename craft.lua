@@ -1412,3 +1412,12 @@ ocular_networks.register_fusion({
 	give_back="",
 	cost=100
 })
+
+minetest.register_craft({
+	output="ocular_networks:insertor 4",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "ocular_networks:toxic_slate_chip", "ocular_networks:luminium_bar_3"},
+		{"ocular_networks:lumigold_rod", "ocular_networks:distributor", "ocular_networks:lumigold_rod"},
+		{"ocular_networks:luminium_bar_3", "default:chest", "ocular_networks:luminium_bar_3"}
+	}
+})

@@ -32,7 +32,8 @@ local meltspec = ""..
 "size[8,9;]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;input;3.5,2;1,1;]"..
-"list[current_player;main;0,5;8,4;]"
+"list[current_player;main;0,5;8,4;]"..
+"listring[]"
 
 local chemspec = ""..
 "size[8,9;]"..
@@ -40,20 +41,23 @@ local chemspec = ""..
 "list[context;input;2.5,1.5;1,1;]"..
 "list[context;fuel;2.5,2.5;1,1;]"..
 "list[context;output;4.5,2;1,1;]"..
-"list[current_player;main;0,5;8,4;]"
+"list[current_player;main;0,5;8,4;]"..
+"listring[]"
 
 local shroomspec = ""..
 "size[8,9;]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;output;0,0;8,4;]"..
-"list[current_player;main;0,5;8,4;]"
+"list[current_player;main;0,5;8,4;]"..
+"listring[]"
 
 local coolspec = ""..
 "size[8,9;]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;input;3.5,1;1,1;]"..
 "list[context;output;3.5,3;1,1;]"..
-"list[current_player;main;0,5;8,4;]"
+"list[current_player;main;0,5;8,4;]"..
+"listring[]"
 
 local alloyspec = ""..
 "size[8,9;]"..
@@ -61,7 +65,8 @@ local alloyspec = ""..
 "list[context;input1;2,1;1,1;]"..
 "list[context;input2;5,1;1,1;]"..
 "list[context;output;3,2;2,2;]"..
-"list[current_player;main;0,5;8,4;]"
+"list[current_player;main;0,5;8,4;]"..
+"listring[]"
 
 local fusespec = ""..
 "size[8,9;]"..
@@ -69,7 +74,8 @@ local fusespec = ""..
 "list[context;input1;2,1;1,1;]"..
 "list[context;input2;5,1;1,1;]"..
 "list[context;output;3,2;2,2;]"..
-"list[current_player;main;0,5;8,4;]"
+"list[current_player;main;0,5;8,4;]"..
+"listring[]"
 
 local deconspec = ""..
 "size[8,9;]"..
@@ -77,19 +83,35 @@ local deconspec = ""..
 "list[context;input;3.5,1;1,1;]"..
 "list[context;fuel;3.5,2;1,1;]"..
 "list[context;output;1.5,3.5;5,1;]"..
-"list[current_player;main;0,5;8,4;]"
+"list[current_player;main;0,5;8,4;]"..
+"listring[]"
 
 local chestspec = ""..
 "size[20,10;]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;output;0,0;20,5;]"..
-"list[current_player;main;6,6;8,4;]"
+"list[current_player;main;6,6;8,4;]"..
+"listring[]"
 
 local bufferspec = ""..
 "size[20,10;]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "list[context;main;0,0;20,5;]"..
-"list[current_player;main;6,6;8,4;]"
+"list[current_player;main;6,6;8,4;]"..
+"listring[]"
+
+local omnispec = ""..
+"size[13,8]"..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
+"label[0.7,0;Sending Location: (max +1, min -1, positions are relative)]"..
+"field[1,1;2,1;sourcex;x;${sourceposx}]"..
+"field[4,1;2,1;sourcey;y;${sourceposy}]"..
+"field[7,1;2,1;sourcez;z;${sourceposz}]"..
+"field[1,2;8,1;inv;Inventory to access;${ainv}]"..
+"button_exit[0.74,2.5;8,1;save;Save]"..
+"list[current_player;main;0.7,3.5;8,4;]"..
+"list[context;main;9,1;3,6;]"..
+"listring[]"
 
 minetest.register_node("ocular_networks:frame", {
 	description = "Gold Frame\n"..minetest.colorize("#00affa", "Used as a part of most multiblock structures"),
@@ -2009,6 +2031,70 @@ minetest.register_node("ocular_networks:chem_oven", {
 		return owner == player:get_player_name()
 	end,
 		allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+
+minetest.register_node("ocular_networks:insertor", {
+	description = "Omni-Insertor\n"..minetest.colorize("#00affa", "Takes things from its inventory and moves them to adjacent blocks"),
+	tiles = {"poly_node_4.png"},
+	is_ground_content = false,
+	groups = {cracky = 3, oddly_breakable_by_hand = 3},
+	sounds = default.node_sound_metal_defaults(),
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		local inv = meta:get_inventory()
+		meta:set_string("enabled", "true")
+		meta:set_string("formspec", omnispec)
+		meta:set_int("sourceposx", 0)
+		meta:set_int("sourceposy", 0)
+		meta:set_int("sourceposz", 0)
+		meta:set_string("ainv", "[_]")
+		inv:set_size("main", 18)
+	end,
+	on_receive_fields = function(pos, formname, fields, sender)
+		local meta = minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			meta:set_int("sourceposx", tonumber(fields.sourcex) or 0)
+			meta:set_int("sourceposy", tonumber(fields.sourcey) or 0)
+			meta:set_int("sourceposz", tonumber(fields.sourcez) or 0)
+			meta:set_string("ainv", fields.inv or "")
+			meta:set_string("formspec", omnispec)
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+	end,
+	after_place_node = function(pos, placer, itemstack, pointed_thing)
+		local meta = minetest.get_meta(pos)
+		local owner = placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+	can_dig = function(pos, player)
+		local meta = minetest.get_meta(pos)
+		local owner = meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
 			return count 
 		else
