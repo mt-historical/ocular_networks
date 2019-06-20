@@ -77,7 +77,7 @@ if minetest.get_modpath("basic_machines") then
 			local source_power=source_meta:get_int("ocular_power")
 			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					if tonumber(source_power) > 9 then
 						source_meta:set_int("ocular_power", tonumber(source_power)-10)
 						inv:add_item("dst", "basic_machines:power_cell")
@@ -141,7 +141,7 @@ if minetest.get_modpath("technic") then
 			local source_power=source_meta:get_int("ocular_power")
 			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.live.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					if tonumber(source_power) > 99 then
 						meta:set_int("MV_EU_supply", 5000)
 						source_meta:set_int("ocular_power", tonumber(source_power)-100)

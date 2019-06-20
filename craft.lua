@@ -1413,6 +1413,15 @@ ocular_networks.register_fusion({
 })
 
 minetest.register_craft({
+	output="ocular_networks:chem_oven",
+	recipe={
+		{"ocular_networks:shimmering_bar", "ocular_networks:firebrick", "ocular_networks:shimmering_bar"},
+		{"ocular_networks:firebrick", "ocular_networks:melter", "ocular_networks:firebrick"},
+		{"ocular_networks:shimmering_bar", "ocular_networks:zweinium_crystal", "ocular_networks:shimmering_bar"}
+	}
+})
+
+minetest.register_craft({
 	output="ocular_networks:insertor 4",
 	recipe={
 		{"ocular_networks:luminium_bar_3", "ocular_networks:toxic_slate_chip", "ocular_networks:luminium_bar_3"},
