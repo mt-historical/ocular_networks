@@ -1,11 +1,9 @@
-
 ocular_networks.pages={}
 ocular_networks.pagetext={}
 
 local function B(x)
 	return minetest.colorize("#000000", minetest.formspec_escape(x))
 end
-
 
 ocular_networks.pages["header"]=""..
 "size[14,10]"..
@@ -81,8 +79,6 @@ ocular_networks.pagetext[3]=""..
 ocular_networks.pages[3]=""..
 ocular_networks.pages["header"]..
 "textarea[1,1;12,8;;"..B(ocular_networks.pagetext[3])..";]"
-
-
 
 ocular_networks.pagetext[4]=""..
 "Getting Started: The Battery\n\n"..
@@ -325,7 +321,6 @@ ocular_networks.pages[22]=""..
 ocular_networks.pages["header"]..
 "textarea[1,1;12,8;;"..B(ocular_networks.pagetext[22])..";]"
 
-
 ocular_networks.pagetext[23]=""..
 "Metals: Hekatonium\n\n"..
 "Hekatonium is a dark blue metal with purple oxide.\nWhen smelted, it becomes a dark purple color.\nHekatonium weighs 430 kilograms per cubic centimeter, but can be lifted with ease under special \nconditions.\n"..
@@ -397,18 +392,18 @@ ocular_networks.pages["header"]..
 "textarea[1,1;12,8;;"..B(ocular_networks.pagetext[28])..";]"
 
 minetest.register_craftitem("ocular_networks:guide", {
-	description = "The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Third Edition"),
-	inventory_image = "poly_guide.png",
+	description="The Ocular Technician's Guide to Power\n"..minetest.colorize("#333333", "Third Edition"),
+	inventory_image="poly_guide.png",
 	stack_max=1,
-	on_use = function(itemstack, user, pointed_thing)
+	on_use=function(itemstack, user, pointed_thing)
 		minetest.show_formspec(user:get_player_name(), "ocn_guide/1", ocular_networks.pages[1])
 	end
 })
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-	local formnames = string.split(formname, "/")
+	local formnames=string.split(formname, "/")
 	if formnames[1]=="ocn_guide" then
-		local pg = tonumber(formnames[2])
+		local pg=tonumber(formnames[2])
 		if fields.next then
 			if pg < #ocular_networks.pages then
 				minetest.show_formspec(player:get_player_name(), "ocn_guide/"..pg+1, ocular_networks.pages[pg+1])

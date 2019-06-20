@@ -1,8 +1,7 @@
-
 minetest.register_craft({
 	output="ocular_networks:guide",
 	type="shapeless",
-	recipe = {"default:book", "default:copper_ingot", "default:glass"},
+	recipe={"default:book", "default:copper_ingot", "default:glass"},
 })
 
 minetest.register_craft({
@@ -235,9 +234,9 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	type = "fuel",
-	recipe = "ocular_networks:fuel",
-	burntime = 120
+	type="fuel",
+	recipe="ocular_networks:fuel",
+	burntime=120
 })
 
 minetest.register_craft({
@@ -500,7 +499,7 @@ minetest.register_craft({
 		{"", "default:copper_ingot", ""},
 		{"ocular_networks:angmallen_bar", "ocular_networks:blazerifle", "ocular_networks:angmallen_bar"},
 		{"", "ocular_networks:charged_gem", ""}},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
+	replacements={{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
 
 minetest.register_craft({
@@ -643,7 +642,7 @@ minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:angmallen_block_4",
 	recipe={"ocular_networks:angmallen_block_3", "ocular_networks:charged_gem"},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
+	replacements={{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
 
 minetest.register_craft({
@@ -761,7 +760,7 @@ minetest.register_craft({
 		{"farming:cotton", "", "farming:cotton"},
 		{"", "ocular_networks:angmallen_bar", "ocular_networks:charged_gem"}
 	},
-	replacements = {{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
+	replacements={{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
 
 minetest.register_craft({

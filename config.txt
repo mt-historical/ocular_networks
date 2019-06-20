@@ -1,7 +1,17 @@
- -- these are the settings that can be changed during the runtime.
-liveConfig = {
-	max_personal_network_power = 1000000000000, -- this is the maximum power a player's personal network can contain at any given time. this will prevent the hud from printing errors. default 1000000000000
-	laserDrill_blacklist = { --nodes that the laserdrill cannot dig.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Don't change this bit
+return {
+-- You can edit below this
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- This is the general purpose config file for ocular_networks.
+
+-- LIVE SETTINGS (These can be changed at any time)
+	-- the max OCP a player's network can contain. this can prevent the hud from printing errors. default 1000000000000
+	max_personal_network_power = 1000000000000, 
+
+	-- nodes that the laser drill cannot dig.
+	laserDrill_blacklist = { 
 		["default:water_source"] = true,
 		["default:water_flowing"] = true,
 		["default:river_water_source"] = true,
@@ -27,16 +37,28 @@ liveConfig = {
 		["ocular_networks:hekatonium_source"] = true,
 		["ocular_networks:hekatonium_flowing"] = true
 	},
-}
 
-startUpConfig = { -- you could also change these during runtime but it will have no effect.
-	load_armor_upgrades = true,-- setting this to false disables the upgrade pendant and upgrade items for the angmallen armor, default true.
-	load_flight_ring = true, -- setting this to false disables the flight ring, default true.
-	load_rifle_weapons = true, -- setting this to false disables the blaze rifle weapons, default true.
-	load_probe_toolkit = true, -- Whether or not to load the probe logic unit.
-	load_forceloader = false, -- Whether to load the lag machine (chunkloader).
+	-- a list of all the players who can bypass the ocular_networks protection system.
 	moderator_whitelist = {["singleplayer"] = true},
-}
 
-ocular_networks.config = {live = liveConfig, onRun = startUpConfig}
-return ocular_networks.config
+-- RUNTIME SETTINGS (Will only take effect if changed before loading)
+
+	-- setting this to false disables the upgrade pendant and upgrade items for the angmallen armor. default true.
+	load_armor_upgrades = true,
+
+	 -- setting this to false disables the flight ring. default true.
+	load_flight_ring = true,
+
+	-- setting this to false disables the blaze rifle weapons. default true.
+	load_rifle_weapons = true, 
+
+	 -- Whether or not to load the probe logic unit.
+	load_probe_toolkit = true,
+
+	-- Whether to load the lag machine (chunkloader).
+	load_forceloader = false, 
+	
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Don't change this bit
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------

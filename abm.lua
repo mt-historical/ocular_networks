@@ -1,23 +1,22 @@
-
 minetest.register_abm({
-    label = "ocular battery charging",
-	nodenames = {"ocular_networks:battery"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
-		local meta = minetest.get_meta(pos)
+    label="ocular battery charging",
+	nodenames={"ocular_networks:battery"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local node_above=minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local power = meta:get_int("ocular_power")
+			local power=meta:get_int("ocular_power")
 			meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
 			if node_above.name == "ocular_networks:frame_lens" then
-				local node_above_light = minetest.get_node_light({x=pos.x, y=pos.y+2, z=pos.z})
+				local node_above_light=minetest.get_node_light({x=pos.x, y=pos.y+2, z=pos.z})
 				if not minetest.find_node_near(pos, 11, ocular_networks.disallowed) then
 					meta:set_int("ocular_power", power+node_above_light)
 				end
 			elseif node_above.name == "ocular_networks:frame_lens_z" then
-				local node_above_light = minetest.get_node_light({x=pos.x, y=pos.y+2, z=pos.z})
+				local node_above_light=minetest.get_node_light({x=pos.x, y=pos.y+2, z=pos.z})
 				if not minetest.find_node_near(pos, 11, ocular_networks.disallowed) then
 					meta:set_int("ocular_power", power+(node_above_light*5))
 				end
@@ -27,23 +26,24 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "steam battery charging",
-	nodenames = {"ocular_networks:boiler"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
-		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
-		local nodes_around = {a=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}), b=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}), c = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}), d = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})}
-		local meta = minetest.get_meta(pos)
+    label="steam battery charging",
+	nodenames={"ocular_networks:boiler"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local node_above=minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
+		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local nodes_around={a=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}), b=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}), c=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}), d=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})}
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local power = meta:get_int("ocular_power")
+			local power=meta:get_int("ocular_power")
 			meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
 			if node_above.name == "default:lava_source" then
 				if node_below.name == "default:river_water_source" then
 					if nodes_around.a.name == "ocular_networks:frame_cross" and nodes_around.b.name == "ocular_networks:frame_cross" and nodes_around.c.name == "ocular_networks:frame_cross" and nodes_around.d.name == "ocular_networks:frame_cross" then
 						meta:set_int("ocular_power", power+150)
+						minetest.sound_play("OCN_steam_puff", {gain = 0.3, pos = pos, max_hear_distance = 10})
 					end
 				end
 			end
@@ -52,17 +52,17 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-        label = "plant battery charging",
-	nodenames = {"ocular_networks:bolumiary"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
-		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
-		local meta = minetest.get_meta(pos)
+        label="plant battery charging",
+	nodenames={"ocular_networks:bolumiary"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local node_above=minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
+		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local power = meta:get_int("ocular_power")
+			local power=meta:get_int("ocular_power")
 			meta:set_string("infotext", "Power Buffer: "..power.."\nOwned By: "..meta:get_string("owner"))
 			if node_below.name == "ocular_networks:gearbox" then
 				if node_above.name == "default:grass_1" then
@@ -86,33 +86,33 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "ocular node network distribution (draw)",
-	nodenames = {"ocular_networks:distributor"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="ocular node network distribution (draw)",
+	nodenames={"ocular_networks:distributor"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local power = meta:get_int("ocular_power")
-			local owner = meta:get_string("owner")
-			local x, y, z = meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
-			local source_meta = minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local power=meta:get_int("ocular_power")
+			local owner=meta:get_string("owner")
+			local x, y, z=meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
+			local source_meta=minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
 				if source_power > 4 then
-					if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+					if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 						if x > -11 and x < 11 and y > -11 and y < 11 and z > -11 and z < 11 then
-							local nom = 1
+							local nom=1
 							if x == 0 or x == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if y == 0 or y == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if z == 0 or z == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if nom < 4 then
 								source_meta:set_int("ocular_power", source_power-5)
@@ -128,34 +128,34 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "ocular node network distribution 2 (draw)",
-	nodenames = {"ocular_networks:distributor_2"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="ocular node network distribution 2 (draw)",
+	nodenames={"ocular_networks:distributor_2"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local power = meta:get_int("ocular_power")
-			local owner = meta:get_string("owner")
-			local draw = meta:get_int("draw")
-			local x, y, z = meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
-			local source_meta = minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local power=meta:get_int("ocular_power")
+			local owner=meta:get_string("owner")
+			local draw=meta:get_int("draw")
+			local x, y, z=meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
+			local source_meta=minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
 				if source_power > draw-1 then
-					if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+					if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 						if x > -21 and x < 21 and y > -21 and y < 21 and z > -21 and z < 21 then
-							local nom = 1
+							local nom=1
 							if x == 0 or x == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if y == 0 or y == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if z == 0 or z == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if nom < 4 then
 								source_meta:set_int("ocular_power", source_power-draw)
@@ -171,34 +171,34 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "ocular node network distribution 3 (draw)",
-	nodenames = {"ocular_networks:distributor_3"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="ocular node network distribution 3 (draw)",
+	nodenames={"ocular_networks:distributor_3"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local power = meta:get_int("ocular_power")
-			local owner = meta:get_string("owner")
-			local draw = meta:get_int("draw")
-			local x, y, z = meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
-			local source_meta = minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local power=meta:get_int("ocular_power")
+			local owner=meta:get_string("owner")
+			local draw=meta:get_int("draw")
+			local x, y, z=meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
+			local source_meta=minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
 				if source_power > draw-1 then
-					if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+					if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 						if x > -31 and x < 31 and y > -31 and y < 31 and z > -31 and z < 31 then
-							local nom = 1
+							local nom=1
 							if x == 0 or x == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if y == 0 or y == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if z == 0 or z == nil then
-								nom = nom+1
+								nom=nom+1
 							end
 							if nom < 4 then
 								source_meta:set_int("ocular_power", source_power-draw)
@@ -215,21 +215,21 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "melting furnace",
-	nodenames = {"ocular_networks:melter"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="melting furnace",
+	nodenames={"ocular_networks:melter"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local owner=meta:get_string("owner")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					for _,recipe in ipairs(ocular_networks.registered_meltables) do
 						if inv:contains_item("input", recipe.input) then
 							if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "air" then
@@ -237,6 +237,7 @@ minetest.register_abm({
 									source_meta:set_int("ocular_power", source_power-recipe.cost)
 									inv:remove_item("input", recipe.input)
 									minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z}, {name=recipe.output})
+									minetest.sound_play("OCN_melter_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 								end
 							end
 						end
@@ -248,28 +249,28 @@ minetest.register_abm({
 	end,
 })
 
-
 minetest.register_abm({
-    label = "shroom infusing",
-	nodenames = {"ocular_networks:shroom_planter"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="shroom infusing",
+	nodenames={"ocular_networks:shroom_planter"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-			local source_power = tonumber(source_meta:get_int("ocular_power")) 
-			local source_owner = source_meta:get_string("owner")
+			local owner=meta:get_string("owner")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+			local source_power=tonumber(source_meta:get_int("ocular_power")) 
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					for _,recipe in ipairs(ocular_networks.registered_shrooms) do
 						if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == recipe.input then
 							if source_power > recipe.cost-1 then
 								source_meta:set_int("ocular_power", source_power-recipe.cost)
 								inv:add_item("output", recipe.output)
+								minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 							end
 						end
 					end
@@ -281,21 +282,21 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "alloyer",
-	nodenames = {"ocular_networks:alloyer"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="alloyer",
+	nodenames={"ocular_networks:alloyer"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local owner=meta:get_string("owner")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					for _,recipe in ipairs(ocular_networks.registered_alloys) do
 						if inv:contains_item("input1", recipe.input1) and inv:contains_item("input2", recipe.input2) then
 							if source_power > recipe.cost-1 then
@@ -306,6 +307,7 @@ minetest.register_abm({
 										inv:add_item("output", recipe._return)
 										inv:remove_item("input2", recipe.input2)
 										inv:remove_item("input1", recipe.input1)
+										minetest.sound_play("OCN_alloyer_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 									else
 										inv:remove_item("output", recipe.output)
 									end
@@ -320,6 +322,7 @@ minetest.register_abm({
 										inv:add_item("output", recipe._return)
 										inv:remove_item("input1", recipe.input2)
 										inv:remove_item("input2", recipe.input1)
+										minetest.sound_play("OCN_alloyer_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 									else
 										inv:remove_item("output", recipe.output)
 									end
@@ -335,21 +338,21 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "fusion",
-	nodenames = {"ocular_networks:fuser"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="fusion",
+	nodenames={"ocular_networks:fuser"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local owner=meta:get_string("owner")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					for _,recipe in ipairs(ocular_networks.registered_fusions) do
 						if inv:contains_item("input1", recipe.input1) and inv:contains_item("input2", recipe.input2) then
 							if source_power > recipe.cost-1 then
@@ -361,6 +364,7 @@ minetest.register_abm({
 										inv:remove_item("input2", recipe.input2)
 										inv:remove_item("input1", recipe.input1)
 										minetest.add_item({x=pos.x, y=pos.y-1, z=pos.z}, "ocular_networks:crud")
+										minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 									else
 										inv:remove_item("output", recipe.output)
 									end
@@ -376,6 +380,7 @@ minetest.register_abm({
 										inv:remove_item("input1", recipe.input2)
 										inv:remove_item("input2", recipe.input1)
 										minetest.add_item({x=pos.x, y=pos.y-1, z=pos.z}, "ocular_networks:crud")
+										minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 									else
 										inv:remove_item("output", recipe.output)
 									end
@@ -390,42 +395,41 @@ minetest.register_abm({
 	end,
 })
 
-ocular_networks.cools = {
-
-}
+ocular_networks.cools={}
 
 minetest.register_abm({
-    label = "metal cooling",
-	nodenames = {"group:metal_liquid_source"},
-	neighbors = {"group:cools_lava"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
+    label="metal cooling",
+	nodenames={"group:metal_liquid_source"},
+	neighbors={"group:cools_lava"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
 		minetest.set_node(pos, ocular_networks.cools[node.name])
+		minetest.sound_play("OCN_steam_puff", {gain = 0.3, pos = pos, max_hear_distance = 10})
 	end,
 })
 
 minetest.register_abm({
-    label = "player personal network loading",
-	nodenames = {"ocular_networks:networknode"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="player personal network loading",
+	nodenames={"ocular_networks:networknode"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local owner=meta:get_string("owner")
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					if minetest.get_player_by_name(owner) then
 						if minetest.get_player_by_name(owner):is_player_connected(owner) then
-							local player = minetest.get_player_by_name(owner)
+							local player=minetest.get_player_by_name(owner)
 							if player:get_attribute("personal_ocular_power") then
-								local playerPower = tonumber(player:get_attribute("personal_ocular_power"))
+								local playerPower=tonumber(player:get_attribute("personal_ocular_power"))
 								player:set_attribute("personal_ocular_power", tostring(playerPower+source_power))
 								source_meta:set_int("ocular_power", 0)
 							else
@@ -443,26 +447,26 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "player personal network unloading",
-	nodenames = {"ocular_networks:networknode2"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="player personal network unloading",
+	nodenames={"ocular_networks:networknode2"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
-			local rate = meta:get_int("draw_amount")
+			local owner=meta:get_string("owner")
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
+			local rate=meta:get_int("draw_amount")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					if minetest.get_player_by_name(owner) then
 						if minetest.get_player_by_name(owner):is_player_connected(owner) then
-							local player = minetest.get_player_by_name(owner)
+							local player=minetest.get_player_by_name(owner)
 							if player:get_attribute("personal_ocular_power") then
-								local playerPower = tonumber(player:get_attribute("personal_ocular_power"))
+								local playerPower=tonumber(player:get_attribute("personal_ocular_power"))
 								if playerPower < rate-1 then
 									source_meta:set_int("ocular_power", source_power+playerPower)
 									player:set_attribute("personal_ocular_power", tostring(0))
@@ -485,34 +489,35 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "reservoir updating",
-	nodenames = {"ocular_networks:reservoir"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
+    label="reservoir updating",
+	nodenames={"ocular_networks:reservoir"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
 		meta:set_string("infotext", "Owned By: "..owner.."\nContains "..meta:get_int("ocular_power").." power")
 	end,
 })
 
 minetest.register_abm({
-    label = "ocn_cooling",
-	nodenames = {"ocular_networks:passive_cooler"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="ocn_cooling",
+	nodenames={"ocular_networks:passive_cooler"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-		local owner = meta:get_string("owner")
-		local inv = meta:get_inventory()
+		local owner=meta:get_string("owner")
+		local inv=meta:get_inventory()
 			for _,recipe in ipairs(ocular_networks.registered_passivecools) do
 				if inv:contains_item("input", recipe.input) then
 					if inv:room_for_item("output", recipe.output) then
 						inv:add_item("output", recipe.output)
 						inv:remove_item("input", recipe.input)
+						minetest.sound_play("OCN_steam_puff", {gain = 0.3, pos = pos, max_hear_distance = 10})
 					end
 				end
 			end
@@ -522,21 +527,21 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "ocn charging",
-	nodenames = {"ocular_networks:charger"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="ocn charging",
+	nodenames={"ocular_networks:charger"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local owner=meta:get_string("owner")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					for _,recipe in ipairs(ocular_networks.registered_chargeables) do
 						if inv:contains_item("input", recipe.input) then
 							if inv:room_for_item("output", recipe.output) then
@@ -544,6 +549,7 @@ minetest.register_abm({
 									source_meta:set_int("ocular_power", source_power-recipe.cost)
 									inv:remove_item("input", recipe.input)
 									inv:add_item("output", recipe.output)
+									minetest.sound_play("OCN_generic_zap", {gain = 0.3, pos = pos, max_hear_distance = 10})
 								end
 							end
 						end
@@ -556,16 +562,16 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "laserdrill core",
-	nodenames = {"ocular_networks:laserdrillchest"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="laserdrill core",
+	nodenames={"ocular_networks:laserdrillchest"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local source_power = meta:get_int("ocular_power")
+			local owner=meta:get_string("owner")
+			local source_power=meta:get_int("ocular_power")
 			if source_power then
 				meta:set_string("infotext", "Owned By: "..owner.."\nPower: "..source_power)
 			end
@@ -574,27 +580,27 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "laserdrill projector",
-	nodenames = {"ocular_networks:laserdrill"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="laserdrill projector",
+	nodenames={"ocular_networks:laserdrill"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local distance = meta:get_int("digDistance")
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local owner=meta:get_string("owner")
+			local distance=meta:get_int("digDistance")
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					if minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name == "ocular_networks:laserdrillchest" then
 						if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "ocular_networks:frame_lens" then
-							local inv = source_meta:get_inventory()
+							local inv=source_meta:get_inventory()
 							if minetest.get_node({x=pos.x, y=pos.y-distance, z=pos.z}).name == "air" then
 								meta:set_int("digDistance", distance+1)
-							elseif not ocular_networks.get_config("live", "laserDrill_blacklist")[minetest.get_node({x=pos.x, y=pos.y-distance, z=pos.z}).name] then
+							elseif not ocular_networks.get_config("laserDrill_blacklist")[minetest.get_node({x=pos.x, y=pos.y-distance, z=pos.z}).name] then
 								if source_power and source_power > 599 then
 									if inv:room_for_item("output", minetest.registered_nodes[minetest.get_node({x=pos.x, y=pos.y-distance, z=pos.z}).name].drop) then
 										minetest.emerge_area({x=pos.x, y=pos.y-distance, z=pos.z}, {x=pos.x, y=pos.y-distance+10, z=pos.z})
@@ -614,23 +620,23 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "east-facing pipe",
-	nodenames = {"ocular_networks:pipe_E"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
-		local inv = meta:get_inventory()
-		local source_meta = minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
-		local source_owner = source_meta:get_string("owner")
-		local target_meta = minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
-		local target_owner = target_meta:get_string("owner")
-		local source_inv = source_meta:get_inventory()
-		local target_inv = target_meta:get_inventory()
-		local source_node = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
-		local target_node = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
+    label="east-facing pipe",
+	nodenames={"ocular_networks:pipe_E"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		local inv=meta:get_inventory()
+		local source_meta=minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
+		local source_owner=source_meta:get_string("owner")
+		local target_meta=minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
+		local target_owner=target_meta:get_string("owner")
+		local source_inv=source_meta:get_inventory()
+		local target_inv=target_meta:get_inventory()
+		local source_node=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
+		local target_node=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
 		if owner == source_owner or source_owner=="" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -688,23 +694,23 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "west-facing pipe",
-	nodenames = {"ocular_networks:pipe_W"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
-		local inv = meta:get_inventory()
-		local source_meta = minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
-		local source_owner = source_meta:get_string("owner")
-		local target_meta = minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
-		local target_owner = target_meta:get_string("owner")
-		local source_inv = source_meta:get_inventory()
-		local target_inv = target_meta:get_inventory()
-		local source_node = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
-		local target_node = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
+    label="west-facing pipe",
+	nodenames={"ocular_networks:pipe_W"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		local inv=meta:get_inventory()
+		local source_meta=minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
+		local source_owner=source_meta:get_string("owner")
+		local target_meta=minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
+		local target_owner=target_meta:get_string("owner")
+		local source_inv=source_meta:get_inventory()
+		local target_inv=target_meta:get_inventory()
+		local source_node=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
+		local target_node=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -762,23 +768,23 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "south-facing pipe",
-	nodenames = {"ocular_networks:pipe_S"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
-		local inv = meta:get_inventory()
-		local source_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
-		local source_owner = source_meta:get_string("owner")
-		local target_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
-		local target_owner = target_meta:get_string("owner")
-		local source_inv = source_meta:get_inventory()
-		local target_inv = target_meta:get_inventory()
-		local source_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
-		local target_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
+    label="south-facing pipe",
+	nodenames={"ocular_networks:pipe_S"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		local inv=meta:get_inventory()
+		local source_meta=minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
+		local source_owner=source_meta:get_string("owner")
+		local target_meta=minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
+		local target_owner=target_meta:get_string("owner")
+		local source_inv=source_meta:get_inventory()
+		local target_inv=target_meta:get_inventory()
+		local source_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
+		local target_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -836,23 +842,23 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "north-facing pipe",
-	nodenames = {"ocular_networks:pipe_N"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
-		local inv = meta:get_inventory()
-		local source_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
-		local source_owner = source_meta:get_string("owner")
-		local target_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
-		local target_owner = target_meta:get_string("owner")
-		local source_inv = source_meta:get_inventory()
-		local target_inv = target_meta:get_inventory()
-		local source_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
-		local target_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
+    label="north-facing pipe",
+	nodenames={"ocular_networks:pipe_N"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		local inv=meta:get_inventory()
+		local source_meta=minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
+		local source_owner=source_meta:get_string("owner")
+		local target_meta=minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
+		local target_owner=target_meta:get_string("owner")
+		local source_inv=source_meta:get_inventory()
+		local target_inv=target_meta:get_inventory()
+		local source_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
+		local target_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -910,23 +916,23 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "up-facing pipe",
-	nodenames = {"ocular_networks:pipe_U"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
-		local inv = meta:get_inventory()
-		local source_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-		local source_owner = source_meta:get_string("owner")
-		local target_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-		local target_owner = target_meta:get_string("owner")
-		local source_inv = source_meta:get_inventory()
-		local target_inv = target_meta:get_inventory()
-		local source_node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-		local target_node = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+    label="up-facing pipe",
+	nodenames={"ocular_networks:pipe_U"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		local inv=meta:get_inventory()
+		local source_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+		local source_owner=source_meta:get_string("owner")
+		local target_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+		local target_owner=target_meta:get_string("owner")
+		local source_inv=source_meta:get_inventory()
+		local target_inv=target_meta:get_inventory()
+		local source_node=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+		local target_node=minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -984,23 +990,23 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "down-facing pipe",
-	nodenames = {"ocular_networks:pipe_D"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
-		local inv = meta:get_inventory()
-		local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-		local source_owner = source_meta:get_string("owner")
-		local target_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-		local target_owner = target_meta:get_string("owner")
-		local source_inv = source_meta:get_inventory()
-		local target_inv = target_meta:get_inventory()
-		local source_node = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
-		local target_node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+    label="down-facing pipe",
+	nodenames={"ocular_networks:pipe_D"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		local inv=meta:get_inventory()
+		local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+		local source_owner=source_meta:get_string("owner")
+		local target_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+		local target_owner=target_meta:get_string("owner")
+		local source_inv=source_meta:get_inventory()
+		local target_inv=target_meta:get_inventory()
+		local source_node=minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+		local target_node=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -1058,25 +1064,25 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "trash extracting",
-	nodenames = {"ocular_networks:pipe_filtered_D"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="trash extracting",
+	nodenames={"ocular_networks:pipe_filtered_D"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local destroyList = string.split(meta:get_string("items"), " ")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local source_owner = source_meta:get_string("owner")
-			local target_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-			local target_owner = target_meta:get_string("owner")
-			local source_inv = source_meta:get_inventory()
-			local target_inv = target_meta:get_inventory()
-			local source_node = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
-			local target_node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+			local owner=meta:get_string("owner")
+			local destroyList=string.split(meta:get_string("items"), " ")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_owner=source_meta:get_string("owner")
+			local target_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+			local target_owner=target_meta:get_string("owner")
+			local source_inv=source_meta:get_inventory()
+			local target_inv=target_meta:get_inventory()
+			local source_node=minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+			local target_node=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1096,25 +1102,25 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "trash extracting",
-	nodenames = {"ocular_networks:pipe_filtered_U"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="trash extracting",
+	nodenames={"ocular_networks:pipe_filtered_U"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local destroyList = string.split(meta:get_string("items"), " ")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-			local source_owner = source_meta:get_string("owner")
-			local target_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local target_owner = target_meta:get_string("owner")
-			local source_inv = source_meta:get_inventory()
-			local target_inv = target_meta:get_inventory()
-			local source_node = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-			local target_node = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
+			local owner=meta:get_string("owner")
+			local destroyList=string.split(meta:get_string("items"), " ")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+			local source_owner=source_meta:get_string("owner")
+			local target_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local target_owner=target_meta:get_string("owner")
+			local source_inv=source_meta:get_inventory()
+			local target_inv=target_meta:get_inventory()
+			local source_node=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+			local target_node=minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z}).name
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1134,25 +1140,25 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "trash extracting",
-	nodenames = {"ocular_networks:pipe_filtered_N"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="trash extracting",
+	nodenames={"ocular_networks:pipe_filtered_N"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local destroyList = string.split(meta:get_string("items"), " ")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
-			local source_owner = source_meta:get_string("owner")
-			local target_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
-			local target_owner = target_meta:get_string("owner")
-			local source_inv = source_meta:get_inventory()
-			local target_inv = target_meta:get_inventory()
-			local source_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
-			local target_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
+			local owner=meta:get_string("owner")
+			local destroyList=string.split(meta:get_string("items"), " ")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
+			local source_owner=source_meta:get_string("owner")
+			local target_meta=minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
+			local target_owner=target_meta:get_string("owner")
+			local source_inv=source_meta:get_inventory()
+			local target_inv=target_meta:get_inventory()
+			local source_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
+			local target_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1172,25 +1178,25 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "trash extracting",
-	nodenames = {"ocular_networks:pipe_filtered_S"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="trash extracting",
+	nodenames={"ocular_networks:pipe_filtered_S"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local destroyList = string.split(meta:get_string("items"), " ")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
-			local source_owner = source_meta:get_string("owner")
-			local target_meta = minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
-			local target_owner = target_meta:get_string("owner")
-			local source_inv = source_meta:get_inventory()
-			local target_inv = target_meta:get_inventory()
-			local source_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
-			local target_node = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
+			local owner=meta:get_string("owner")
+			local destroyList=string.split(meta:get_string("items"), " ")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y, z=pos.z+1})
+			local source_owner=source_meta:get_string("owner")
+			local target_meta=minetest.get_meta({x=pos.x, y=pos.y, z=pos.z-1})
+			local target_owner=target_meta:get_string("owner")
+			local source_inv=source_meta:get_inventory()
+			local target_inv=target_meta:get_inventory()
+			local source_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
+			local target_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1210,25 +1216,25 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "trash extracting",
-	nodenames = {"ocular_networks:pipe_filtered_E"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="trash extracting",
+	nodenames={"ocular_networks:pipe_filtered_E"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local destroyList = string.split(meta:get_string("items"), " ")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
-			local source_owner = source_meta:get_string("owner")
-			local target_meta = minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
-			local target_owner = target_meta:get_string("owner")
-			local source_inv = source_meta:get_inventory()
-			local target_inv = target_meta:get_inventory()
-			local source_node = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
-			local target_node = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
+			local owner=meta:get_string("owner")
+			local destroyList=string.split(meta:get_string("items"), " ")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
+			local source_owner=source_meta:get_string("owner")
+			local target_meta=minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
+			local target_owner=target_meta:get_string("owner")
+			local source_inv=source_meta:get_inventory()
+			local target_inv=target_meta:get_inventory()
+			local source_node=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
+			local target_node=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1248,25 +1254,25 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "trash extracting",
-	nodenames = {"ocular_networks:pipe_filtered_W"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="trash extracting",
+	nodenames={"ocular_networks:pipe_filtered_W"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local destroyList = string.split(meta:get_string("items"), " ")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
-			local source_owner = source_meta:get_string("owner")
-			local target_meta = minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
-			local target_owner = target_meta:get_string("owner")
-			local source_inv = source_meta:get_inventory()
-			local target_inv = target_meta:get_inventory()
-			local source_node = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
-			local target_node = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
+			local owner=meta:get_string("owner")
+			local destroyList=string.split(meta:get_string("items"), " ")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x+1, y=pos.y, z=pos.z})
+			local source_owner=source_meta:get_string("owner")
+			local target_meta=minetest.get_meta({x=pos.x-1, y=pos.y, z=pos.z})
+			local target_owner=target_meta:get_string("owner")
+			local source_inv=source_meta:get_inventory()
+			local target_inv=target_meta:get_inventory()
+			local source_node=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
+			local target_node=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1286,20 +1292,20 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "trash extracting",
-	nodenames = {"ocular_networks:pipe_trashextractor"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="trash extracting",
+	nodenames={"ocular_networks:pipe_trashextractor"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 			if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local destroyList = string.split(meta:get_string("items"), " ")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local source_owner = source_meta:get_string("owner")
-			local source_inv = source_meta:get_inventory()
+			local owner=meta:get_string("owner")
+			local destroyList=string.split(meta:get_string("items"), " ")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_owner=source_meta:get_string("owner")
+			local source_inv=source_meta:get_inventory()
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1316,14 +1322,14 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "growth",
-	nodenames = {"ocular_networks:loomshroom"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
+    label="growth",
+	nodenames={"ocular_networks:loomshroom"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
 		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "ocular_networks:dirt_with_loomshroom_grass" then
-			local chance = math.random(1,100)
+			local chance=math.random(1,100)
 			if chance == 37 then
 				minetest.set_node(pos, {name="ocular_networks:loomshroom2"})
 			end
@@ -1332,14 +1338,14 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "growth",
-	nodenames = {"ocular_networks:loomshroom2"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
+    label="growth",
+	nodenames={"ocular_networks:loomshroom2"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
 		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "ocular_networks:dirt_with_loomshroom_grass" then
-			local chance = math.random(1,1000)
+			local chance=math.random(1,1000)
 			if chance == 37 then
 				minetest.set_node(pos, {name="ocular_networks:loomshroom3"})
 			end
@@ -1348,14 +1354,14 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "growth",
-	nodenames = {"ocular_networks:loomshroom3"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
+    label="growth",
+	nodenames={"ocular_networks:loomshroom3"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
 		if minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name == "ocular_networks:dirt_with_loomshroom_grass" then
-			local chance = math.random(1,1000)
+			local chance=math.random(1,1000)
 			if chance == 3 then
 				minetest.set_node(pos, {name="ocular_networks:loomshroom4"})
 			end
@@ -1364,21 +1370,21 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "chemical oven",
-	nodenames = {"ocular_networks:chem_oven"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="chemical oven",
+	nodenames={"ocular_networks:chem_oven"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local inv = meta:get_inventory()
-			local source_meta = minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
-			local source_power = source_meta:get_int("ocular_power")
-			local source_owner = source_meta:get_string("owner")
+			local owner=meta:get_string("owner")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
 			if source_power then
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					for _,recipe in ipairs(ocular_networks.registered_dessicables) do
 						if inv:contains_item("input", recipe.input) then
 							if inv:contains_item("fuel", "ocular_networks:peat") then
@@ -1387,6 +1393,7 @@ minetest.register_abm({
 									inv:remove_item("input", recipe.input)
 									inv:remove_item("fuel", "ocular_networks:peat")
 									inv:add_item("output", recipe.output)
+									minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 								end
 							end
 						end
@@ -1397,6 +1404,7 @@ minetest.register_abm({
 							inv:remove_item("fuel", "ocular_networks:peat")
 							inv:add_item("output", "ocular_networks:crud "..inv:get_stack("input", 1):get_count())
 							inv:set_stack("input", 1, "")
+							minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 						end
 					end
 				end
@@ -1407,19 +1415,19 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "heka battery charging",
-	nodenames = {"ocular_networks:ton_core"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local node_above = minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
-		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+    label="heka battery charging",
+	nodenames={"ocular_networks:ton_core"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local node_above=minetest.get_node({x=pos.x, y=pos.y+1, z=pos.z})
+		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
 		local inv=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z}):get_inventory()
-		local nodes_around = {a=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}), b=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}), c = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}), d = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})}
-		local meta = minetest.get_meta(pos)
+		local nodes_around={a=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}), b=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}), c=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}), d=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})}
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local power = meta:get_int("ocular_power")
+			local power=meta:get_int("ocular_power")
 			meta:set_string("infotext", "Power Buffer: "..power.."\nHeat: "..meta:get_int("heat").."\nOwned By: "..meta:get_string("owner"))
 			if node_above.name == "ocular_networks:pipe_itembuffer" then
 				if node_below.name == "ocular_networks:firebrick" then
@@ -1447,37 +1455,37 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "omni-insertion",
-	nodenames = {"ocular_networks:insertor"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local meta = minetest.get_meta(pos)
+    label="omni-insertion",
+	nodenames={"ocular_networks:insertor"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
 		if meta:get_string("enabled")=="true" then
-			local owner = meta:get_string("owner")
-			local x, y, z = meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
-			local source_meta = minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
-			local source_owner = source_meta:get_string("owner")
-				if owner == source_owner or ocular_networks.config.onRun.moderator_whitelist[owner] then
+			local owner=meta:get_string("owner")
+			local x, y, z=meta:get_int("sourceposx"), meta:get_int("sourceposy"), meta:get_int("sourceposz")
+			local source_meta=minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
+			local source_owner=source_meta:get_string("owner")
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					print("A")
 					if x > -2 and x < 2 and y > -2 and y < 2 and z > -2 and z < 2 then
 						print("b")
-						local nom = 1
+						local nom=1
 						if x == 0 or x == nil then
-							nom = nom+1
+							nom=nom+1
 						end
 						if y == 0 or y == nil then
-							nom = nom+1
+							nom=nom+1
 						end
 						if z == 0 or z == nil then
-							nom = nom+1
+							nom=nom+1
 						end
 						if nom < 4 then
 							print("c")
 							if source_meta:get_inventory():get_list(meta:get_string("ainv")) then
 								print("1")
-								local subinv = source_meta:get_inventory()
+								local subinv=source_meta:get_inventory()
 								for i, stack in ipairs(meta:get_inventory():get_list("main")) do
 									print("2")
 									if subinv:room_for_item(meta:get_string("ainv"), stack) then

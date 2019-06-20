@@ -1,1 +1,5 @@
-Draw power from the world, and use it to power useful machines and tools.
+Draw OCP power from sources such as the sun, or the molten core, or even compressed trash, and use it to power efficient machines and tools.
+Key features: 
+ - Passive energy generation
+ - Ultra compatible
+ - Adds a whole new level to combat

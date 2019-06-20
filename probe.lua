@@ -72,13 +72,13 @@ ocular_networks.netCommands={
 }
 
 local st={
-	description = "Ocular Logistics Controller\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the probe message service."),
-	inventory_image = "poly_disk2.png",
+	description="Ocular Logistics Controller\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the probe message service."),
+	inventory_image="poly_disk2.png",
 	not_in_creative_inventory=1,
 	stack_max=1,
-	on_place = function(itemstack, placer, pointed_thing)
+	on_place=function(itemstack, placer, pointed_thing)
 		if pointed_thing.type=="node" then
-			local meta = minetest.get_meta(minetest.get_pointed_thing_position(pointed_thing, nil))
+			local meta=minetest.get_meta(minetest.get_pointed_thing_position(pointed_thing, nil))
 			local pseudodata=meta:to_table().fields
 			if pseudodata.formspec then
 				pseudodata.formspec="omitted"
@@ -87,7 +87,7 @@ local st={
 		end	
 	end,
 	
-	on_use = function(itemstack, placer, pointed_thing)
+	on_use=function(itemstack, placer, pointed_thing)
 		minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", "size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[0,0.5;8.5,8.5;cmd;OCProbe IO Window | Type 'help' for a list of commands;]button[0,8;8,1;send;|==>]")
 	end
 }
@@ -97,7 +97,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		if fields.send and fields.cmd then
 			local commandElems=string.split(fields.cmd, " ")
 			if ocular_networks.netCommands[commandElems[1]] then
-				local output = ocular_networks.netCommands[commandElems[1]].func(commandElems[2])
+				local output=ocular_networks.netCommands[commandElems[1]].func(commandElems[2])
 				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", "size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[0,0.5;8.5,8.5;cmd;OCProbe IO Window;"..output.."]button[0,8;8,1;send;|==>]")
 			else
 				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", "size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[0,0.5;8.5,8.5;cmd;OCProbe IO Window;"..fields.cmd.." is not recognized as an operable command.]button[0,8;8,1;send;|==>]")
@@ -106,10 +106,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	end
 end)
 
-if ocular_networks.get_config("onRun", "load_armor_upgrades") then
-	st.on_use = function(itemstack, placer, pointed_thing)
+if ocular_networks.get_config("load_armor_upgrades") then
+	st.on_use=function(itemstack, placer, pointed_thing)
 		if placer:get_player_control().sneak == true then
-			local inv = placer:get_inventory()
+			local inv=placer:get_inventory()
 			if inv:get_lists().ocn_armor_upgrades and inv:get_lists().ocn_cyber_upgrades then
 				minetest.show_formspec(placer:get_player_name(), "ocn_armor_upgrades_2", "size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]list[current_player;main;0,5;8,4;]label[1.5,0.2;Armor Upgrades]list[current_player;ocn_armor_upgrades;1.5,0.6;5,1;]label[1.5,1.7;Cybernetic Upgrades]list[current_player;ocn_cyber_upgrades;1.5,2.1;5,1;]")
 			else
@@ -135,7 +135,7 @@ minetest.register_craft({
 	}
 })
 
-local nodespec = ""..
+local nodespec=""..
 "size[10,6]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "label[0.9,0;data to read:]"..
@@ -145,24 +145,24 @@ local nodespec = ""..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe", {
-	description = "Network Probe (Uplink)\n"..minetest.colorize("#00affa", "Can be configured to read fields from the node below, and send them to the channel network."),
-	tiles = {"poly_uplink3.png", "poly_battery_bottom.png", "poly_uplink_side3.png"},
-	is_ground_content = false,
-	sunlight_propagates = true,
+	description="Network Probe (Uplink)\n"..minetest.colorize("#00affa", "Can be configured to read fields from the node below, and send them to the channel network."),
+	tiles={"poly_uplink3.png", "poly_battery_bottom.png", "poly_uplink_side3.png"},
+	is_ground_content=false,
+	sunlight_propagates=true,
 	drawtype="nodebox",
 	paramtype="light",
-	groups = {cracky = 3, oddly_breakable_by_hand = 3},
-	sounds = default.node_sound_metal_defaults(),
-	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
 		meta:set_string("channel", "")
 		meta:set_string("mode", "")
 		meta:set_string("attr", "")
 		meta:set_int("modeidx",1)
 		meta:set_string("formspec", nodespec)
 	end,
-	on_receive_fields = function(pos, formname, fields, sender)
-		local meta = minetest.get_meta(pos)
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
 		if sender:get_player_name() == meta:get_string("owner") then
 			meta:set_string("channel", fields.channel or "")
 			meta:set_string("mode", fields.mode)
@@ -191,24 +191,24 @@ minetest.register_node("ocular_networks:networkprobe", {
 			local meta=minetest.get_meta(pos)
 			meta:set_string("MCON", "false")
 		end}},
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		local meta = minetest.get_meta(pos)
-		local owner = placer:get_player_name()
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
 		meta:set_string("owner", owner)
 		meta:set_string("infotext", "Sending data: "..meta:get_string("attr").."\nover channel:"..meta:get_string("channel").."\nOwned By: "..owner)
 	end,
-	can_dig = function(pos, player)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
 		return owner == player:get_player_name()
 	end,
-	selection_box = {
-		type = "fixed",
-		fixed =  {-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16}
+	selection_box={
+		type="fixed",
+		fixed= {-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16}
 	},
-	node_box = {
-		type = "fixed",
-		fixed =  {	{-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16},
+	node_box={
+		type="fixed",
+		fixed= {	{-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16},
 					{-5 / 16, -0.5, -3 / 16, 5 / 16, -0.4, 3 / 16},
 					{-3 / 16, -0.5, -5 / 16, 3 / 16, -0.4, 5 / 16},
 					{-1 / 16, -0.5, -1 / 16, 1 / 16, 0.4, 1 / 16}}
@@ -216,19 +216,19 @@ minetest.register_node("ocular_networks:networkprobe", {
 })
 
 minetest.register_abm({
-    label = "uplink probe",
-	nodenames = {"ocular_networks:networkprobe"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
-		local meta = minetest.get_meta(pos)
-		local meta2 = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-		local owner = meta:get_string("owner")
+    label="uplink probe",
+	nodenames={"ocular_networks:networkprobe"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local meta=minetest.get_meta(pos)
+		local meta2=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+		local owner=meta:get_string("owner")
 		meta:set_string("infotext", "Sending data: "..meta:get_string("attr").."\nover channel: "..meta:get_string("channel").."\nOwned By: "..owner)
 		if meta:get_string("mode") == "inventory" then
-			local inv = meta2:get_inventory()
+			local inv=meta2:get_inventory()
 			if inv:get_list(meta:get_string("attr")) then
 				ocular_networks.channel_states[meta:get_string("channel")]=inv:get_lists()[meta:get_string("attr")]
 			end
@@ -259,7 +259,7 @@ minetest.register_craft({
 	}
 })
 
-local nodespec2 = ""..
+local nodespec2=""..
 "size[10,6]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "label[0.9,0;data to modify:]"..
@@ -269,30 +269,30 @@ local nodespec2 = ""..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe2", {
-	description = "Network Probe (Downlink)\n"..minetest.colorize("#00affa", "Can be configured to enable or disable the node below,\nor send a mesecon signal."),
-	tiles = {"poly_uplink4.png", "poly_battery_bottom.png", "poly_uplink_side4.png"},
-	is_ground_content = false,
-	sunlight_propagates = true,
+	description="Network Probe (Downlink)\n"..minetest.colorize("#00affa", "Can be configured to enable or disable the node below,\nor send a mesecon signal."),
+	tiles={"poly_uplink4.png", "poly_battery_bottom.png", "poly_uplink_side4.png"},
+	is_ground_content=false,
+	sunlight_propagates=true,
 	drawtype="nodebox",
 	paramtype="light",
-	groups = {cracky = 3, oddly_breakable_by_hand = 3},
-	sounds = default.node_sound_metal_defaults(),
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
 	mesecons= {
 		receptor={
 			state=mesecon.state.off,
 			rules=mesecon.rules.default
 		},
 	},
-	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
 		meta:set_string("channel", "")
 		meta:set_string("mode", "")
 		meta:set_string("attr", "")
 		meta:set_int("modeidx",1)
 		meta:set_string("formspec", nodespec2)
 	end,
-	on_receive_fields = function(pos, formname, fields, sender)
-		local meta = minetest.get_meta(pos)
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
 		if sender:get_player_name() == meta:get_string("owner") then
 			meta:set_string("channel", fields.channel or "")
 			meta:set_string("mode", fields.mode)
@@ -310,24 +310,24 @@ minetest.register_node("ocular_networks:networkprobe2", {
 			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
 		end
 	end,
-	after_place_node = function(pos, placer, itemstack, pointed_thing)
-		local meta = minetest.get_meta(pos)
-		local owner = placer:get_player_name()
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
 		meta:set_string("owner", owner)
 		meta:set_string("infotext", "Receiving data over channel:"..meta:get_string("channel").."\nOwned By: "..owner)
 	end,
-	can_dig = function(pos, player)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
 		return owner == player:get_player_name()
 	end,
-	selection_box = {
-		type = "fixed",
-		fixed =  {-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16}
+	selection_box={
+		type="fixed",
+		fixed= {-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16}
 	},
-	node_box = {
-		type = "fixed",
-		fixed =  {	{-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16},
+	node_box={
+		type="fixed",
+		fixed= {	{-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16},
 					{-5 / 16, -0.5, -3 / 16, 5 / 16, -0.4, 3 / 16},
 					{-3 / 16, -0.5, -5 / 16, 3 / 16, -0.4, 5 / 16},
 					{-1 / 16, -0.5, -1 / 16, 1 / 16, 0.4, 1 / 16}}
@@ -335,29 +335,29 @@ minetest.register_node("ocular_networks:networkprobe2", {
 })
 
 minetest.register_node("ocular_networks:networkprobe2_MCON", {
-	tiles = {"poly_uplink5.png", "poly_battery_bottom.png", "poly_uplink_side5.png"},
-	is_ground_content = false,
-	sunlight_propagates = true,
+	tiles={"poly_uplink5.png", "poly_battery_bottom.png", "poly_uplink_side5.png"},
+	is_ground_content=false,
+	sunlight_propagates=true,
 	drawtype="nodebox",
 	paramtype="light",
-	groups = {cracky = 3, oddly_breakable_by_hand = 3},
-	sounds = default.node_sound_metal_defaults(),
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
 	mesecons= {
 		receptor={
 			state=mesecon.state.on,
 			rules=mesecon.rules.default
 		},
 	},
-	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
 		meta:set_string("channel", "")
 		meta:set_string("mode", "")
 		meta:set_string("attr", "")
 		meta:set_int("modeidx",1)
 		meta:set_string("formspec", nodespec2)
 	end,
-	on_receive_fields = function(pos, formname, fields, sender)
-		local meta = minetest.get_meta(pos)
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
 		if sender:get_player_name() == meta:get_string("owner") then
 			meta:set_string("channel", fields.channel or "")
 			meta:set_string("mode", fields.mode)
@@ -375,18 +375,18 @@ minetest.register_node("ocular_networks:networkprobe2_MCON", {
 			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
 		end
 	end,
-	can_dig = function(pos, player)
-		local meta = minetest.get_meta(pos)
-		local owner = meta:get_string("owner")
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
 		return owner == player:get_player_name()
 	end,
-	selection_box = {
-		type = "fixed",
-		fixed =  {-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16}
+	selection_box={
+		type="fixed",
+		fixed= {-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16}
 	},
-	node_box = {
-		type = "fixed",
-		fixed =  {	{-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16},
+	node_box={
+		type="fixed",
+		fixed= {	{-4 / 16, -0.5, -4 / 16, 4 / 16, -0.25, 4 / 16},
 					{-5 / 16, -0.5, -3 / 16, 5 / 16, -0.4, 3 / 16},
 					{-3 / 16, -0.5, -5 / 16, 3 / 16, -0.4, 5 / 16},
 					{-1 / 16, -0.5, -1 / 16, 1 / 16, 0.4, 1 / 16}}
@@ -396,16 +396,16 @@ minetest.register_node("ocular_networks:networkprobe2_MCON", {
 })
 
 minetest.register_abm({
-    label = "downlink probe",
-	nodenames = {"ocular_networks:networkprobe2"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
-		local meta = minetest.get_meta(pos)
-		local meta2 = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-		local owner = meta:get_string("owner")
+    label="downlink probe",
+	nodenames={"ocular_networks:networkprobe2"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local meta=minetest.get_meta(pos)
+		local meta2=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+		local owner=meta:get_string("owner")
 		meta:set_string("infotext", "Receiving data over channel:"..meta:get_string("channel").."\nOwned By: "..owner)
 		if meta:get_string("mode") == "switch" then
 			local verifstates={
@@ -429,16 +429,16 @@ minetest.register_abm({
 })
 
 minetest.register_abm({
-    label = "downlink probe",
-	nodenames = {"ocular_networks:networkprobe2_MCON"},
-	interval = 1,
-	chance = 1,
-	catch_up = true,
-	action = function(pos, node)
-		local node_below = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
-		local meta = minetest.get_meta(pos)
-		local meta2 = minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-		local owner = meta:get_string("owner")
+    label="downlink probe",
+	nodenames={"ocular_networks:networkprobe2_MCON"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local meta=minetest.get_meta(pos)
+		local meta2=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+		local owner=meta:get_string("owner")
 		meta:set_string("infotext", "Receiving data over channel:"..meta:get_string("channel").."\nOwned By: "..owner)
 		if ocular_networks.channel_states[meta:get_string("channel")] ~= meta:get_string("attr") then
 			minetest.swap_node(pos, {name="ocular_networks:networkprobe2"})
