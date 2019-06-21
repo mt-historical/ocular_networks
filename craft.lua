@@ -442,7 +442,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:networknode",
 	recipe={
-		{"", "default:diamond", ""},
+		{"", "ocular_networks:emitter", ""},
 		{"", "ocular_networks:distributor", ""},
 		{"", "ocular_networks:toxic_slate_chip", ""}
 	}
@@ -766,7 +766,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:charger",
 	recipe={
-		{"ocular_networks:cross", "ocular_networks:frame", "ocular_networks:cross"},
+		{"ocular_networks:cross", "default:copperblock", "ocular_networks:cross"},
 		{"ocular_networks:frame", "ocular_networks:distributor_3", "ocular_networks:frame"},
 		{"ocular_networks:cross", "ocular_networks:gearbox", "ocular_networks:cross"}
 	}
@@ -1427,5 +1427,23 @@ minetest.register_craft({
 		{"ocular_networks:luminium_bar_3", "ocular_networks:toxic_slate_chip", "ocular_networks:luminium_bar_3"},
 		{"ocular_networks:lumigold_rod", "ocular_networks:distributor", "ocular_networks:lumigold_rod"},
 		{"ocular_networks:luminium_bar_3", "default:chest", "ocular_networks:luminium_bar_3"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:repairer",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "ocular_networks:emitter", "ocular_networks:luminium_bar_3"},
+		{"ocular_networks:silicotin_bar", "ocular_networks:zweinium_lens", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:luminium_bar_3", "ocular_networks:charger", "ocular_networks:luminium_bar_3"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:emitter",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "default:diamond", "ocular_networks:luminium_bar_3"},
+		{"default:copper_ingot", "ocular_networks:luminium_bar_3", "default:copper_ingot"},
+		{"default:copper_ingot", "", "default:copper_ingot"}
 	}
 })

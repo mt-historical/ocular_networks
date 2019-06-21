@@ -1468,9 +1468,7 @@ minetest.register_abm({
 			local source_meta=minetest.get_meta({x=pos.x+x, y=pos.y+y, z=pos.z+z})
 			local source_owner=source_meta:get_string("owner")
 				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
-					print("A")
 					if x > -2 and x < 2 and y > -2 and y < 2 and z > -2 and z < 2 then
-						print("b")
 						local nom=1
 						if x == 0 or x == nil then
 							nom=nom+1
@@ -1482,14 +1480,10 @@ minetest.register_abm({
 							nom=nom+1
 						end
 						if nom < 4 then
-							print("c")
 							if source_meta:get_inventory():get_list(meta:get_string("ainv")) then
-								print("1")
 								local subinv=source_meta:get_inventory()
 								for i, stack in ipairs(meta:get_inventory():get_list("main")) do
-									print("2")
 									if subinv:room_for_item(meta:get_string("ainv"), stack) then
-										print("3")
 										meta:get_inventory():set_stack("main", i, {})
 										subinv:add_item(meta:get_string("ainv"), stack)
 									end
@@ -1499,6 +1493,38 @@ minetest.register_abm({
 					end
 				end
 			meta:set_string("infotext", "\nOwned By: "..owner)
+		end
+	end,
+})
+
+minetest.register_abm({
+    label="ocn charging",
+	nodenames={"ocular_networks:repairer"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		if meta:get_string("enabled")=="true" then
+			local owner=meta:get_string("owner")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
+			if source_power then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
+					if inv:get_stack("input",1):get_wear() >0 then
+						if source_power > 9999+inv:get_stack("input",1):get_wear() then
+							source_meta:set_int("ocular_power", source_power-(10000+inv:get_stack("input",1):get_wear()) )
+							local stacke=inv:get_stack("input",1)
+							stacke:set_wear(0)
+							inv:set_stack("input",1,stacke)
+							minetest.sound_play("OCN_melter_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
+						end
+					end
+				end
+			end
+		meta:set_string("infotext", "Owned By: "..owner)
 		end
 	end,
 })

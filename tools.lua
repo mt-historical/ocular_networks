@@ -427,3 +427,60 @@ minetest.register_tool("ocular_networks:composite_scythe", {
 	},
 	sound={breaks="default_tool_breaks"},
 })
+
+minetest.register_tool("ocular_networks:zweinium_pick", {
+	description="Zweinium Pickaxe",
+	inventory_image="poly_pick_zwei.png",
+	tool_capabilities={
+		full_punch_interval=0.9,
+		max_drop_level=3,
+		groupcaps={
+			cracky={times={[1]=2.4, [2]=1.2, [3]=0.60}, uses=15, maxlevel=3},
+		},
+		damage_groups={fleshy=5},
+	},
+	sound={breaks="default_tool_breaks"},
+})
+
+minetest.register_tool("ocular_networks:zweinium_shovel", {
+	description="Zweinium Shovel",
+	inventory_image="poly_shovel_zwei.png",
+	wield_image="poly_shovel_zwei.png^[transformR90",
+	tool_capabilities={
+		full_punch_interval=1.0,
+		max_drop_level=3,
+		groupcaps={
+			crumbly={times={[1]=1.20, [2]=0.60, [3]=0.30}, uses=15, maxlevel=3},
+		},
+		damage_groups={fleshy=4},
+	},
+	sound={breaks="default_tool_breaks"},
+})
+
+minetest.register_tool("ocular_networks:zweinium_axe", {
+	description="Zweinium Axe",
+	inventory_image="poly_axe_zwei.png",
+	tool_capabilities={
+		full_punch_interval=0.9,
+		max_drop_level=1,
+		groupcaps={
+			choppy={times={[1]=2.20, [2]=1.00, [3]=0.60}, uses=15, maxlevel=3},
+		},
+		damage_groups={fleshy=6},
+	},
+	sound={breaks="default_tool_breaks"},
+})
+
+minetest.register_tool("ocular_networks:zweinium_sword", {
+	description="Zweinium Zweihander",
+	inventory_image="poly_sword_zwei.png",
+	tool_capabilities={
+		full_punch_interval=1.1,
+		max_drop_level=1,
+		groupcaps={
+			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=20, maxlevel=3},
+		},
+		damage_groups={fleshy=12},
+	},
+	sound={breaks="default_tool_breaks"},
+})
