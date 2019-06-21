@@ -213,8 +213,8 @@ end
 
 ocular_networks.get_config=function(nam)
 	local con=dofile(MP.."/config.txt")
-	if loadfile(worldpath.."/ocular_networks_config.txt") then
-		con=dofile(worldpath.."/ocular_networks_config.txt")
+	if loadfile(ocular_networks.worldpath.."/ocular_networks_config.txt") then
+		con=dofile(ocular_networks.worldpath.."/ocular_networks_config.txt")
 	end
 	return con[nam]
 end
