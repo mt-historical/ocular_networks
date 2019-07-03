@@ -66,6 +66,7 @@ minetest.register_craftitem("ocular_networks:placeholder_power", {
 minetest.register_tool("ocular_networks:angmallen_hammer", {
 	description=minetest.colorize("#00affa", "Angmallen Destroyer"),
 	inventory_image="poly_angmallen_hammer.png",
+	range=10,
 	wield_scale={x=3.0, y=3.0, z=1.0},
 	tool_capabilities={
 		full_punch_interval=0.01,
@@ -82,6 +83,7 @@ minetest.register_tool("ocular_networks:angmallen_hammer", {
 minetest.register_tool("ocular_networks:angmallen_axe", {
 	description=minetest.colorize("#00affa", "Angmallen Deforester"),
 	inventory_image="poly_angmallen_axe.png",
+	range=10,
 	wield_scale={x=3.0, y=3.0, z=1.0},
 	tool_capabilities={
 		full_punch_interval=0.01,
@@ -97,6 +99,7 @@ minetest.register_tool("ocular_networks:angmallen_axe", {
 minetest.register_tool("ocular_networks:angmallen_sword", {
 	description=minetest.colorize("#00affa", "Angmallen Decapitator\n")..minetest.colorize("#ff0000", "290 Melee Damage"),
 	inventory_image="poly_angmallen_sword.png",
+	range=10,
 	wield_scale={x=3.0, y=3.0, z=1.0},
 	tool_capabilities={
 		full_punch_interval=1,
@@ -119,6 +122,7 @@ minetest.register_tool("ocular_networks:hekaton_hammer", {
 	description=minetest.colorize("#00affa", "4k Tonne Drumel"),
 	inventory_image="poly_hekaton_hammer.png",
 	wield_scale={x=3.0, y=3.0, z=1.0},
+	range=20,
 	tool_capabilities={
 		full_punch_interval=0.01,
 		max_drop_level=10,
@@ -134,6 +138,7 @@ minetest.register_tool("ocular_networks:hekaton_hammer", {
 minetest.register_tool("ocular_networks:hekaton_axe", {
 	description=minetest.colorize("#00affa", "Erenic Axaw"),
 	inventory_image="poly_hekaton_axe.png",
+	range=20,
 	wield_scale={x=3.0, y=3.0, z=1.0},
 	tool_capabilities={
 		full_punch_interval=0.01,
@@ -166,7 +171,7 @@ minetest.register_tool("ocular_networks:hekaton_sword", {
 })
 
 minetest.register_tool("ocular_networks:hekaton_sword_on", {
-	description=minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "500 Melee Damage")..minetest.colorize("#00affa", "\nRightclick to disable"),
+	description=minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "500 Melee Damage")..minetest.colorize("#00affa", "\nRightclick to switch to lancet"),
 	inventory_image="poly_hekaton_sword.png",
 	wield_scale={x=3.0, y=3.0, z=1.0},
 	tool_capabilities={
@@ -177,6 +182,27 @@ minetest.register_tool("ocular_networks:hekaton_sword_on", {
 		},
 		damage_groups={fleshy=500},
 	},
+	groups={not_in_creative_inventory=1},
+	sound={breaks="default_tool_breaks"},
+	on_secondary_use=function(itemstack, user, pointed_thing)
+		itemstack:set_name("ocular_networks:hekaton_garus")
+		return itemstack
+	end
+})
+
+minetest.register_tool("ocular_networks:hekaton_garus", {
+	description=minetest.colorize("#00affa", "Erenic Lancet\n")..minetest.colorize("#ff0000", "350 Melee Damage\n+25 Reach")..minetest.colorize("#00affa", "\nRightclick to disable"),
+	inventory_image="poly_hekaton_garus.png",
+	wield_scale={x=3.0, y=3.0, z=1.0},
+	tool_capabilities={
+		full_punch_interval=1,
+		max_drop_level=10,
+		groupcaps={
+			snappy={times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=500, maxlevel=10},
+		},
+		damage_groups={fleshy=500},
+	},
+	range=29,
 	groups={not_in_creative_inventory=1},
 	sound={breaks="default_tool_breaks"},
 	on_secondary_use=function(itemstack, user, pointed_thing)
