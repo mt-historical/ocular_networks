@@ -17,28 +17,37 @@ dofile(modpath.."/nodes.lua")
 dofile(modpath.."/liquids.lua")
 dofile(modpath.."/items.lua")
 dofile(modpath.."/tools.lua")
-dofile(modpath.."/guide.lua")
-dofile(modpath.."/armor.lua")
 dofile(modpath.."/craft.lua")
-dofile(modpath.."/compat.lua")
 dofile(modpath.."/abm.lua")
 
+if ocular_networks.get_config("load_armor") then
+	dofile(modpath.."/modules/armor.lua")
+end
+
 if ocular_networks.get_config("load_armor_upgrades") then
-	dofile(modpath.."/upgrade.lua")
+	dofile(modpath.."/modules/upgrade.lua")
 end
 
 if ocular_networks.get_config("load_probe_toolkit") and minetest.get_modpath("mesecons") then
-	dofile(modpath.."/probe.lua")
+	dofile(modpath.."/modules/probe.lua")
 end
 
 if ocular_networks.get_config("load_forceloader") then
-	dofile(modpath.."/chload.lua")
+	dofile(modpath.."/modules/chload.lua")
 end
 
 if ocular_networks.get_config("load_rifle_weapons") then
-	dofile(modpath.."/rifle.lua")
+	dofile(modpath.."/modules/rifle.lua")
 end
 
 if ocular_networks.get_config("load_flight_ring") then
-	dofile(modpath.."/jetring.lua")
+	dofile(modpath.."/modules/jetring.lua")
+end
+
+if ocular_networks.get_config("load_guide") then
+	dofile(modpath.."/modules/guide.lua")
+end
+
+if ocular_networks.get_config("load_optic_cables") then
+	dofile(modpath.."/modules/cable.lua")
 end

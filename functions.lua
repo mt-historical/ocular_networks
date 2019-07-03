@@ -20,6 +20,7 @@ ocular_networks.registered_chargeables={}
 ocular_networks.chunkloaded_areas={}
 ocular_networks.registered_shrooms={}
 ocular_networks.registered_dessicables={}
+ocular_networks.registered_grindables={}
 
 minetest.register_chatcommand("ocun_exec", {
 	params="luacode",
@@ -109,6 +110,13 @@ if minetest.get_modpath("unified_inventory") then
 		width=2,
 		height=1,
 	})
+	
+	unified_inventory.register_craft_type("ocun_grinding", {
+		description="Pneumatic Pulveriser",
+		icon="poly_grinder_side.png",
+		width=2,
+		height=1,
+	})
 		
 	ocular_networks.register_meltable=function(def)
 		table.insert(ocular_networks.registered_meltables, {input=def.input, output=def.output, cost=def.cost})
@@ -180,6 +188,16 @@ if minetest.get_modpath("unified_inventory") then
 		width=2,
 		})
 	end
+	
+	ocular_networks.register_grindable=function(def)
+		table.insert(ocular_networks.registered_grindables, {input=def.input, output=def.output, cost=def.cost})
+		unified_inventory.register_craft({
+		type="ocun_grinding",
+		items={"ocular_networks:placeholder_power "..def.cost, def.input},
+		output=def.output,
+		width=2,
+		})
+	end
 else
 	ocular_networks.register_meltable=function(def)
 		table.insert(ocular_networks.registered_meltables, {input=def.input, output=def.output, cost=def.cost})
@@ -208,6 +226,10 @@ else
 	
 	ocular_networks.register_dessicable=function(def)
 		table.insert(ocular_networks.registered_dessicables, {input=def.material, output=def.output, cost=def.cost})
+	end
+	
+	ocular_networks.register_grindable=function(def)
+		table.insert(ocular_networks.registered_grindables, {input=def.input, output=def.output, cost=def.cost})
 	end
 end
 
@@ -238,14 +260,13 @@ minetest.register_globalstep(function(dtime)
 			else
 				if player:get_attribute("personal_ocular_power") then
 				local hud=player:hud_add({
-						hud_elem_type="text",
-						position={x=0.5,y=0.87},
-						number= 0xffffff,
-						scale={x=100,y=100},
-						text="Network OCP: "..player:get_attribute("personal_ocular_power"),
-						alignment=0,
-						
-					})
+					hud_elem_type="text",
+					position={x=0.5,y=0.87},
+					number= 0xffffff,
+					scale={x=100,y=100},
+					text="Network OCP: "..player:get_attribute("personal_ocular_power"),
+					alignment=0,
+				})
 					player:set_attribute("ocular_networks_hud_power", hud)
 				else
 					player:set_attribute("personal_ocular_power", 0)

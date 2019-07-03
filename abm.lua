@@ -1528,3 +1528,38 @@ minetest.register_abm({
 		end
 	end,
 })
+
+minetest.register_abm({
+    label="ocn grinding",
+	nodenames={"ocular_networks:grinder"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		if meta:get_string("enabled")=="true" then
+			local owner=meta:get_string("owner")
+			local inv=meta:get_inventory()
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
+			if source_power then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
+					for _,recipe in ipairs(ocular_networks.registered_grindables) do
+						if inv:contains_item("input", recipe.input) then
+							if inv:room_for_item("output", recipe.output) then
+								if source_power > recipe.cost-1 then
+									source_meta:set_int("ocular_power", source_power-recipe.cost)
+									inv:remove_item("input", recipe.input)
+									inv:add_item("output", recipe.output)
+									minetest.sound_play("OCN_generic_crunch", {gain = 0.3, pos = pos, max_hear_distance = 10})
+								end
+							end
+						end
+					end
+				end
+			end
+		meta:set_string("infotext", "Owned By: "..owner)
+		end
+	end,
+})

@@ -21,3 +21,12 @@ HuvaaKoodia - CC0 - EDITED
 
 OCN_shot_2.ogg
 DayCraftMC - CC0 - EDITED
+
+OCN_generic_crunch.ogg
+domiscz - CC0 - EDITED
+
+OCN_generic_shake.ogg
+SamsterBirdies - CC0 - CONVERTED
+
+OCN_piston.ogg
+SamsterBirdies - CC0 - EDITED

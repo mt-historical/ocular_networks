@@ -43,6 +43,9 @@ return {
 
 -- RUNTIME SETTINGS (Will only take effect if changed before loading)
 
+	-- setting this to false disables the armor. default true.
+	load_armor = true,
+
 	-- setting this to false disables the upgrade pendant and upgrade items for the angmallen armor. default true.
 	load_armor_upgrades = true,
 
@@ -54,6 +57,12 @@ return {
 
 	 -- Whether or not to load the probe logic unit.
 	load_probe_toolkit = true,
+	
+	 -- Whether or not to load the guidebook unit.
+	load_guide = true,
+	
+	 -- Whether or not to load the guidebook unit.
+	load_optic_cables = true,
 
 	-- Whether to load the lag machine (chunkloader).
 	load_forceloader = false, 

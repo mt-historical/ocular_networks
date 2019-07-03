@@ -253,6 +253,11 @@ minetest.register_craftitem("ocular_networks:dust_zweinium", {
 	inventory_image="poly_zweinium_dust.png",
 })
 
+minetest.register_craftitem("ocular_networks:dust_slate", {
+	description="Toxic Slate Dust",
+	inventory_image="poly_slate_dust.png",
+})
+
 minetest.register_craftitem("ocular_networks:emitter", {
 	description="OCP Emitter",
 	inventory_image="poly_emitter.png",

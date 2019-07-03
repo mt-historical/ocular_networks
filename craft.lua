@@ -1447,3 +1447,182 @@ minetest.register_craft({
 		{"default:copper_ingot", "", "default:copper_ingot"}
 	}
 })
+
+minetest.register_craft({
+	output="ocular_networks:grinder",
+	recipe={
+		{"ocular_networks:lumigold_rod", "ocular_networks:pipe_itembuffer", "ocular_networks:lumigold_rod"},
+		{"ocular_networks:piston", "ocular_networks:frame", "ocular_networks:piston"},
+		{"default:steel_ingot", "ocular_networks:gearbox", "default:steel_ingot"}
+	}
+})
+
+ocular_networks.register_grindable({
+	input="default:stone",
+	output="default:gravel 5",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:cobble",
+	output="default:gravel 4",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:sandstone",
+	output="default:sand 4",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:desert_sandstone",
+	output="default:desert_sand 4",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:silver_sandstone",
+	output="default:silver_sand 4",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:wood",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:acacia_wood",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:junglewood",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:pine_wood",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:aspen_wood",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+
+ocular_networks.register_grindable({
+	input="default:leaves",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:acacia_leaves",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:jungleleaves",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:pine_needles",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:aspen_leaves",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:acacia_bush_leaves",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="default:bush_leaves",
+	output="ocular_networks:mulch",
+	cost="350"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:zweinium_crystal",
+	output="ocular_networks:dust_zweinium",
+	cost="700"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:zweinium_crystal_chunk",
+	output="ocular_networks:dust_zweinium 2",
+	cost="700"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:silicotin_bar",
+	output="ocular_networks:dust_silicotin",
+	cost="700"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:shimmering_bar",
+	output="ocular_networks:dust_shimmering",
+	cost="700"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:angmallen_bar",
+	output="ocular_networks:dust_angmallen",
+	cost="700"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:luminium_bar",
+	output="ocular_networks:dust_luminium",
+	cost="700"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:luminium_lump",
+	output="ocular_networks:dust_luminium 2",
+	cost="700"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:luminium_bar_3",
+	output="ocular_networks:dust_lumigold",
+	cost="700"
+})
+
+ocular_networks.register_grindable({
+	input="ocular_networks:toxic_slate_chip",
+	output="ocular_networks:dust_slate",
+	cost="700"
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="ocular_networks:dust_slate",
+	recipe={"ocular_networks:toxic_slate_chip","ocular_networks:hammer"},
+	replacements={{"ocular_networks:hammer","ocular_networks:hammer"}}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="ocular_networks:toxic_slate_chip",
+	recipe="ocular_networks:dust_slate",
+})

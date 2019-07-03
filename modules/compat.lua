@@ -194,6 +194,11 @@ if minetest.get_modpath("technic") then
 		input={"ocular_networks:luminium_lump"},
 		output="ocular_networks:dust_luminium 2"
 	})
+	
+	technic.register_grinder_recipe({
+		input={"ocular_networks:toxic_slate_chip"},
+		output="ocular_networks:ocular_networks:dust_slate"
+	})
 end
 
 if minetest.get_modpath("mobs") then
