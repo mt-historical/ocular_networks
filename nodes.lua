@@ -2250,3 +2250,75 @@ minetest.register_node("ocular_networks:mulch", {
 		footstep={name="default_grass_footstep", gain=0.25},
 	}),
 })
+
+minetest.register_node("ocular_networks:forge", {
+	description="Panel Forge\n"..minetest.colorize("#00affa", "Smashes metal into plates.\nTakes Power From ABOVE"),
+	tiles={"default_steel_block.png^poly_frame.png", "default_steel_block.png^poly_frame.png", "poly_forge_side.png"},
+	is_ground_content=false,
+	drawtype="nodebox",
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", coolspec)
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("input", {""})
+		inv:set_size("input", 1)
+		inv:set_list("output", {""})
+		inv:set_size("output", 1)
+		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
+		meta:set_string("formspec", coolspec)
+		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	selection_box={
+		type="fixed",
+		fixed= {	{-1/5, -1/2, -1/5, 1/5, 1/2, 1/5},
+					{-5 / 16, -0.5, -5 / 16, 5 / 16, -3.5/10, 5 / 16},
+					{-5 / 16, 0.5, -5 / 16, 5 / 16, 3.5/10, 5 / 16}
+					}
+	},
+	node_box={
+		type="fixed",
+		fixed= {
+				{-5 / 16, -0.5, -5 / 16, 5 / 16, 0.5, 5 / 16},
+				{-0.5, 4/16, -0.5, 0.5, 0.5, 0.5},
+				{-0.5, -0.5, -0.5, 0.5, -4/16, 0.5},
+				}
+	},
+})

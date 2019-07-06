@@ -290,15 +290,15 @@ minetest.register_globalstep(function(dtime)
 			if ocular_networks.heal_pause > 1.99 then
 				local inv=player:get_inventory() 
 				local playerPhysics=player:get_physics_override()
-				local power=player:get_attribute("personal_ocular_power")
+				local power=player:get_meta():get_string("personal_ocular_power")
 				if player:get_hp() < 20 then
 					if power and tonumber(power) > 49 then
 						if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_heal") then	
-							player:set_attribute("personal_ocular_power", power-50)
+							player:get_meta():set_string("personal_ocular_power", power-50)
 							player:set_hp(player:get_hp()+1)
 							ocular_networks.heal_pause=0
 						elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_heal2") then
-							player:set_attribute("personal_ocular_power", power-50)
+							player:get_meta():set_string("personal_ocular_power", power-50)
 							player:set_hp(player:get_hp()+2)
 							ocular_networks.heal_pause=0
 						end
@@ -647,7 +647,7 @@ minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		if player:get_player_control().LMB then
 			local inv=player:get_inventory() 
-			local power=tonumber(player:get_attribute("personal_ocular_power"))
+			local power=tonumber(player:get_meta():get_string("personal_ocular_power"))
 			if player:get_wielded_item():get_name() == "" then
 				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_inspector") then
 					player:set_wielded_item({name="default:sword_steel"})
@@ -656,7 +656,7 @@ minetest.register_globalstep(function(dtime)
 					local node=minetest.get_node({x=userPos.x+userDir.x*10, y=userPos.y+userDir.y*10, z=userPos.z+userDir.z*10})
 					if power > 49 then
 						if node.name == "air" then
-							player:set_attribute("personal_ocular_power", power-50)
+							player:get_meta():set_string("personal_ocular_power", power-50)
 							player:set_pos({x=userPos.x+userDir.x*10, y=userPos.y+userDir.y*10, z=userPos.z+userDir.z*10})
 						end
 					end
@@ -684,13 +684,13 @@ minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		if player:get_player_control().RMB then
 			local inv=player:get_inventory() 
-			local power=tonumber(player:get_attribute("personal_ocular_power"))
+			local power=tonumber(player:get_meta():get_string("personal_ocular_power"))
 			if player:get_wielded_item():get_name() == "" then
 				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_inspector") then
 					local userPos=player:get_pos()
 					local userDir=player:get_look_dir()
 					if power > 99 then
-						player:set_attribute("personal_ocular_power", power-100)
+						player:get_meta():set_string("personal_ocular_power", power-100)
 						local pos=player:getpos()
 						local dir=player:get_look_dir()
 						local yaw=player:get_look_yaw()
@@ -746,11 +746,11 @@ minetest.register_craft({
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		local inv=player:get_inventory() 
-		local power=tonumber(player:get_attribute("personal_ocular_power"))
+		local power=tonumber(player:get_meta():get_string("personal_ocular_power"))
 		if player:get_wielded_item():get_name() == "" then
 			if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_core_air") then
 				if power > 0 and player:get_breath() < 11 then
-					player:set_attribute("personal_ocular_power", power-1)
+					player:get_meta():set_string("personal_ocular_power", power-1)
 					player:set_breath(11)
 				end
 			end

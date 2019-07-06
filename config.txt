@@ -43,16 +43,16 @@ return {
 
 -- RUNTIME SETTINGS (Will only take effect if changed before loading)
 
-	-- setting this to false disables the armor. default true.
+	-- Whether or not to load the armor.
 	load_armor = true,
 
-	-- setting this to false disables the upgrade pendant and upgrade items for the angmallen armor. default true.
+	-- Whether or not to load the upgrade pendant and upgrade items for the angmallen armor.
 	load_armor_upgrades = true,
 
-	 -- setting this to false disables the flight ring. default true.
+	 -- Whether or not to load the flight ring.
 	load_flight_ring = true,
 
-	-- setting this to false disables the blaze rifle weapons. default true.
+	-- Whether or not to load the blaze rifle weapons.
 	load_rifle_weapons = true, 
 
 	 -- Whether or not to load the probe logic unit.
@@ -62,7 +62,7 @@ return {
 	load_guide = true,
 	
 	 -- Whether or not to load the guidebook unit.
-	load_optic_cables = true,
+	load_optic_cables = false,
 
 	-- Whether to load the lag machine (chunkloader).
 	load_forceloader = false, 

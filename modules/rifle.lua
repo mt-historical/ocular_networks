@@ -4,8 +4,8 @@ minetest.register_tool("ocular_networks:blazerifle", {
 	inventory_image="poly_blazerifle.png",
 	on_secondary_use=function(itemstack, user, pointed_thing)
 		local userPower=0
-		if user:get_attribute("personal_ocular_power") then
-			userPower=tonumber(user:get_attribute("personal_ocular_power"))
+		if user:get_meta():get_string("personal_ocular_power") then
+			userPower=tonumber(user:get_meta():get_string("personal_ocular_power"))
 		end
 		local pos=user:getpos()
 		local dir=user:get_look_dir()
@@ -21,7 +21,7 @@ minetest.register_tool("ocular_networks:blazerifle", {
 				if ent then
 					ent.player=ent.player or user
 				end
-				user:set_attribute("personal_ocular_power", userPower-100)
+				user:get_meta():set_string("personal_ocular_power", userPower-100)
 				minetest.sound_play("OCN_shot_1", {gain = 0.3, pos = pos, max_hear_distance = 10})
 			end
 		end
@@ -93,8 +93,8 @@ minetest.register_tool("ocular_networks:blazerifle_c", {
 	inventory_image="poly_blazerifle_c.png",
 	on_secondary_use=function(itemstack, user, pointed_thing)
 		local userPower=0
-		if user:get_attribute("personal_ocular_power") then
-			userPower=tonumber(user:get_attribute("personal_ocular_power"))
+		if user:get_meta():get_string("personal_ocular_power") then
+			userPower=tonumber(user:get_meta():get_string("personal_ocular_power"))
 		end
 		local pos=user:getpos()
 		local dir=user:get_look_dir()
@@ -110,7 +110,7 @@ minetest.register_tool("ocular_networks:blazerifle_c", {
 				if ent then
 					ent.player=ent.player or user
 				end
-				user:set_attribute("personal_ocular_power", userPower-500)
+				user:get_meta():set_string("personal_ocular_power", userPower-500)
 				minetest.sound_play("OCN_shot_1", {gain = 1, pos = pos, max_hear_distance = 10})
 			end
 		end
@@ -206,8 +206,8 @@ minetest.register_tool("ocular_networks:erena_blaster", {
 	wield_scale={x=3.0, y=3.0, z=1.0},
 	on_secondary_use=function(itemstack, user, pointed_thing)
 		local userPower=0
-		if user:get_attribute("personal_ocular_power") then
-			userPower=tonumber(user:get_attribute("personal_ocular_power"))
+		if user:get_meta():get_string("personal_ocular_power") then
+			userPower=tonumber(user:get_meta():get_string("personal_ocular_power"))
 		end
 		local pos=user:getpos()
 		local dir=user:get_look_dir()
@@ -223,7 +223,7 @@ minetest.register_tool("ocular_networks:erena_blaster", {
 				if ent then
 					ent.player=ent.player or user
 				end
-				user:set_attribute("personal_ocular_power", userPower-500)
+				user:get_meta():set_string("personal_ocular_power", userPower-500)
 				minetest.sound_play("OCN_shot_2", {gain = 1, pos = pos, max_hear_distance = 10})
 			end
 		end

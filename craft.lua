@@ -1626,3 +1626,36 @@ minetest.register_craft({
 	output="ocular_networks:toxic_slate_chip",
 	recipe="ocular_networks:dust_slate",
 })
+
+minetest.register_craft({
+	output="ocular_networks:forge",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "default:steelblock", "ocular_networks:luminium_bar_3"},
+		{"ocular_networks:piston", "ocular_networks:pipe_socket", "ocular_networks:piston"},
+		{"ocular_networks:luminium_bar_3", "default:steelblock", "ocular_networks:luminium_bar_3"}
+	}
+})
+
+ocular_networks.register_forgable({
+	input="ocular_networks:luminium_bar",
+	output="ocular_networks:plate_luminium",
+	cost="500"
+})
+
+ocular_networks.register_forgable({
+	input="ocular_networks:luminium_bar_3",
+	output="ocular_networks:plate_lumigold",
+	cost="500"
+})
+
+ocular_networks.register_forgable({
+	input="ocular_networks:silicotin_bar",
+	output="ocular_networks:plate_silicotin",
+	cost="500"
+})
+
+ocular_networks.register_forgable({
+	input="ocular_networks:shimmering_bar",
+	output="ocular_networks:plate_shimmering",
+	cost="500"
+})

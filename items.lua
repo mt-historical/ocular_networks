@@ -262,3 +262,23 @@ minetest.register_craftitem("ocular_networks:emitter", {
 	description="OCP Emitter",
 	inventory_image="poly_emitter.png",
 })
+
+minetest.register_craftitem("ocular_networks:plate_luminium", {
+	description="Luminium Plate",
+	inventory_image="poly_luminium_plate.png",
+})
+
+minetest.register_craftitem("ocular_networks:plate_lumigold", {
+	description="Lumigold Plate",
+	inventory_image="poly_lumigold_plate.png",
+})
+
+minetest.register_craftitem("ocular_networks:plate_silicotin", {
+	description="Silicotin Plate",
+	inventory_image="poly_silicotin_plate.png",
+})
+
+minetest.register_craftitem("ocular_networks:plate_shimmering", {
+	description="Shimmering Plate",
+	inventory_image="poly_shimmering_plate.png",
+})

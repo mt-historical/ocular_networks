@@ -50,8 +50,8 @@ minetest.register_craftitem("ocular_networks:healer", {
 	inventory_image="poly_gimble.png",
 	stack_max=1,
 	on_use=function(itemstack, user, pointed_thing)
-		if user:get_attribute("personal_ocular_power") and tonumber(user:get_attribute("personal_ocular_power")) > 99 then
-			user:set_attribute("personal_ocular_power", tonumber(user:get_attribute("personal_ocular_power"))-10)
+		if user:get_meta():get_string("personal_ocular_power") and tonumber(user:get_meta():get_string("personal_ocular_power")) > 99 then
+			user:get_meta():set_string("personal_ocular_power", tonumber(user:get_meta():get_string("personal_ocular_power"))-10)
 			user:set_hp(user:get_hp()+2)
 		end
 	end
@@ -509,4 +509,13 @@ minetest.register_tool("ocular_networks:zweinium_sword", {
 		damage_groups={fleshy=12},
 	},
 	sound={breaks="default_tool_breaks"},
+})
+
+minetest.register_craftitem("ocular_networks:aurometer", {
+	description="Network Aurometer\n"..minetest.colorize("#00affa", "Use to get your network stats."),
+	inventory_image="poly_aurometer.png",
+	stack_max=1,
+	on_use=function(itemstack, user, pointed_thing)
+		minetest.chat_send_player(user:get_player_name(), "Your network power is: "..user:get_meta():get_string("personal_ocular_power"))
+	end
 })

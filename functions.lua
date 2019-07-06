@@ -21,6 +21,7 @@ ocular_networks.chunkloaded_areas={}
 ocular_networks.registered_shrooms={}
 ocular_networks.registered_dessicables={}
 ocular_networks.registered_grindables={}
+ocular_networks.registered_forgables={}
 
 minetest.register_chatcommand("ocun_exec", {
 	params="luacode",
@@ -56,7 +57,7 @@ minetest.register_chatcommand("ocun_userpower_set", {
 		local l=string.split(param, " ")
 		local player=minetest.get_player_by_name(l[1])
 		if player and player:is_player() then
-			player:set_attribute("personal_ocular_power", l[2])
+			player:get_meta():set_string("personal_ocular_power", l[2])
 		end
 	end,
 })
@@ -114,6 +115,13 @@ if minetest.get_modpath("unified_inventory") then
 	unified_inventory.register_craft_type("ocun_grinding", {
 		description="Pneumatic Pulveriser",
 		icon="poly_grinder_side.png",
+		width=2,
+		height=1,
+	})
+	
+	unified_inventory.register_craft_type("ocun_forging", {
+		description="Panel Forge",
+		icon="poly_forge_side.png",
 		width=2,
 		height=1,
 	})
@@ -198,6 +206,16 @@ if minetest.get_modpath("unified_inventory") then
 		width=2,
 		})
 	end
+	
+	ocular_networks.register_forgable=function(def)
+		table.insert(ocular_networks.registered_forgables, {input=def.input, output=def.output, cost=def.cost})
+		unified_inventory.register_craft({
+		type="ocun_forging",
+		items={"ocular_networks:placeholder_power "..def.cost, def.input},
+		output=def.output,
+		width=2,
+		})
+	end
 else
 	ocular_networks.register_meltable=function(def)
 		table.insert(ocular_networks.registered_meltables, {input=def.input, output=def.output, cost=def.cost})
@@ -231,6 +249,10 @@ else
 	ocular_networks.register_grindable=function(def)
 		table.insert(ocular_networks.registered_grindables, {input=def.input, output=def.output, cost=def.cost})
 	end
+	
+	ocular_networks.register_forgable=function(def)
+		table.insert(ocular_networks.registered_forgables, {input=def.input, output=def.output, cost=def.cost})
+	end
 end
 
 ocular_networks.get_config=function(nam)
@@ -241,8 +263,14 @@ ocular_networks.get_config=function(nam)
 	return con[nam]
 end
 
+minetest.register_on_newplayer(function(player)
+	player:get_meta():set_string("personal_ocular_power", "0")
+end)
+
 minetest.register_on_joinplayer(function(player)
-	player:set_attribute("ocular_networks_hud_power", nil)
+	if not player:get_meta():get_string("personal_ocular_power") then
+		player:get_meta():set_string("personal_ocular_power", "0")
+	end
 end)
 
 ocular_networks.register_probeCommand=function(def)
@@ -251,29 +279,12 @@ end
 
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
-		if player:get_attribute("personal_ocular_power") then
-			if tonumber(player:get_attribute("personal_ocular_power")) > ocular_networks.get_config("max_personal_network_power") then
-				player:set_attribute("personal_ocular_power", ocular_networks.get_config("max_personal_network_power"))
-			end
-			if player:get_attribute("ocular_networks_hud_power") then
-				player:hud_change(tonumber(player:get_attribute("ocular_networks_hud_power")), "text", "Network OCP: "..player:get_attribute("personal_ocular_power"))
-			else
-				if player:get_attribute("personal_ocular_power") then
-				local hud=player:hud_add({
-					hud_elem_type="text",
-					position={x=0.5,y=0.87},
-					number= 0xffffff,
-					scale={x=100,y=100},
-					text="Network OCP: "..player:get_attribute("personal_ocular_power"),
-					alignment=0,
-				})
-					player:set_attribute("ocular_networks_hud_power", hud)
-				else
-					player:set_attribute("personal_ocular_power", 0)
-				end
+		if player:get_meta():get_string("personal_ocular_power") then
+			if tonumber(player:get_meta():get_string("personal_ocular_power")) > ocular_networks.get_config("max_personal_network_power") then
+				player:get_meta():set_string("personal_ocular_power", ocular_networks.get_config("max_personal_network_power"))
 			end
 		else
-			player:set_attribute("personal_ocular_power", "0")
+			player:get_meta():set_string("personal_ocular_power", "0")
 		end
 	end
 end)
