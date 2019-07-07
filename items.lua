@@ -287,3 +287,8 @@ minetest.register_craftitem("ocular_networks:rubber", {
 	description="Ultra Rubber",
 	inventory_image="poly_rubber.png",
 })
+
+minetest.register_craftitem("ocular_networks:ruined_gun", {
+	description="Crushed Erena Blaster"..minetest.colorize("#00affa", "\nWhy would you do this?!"),
+	inventory_image="poly_blazerifle_e.png",
+})

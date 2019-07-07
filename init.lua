@@ -47,7 +47,3 @@ end
 if ocular_networks.get_config("load_guide") then
 	dofile(modpath.."/modules/guide.lua")
 end
-
-if ocular_networks.get_config("load_optic_cables") then
-	dofile(modpath.."/modules/cable.lua")
-end

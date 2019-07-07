@@ -1677,3 +1677,9 @@ minetest.register_craft({
 		{"ocular_networks:freeElem_silicon", "ocular_networks:freeElem_hydrogen", "ocular_networks:freeElem_silicon"}
 	}
 })
+
+ocular_networks.register_forgable({
+	input="ocular_networks:erena_blaster",
+	output="ocular_networks:ruined_gun",
+	cost="10000"
+})
