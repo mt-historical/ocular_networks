@@ -650,7 +650,7 @@ minetest.register_craft({
 	recipe={
 		{"ocular_networks:angmallen_block_4", "ocular_networks:angmallen_block_4", "ocular_networks:angmallen_block_4"},
 		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"ocular_networks:rubber", "ocular_networks:lumigold_rod", "ocular_networks:rubber"}
 	}
 })
 
@@ -659,7 +659,7 @@ minetest.register_craft({
 	recipe={
 		{"ocular_networks:angmallen_block_4", "ocular_networks:angmallen_block_4", ""},
 		{"ocular_networks:angmallen_block_4", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"ocular_networks:rubber", "ocular_networks:lumigold_rod", "ocular_networks:rubber"}
 	}
 })
 
@@ -668,7 +668,7 @@ minetest.register_craft({
 	recipe={
 		{"", "ocular_networks:angmallen_block_4", ""},
 		{"ocular_networks:angmallen_bar", "ocular_networks:angmallen_block_4", "ocular_networks:angmallen_bar"},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"ocular_networks:rubber", "ocular_networks:lumigold_rod", "ocular_networks:rubber"}
 	}
 })
 
@@ -748,7 +748,7 @@ minetest.register_craft({
 	output="ocular_networks:performance_controller",
 	recipe={
 		{"ocular_networks:silicotin_bar", "ocular_networks:hekatonium_bar", "ocular_networks:silicotin_bar"},
-		{"default:obsidian", "ocular_networks:inspector", "default:obsidian"},
+		{"ocular_networks:rubber", "ocular_networks:inspector", "ocular_networks:rubber"},
 		{"default:diamond", "ocular_networks:armor_pendant", "default:diamond"}
 	}
 })
@@ -964,7 +964,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:gun_stock2",
 	recipe={
-		{"ocular_networks:peat", "ocular_networks:peat", "ocular_networks:peat"},
+		{"ocular_networks:rubber", "ocular_networks:rubber", "ocular_networks:rubber"},
 		{"", "ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar"},
 		{"", "", ""}
 	}
@@ -1658,4 +1658,22 @@ ocular_networks.register_forgable({
 	input="ocular_networks:shimmering_bar",
 	output="ocular_networks:plate_shimmering",
 	cost="500"
+})
+
+minetest.register_craft({
+	output="ocular_networks:wire 10",
+	recipe={
+		{"ocular_networks:rubber", "", "ocular_networks:rubber"},
+		{"ocular_networks:luminium_bar", "ocular_networks:zweinium_crystal", "ocular_networks:luminium_bar"},
+		{"ocular_networks:rubber", "", "ocular_networks:rubber"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:rubber",
+	recipe={
+		{"ocular_networks:freeElem_silicon", "ocular_networks:freeElem_hydrogen", "ocular_networks:freeElem_silicon"},
+		{"ocular_networks:freeElem_carbon", "ocular_networks:freeElem_sulfur", "ocular_networks:freeElem_carbon"},
+		{"ocular_networks:freeElem_silicon", "ocular_networks:freeElem_hydrogen", "ocular_networks:freeElem_silicon"}
+	}
 })

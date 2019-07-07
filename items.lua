@@ -169,47 +169,47 @@ minetest.register_craftitem("ocular_networks:zweinium_lens", {
 
 minetest.register_craftitem("ocular_networks:freeElem_nitrogen", {
 	description="Stabilized Nitrogen",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#0090FF80",
 })
 
 minetest.register_craftitem("ocular_networks:freeElem_carbon", {
 	description="Stabilized Carbon",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#55555580",
 })
 
 minetest.register_craftitem("ocular_networks:freeElem_hydrogen", {
 	description="Stabilized Hydrogen",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#0000FF80",
 })
 
 minetest.register_craftitem("ocular_networks:freeElem_sulfur", {
 	description="Stabilized Sulfur",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#fffb0080",
 })
 
 minetest.register_craftitem("ocular_networks:freeElem_silicon", {
 	description="Stabilized Silicon",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#ffffff80",
 })
 
 minetest.register_craftitem("ocular_networks:freeElem_iron", {
 	description="Stabilized Iron",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#ff000080",
 })
 
 minetest.register_craftitem("ocular_networks:freeElem_gold", {
 	description="Stabilized Gold",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#ffdd0080",
 })
 
 minetest.register_craftitem("ocular_networks:freeElem_copper", {
 	description="Stabilized Copper",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#ffa60080",
 })
 
 minetest.register_craftitem("ocular_networks:freeElem_tin", {
 	description="Stabilized Tin",
-	inventory_image="poly_element.png",
+	inventory_image="poly_element.png^[colorize:#c2c2c280",
 })
 
 
@@ -281,4 +281,9 @@ minetest.register_craftitem("ocular_networks:plate_silicotin", {
 minetest.register_craftitem("ocular_networks:plate_shimmering", {
 	description="Shimmering Plate",
 	inventory_image="poly_shimmering_plate.png",
+})
+
+minetest.register_craftitem("ocular_networks:rubber", {
+	description="Ultra Rubber",
+	inventory_image="poly_rubber.png",
 })

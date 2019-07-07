@@ -60,9 +60,6 @@ return {
 	
 	 -- Whether or not to load the guidebook unit.
 	load_guide = true,
-	
-	 -- Whether or not to load the guidebook unit.
-	load_optic_cables = false,
 
 	-- Whether to load the lag machine (chunkloader).
 	load_forceloader = false, 
