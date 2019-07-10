@@ -1683,3 +1683,13 @@ ocular_networks.register_forgable({
 	output="ocular_networks:ruined_gun",
 	cost="10000"
 })
+
+
+minetest.register_craft({
+	output="ocular_networks:aurometer",
+	recipe={
+		{"", "ocular_networks:luminium_bar_3", ""},
+		{"default:stick", "default:copper_ingot", "default:stick"},
+		{"", "ocular_networks:luminium_bar_3", ""}
+	}
+})
