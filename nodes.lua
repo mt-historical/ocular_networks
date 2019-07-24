@@ -112,6 +112,15 @@ local omnispec=""..
 "list[context;main;9,1;3,6;]"..
 "listring[]"
 
+local cultspec=""..
+"size[8,9;]"..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
+"list[context;input;2.5,1.5;1,1;]"..
+"list[context;fuel;2.5,2.5;1,1;]"..
+"list[context;output;4.5,2;1,1;]"..
+"list[current_player;main;0,5;8,4;]"..
+"listring[]"
+
 minetest.register_node("ocular_networks:frame", {
 	description="Gold Frame\n"..minetest.colorize("#00affa", "Used as a part of most multiblock structures"),
 	drawtype="glasslike_framed",
@@ -2321,4 +2330,36 @@ minetest.register_node("ocular_networks:forge", {
 				{-0.5, -0.5, -0.5, 0.5, -4/16, 0.5},
 				}
 	},
+})
+
+minetest.register_node("ocular_networks:cultivator", {
+	description="Phytogenic Cultivator\n"..minetest.colorize("#00affa", "Increases the speed of plant growth using fertiliser"),
+	tiles={"poly_bolumiary_top2.png", "poly_bolumiary_bottom.png", "poly_bolumiary_side2.png"},
+	is_ground_content=false,
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_stone_defaults(),
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
+		meta:set_int("ocular_power", 0)
+		local inv=meta:get_inventory()
+		meta:set_string("enabled", "true")
+		meta:set_string("formspec", cultspec)
+		inv:set_list("input", {""})
+		inv:set_size("input", 1)
+		inv:set_list("fuel", {""})
+		inv:set_size("fuel", 1)
+		inv:set_list("output", {""})
+		inv:set_size("output", 1)
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Power Buffer: 0".."\nOwned By: "..owner)
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end
 })

@@ -267,3 +267,51 @@ if minetest.get_modpath("mobs") then
 		end,
 	})
 end
+
+if minetest.get_modpath("farming") then
+	
+	farming.register_hoe(":ocular_networks:hoe_lumi", {
+		description = "Luminium Hoe",
+		inventory_image = "poly_hoe_lumi.png",
+		max_uses = 200,
+		material = "ocular_networks:luminium_bar"
+	})
+	
+	farming.register_hoe(":ocular_networks:hoe_lumig", {
+		description = "Lumigold Hoe",
+		inventory_image = "poly_hoe_lumig.png",
+		max_uses = 190,
+		material = "ocular_networks:luminium_bar_3"
+	})
+	
+	farming.register_hoe(":ocular_networks:hoe_silic", {
+		description = "Silicotin Hoe",
+		inventory_image = "poly_hoe_silic.png",
+		max_uses = 190,
+		material = "ocular_networks:silicotin_bar"
+	})
+	
+	farming.register_hoe(":ocular_networks:hoe_shimmering", {
+		description = "Shimmering Alloy Hoe",
+		inventory_image = "poly_hoe_shimmering.png",
+		max_uses = 220,
+		material = "ocular_networks:shimmering_bar"
+	})
+	
+	farming.register_hoe(":ocular_networks:hoe_zwei", {
+		description = "Zweinium Hoe",
+		inventory_image = "poly_hoe_zwei.png",
+		max_uses = 200,
+		material = "ocular_networks:zweinium_crystal"
+	})
+	
+	minetest.after(1, function()
+		for k,v in ipairs(farming.registered_plants) do 
+			ocular_networks.register_cultivateable({
+				plant=v.seed,
+				cost=10*v.steps,
+				output=v.crop
+			})
+		end
+	end)
+end

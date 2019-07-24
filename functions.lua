@@ -22,6 +22,7 @@ ocular_networks.registered_shrooms={}
 ocular_networks.registered_dessicables={}
 ocular_networks.registered_grindables={}
 ocular_networks.registered_forgables={}
+ocular_networks.registered_cultivables={}
 
 minetest.register_chatcommand("ocun_exec", {
 	params="luacode",
@@ -216,6 +217,23 @@ if minetest.get_modpath("unified_inventory") then
 		width=2,
 		})
 	end
+	
+	unified_inventory.register_craft_type("ocun_cultivating", {
+		description="Phytogenic Cultivator",
+		icon="poly_bolumiary_side2.png",
+		width=2,
+		height=1,
+	})
+
+	ocular_networks.register_cultivateable=function(def)
+		table.insert(ocular_networks.registered_cultivables, {input=def.plant, output=def.output, cost=def.cost})
+		unified_inventory.register_craft({
+		type="ocun_cultivating",
+		items={"ocular_networks:placeholder_power "..def.cost, def.plant},
+		output=def.output,
+		width=2,
+		})
+	end
 else
 	ocular_networks.register_meltable=function(def)
 		table.insert(ocular_networks.registered_meltables, {input=def.input, output=def.output, cost=def.cost})
@@ -252,6 +270,10 @@ else
 	
 	ocular_networks.register_forgable=function(def)
 		table.insert(ocular_networks.registered_forgables, {input=def.input, output=def.output, cost=def.cost})
+	end
+	
+	ocular_networks.register_cultivateable=function(def)
+		table.insert(ocular_networks.registered_cultivables, {input=def.plant, output=def.output, cost=def.cost})
 	end
 end
 

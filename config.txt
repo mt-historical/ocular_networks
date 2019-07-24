@@ -43,6 +43,9 @@ return {
 
 -- RUNTIME SETTINGS (Will only take effect if changed before loading)
 
+	-- Whether to load compatibility for mod such as technic and farming.
+	load_compat = true,
+
 	-- Whether or not to load the armor.
 	load_armor = true,
 

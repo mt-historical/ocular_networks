@@ -292,3 +292,13 @@ minetest.register_craftitem("ocular_networks:ruined_gun", {
 	description="Crushed Erena Blaster"..minetest.colorize("#00affa", "\nWhy would you do this?!"),
 	inventory_image="poly_blazerifle_e.png",
 })
+
+minetest.register_craftitem("ocular_networks:gum", {
+	description="Sugary Pulp",
+	inventory_image="poly_sugar.png",
+})
+
+minetest.register_craftitem("ocular_networks:fertiliser", {
+	description="Fertiliser",
+	inventory_image="poly_sugar2.png",
+})

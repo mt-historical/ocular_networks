@@ -794,7 +794,7 @@ minetest.register_craft({
 	output="ocular_networks:pipe_E 10",
 	recipe={
 		{"", "ocular_networks:pipe_socket", ""},
-		{"ocular_networks:silicotin_bar", "default:chest_locked", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:ocular_networks:plate_silicotin", "default:chest_locked", "ocular_networks:plate_silicotin"},
 		{"", "ocular_networks:pipe_socket", ""}
 	}
 })
@@ -812,7 +812,7 @@ minetest.register_craft({
 	output="ocular_networks:laserdrillchest",
 	recipe={
 		{"default:diamondblock", "ocular_networks:distributor", "default:diamondblock"},
-		{"ocular_networks:silicotin_block", "default:chest_locked", "ocular_networks:silicotin_block"},
+		{"ocular_networks:plate_silicotin", "default:chest_locked", "ocular_networks:plate_silicotin"},
 		{"ocular_networks:silicotin_block", "ocular_networks:pipe_socket", "ocular_networks:silicotin_block"}
 	}
 })
@@ -973,9 +973,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:scope",
 	recipe={
-		{"ocular_networks:silicotin_bar", "ocular_networks:hekatonium_bar", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:plate_silicotin", "ocular_networks:hekatonium_bar", "ocular_networks:plate_silicotin"},
 		{"ocular_networks:lens", "ocular_networks:cross", "ocular_networks:lens"},
-		{"ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar", "ocular_networks:hekatonium_bar"}
+		{"ocular_networks:plate_silicotin", "ocular_networks:hekatonium_bar", "ocular_networks:plate_silicotin"}
 	}
 })
 minetest.register_craft({
@@ -997,9 +997,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:boiler",
 	recipe={
-		{"default:luminium_bar_3", "ocular_networks:pipe_socket", "default:luminium_bar_3"},
+		{"default:plate_lumigold", "ocular_networks:pipe_socket", "default:plate_lumigold"},
 		{"default:bronze_ingot", "ocular_networks:gearbox", "default:bronze_ingot"},
-		{"default:luminium_bar_3", "ocular_networks:pipe_socket", "default:luminium_bar_3"}
+		{"default:plate_lumigold", "ocular_networks:pipe_socket", "default:plate_lumigold"}
 	}
 })
 
@@ -1691,5 +1691,28 @@ minetest.register_craft({
 		{"", "ocular_networks:luminium_bar_3", ""},
 		{"default:stick", "default:copper_ingot", "default:stick"},
 		{"", "ocular_networks:luminium_bar_3", ""}
+	}
+})
+
+ocular_networks.register_grindable({
+	input="default:papyrus",
+	output="ocular_networks:gum",
+	cost="200"
+})
+
+minetest.register_craft({
+	output="ocular_networks:cultivator",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "ocular_networks:mulch", "ocular_networks:luminium_bar_3"},
+		{"ocular_networks:toxic_slate", "default:diamond", "ocular_networks:toxic_slate"},
+		{"", "ocular_networks:bolumiary", ""}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:fertiliser",
+	recipe={
+		{"ocular_networks:mulch", "ocular_networks:gum"},
+		{"default:clay_lump", "ocular_networks:freeElem_nitrogen"}
 	}
 })

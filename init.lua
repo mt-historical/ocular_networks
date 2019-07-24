@@ -20,6 +20,10 @@ dofile(modpath.."/tools.lua")
 dofile(modpath.."/craft.lua")
 dofile(modpath.."/abm.lua")
 
+if ocular_networks.get_config("load_compat") then
+	dofile(modpath.."/modules/compat.lua")
+end
+
 if ocular_networks.get_config("load_armor") then
 	dofile(modpath.."/modules/armor.lua")
 end
