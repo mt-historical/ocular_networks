@@ -794,7 +794,7 @@ minetest.register_craft({
 	output="ocular_networks:pipe_E 10",
 	recipe={
 		{"", "ocular_networks:pipe_socket", ""},
-		{"ocular_networks:ocular_networks:plate_silicotin", "default:chest_locked", "ocular_networks:plate_silicotin"},
+		{"ocular_networks:plate_silicotin", "default:chest_locked", "ocular_networks:plate_silicotin"},
 		{"", "ocular_networks:pipe_socket", ""}
 	}
 })
