@@ -290,7 +290,7 @@ minetest.register_on_newplayer(function(player)
 end)
 
 minetest.register_on_joinplayer(function(player)
-	if not player:get_meta():get_string("personal_ocular_power") then
+	if not tonumber(player:get_meta():get_string("personal_ocular_power")) then
 		player:get_meta():set_string("personal_ocular_power", "0")
 	end
 end)
@@ -301,7 +301,7 @@ end
 
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
-		if player:get_meta():get_string("personal_ocular_power") then
+		if tonumber(player:get_meta():get_string("personal_ocular_power")) then
 			if tonumber(player:get_meta():get_string("personal_ocular_power")) > ocular_networks.get_config("max_personal_network_power") then
 				player:get_meta():set_string("personal_ocular_power", ocular_networks.get_config("max_personal_network_power"))
 			end

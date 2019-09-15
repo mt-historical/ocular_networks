@@ -1,3 +1,4 @@
+
 minetest.register_craft({
 	output="ocular_networks:guide",
 	type="shapeless",
@@ -56,7 +57,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:distributor",
+	output="ocular_networks:distributor 4",
 	recipe={
 		{"ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar", "ocular_networks:luminium_bar_3"},
 		{"ocular_networks:luminium_bar", "ocular_networks:gearbox", "ocular_networks:luminium_bar"},
@@ -191,18 +192,18 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:distributor_2",
 	recipe={
-		{"default:mese_crystal", "dye:violet", "default:mese_crystal"},
-		{"dye:red", "ocular_networks:distributor", "dye:red"},
-		{"default:mese_crystal", "dye:violet", "default:mese_crystal"}
+		{"default:mese_crystal", "", "default:mese_crystal"},
+		{"", "ocular_networks:distributor", ""},
+		{"default:mese_crystal", "", "default:mese_crystal"}
 	}
 })
 
 minetest.register_craft({
 	output="ocular_networks:distributor_3",
 	recipe={
-		{"ocular_networks:angmallen_bar", "default:diamondblock", "ocular_networks:angmallen_bar"},
-		{"dye:green", "ocular_networks:distributor_2", "dye:blue"},
-		{"ocular_networks:angmallen_bar", "dye:cyan", "ocular_networks:angmallen_bar"}
+		{"ocular_networks:angmallen_bar", "default:diamond", "ocular_networks:angmallen_bar"},
+		{"", "ocular_networks:distributor_2", ""},
+		{"ocular_networks:angmallen_bar", "", "ocular_networks:angmallen_bar"}
 	}
 })
 
@@ -220,7 +221,7 @@ minetest.register_craft({
 	recipe={
 		{"ocular_networks:toxic_slate", "ocular_networks:frame", "ocular_networks:toxic_slate"},
 		{"ocular_networks:piston", "default:furnace", "ocular_networks:piston"},
-		{"ocular_networks:gearbox", "default:steelblock", "ocular_networks:gearbox"}
+		{"ocular_networks:gearbox", "default:steel_ingot", "ocular_networks:gearbox"}
 	}
 })
 
@@ -251,7 +252,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:piston",
-	recipe={"ocular_networks:lumigold_rod","default:steelblock"},
+	recipe={"ocular_networks:lumigold_rod","default:steel_ingot"},
 })
 
 ocular_networks.register_meltable({
@@ -443,7 +444,7 @@ minetest.register_craft({
 	output="ocular_networks:networknode",
 	recipe={
 		{"", "ocular_networks:emitter", ""},
-		{"", "ocular_networks:distributor", ""},
+		{"", "ocular_networks:luminium_bar", ""},
 		{"", "ocular_networks:toxic_slate_chip", ""}
 	}
 })
@@ -451,18 +452,14 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:networknode",
 	recipe={
-		{"", "dye:cyan", ""},
-		{"", "ocular_networks:networknode2", ""},
-		{"", "", ""}
+		{"ocular_networks:networknode2"}
 	}
 })
 
 minetest.register_craft({
 	output="ocular_networks:networknode2",
 	recipe={
-		{"", "dye:red", ""},
-		{"", "ocular_networks:networknode", ""},
-		{"", "", ""}
+		{"ocular_networks:networknode"}
 	}
 })
 
@@ -1440,7 +1437,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:emitter",
+	output="ocular_networks:emitter 8",
 	recipe={
 		{"ocular_networks:luminium_bar_3", "default:diamond", "ocular_networks:luminium_bar_3"},
 		{"default:copper_ingot", "ocular_networks:luminium_bar_3", "default:copper_ingot"},
@@ -1630,9 +1627,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:forge",
 	recipe={
-		{"ocular_networks:luminium_bar_3", "default:steelblock", "ocular_networks:luminium_bar_3"},
+		{"ocular_networks:luminium_bar_3", "default:steel_ingot", "ocular_networks:luminium_bar_3"},
 		{"ocular_networks:piston", "ocular_networks:pipe_socket", "ocular_networks:piston"},
-		{"ocular_networks:luminium_bar_3", "default:steelblock", "ocular_networks:luminium_bar_3"}
+		{"ocular_networks:luminium_bar_3", "default:steel_ingot", "ocular_networks:luminium_bar_3"}
 	}
 })
 
@@ -1658,6 +1655,12 @@ ocular_networks.register_forgable({
 	input="ocular_networks:shimmering_bar",
 	output="ocular_networks:plate_shimmering",
 	cost="500"
+})
+
+ocular_networks.register_forgable({
+	input="default:sand_with_kelp",
+	output="default:paper",
+	cost="150"
 })
 
 minetest.register_craft({
