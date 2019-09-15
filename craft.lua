@@ -994,9 +994,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:boiler",
 	recipe={
-		{"default:plate_lumigold", "ocular_networks:pipe_socket", "default:plate_lumigold"},
+		{"ocular_networks:plate_lumigold", "ocular_networks:pipe_socket", "ocular_networks:plate_lumigold"},
 		{"default:bronze_ingot", "ocular_networks:gearbox", "default:bronze_ingot"},
-		{"default:plate_lumigold", "ocular_networks:pipe_socket", "default:plate_lumigold"}
+		{"ocular_networks:plate_lumigold", "ocular_networks:pipe_socket", "ocular_networks:plate_lumigold"}
 	}
 })
 

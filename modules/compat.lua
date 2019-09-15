@@ -249,7 +249,7 @@ if minetest.get_modpath("mobs") then
 		shoot_offset=2,
 	})
 	
-	mobs:register_spawn("ocular_networks:drone", {"default:sand", "default:silver_sand", "default:gravel"}, 15, 5, 5, 1, 47)
+	mobs:register_spawn("ocular_networks:drone", {"default:silver_sand"}, 15, 5, 5, 1, 47)
 	
 	mobs:register_egg("ocular_networks:drone", "Jammer Drone Deployer", "poly_jammer.png", 0)
 	
