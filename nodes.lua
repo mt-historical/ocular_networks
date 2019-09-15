@@ -567,7 +567,7 @@ minetest.register_ore({
 	clust_num_ores=16,
 	clust_size    =5,
 	y_min         =-31000,
-	y_max         =-78,
+	y_max         =-20,
 })
 
 minetest.register_ore({

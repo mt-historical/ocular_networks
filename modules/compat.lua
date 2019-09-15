@@ -305,13 +305,4 @@ if minetest.get_modpath("farming") then
 		material = "ocular_networks:zweinium_crystal"
 	})
 	
-	minetest.after(1, function()
-		for k,v in ipairs(farming.registered_plants) do 
-			ocular_networks.register_cultivateable({
-				plant=v.seed,
-				cost=10*v.steps,
-				output=v.crop
-			})
-		end
-	end)
 end
