@@ -170,7 +170,7 @@ minetest.register_craftitem("ocular_networks:probe", st)
 minetest.register_craft({
 	output="ocular_networks:probe",
 	recipe={
-		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", "ocular_networks:inspector"},
+		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", "ocular_networks:lens"},
 		{"ocular_networks:shimmering_bar", "default:obsidian_glass", "ocular_networks:shimmering_bar"},
 		{"default:steel_ingot", "ocular_networks:performance_controller", "default:steel_ingot"}
 	}

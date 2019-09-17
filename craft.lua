@@ -75,6 +75,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:furnace",
+	recipe={
+		{"ocular_networks:lumigold_rod", "ocular_networks:lens", "ocular_networks:lumigold_rod"},
+		{"ocular_networks:toxic_slate", "default:furnace", "ocular_networks:toxic_slate"},
+		{"ocular_networks:hekatonium_bar", "default:obsidian", "ocular_networks:hekatonium_bar"}
+	}
+})
+
+minetest.register_craft({
 	output="ocular_networks:cross 9",
 	recipe={
 		{"default:tin_ingot", "", "default:tin_ingot"},
@@ -544,24 +553,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:angmallen_block_2",
-	recipe={
-		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block", "ocular_networks:angmallen_block"},
-		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block", "ocular_networks:angmallen_block"},
-		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block", "ocular_networks:angmallen_block"}
-	}
-})
-
-minetest.register_craft({
-	output="ocular_networks:angmallen_block_3",
-	recipe={
-		{"ocular_networks:angmallen_block_2", "ocular_networks:angmallen_block_2", "ocular_networks:angmallen_block_2"},
-		{"ocular_networks:angmallen_block_2", "ocular_networks:angmallen_block_2", "ocular_networks:angmallen_block_2"},
-		{"ocular_networks:angmallen_block_2", "ocular_networks:angmallen_block_2", "ocular_networks:angmallen_block_2"}
-	}
-})
-
-minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:angmallen_bar 9",
 	recipe={"ocular_networks:angmallen_block"}
@@ -622,8 +613,8 @@ ocular_networks.register_passive_cool({
 })
 
 ocular_networks.register_fusion({
-	item_1="default:diamondblock 9",
-	item_2="default:mese 9",
+	item_1="default:diamondblock",
+	item_2="default:mese",
 	output="ocular_networks:uncharged_gem",
 	give_back="",
 	cost=10000
@@ -638,7 +629,7 @@ ocular_networks.register_chargeable({
 minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:angmallen_block_4",
-	recipe={"ocular_networks:angmallen_block_3", "ocular_networks:charged_gem"},
+	recipe={"ocular_networks:angmallen_block", "ocular_networks:charged_gem"},
 	replacements={{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
 
@@ -672,8 +663,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:angmallen_helm",
 	recipe={
-		{"ocular_networks:angmallen_block_2", "ocular_networks:angmallen_block_4", "ocular_networks:angmallen_block_2"},
-		{"ocular_networks:angmallen_block_2", "ocular_networks:charged_gem", "ocular_networks:angmallen_block_2"},
+		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block_4", "ocular_networks:angmallen_block"},
+		{"ocular_networks:angmallen_block", "ocular_networks:charged_gem", "ocular_networks:angmallen_block"},
 		{"", "", ""}
 	}
 })
@@ -681,8 +672,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:angmallen_legs",
 	recipe={
-		{"ocular_networks:angmallen_block_2", "ocular_networks:angmallen_block_4", "ocular_networks:angmallen_block_2"},
-		{"ocular_networks:angmallen_block_2", "ocular_networks:charged_gem", "ocular_networks:angmallen_block_2"},
+		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block_4", "ocular_networks:angmallen_block"},
+		{"ocular_networks:angmallen_block", "ocular_networks:charged_gem", "ocular_networks:angmallen_block"},
 		{"ocular_networks:angmallen_block", "", "ocular_networks:angmallen_block"}
 	}
 })
@@ -690,8 +681,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:angmallen_chest",
 	recipe={
-		{"ocular_networks:angmallen_block_2", "", "ocular_networks:angmallen_block_2"},
-		{"ocular_networks:angmallen_block_2", "ocular_networks:charged_gem", "ocular_networks:angmallen_block_2"},
+		{"ocular_networks:angmallen_block", "", "ocular_networks:angmallen_block"},
+		{"ocular_networks:angmallen_block", "ocular_networks:charged_gem", "ocular_networks:angmallen_block"},
 		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block_4", "ocular_networks:angmallen_block"}
 	}
 })
@@ -699,8 +690,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:angmallen_boots",
 	recipe={
-		{"ocular_networks:angmallen_block_2", "", "ocular_networks:angmallen_block_2"},
-		{"ocular_networks:angmallen_block_2", "ocular_networks:charged_gem", "ocular_networks:angmallen_block_2"},
+		{"ocular_networks:angmallen_block", "", "ocular_networks:angmallen_block"},
+		{"ocular_networks:angmallen_block", "ocular_networks:charged_gem", "ocular_networks:angmallen_block"},
 		{"ocular_networks:piston", "ocular_networks:angmallen_block_4", "ocular_networks:piston"}
 	}
 })
@@ -1175,19 +1166,19 @@ minetest.register_craft({
 
 ocular_networks.register_shroomable({
 	node="ocular_networks:loomshroom",
-	output="ocular_networks:luminium_lump 3",
+	output="ocular_networks:luminium_lump",
 	cost=1000,
 })
 
 ocular_networks.register_shroomable({
 	node="flowers:mushroom_red",
-	output="flowers:mushroom_red 2",
+	output="flowers:mushroom_red",
 	cost=500,
 })
 
 ocular_networks.register_shroomable({
 	node="flowers:mushroom_brown",
-	output="flowers:mushroom_brown 2",
+	output="flowers:mushroom_brown",
 	cost=500,
 })
 

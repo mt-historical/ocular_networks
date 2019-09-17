@@ -302,3 +302,8 @@ minetest.register_craftitem("ocular_networks:fertiliser", {
 	description="Fertiliser",
 	inventory_image="poly_sugar2.png",
 })
+
+minetest.register_craftitem("ocular_networks:dagnabbitite", {
+	description=minetest.colorize("#00affa", "Dagnabbitite"),
+	inventory_image="poly_dagnabbitite.png",
+})

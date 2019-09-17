@@ -1037,7 +1037,7 @@ minetest.register_node("ocular_networks:networknode2", {
 })
 
 minetest.register_node("ocular_networks:passive_cooler", {
-	description="Passive Cooler\n"..minetest.colorize("#00affa", "Cools liquid metal, requrires no power.\n'It doesn't return the buckets. Maybe it uses them for fuel?'"),
+	description="Passive Cooler\n"..minetest.colorize("#00affa", "Cools liquid metal, requrires no power."),
 	tiles={"default_ice.png^poly_frame.png", "default_ice.png^poly_frame.png", "default_ice.png^poly_frame.png", "default_ice.png^poly_frame.png", "default_ice.png^poly_frame.png", "default_ice.png^poly_frame.png^poly_furnace.png"},
 	paramtype2="facedir",
 	is_ground_content=false,
@@ -2361,5 +2361,64 @@ minetest.register_node("ocular_networks:cultivator", {
 		local meta=minetest.get_meta(pos)
 		local owner=meta:get_string("owner")
 		return owner == player:get_player_name()
+	end
+})
+
+
+minetest.register_node("ocular_networks:furnace", {
+	description="Fresnel Furnace\n"..minetest.colorize("#00affa", "A powerfule ndgame furnace using focused light.\nTakes Power From BELOW"),
+	tiles={"default_obsidian.png^poly_silver_lens.png^poly_frame.png", "default_steel_block.png^poly_frame.png", "poly_battery_bottom.png^poly_frame.png", "poly_battery_bottom.png^poly_frame.png", "poly_battery_bottom.png^poly_frame.png", "poly_battery_bottom.png^poly_frame.png^poly_furnace2.png"},
+	is_ground_content=false,
+	drawtype="nodebox",
+	paramtype2="facedir",
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", coolspec)
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("input", {""})
+		inv:set_size("input", 1)
+		inv:set_list("output", {""})
+		inv:set_size("output", 1)
+		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
+		meta:set_string("formspec", coolspec)
+		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
 	end
 })
