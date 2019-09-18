@@ -93,18 +93,6 @@ minetest.register_craftitem("ocular_networks:gun_stock", {
 	inventory_image="poly_stock.png",
 })
 
-minetest.register_craftitem("ocular_networks:placeholder_power", {
-	description="Ocular Networks Power\n"..minetest.colorize("#00affa", "Recipe requires this much OCP"),
-	inventory_image="poly_gui_icon_pwr.png",
-	groups={not_in_creative_inventory=1}
-})
-
-minetest.register_craftitem("ocular_networks:placeholder_any_item", {
-	description="Any item\n"..minetest.colorize("#00affa", "Any item"),
-	inventory_image="poly_item.png",
-	groups={not_in_creative_inventory=1}
-})
-
 minetest.register_craftitem("ocular_networks:uncharged_gem", {
 	description="Uncharged Gem\n"..minetest.colorize("#00affa", "This gem radiates energy, or it would, if it had any.\nPut it in the charger to charge it."),
 	inventory_image="poly_gem_2.png",
@@ -120,6 +108,11 @@ minetest.register_craftitem("ocular_networks:charged_gem", {
 minetest.register_craftitem("ocular_networks:pipe_socket", {
 	description="Pipe Socket\n"..minetest.colorize("#00affa", "A locking plate for pipes."),
 	inventory_image="poly_pipe_socket_inv.png",
+})
+
+minetest.register_craftitem("ocular_networks:pipe_socket_filter", {
+	description="Filtered Pipe Socket\n"..minetest.colorize("#00affa", "A locking plate for pipes, with a built-in filter."),
+	inventory_image="poly_pipe_socket_inv2.png",
 })
 
 minetest.register_craftitem("ocular_networks:silicotin_bar", {

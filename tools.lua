@@ -52,15 +52,9 @@ minetest.register_craftitem("ocular_networks:healer", {
 	on_use=function(itemstack, user, pointed_thing)
 		if user:get_meta():get_string("personal_ocular_power") and tonumber(user:get_meta():get_string("personal_ocular_power")) > 99 then
 			user:get_meta():set_string("personal_ocular_power", tonumber(user:get_meta():get_string("personal_ocular_power"))-10)
-			user:set_hp(user:get_hp()+2)
+			user:set_hp(user:get_hp()+ocular_networks.get_config("healer_quality"))
 		end
 	end
-})
-
-minetest.register_craftitem("ocular_networks:placeholder_power", {
-	description="OcularNetworks Power\n"..minetest.colorize("#00affa", "Recipe requires this much OCP"),
-	inventory_image="poly_gui_icon_pwr.png",
-	groups={not_in_creative_inventory=1}
 })
 
 minetest.register_tool("ocular_networks:angmallen_hammer", {
@@ -72,7 +66,7 @@ minetest.register_tool("ocular_networks:angmallen_hammer", {
 		full_punch_interval=0.01,
 		max_drop_level=10,
 		groupcaps={
-			cracky={times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
+			cracky={times={[1]=0.70, [2]=0.60, [3]=0.40}, uses=150, maxlevel=10},
 			hekatonium_ore={times={[1]=3}, uses=150, maxlevel=10}
 		},
 		damage_groups={fleshy=19},
@@ -89,7 +83,7 @@ minetest.register_tool("ocular_networks:angmallen_axe", {
 		full_punch_interval=0.01,
 		max_drop_level=10,
 		groupcaps={
-			choppy={times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
+			choppy={times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=150, maxlevel=10},
 		},
 		damage_groups={fleshy=20},
 	},
@@ -105,7 +99,7 @@ minetest.register_tool("ocular_networks:angmallen_sword", {
 		full_punch_interval=1,
 		max_drop_level=10,
 		groupcaps={
-			snappy={times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=250, maxlevel=10},
+			snappy={times={[1]=0.50, [2]=0.50, [3]=0.20}, uses=150, maxlevel=10},
 		},
 		damage_groups={fleshy=290},
 	},

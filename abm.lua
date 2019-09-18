@@ -637,6 +637,7 @@ minetest.register_abm({
 		local target_inv=target_meta:get_inventory()
 		local source_node=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
 		local target_node=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
+		if meta:get_string("enabled")=="true" then
 		if owner == source_owner or source_owner=="" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -690,6 +691,7 @@ minetest.register_abm({
 				end
 			end
 		end
+		end
 	end,
 })
 
@@ -711,6 +713,7 @@ minetest.register_abm({
 		local target_inv=target_meta:get_inventory()
 		local source_node=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
 		local target_node=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
+		if meta:get_string("enabled")=="true" then
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -764,6 +767,7 @@ minetest.register_abm({
 				end
 			end
 		end
+		end
 	end,
 })
 
@@ -785,6 +789,7 @@ minetest.register_abm({
 		local target_inv=target_meta:get_inventory()
 		local source_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
 		local target_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
+		if meta:get_string("enabled")=="true" then
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -838,6 +843,7 @@ minetest.register_abm({
 				end
 			end
 		end
+		end
 	end,
 })
 
@@ -859,6 +865,7 @@ minetest.register_abm({
 		local target_inv=target_meta:get_inventory()
 		local source_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
 		local target_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
+		if meta:get_string("enabled")=="true" then
 		if owner == source_owner or source_owner == "" then
 			if source_inv:get_list("output") then
 				for i,stack in ipairs(source_inv:get_list("output")) do
@@ -911,6 +918,7 @@ minetest.register_abm({
 					end
 				end
 			end
+		end
 		end
 	end,
 })
@@ -1159,6 +1167,7 @@ minetest.register_abm({
 			local target_inv=target_meta:get_inventory()
 			local source_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
 			local target_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
+			if meta:get_string("enabled")=="true" then
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1172,6 +1181,7 @@ minetest.register_abm({
 						end
 					end
 				end
+			end
 			end
 		end
 	end,
@@ -1197,6 +1207,7 @@ minetest.register_abm({
 			local target_inv=target_meta:get_inventory()
 			local source_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1}).name
 			local target_node=minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1}).name
+			if meta:get_string("enabled")=="true" then
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1210,6 +1221,7 @@ minetest.register_abm({
 						end
 					end
 				end
+			end
 			end
 		end
 	end,
@@ -1235,6 +1247,7 @@ minetest.register_abm({
 			local target_inv=target_meta:get_inventory()
 			local source_node=minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z}).name
 			local target_node=minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z}).name
+			if meta:get_string("enabled")=="true" then
 			if owner == source_owner or source_owner == "" then
 				if source_inv:get_list("main") then
 					for _,item in ipairs(destroyList) do
@@ -1248,6 +1261,7 @@ minetest.register_abm({
 						end
 					end
 				end
+			end
 			end
 		end
 	end,
@@ -1610,7 +1624,7 @@ minetest.register_abm({
 		if meta:get_string("enabled")=="true" then
 			local owner=meta:get_string("owner")
 			local inv=meta:get_inventory()
-			local source_meta=minetest.get_meta({x=pos.x, y=pos.y+1, z=pos.z})
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
 			local source_power=source_meta:get_int("ocular_power")
 			local source_owner=source_meta:get_string("owner")
 			if source_power then
@@ -1620,7 +1634,6 @@ minetest.register_abm({
 							if inv:contains_item("fuel", "ocular_networks:fertiliser") then
 								if source_power > recipe.cost-1 then
 									source_meta:set_int("ocular_power", source_power-recipe.cost)
-									inv:remove_item("input", recipe.input)
 									inv:remove_item("fuel", "ocular_networks:fertiliser")
 									inv:add_item("output", recipe.output)
 									minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})

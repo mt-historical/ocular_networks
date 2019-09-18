@@ -311,4 +311,22 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
+minetest.register_craftitem("ocular_networks:placeholder_power", {
+	description="Ocular Networks Power\n"..minetest.colorize("#00affa", "Recipe requires this much OCP"),
+	inventory_image="poly_gui_icon_pwr.png",
+	groups={not_in_creative_inventory=1}
+})
+
+minetest.register_craftitem("ocular_networks:placeholder_any_item", {
+	description="Any item\n"..minetest.colorize("#00affa", "Any item (excluding existing recipes)"),
+	inventory_image="poly_item.png",
+	groups={not_in_creative_inventory=1}
+})
+
+minetest.register_craftitem("ocular_networks:placeholder_any_item2", {
+	description="Any item\n"..minetest.colorize("#00affa", "Any item"),
+	inventory_image="poly_item.png",
+	groups={not_in_creative_inventory=1}
+})
+
 minetest.after(0, disallow)

@@ -75,15 +75,6 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:furnace",
-	recipe={
-		{"ocular_networks:lumigold_rod", "ocular_networks:lens", "ocular_networks:lumigold_rod"},
-		{"ocular_networks:toxic_slate", "default:furnace", "ocular_networks:toxic_slate"},
-		{"ocular_networks:hekatonium_bar", "default:obsidian", "ocular_networks:hekatonium_bar"}
-	}
-})
-
-minetest.register_craft({
 	output="ocular_networks:cross 9",
 	recipe={
 		{"default:tin_ingot", "", "default:tin_ingot"},
@@ -553,6 +544,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:angmallen_block_2",
+	recipe={
+		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block", "ocular_networks:angmallen_block"},
+		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block", "ocular_networks:angmallen_block"},
+		{"ocular_networks:angmallen_block", "ocular_networks:angmallen_block", "ocular_networks:angmallen_block"}
+	}
+})
+
+minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:angmallen_bar 9",
 	recipe={"ocular_networks:angmallen_block"}
@@ -629,8 +629,17 @@ ocular_networks.register_chargeable({
 minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:angmallen_block_4",
-	recipe={"ocular_networks:angmallen_block", "ocular_networks:charged_gem"},
+	recipe={"ocular_networks:angmallen_block_2", "ocular_networks:charged_gem"},
 	replacements={{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
+})
+
+minetest.register_craft({
+	output="ocular_networks:furnace",
+	recipe={
+		{"ocular_networks:lumigold_rod", "ocular_networks:lens", "ocular_networks:lumigold_rod"},
+		{"ocular_networks:plate_shimmering", "default:furnace", "ocular_networks:plate_shimmering"},
+		{"ocular_networks:hekatonium_bar", "default:obsidian", "ocular_networks:hekatonium_bar"}
+	}
 })
 
 minetest.register_craft({
@@ -779,6 +788,15 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output="ocular_networks:pipe_socket_filter 5",
+	recipe={
+		{"ocular_networks:luminium_bar_3", "default:tin_ingot", "ocular_networks:luminium_bar_3"},
+		{"default:tin_ingot", "default:glass", "default:tin_ingot"},
+		{"ocular_networks:luminium_bar_3", "default:tin_ingot", "ocular_networks:luminium_bar_3"}
+	}
+})
+
+minetest.register_craft({
 	output="ocular_networks:pipe_E 10",
 	recipe={
 		{"", "ocular_networks:pipe_socket", ""},
@@ -861,7 +879,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:pipe_trashextractor",
 	recipe={
-		{"ocular_networks:silicotin_bar", "ocular_networks:pipe_socket", "ocular_networks:silicotin_bar"},
+		{"ocular_networks:silicotin_bar", "ocular_networks:pipe_socket_filter", "ocular_networks:silicotin_bar"},
 		{"ocular_networks:silicotin_bar", "ocular_networks:melter", "ocular_networks:silicotin_bar"},
 		{"ocular_networks:frame", "ocular_networks:silicotin_bar", "ocular_networks:frame"}
 	}
@@ -870,9 +888,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:pipe_filtered_E 5",
 	recipe={
-		{"", "ocular_networks:pipe_socket", "dye:violet"},
+		{"", "ocular_networks:pipe_socket_filter", ""},
 		{"ocular_networks:silicotin_bar", "ocular_networks:pipe_E", "ocular_networks:silicotin_bar"},
-		{"dye:violet", "ocular_networks:silicotin_bar", ""}
+		{"", "", ""}
 	}
 })
 
@@ -1167,7 +1185,7 @@ minetest.register_craft({
 ocular_networks.register_shroomable({
 	node="ocular_networks:loomshroom",
 	output="ocular_networks:luminium_lump",
-	cost=1000,
+	cost=5000,
 })
 
 ocular_networks.register_shroomable({
@@ -1710,3 +1728,73 @@ minetest.register_craft({
 		{"default:clay_lump", "ocular_networks:freeElem_nitrogen"}
 	}
 })
+
+ocular_networks.register_cultivateable({
+	plant="default:grass_1",
+	output="default:grass_1",
+	cost=250,
+})
+
+ocular_networks.register_cultivateable({
+	plant="default:junglegrass",
+	output="default:junglegrass",
+	cost=250,
+})
+
+ocular_networks.register_cultivateable({
+	plant="default:papyrus",
+	output="default:papyrus",
+	cost=2500,
+})
+
+if minetest.get_modpath("farming") then
+	ocular_networks.register_cultivateable({
+		plant="farming:seed_cotton",
+		output="farming:cotton",
+		cost=2500,
+	})
+	
+	ocular_networks.register_cultivateable({
+		plant="farming:seed_wheat",
+		output="farming:wheat",
+		cost=2500,
+	})
+end
+
+if minetest.get_modpath("flowers") then
+	ocular_networks.register_cultivateable({
+		plant="flowers:rose",
+		output="flowers:rose",
+		cost=500,
+	})
+	
+	ocular_networks.register_cultivateable({
+		plant="flowers:dandelion_yellow",
+		output="flowers:dandelion_yellow",
+		cost=500,
+	})
+	
+	ocular_networks.register_cultivateable({
+		plant="flowers:dandelion_white",
+		output="flowers:dandelion_white",
+		cost=500,
+	})
+	
+	ocular_networks.register_cultivateable({
+		plant="flowers:geranium",
+		output="flowers:geranium",
+		cost=500,
+	})
+	
+	ocular_networks.register_cultivateable({
+		plant="flowers:tulip",
+		output="flowers:tulip",
+		cost=500,
+	})
+	
+	ocular_networks.register_cultivateable({
+		plant="flowers:viola",
+		output="flowers:viola",
+		cost=500,
+	})
+end

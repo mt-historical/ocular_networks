@@ -58,7 +58,7 @@ return {
 	-- Whether or not to load the blaze rifle weapons.
 	load_rifle_weapons = true, 
 
-	 -- Whether or not to load the probe logic unit.
+	 -- Whether or not to load the probe logic unit. (requires mesecons)
 	load_probe_toolkit = true,
 	
 	 -- Whether or not to load the guidebook unit.
@@ -67,6 +67,10 @@ return {
 	-- Whether to load the lag machine (chunkloader).
 	load_forceloader = false, 
 	
+-- TWEAKING (Will only take effect if changed before loading)
+	
+	-- how many hp the healer returns
+	healer_quality=3, 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Don't change this bit
 }

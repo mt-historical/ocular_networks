@@ -3,7 +3,7 @@ ocular_networks.channel_states={}
 ocular_networks.netCommands={
 	["help"]={
 		name="help",
-		desc="List commands, or provide help for a specified command. | Syntax: help | help <cmd>",
+		desc="help : List commands, or provide help for a specified command. | Syntax: help | help <cmd>",
 		func=function(arg)
 			if arg then
 				if ocular_networks.netCommands[arg] then
@@ -12,23 +12,23 @@ ocular_networks.netCommands={
 					return "Command "..arg.." doesn't exist"
 				end
 			else
-				return 	"Available commands:\n"..
-						"help : List commands, or provide help for a specified command. | Syntax: help | help <cmd>\n"..
-						"write : Set a channel value. | Syntax: write <channel>=<val>\n"..
-						"read : Print the content of a channel. | Syntax: read <channel>\n"..
-						"display : Print the content of a channel as an array. | Syntax: display <channel>\n"..
-						"denote : Turn a list of args into a table and write it to a channel. | Syntax: denote <channel>=<arg1>,<arg2>,<arg3>"
+				local help=""
+				for _,v in pairs(ocular_networks.netCommands) do
+					help=help..v.desc.."\n\n"
+				end
+				return help
 			end
 			return "(This message should never show up, report immediately) [HELP]["..arg.."]"
 		end,
 	},
 	["write"]={
 		name="write",
-		desc="Set a channel value. | Syntax: write <channel>=<val>",
+		desc="write : Set a channel value. | Syntax: write <channel>=<val> (val can be a channel name)",
 		func=function(arg)
 			if arg then
 				local args=string.split(arg, "=")
 				if #args==2 then
+					if ocular_networks.channel_states[args[2]] then args[2]=ocular_networks.channel_states[args[2]] end
 					ocular_networks.channel_states[args[1]]=tostring(args[2])
 					return "Value of channel '"..args[1].."' set to '"..args[2].."'."
 				else
@@ -42,12 +42,12 @@ ocular_networks.netCommands={
 	},
 	["read"]={
 		name="read",
-		desc="Print the content of a channel. | Syntax: read <channel>", 
+		desc="read : Print the content of a channel. | Syntax: read <channel>", 
 		func=function(arg)
 			if arg then
 				if ocular_networks.channel_states[arg] then
-					if type(ocular_networks.channel_states[arg])=="string" then
-						return ocular_networks.channel_states[arg]
+					if type(tostring(ocular_networks.channel_states[arg]))=="string" then
+						return tostring(ocular_networks.channel_states[arg])
 					else
 						return "Expected string, got "..type(ocular_networks.channel_states[arg])
 					end
@@ -107,6 +107,161 @@ ocular_networks.netCommands={
 			return "(This message should never show up, report immediately) [DISPLAY2]["..arg.."]"
 		end,
 	},
+	["add"]={
+		name="add",
+		desc="add : Add two args and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: add <channel>=<arg1>+<arg2>", 
+		func=function(arg)
+			if arg then
+				local args=string.split(arg, "=")
+				if #args==2 then
+					local args2=string.split(args[2], "+")
+					if #args2==2 then
+						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
+						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
+						if type(tonumber(args2[1]))=="number" and type(tonumber(args2[2]))=="number" then
+							ocular_networks.channel_states[args[1]]=tonumber(args2[1])+tonumber(args2[2])
+							return "Value of channel '"..args[1].."' set to '"..tonumber(args2[1])+tonumber(args2[2]).."'."
+						else
+							return "NaN supplied"
+						end
+					elseif #args2>2 then
+						return "Too many arguments"
+					elseif #args2<2 then
+						return "Too few arguments"
+					end
+				else
+					return "Incorrect formatting"
+				end
+			else
+				return "No arguments specified"
+			end
+			return "(This message should never show up, report immediately) [ADD]["..arg.."]"
+		end,
+	},
+	["sub"]={
+		name="sub",
+		desc="sub : Subtract arg 2 from arg 1 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: sub <channel>=<arg1>-<arg2>", 
+		func=function(arg)
+			if arg then
+				local args=string.split(arg, "=")
+				if #args==2 then
+					local args2=string.split(args[2], "-")
+					if #args2==2 then
+						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
+						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
+						if type(tonumber(args2[1]))=="number" and type(tonumber(args2[2]))=="number" then
+							ocular_networks.channel_states[args[1]]=tonumber(args2[1])-tonumber(args2[2])
+							return "Value of channel '"..args[1].."' set to '"..tonumber(args2[1])-tonumber(args2[2]).."'."
+						else
+							return "NaN supplied"
+						end
+					elseif #args2>2 then
+						return "Too many arguments"
+					elseif #args2<2 then
+						return "Too few arguments"
+					end
+				else
+					return "Incorrect formatting"
+				end
+			else
+				return "No arguments specified"
+			end
+			return "(This message should never show up, report immediately) [SUB]["..arg.."]"
+		end,
+	},
+	["mult"]={
+		name="mult",
+		desc="mult : Multiply arg 1 by arg 2 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: mult <channel>=<arg1>*<arg2>", 
+		func=function(arg)
+			if arg then
+				local args=string.split(arg, "=")
+				if #args==2 then
+					local args2=string.split(args[2], "*")
+					if #args2==2 then
+						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
+						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
+						if type(tonumber(args2[1]))=="number" and type(tonumber(args2[2]))=="number" then
+							ocular_networks.channel_states[args[1]]=tonumber(args2[1])*tonumber(args2[2])
+							return "Value of channel '"..args[1].."' set to '"..tonumber(args2[1])*tonumber(args2[2]).."'."
+						else
+							return "NaN supplied"
+						end
+					elseif #args2>2 then
+						return "Too many arguments"
+					elseif #args2<2 then
+						return "Too few arguments"
+					end
+				else
+					return "Incorrect formatting"
+				end
+			else
+				return "No arguments specified"
+			end
+			return "(This message should never show up, report immediately) [MULT]["..arg.."]"
+		end,
+	},
+	["div"]={
+		name="div",
+		desc="div : Divide arg 1 by arg 2 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: div <channel>=<arg1>/<arg2>", 
+		func=function(arg)
+			if arg then
+				local args=string.split(arg, "=")
+				if #args==2 then
+					local args2=string.split(args[2], "/")
+					if #args2==2 then
+						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
+						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
+						if type(tonumber(args2[1]))=="number" and type(tonumber(args2[2]))=="number" then
+							ocular_networks.channel_states[args[1]]=tonumber(args2[1])/tonumber(args2[2])
+							return "Value of channel '"..args[1].."' set to '"..tonumber(args2[1])/tonumber(args2[2]).."'."
+						else
+							return "NaN supplied"
+						end
+					elseif #args2>2 then
+						return "Too many arguments"
+					elseif #args2<2 then
+						return "Too few arguments"
+					end
+				else
+					return "Incorrect formatting"
+				end
+			else
+				return "No arguments specified"
+			end
+			return "(This message should never show up, report immediately) [DIV]["..arg.."]"
+		end,
+	},
+	["con"]={
+		name="con",
+		desc="con : Concatenate arg1 witth arg2 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: con <channel>=<arg1>+<arg2>", 
+		func=function(arg)
+			if arg then
+				local args=string.split(arg, "=")
+				if #args==2 then
+					local args2=string.split(args[2], "+")
+					if #args2==2 then
+						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
+						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
+						if type(tostring(args2[1]))=="string" and type(tostring(args2[2]))=="string" then
+							ocular_networks.channel_states[args[1]]=tostring(args2[1])..tostring(args2[2])
+							return "Value of channel '"..args[1].."' set to '"..tostring(args2[1])..tostring(args2[2]).."'."
+						else
+							return "Ivalid data supplied"
+						end
+					elseif #args2>2 then
+						return "Too many arguments"
+					elseif #args2<2 then
+						return "Too few arguments"
+					end
+				else
+					return "Incorrect formatting"
+				end
+			else
+				return "No arguments specified"
+			end
+			return "(This message should never show up, report immediately) [CON]["..arg.."]"
+		end,
+	},
 }
 
 local prb="size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,1;6.5,8;;;"
@@ -137,11 +292,15 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname=="Poly_disk2IO" then
 		if fields.cmd then
 			local commandElems=string.split(fields.cmd, " ")
+			if #commandElems==2 then
 			if ocular_networks.netCommands[commandElems[1]] then
 				local output=ocular_networks.netCommands[commandElems[1]].func(commandElems[2])
 				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\n"..output..ef)
 			else
 				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nCommand '"..fields.cmd.." does not exist."..ef)
+			end
+			else
+				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nSyntax error"..ef)
 			end
 		end
 	end
@@ -436,9 +595,9 @@ minetest.register_abm({
 				["1"]=true,
 			}
 			if verifstates[ocular_networks.channel_states[meta:get_string("channel")]] then
-				meta2:set_string("enabled", "true")
-			else
 				meta2:set_string("enabled", "false")
+			else
+				meta2:set_string("enabled", "true")
 			end
 		elseif meta:get_string("mode") == "mesecon" then
 			if ocular_networks.channel_states[meta:get_string("channel")] == meta:get_string("attr") then

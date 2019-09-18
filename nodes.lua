@@ -1095,7 +1095,7 @@ minetest.register_node("ocular_networks:passive_cooler", {
 
 minetest.register_node("ocular_networks:charger", {
 	description="Charging Station\n"..minetest.colorize("#00affa", "Charges items with OCP\nTakes power from ABOVE"),
-	tiles={"default_copper_block.png^poly_frame.png^poly_gui_icon_pwr.png"},
+	tiles={"default_copper_block.png^poly_frame.png^poly_gui_icon_pwr2.png"},
 	paramtype2="facedir",
 	is_ground_content=false,
 	groups={cracky=3, oddly_breakable_by_hand=3},
@@ -1620,7 +1620,7 @@ minetest.register_node("ocular_networks:pipe_itembuffer", {
 
 minetest.register_node("ocular_networks:pipe_trashextractor", {
 	description="Filter-Wise Item Destroyer\n"..minetest.colorize("#00affa", "Removes items from pipe-enabled storage crates (or chests)\nbased on filters.\nTakes items from ABOVE"),
-	tiles={"poly_trash_extractor.png"},
+	tiles={"poly_trash_extractor.png^poly_pipe_socket2.png", "poly_trash_extractor.png", "poly_trash_extractor.png"},
 	is_ground_content=false,
 	groups={cracky=3, oddly_breakable_by_hand=3},
 	sounds=default.node_sound_metal_defaults(),
@@ -1672,7 +1672,7 @@ minetest.register_node("ocular_networks:pipe_trashextractor", {
 
 minetest.register_node("ocular_networks:pipe_filtered_E", {
 	description="Horizontal Filtered Item Pipe\n"..minetest.colorize("#00affa", "Arrow indicates direction,\nPunch with wrench to rotate."),
-	tiles={"poly_pipe_casing_arrow_right_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing_filtered.png", "poly_pipe_casing_filtered.png"},
+	tiles={"poly_pipe_casing_arrow_right_filtered.png", "poly_pipe_casing_filtered.png", "^poly_pipe_socket2.png", "poly_pipe_socket2.png", "poly_pipe_casing_filtered.png", "poly_pipe_casing_filtered.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
 	drop="ocular_networks:pipe_filtered_E",
@@ -1730,7 +1730,7 @@ minetest.register_node("ocular_networks:pipe_filtered_E", {
 
 minetest.register_node("ocular_networks:pipe_filtered_S", {
 	description="Horizontal Filtered Item Pipe\n"..minetest.colorize("#00affa", "Arrow indicates direction,\nPunch with wrench to rotate."),
-	tiles={"poly_pipe_casing_arrow_down_filtered.png", "poly_pipe_casing2_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_socket.png", "poly_pipe_socket.png"},
+	tiles={"poly_pipe_casing_arrow_down_filtered.png", "poly_pipe_casing2_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_socket2.png", "poly_pipe_socket2.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
 	drop="ocular_networks:pipe_filtered_E",
@@ -1788,7 +1788,7 @@ minetest.register_node("ocular_networks:pipe_filtered_S", {
 
 minetest.register_node("ocular_networks:pipe_filtered_W", {
 	description="Horizontal Filtered Item Pipe\n"..minetest.colorize("#00affa", "Arrow indicates direction,\nPunch with wrench to rotate."),
-	tiles={"poly_pipe_casing_arrow_left_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing_filtered.png", "poly_pipe_casing_filtered.png"},
+	tiles={"poly_pipe_casing_arrow_left_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_socket2.png", "poly_pipe_socket2.png", "poly_pipe_casing_filtered.png", "poly_pipe_casing_filtered.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
 	drop="ocular_networks:pipe_filtered_E",
@@ -1846,7 +1846,7 @@ minetest.register_node("ocular_networks:pipe_filtered_W", {
 
 minetest.register_node("ocular_networks:pipe_filtered_N", {
 	description="Horizontal Filtered Item Pipe\n"..minetest.colorize("#00affa", "Arrow indicates direction,\nPunch with wrench to rotate."),
-	tiles={"poly_pipe_casing_arrow_up_filtered.png", "poly_pipe_casing2_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_socket.png", "poly_pipe_socket.png"},
+	tiles={"poly_pipe_casing_arrow_up_filtered.png", "poly_pipe_casing2_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_casing_filtered.png", "poly_pipe_socket2.png", "poly_pipe_socket2.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
 	drop="ocular_networks:pipe_filtered_E",
@@ -1904,7 +1904,7 @@ minetest.register_node("ocular_networks:pipe_filtered_N", {
 
 minetest.register_node("ocular_networks:pipe_filtered_D", {
 	description="Vertical Filtered Item Pipe\n"..minetest.colorize("#00affa", "Arrow indicates direction,\nPunch with wrench to rotate."),
-	tiles={"poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing_arrow_down_filtered.png", "poly_pipe_casing_arrow_down_filtered.png", "poly_pipe_casing_arrow_down_filtered.png", "poly_pipe_casing_arrow_down_filtered.png"},
+	tiles={"poly_pipe_socket2.png", "poly_pipe_socket2.png", "poly_pipe_casing_arrow_down_filtered.png", "poly_pipe_casing_arrow_down_filtered.png", "poly_pipe_casing_arrow_down_filtered.png", "poly_pipe_casing_arrow_down_filtered.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
 	drop="ocular_networks:pipe_filtered_D",
@@ -1962,7 +1962,7 @@ minetest.register_node("ocular_networks:pipe_filtered_D", {
 
 minetest.register_node("ocular_networks:pipe_filtered_U", {
 	description="Vertical Filtered Item Pipe\n"..minetest.colorize("#00affa", "Arrow indicates direction,\nPunch with wrench to rotate."),
-	tiles={"poly_pipe_socket.png", "poly_pipe_socket.png", "poly_pipe_casing_arrow_up_filtered.png", "poly_pipe_casing_arrow_up_filtered.png", "poly_pipe_casing_arrow_up_filtered.png", "poly_pipe_casing_arrow_up_filtered.png"},
+	tiles={"poly_pipe_socket2.png", "poly_pipe_socket2.png", "poly_pipe_casing_arrow_up_filtered.png", "poly_pipe_casing_arrow_up_filtered.png", "poly_pipe_casing_arrow_up_filtered.png", "poly_pipe_casing_arrow_up_filtered.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
 	drop="ocular_networks:pipe_filtered_D",
@@ -2333,7 +2333,7 @@ minetest.register_node("ocular_networks:forge", {
 })
 
 minetest.register_node("ocular_networks:cultivator", {
-	description="Phytogenic Cultivator\n"..minetest.colorize("#00affa", "Increases the speed of plant growth using fertiliser"),
+	description="Phytogenic Cultivator\n"..minetest.colorize("#00affa", "Increases the speed of plant growth using fertiliser.\nTakes power from BELOW"),
 	tiles={"poly_bolumiary_top2.png", "poly_bolumiary_bottom.png", "poly_bolumiary_side2.png"},
 	is_ground_content=false,
 	groups={cracky=3, oddly_breakable_by_hand=3},
@@ -2366,8 +2366,8 @@ minetest.register_node("ocular_networks:cultivator", {
 
 
 minetest.register_node("ocular_networks:furnace", {
-	description="Fresnel Furnace\n"..minetest.colorize("#00affa", "A powerfule ndgame furnace using focused light.\nTakes Power From BELOW"),
-	tiles={"default_obsidian.png^poly_silver_lens.png^poly_frame.png", "default_steel_block.png^poly_frame.png", "poly_battery_bottom.png^poly_frame.png", "poly_battery_bottom.png^poly_frame.png", "poly_battery_bottom.png^poly_frame.png", "poly_battery_bottom.png^poly_frame.png^poly_furnace2.png"},
+	description="Fresnel Furnace\n"..minetest.colorize("#00affa", "A powerful endgame furnace using focused light.\nTakes Power From BELOW"),
+	tiles={"default_obsidian.png^poly_silver_lens.png^poly_frame.png", "default_steel_block.png^poly_frame.png", "poly_shimmering_block.png^poly_frame.png", "poly_shimmering_block.png^poly_frame.png", "poly_shimmering_block.png^poly_frame.png", "poly_shimmering_block.png^poly_frame.png^poly_furnace2.png"},
 	is_ground_content=false,
 	drawtype="nodebox",
 	paramtype2="facedir",
