@@ -1,22 +1,51 @@
 ocular_networks.channel_states={}
 
+ocular_networks.netKeyWords={
+	["if"]={
+		name="if",
+		desc="if : Conditionally execute a command. | Syntax: if <arg>==<arg> [command] <args>",
+		func=function(arg, args_)
+			if arg then
+				local args=string.split(arg, "==")
+				if #args==2 then
+					if ocular_networks.channel_states[args[2]] then args[2]=ocular_networks.channel_states[args[2]] end
+					if ocular_networks.channel_states[args[1]] then args[1]=ocular_networks.channel_states[args[1]] end
+					if args[1]==args[2] then
+						return "Success: ", true
+					else
+						return "Conditions not met", false
+					end
+				else
+					return "Invalid argument structure", false
+				end
+			else
+				return "No arguments specified", false
+			end
+			return "(This message should never show up, report immediately) [WRITE]["..arg.."]", false
+		end,
+	},
+}
+
 ocular_networks.netCommands={
 	["help"]={
 		name="help",
-		desc="help : List commands, or provide help for a specified command. | Syntax: help | help <cmd>",
+		desc="help : List commands, or provide help for a specified command. | Syntax: help all | help <cmd>",
 		func=function(arg)
 			if arg then
-				if ocular_networks.netCommands[arg] then
+				if arg=="all" then
+					local help=""
+					for _,v in pairs(ocular_networks.netCommands) do
+						help=help..v.desc.."\n\n"
+					end
+					for _,v in pairs(ocular_networks.netKeyWords) do
+						help=help..v.desc.."\n\n"
+					end
+					return help
+				elseif ocular_networks.netCommands[arg] then
 					return ocular_networks.netCommands[arg].desc
 				else
 					return "Command "..arg.." doesn't exist"
 				end
-			else
-				local help=""
-				for _,v in pairs(ocular_networks.netCommands) do
-					help=help..v.desc.."\n\n"
-				end
-				return help
 			end
 			return "(This message should never show up, report immediately) [HELP]["..arg.."]"
 		end,
@@ -119,7 +148,7 @@ ocular_networks.netCommands={
 						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
 						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
 						if type(tonumber(args2[1]))=="number" and type(tonumber(args2[2]))=="number" then
-							ocular_networks.channel_states[args[1]]=tonumber(args2[1])+tonumber(args2[2])
+							ocular_networks.channel_states[args[1]]=tostring(tonumber(args2[1])+tonumber(args2[2]))
 							return "Value of channel '"..args[1].."' set to '"..tonumber(args2[1])+tonumber(args2[2]).."'."
 						else
 							return "NaN supplied"
@@ -150,7 +179,7 @@ ocular_networks.netCommands={
 						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
 						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
 						if type(tonumber(args2[1]))=="number" and type(tonumber(args2[2]))=="number" then
-							ocular_networks.channel_states[args[1]]=tonumber(args2[1])-tonumber(args2[2])
+							ocular_networks.channel_states[args[1]]=tostring(tonumber(args2[1])-tonumber(args2[2]))
 							return "Value of channel '"..args[1].."' set to '"..tonumber(args2[1])-tonumber(args2[2]).."'."
 						else
 							return "NaN supplied"
@@ -181,7 +210,7 @@ ocular_networks.netCommands={
 						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
 						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
 						if type(tonumber(args2[1]))=="number" and type(tonumber(args2[2]))=="number" then
-							ocular_networks.channel_states[args[1]]=tonumber(args2[1])*tonumber(args2[2])
+							ocular_networks.channel_states[args[1]]=tostring(tonumber(args2[1])*tonumber(args2[2]))
 							return "Value of channel '"..args[1].."' set to '"..tonumber(args2[1])*tonumber(args2[2]).."'."
 						else
 							return "NaN supplied"
@@ -212,7 +241,7 @@ ocular_networks.netCommands={
 						if ocular_networks.channel_states[args2[1]] then args2[1]=ocular_networks.channel_states[args2[1]] end
 						if ocular_networks.channel_states[args2[2]] then args2[2]=ocular_networks.channel_states[args2[2]] end
 						if type(tonumber(args2[1]))=="number" and type(tonumber(args2[2]))=="number" then
-							ocular_networks.channel_states[args[1]]=tonumber(args2[1])/tonumber(args2[2])
+							ocular_networks.channel_states[args[1]]=tostring(tonumber(args2[1])/tonumber(args2[2]))
 							return "Value of channel '"..args[1].."' set to '"..tonumber(args2[1])/tonumber(args2[2]).."'."
 						else
 							return "NaN supplied"
@@ -284,7 +313,7 @@ local st={
 	end,
 	
 	on_use=function(itemstack, placer, pointed_thing)
-		minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help' for a list of commands"..ef)
+		minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help all' for a list of commands"..ef)
 	end
 }
 
@@ -292,13 +321,22 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname=="Poly_disk2IO" then
 		if fields.cmd then
 			local commandElems=string.split(fields.cmd, " ")
-			if #commandElems==2 then
-			if ocular_networks.netCommands[commandElems[1]] then
-				local output=ocular_networks.netCommands[commandElems[1]].func(commandElems[2])
-				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\n"..output..ef)
-			else
-				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nCommand '"..fields.cmd.." does not exist."..ef)
-			end
+			if #commandElems>1 then
+				local con=true
+				local output_=""
+				if ocular_networks.netKeyWords[commandElems[1]] then
+					output_, con=ocular_networks.netKeyWords[commandElems[1]].func(commandElems[2], commandElems)
+				end
+				
+				if ocular_networks.netCommands[commandElems[#commandElems-1]] then
+					local output=""
+					if con then
+						output=ocular_networks.netCommands[commandElems[#commandElems-1]].func(commandElems[#commandElems])
+					end
+					minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\n"..output_..output..ef)
+				else
+					minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nCommand '"..fields.cmd.." does not exist."..ef)
+				end
 			else
 				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nSyntax error"..ef)
 			end
@@ -319,7 +357,7 @@ if ocular_networks.get_config("load_armor_upgrades") then
 				inv:set_size("ocn_cyber_upgrades", 32)
 			end
 		else
-			minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help' for a list of commands"..ef)
+			minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help all' for a list of commands"..ef)
 		end
 	end
 end
@@ -345,7 +383,7 @@ local nodespec=""..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe", {
-	description="Network Probe (Uplink)\n"..minetest.colorize("#00affa", "Can be configured to read fields from the node below, and send them to the channel network."),
+	description="Channel Probe (Uplink)\n"..minetest.colorize("#00affa", "Can be configured to read fields from the node below, and send them to the channel network."),
 	tiles={"poly_uplink3.png", "poly_battery_bottom.png", "poly_uplink_side3.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
@@ -459,7 +497,7 @@ local nodespec2=""..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe2", {
-	description="Network Probe (Downlink)\n"..minetest.colorize("#00affa", "Can be configured to enable or disable the node below,\nor send a mesecon signal."),
+	description="Channel Probe (Downlink)\n"..minetest.colorize("#00affa", "Can be configured to enable or disable the node below,\nor send a mesecon signal."),
 	tiles={"poly_uplink4.png", "poly_battery_bottom.png", "poly_uplink_side4.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
@@ -634,4 +672,98 @@ minetest.register_craft({
 		{"ocular_networks:zweinium_crystal", "ocular_networks:networknode2", "ocular_networks:zweinium_crystal"},
 		{"ocular_networks:shimmering_bar", "default:coal_lump", "ocular_networks:shimmering_bar"}
 	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:computer",
+	recipe={
+		{"ocular_networks:zweinium_crystal", "ocular_networks:plate_shimmering", "ocular_networks:zweinium_crystal"},
+		{"ocular_networks:plate_shimmering", "default:obsidian_glass", "ocular_networks:plate_shimmering"},
+		{"ocular_networks:shimmering_bar", "ocular_networks:plate_shimmering", "ocular_networks:shimmering_bar"}
+	}
+})
+
+local prb2="size[10,10;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,0.75;8.65,10;cmd;;${code}]field_close_on_enter[cmd;false]button_exit[3,9.5;4,1;send;Submit]"
+
+minetest.register_node("ocular_networks:computer", {
+	description="Channel Processor\n"..minetest.colorize("#00affa", "Repeatedly runs a series of channel commands."),
+	tiles={"poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png^poly_screen.png"},
+	is_ground_content=false,
+	drawtype="nodebox",
+	paramtype2="facedir",
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		
+		if fields.cmd then
+			meta:set_string("code", fields.cmd)
+		end
+		
+		meta:set_string("formspec", prb2)
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
+		meta:set_string("code", "")
+		meta:set_string("formspec", prb2)
+		meta:set_string("infotext", "Owned By: "..owner)
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.5, 0)
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	on_timer = function(pos, elapsed)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		local code=meta:get_string("code").."\n"
+		for line in code:gmatch("([^\r\n]*)[\r\n]") do
+			local commandElems=string.split(line, " ")
+			if #commandElems>1 then
+				local con=true
+				local output_=""
+				if ocular_networks.netKeyWords[commandElems[1]] then
+					output_, con = ocular_networks.netKeyWords[commandElems[1]].func(commandElems[2], commandElems)
+				end
+				if con then
+					if ocular_networks.netCommands[commandElems[#commandElems-1]] then
+						meta:set_string("infotext", ocular_networks.netCommands[commandElems[#commandElems-1]].func(commandElems[#commandElems]))
+					end
+				end
+			end
+		end
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.5, 0)
+	end
 })
