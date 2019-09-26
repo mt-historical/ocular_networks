@@ -50,9 +50,9 @@ ocular_networks.netCommands={
 			return "(This message should never show up, report immediately) [HELP]["..arg.."]"
 		end,
 	},
-	["write"]={
-		name="write",
-		desc="write : Set a channel value. | Syntax: write <channel>=<val> (val can be a channel name)",
+	["let"]={
+		name="let",
+		desc="let : Set a channel value. | Syntax: let <channel>=<val> (val can be a channel name)",
 		func=function(arg)
 			if arg then
 				local args=string.split(arg, "=")
@@ -66,12 +66,12 @@ ocular_networks.netCommands={
 			else
 				return "No arguments specified"
 			end
-			return "(This message should never show up, report immediately) [WRITE]["..arg.."]"
+			return "(This message should never show up, report immediately) [LET]["..arg.."]"
 		end,
 	},
-	["read"]={
-		name="read",
-		desc="read : Print the content of a channel. | Syntax: read <channel>", 
+	["get"]={
+		name="get",
+		desc="get : Print the content of a channel. | Syntax: get <channel>", 
 		func=function(arg)
 			if arg then
 				if ocular_networks.channel_states[arg] then
@@ -86,12 +86,12 @@ ocular_networks.netCommands={
 			else
 				return "No arguments specified"
 			end
-			return "(This message should never show up, report immediately) [READ]["..arg.."]"
+			return "(This message should never show up, report immediately) [GET]["..arg.."]"
 		end,
 	},
-	["denote"]={
-		name="denote",
-		desc="denote : Turn a list of args into a table and write it to a channel. | Syntax: denote <channel>=<arg1>,<arg2>,<arg3>", 
+	["list"]={
+		name="list",
+		desc="list : Turn a list of args into a table and write it to a channel. | Syntax: list <channel>=<arg1>,<arg2>,<arg3>", 
 		func=function(arg)
 			if arg then
 				local args=string.split(arg, "=")
@@ -102,12 +102,12 @@ ocular_networks.netCommands={
 			else
 				return "No arguments specified"
 			end
-			return "(This message should never show up, report immediately) [DENOTE]["..arg.."]"
+			return "(This message should never show up, report immediately) [LIST]["..arg.."]"
 		end,
 	},
-	["display"]={
-		name="display",
-		desc="display : Print the content of a channel as an array. | Syntax: display <channel>", 
+	["dList"]={
+		name="dList",
+		desc="dList : Print the content of a channel as an array. | Syntax: dList <channel>", 
 		func=function(arg)
 			if arg then
 				if ocular_networks.channel_states[arg] then
@@ -133,7 +133,7 @@ ocular_networks.netCommands={
 			else
 				return "No arguments specified"
 			end
-			return "(This message should never show up, report immediately) [DISPLAY2]["..arg.."]"
+			return "(This message should never show up, report immediately) [DLIST]["..arg.."]"
 		end,
 	},
 	["add"]={
@@ -260,9 +260,9 @@ ocular_networks.netCommands={
 			return "(This message should never show up, report immediately) [DIV]["..arg.."]"
 		end,
 	},
-	["con"]={
-		name="con",
-		desc="con : Concatenate arg1 witth arg2 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: con <channel>=<arg1>+<arg2>", 
+	["append"]={
+		name="append",
+		desc="append : Concatenate arg1 witth arg2 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: append <channel>=<arg1>+<arg2>", 
 		func=function(arg)
 			if arg then
 				local args=string.split(arg, "=")
@@ -288,7 +288,7 @@ ocular_networks.netCommands={
 			else
 				return "No arguments specified"
 			end
-			return "(This message should never show up, report immediately) [CON]["..arg.."]"
+			return "(This message should never show up, report immediately) [APPEND]["..arg.."]"
 		end,
 	},
 }
@@ -334,6 +334,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 						output=ocular_networks.netCommands[commandElems[#commandElems-1]].func(commandElems[#commandElems])
 					end
 					minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\n"..output_..output..ef)
+					print("[OUCULAR NETWORKS]: player "..player:get_player_name().." executed command "..commandElems[#commandElems-1].." with the arguments "..commandElems[#commandElems])
 				else
 					minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nCommand '"..fields.cmd.." does not exist."..ef)
 				end

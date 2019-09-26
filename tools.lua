@@ -441,7 +441,7 @@ minetest.register_tool("ocular_networks:composite_scythe", {
 		full_punch_interval=0.7,
 		max_drop_level=1,
 		groupcaps={
-			snappy={times={[1]=2.0, [2]=1.00, [3]=0.35}, uses=40, maxlevel=3},
+			snappy={times={[1]=0, [2]=0, [3]=0}, uses=40, maxlevel=3},
 		},
 		damage_groups={fleshy=27},
 	},

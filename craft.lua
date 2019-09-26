@@ -1722,7 +1722,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:fertiliser",
+	output="ocular_networks:fertiliser 10",
 	recipe={
 		{"ocular_networks:mulch", "ocular_networks:gum"},
 		{"default:clay_lump", "ocular_networks:freeElem_nitrogen"}
@@ -1798,3 +1798,33 @@ if minetest.get_modpath("flowers") then
 		cost=500,
 	})
 end
+
+ocular_networks.register_cultivateable({
+	plant="default:acacia_sapling",
+	output="default:acacia_leaves 5",
+	cost=2500,
+})
+
+ocular_networks.register_cultivateable({
+	plant="default:aspen_sapling",
+	output="default:aspen_leaves 5",
+	cost=2500,
+})
+
+ocular_networks.register_cultivateable({
+	plant="default:junglesapling",
+	output="default:jungleleaves 10",
+	cost=2500,
+})
+
+ocular_networks.register_cultivateable({
+	plant="default:sapling",
+	output="default:leaves 5",
+	cost=2500,
+})
+
+ocular_networks.register_cultivateable({
+	plant="default:pine_sapling",
+	output="default:pine_needles 5",
+	cost=2500,
+})
