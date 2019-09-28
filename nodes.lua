@@ -1254,6 +1254,7 @@ minetest.register_node("ocular_networks:pipe_E", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1301,6 +1302,7 @@ minetest.register_node("ocular_networks:pipe_S", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1348,6 +1350,7 @@ minetest.register_node("ocular_networks:pipe_W", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1395,6 +1398,7 @@ minetest.register_node("ocular_networks:pipe_N", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1544,7 +1548,6 @@ minetest.register_node("ocular_networks:pipe_itembuffer", {
 		meta:set_string("owner", owner)
 		meta:set_string("formspec", bufferspec)
 		meta:set_string("infotext", "Owned By: "..owner)
-		meta:set_int("ocular_power", 0)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -2111,6 +2114,7 @@ minetest.register_node("ocular_networks:insertor", {
 		local owner=placer:get_player_name()
 		meta:set_string("owner", owner)
 		meta:set_string("infotext", "Owned By: "..owner)
+		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
