@@ -48,6 +48,6 @@ if ocular_networks.get_config("load_flight_ring") then
 	dofile(modpath.."/modules/jetring.lua")
 end
 
-if ocular_networks.get_config("load_guide") then
+if ocular_networks.get_config("load_guide") and minetest.get_modpath("guidebooks") then
 	dofile(modpath.."/modules/guide.lua")
 end

@@ -1681,3 +1681,46 @@ minetest.register_abm({
 		end
 	end
 })
+
+minetest.register_abm({
+    label="ocn_crafting",
+	nodenames={"ocular_networks:crafter"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		if meta:get_string("enabled")=="true" then
+			local owner=meta:get_string("owner")
+			local source_meta=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+			local source_power=source_meta:get_int("ocular_power")
+			local source_owner=source_meta:get_string("owner")
+			if source_power then
+				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
+					local inv=meta:get_inventory()
+					if source_power  and source_power >499 then
+						local result,dec=minetest.get_craft_result({method="normal", width=3, items=inv:get_list("recipe")})
+						if result and result.item and result.item:get_name() ~= "" then
+							if inv:room_for_item("output", result.item) then
+								for _,v in ipairs(inv:get_list("recipe")) do
+									if v and ItemStack(v) and v ~= "" then
+										if not inv:contains_item("input", ItemStack(v):get_name()) then
+											return
+										end
+									end
+								end
+								inv:add_item("output", result.item)
+								for _,v in ipairs(inv:get_list("recipe")) do
+									inv:remove_item("input", ItemStack(v):get_name())
+								end
+								--minetest.sound_play("OCN", {gain = 0.3, pos = pos, max_hear_distance = 10})
+								source_meta:set_int("ocular_power", source_power-500)
+							end
+						end
+					end
+				end
+			end
+			meta:set_string("infotext", "Owned By: "..owner)
+		end
+	end
+})

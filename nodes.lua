@@ -7,6 +7,7 @@ local nodespec=""..
 "field[7,1;2,1;sourcez;z;${sourceposz}]"..
 "label[0.7,2;positions are relative to the networking node.]"..
 "field[1,4.4;8,1;power;power is at:;${ocular_power}]"..
+"style[save;bgcolor=blue;textcolor=white]"..
 "button_exit[0.74,5;8,1;save;Save]"
 
 local nodespec2=""..
@@ -19,12 +20,14 @@ local nodespec2=""..
 "label[0.7,1.7;positions are relative to the networking node.]"..
 "field[1,2.7;8,1;draw;input amount to take:;${draw}]"..
 "field[1,4.4;8,1;power;power is at:;${ocular_power}]"..
+"style[save;bgcolor=blue;textcolor=white]"..
 "button_exit[0.74,5;8,1;save;Save]"
 
 local trashspec=""..
 "size[10,6]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "field[1,2.7;8,1;items;input items to take:;${items}]"..
+"style[save;bgcolor=blue;textcolor=white]"..
 "button_exit[0.74,5;8,1;save;Save]"
 
 local meltspec=""..
@@ -107,6 +110,7 @@ local omnispec=""..
 "field[4,1;2,1;sourcey;y;${sourceposy}]"..
 "field[7,1;2,1;sourcez;z;${sourceposz}]"..
 "field[1,2;8,1;inv;Inventory to access;${ainv}]"..
+"style[save;bgcolor=blue;textcolor=white]"..
 "button_exit[0.74,2.5;8,1;save;Save]"..
 "list[current_player;main;0.7,3.5;8,4;]"..
 "list[context;main;9,1;3,6;]"..
@@ -169,7 +173,7 @@ minetest.register_node("ocular_networks:zweinium_block", {
 	sunlight_propagates=true,
 	is_ground_content=false,
 	groups={cracky=3, oddly_breakable_by_hand=3},
-	sounds=default.node_sound_metal_defaults(),
+	sounds=default.node_sound_glass_defaults(),
 })
 
 minetest.register_node("ocular_networks:frame_lens", {
@@ -2365,6 +2369,27 @@ minetest.register_node("ocular_networks:cultivator", {
 		local meta=minetest.get_meta(pos)
 		local owner=meta:get_string("owner")
 		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
 	end
 })
 
@@ -2398,6 +2423,77 @@ minetest.register_node("ocular_networks:furnace", {
 		meta:set_string("enabled", "true")
 		meta:set_string("formspec", coolspec)
 		meta:set_string("infotext", "Owned By: "..owner)
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end
+})
+
+local crafspec=""..
+"size[14,9]"..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
+"list[current_player;main;0,5;8,4;]"..
+"list[context;input;0,0;8,4;]"..
+"list[context;recipe;8.5,3;3,3;]"..
+"list[context;output;12,4;1,1;]"..
+"listring[]"
+
+minetest.register_node("ocular_networks:crafter", {
+	description="Complex Crafter\n"..minetest.colorize("#00affa", "Automatically crafts items based on a set recipe.\nTakes power from BELOW."),
+	tiles={"poly_crafter_top.png", "poly_crafter.png", "poly_crafter.png"},
+	is_ground_content=false,
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_stone_defaults(),
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
+		meta:set_int("ocular_power", 0)
+		meta:set_string("enabled", "true")
+	end,
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		meta:set_string("formspec", crafspec)
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("infotext", "Power Buffer: 0".."\nOwned By: "..owner)
+		local inv=meta:get_inventory()
+		inv:set_list("input", {""})
+		inv:set_size("input", 32)
+		inv:set_list("recipe", {""})
+		inv:set_size("recipe", 9)
+		inv:set_list("output", {""})
+		inv:set_size("output", 1)
+		meta:set_string("formspec", crafspec)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)

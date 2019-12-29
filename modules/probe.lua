@@ -32,20 +32,20 @@ ocular_networks.netCommands={
 		desc="help : List commands, or provide help for a specified command. | Syntax: help all | help <cmd>",
 		func=function(arg)
 			if arg then
-				if arg=="all" then
-					local help=""
-					for _,v in pairs(ocular_networks.netCommands) do
-						help=help..v.desc.."\n\n"
-					end
-					for _,v in pairs(ocular_networks.netKeyWords) do
-						help=help..v.desc.."\n\n"
-					end
-					return help
-				elseif ocular_networks.netCommands[arg] then
+				if ocular_networks.netCommands[arg] then
 					return ocular_networks.netCommands[arg].desc
 				else
 					return "Command "..arg.." doesn't exist"
 				end
+			else
+				local help=""
+				for _,v in pairs(ocular_networks.netCommands) do
+					help=help..v.desc.."\n\n"
+				end
+				for _,v in pairs(ocular_networks.netKeyWords) do
+					help=help..v.desc.."\n\n"
+				end
+				return help
 			end
 			return "(This message should never show up, report immediately) [HELP]["..arg.."]"
 		end,
@@ -294,7 +294,7 @@ ocular_networks.netCommands={
 }
 
 local prb="size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,1;6.5,8;;;"
-local ef="]field_close_on_enter[cmd;false]field[0,8.9;7.5,1;cmd;;]button[7,8.59;1.2,1;send;|==>]"
+local ef="]field_close_on_enter[cmd;false]field[0,8.9;7.5,1;cmd;;]style[send;bgcolor=blue;textcolor=white]button[7,8.59;1.2,1;send;|==>]"
 
 local st={
 	description="Ocular Logistics Controller\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the probe message service."),
@@ -313,7 +313,7 @@ local st={
 	end,
 	
 	on_use=function(itemstack, placer, pointed_thing)
-		minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help all' for a list of commands"..ef)
+		minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help' for a list of commands"..ef)
 	end
 }
 
@@ -338,6 +338,10 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				else
 					minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nCommand '"..fields.cmd.." does not exist."..ef)
 				end
+			elseif fields.cmd=="help" then
+				--print("[OUCULAR NETWORKS]: player "..player:get_player_name().." queried help")
+				output=ocular_networks.netCommands[fields.cmd].func()
+				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\n"..output..ef)
 			else
 				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nSyntax error"..ef)
 			end
@@ -358,7 +362,7 @@ if ocular_networks.get_config("load_armor_upgrades") then
 				inv:set_size("ocn_cyber_upgrades", 32)
 			end
 		else
-			minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help all' for a list of commands"..ef)
+			minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help' for a list of commands"..ef)
 		end
 	end
 end
@@ -381,6 +385,7 @@ local nodespec=""..
 "dropdown[1,1;4,1;mode;inventory,metadata,nodename,mesecon;${mode}]"..
 "field[1,2.7;8,1;attr;Inventory name or metadata field:;${attr}]"..
 "field[1,4.4;8,1;channel;channel to use:;${channel}]"..
+"style[save;bgcolor=blue;textcolor=white]"..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe", {
@@ -495,6 +500,7 @@ local nodespec2=""..
 "dropdown[1,1;4,1;mode;switch,mesecon;${mode}]"..
 "field[1,2.7;8,1;attr;channel value required:;${attr}]"..
 "field[1,4.4;8,1;channel;channel to use:;${channel}]"..
+"style[save;bgcolor=blue;textcolor=white]"..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe2", {
@@ -684,7 +690,7 @@ minetest.register_craft({
 	}
 })
 
-local prb2="size[10,10;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,0.75;8.65,10;cmd;;${code}]field_close_on_enter[cmd;false]button_exit[3,9.5;4,1;send;Submit]"
+local prb2="size[10,10;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,0.75;8.65,10;cmd;;${code}]field_close_on_enter[cmd;false]style[send;bgcolor=blue;textcolor=white]button_exit[3,9.5;4,1;send;Submit]"
 
 minetest.register_node("ocular_networks:computer", {
 	description="Channel Processor\n"..minetest.colorize("#00affa", "Repeatedly runs a series of channel commands."),

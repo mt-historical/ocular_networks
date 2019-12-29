@@ -17,7 +17,6 @@ minetest.register_craftitem("ocular_networks:inspector", {
 minetest.register_craftitem("ocular_networks:save_disk", {
 	description="Aministrator Metadata Probe\n"..minetest.colorize("#00affa", "Sneak and rightclick on a node to \nsave it's metadata.\nClick on a node to load meta to it from the disk.\nhold 'use', and rightclick to view saved meta."),
 	inventory_image="poly_disk.png",
-	not_in_creative_inventory=1,
 	stack_max=1,
 	on_place=function(itemstack, placer, pointed_thing)
 		if placer:get_player_control().aux1 == true then

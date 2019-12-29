@@ -2,7 +2,13 @@
 minetest.register_craft({
 	output="ocular_networks:guide",
 	type="shapeless",
-	recipe={"default:book", "default:copper_ingot", "default:glass"},
+	recipe={"default:book", "default:copper_ingot", "ocular_networks:fibre"},
+})
+
+minetest.register_craft({
+	output="ocular_networks:fibre 6",
+	type="shapeless",
+	recipe={"default:grass_1", "default:grass_1"},
 })
 
 minetest.register_craft({
@@ -1827,4 +1833,13 @@ ocular_networks.register_cultivateable({
 	plant="default:pine_sapling",
 	output="default:pine_needles 5",
 	cost=2500,
+})
+
+minetest.register_craft({
+	output="ocular_networks:crafter",
+	recipe={
+		{"ocular_networks:plate_silicotin", "default:paper", "ocular_networks:plate_silicotin"},
+		{"ocular_networks:plate_silicotin", "default:chest_locked", "ocular_networks:plate_silicotin"},
+		{"ocular_networks:plate_silicotin", "ocular_networks:pipe_socket", "ocular_networks:plate_silicotin"}
+	}
 })
