@@ -29,9 +29,9 @@ ocular_networks.netKeyWords={
 ocular_networks.netCommands={
 	["help"]={
 		name="help",
-		desc="help : List commands, or provide help for a specified command. | Syntax: help all | help <cmd>",
+		desc="help : Provide help for a specified command, or list available commands. | Syntax: help all | help <cmd>",
 		func=function(arg)
-			if arg then
+			if arg and arg ~= "" then
 				if ocular_networks.netCommands[arg] then
 					return ocular_networks.netCommands[arg].desc
 				else
@@ -275,7 +275,7 @@ ocular_networks.netCommands={
 							ocular_networks.channel_states[args[1]]=tostring(args2[1])..tostring(args2[2])
 							return "Value of channel '"..args[1].."' set to '"..tostring(args2[1])..tostring(args2[2]).."'."
 						else
-							return "Ivalid data supplied"
+							return "Invalid data supplied"
 						end
 					elseif #args2>2 then
 						return "Too many arguments"
@@ -297,7 +297,7 @@ local prb="size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,1;6
 local ef="]field_close_on_enter[cmd;false]field[0,8.9;7.5,1;cmd;;]style[send;bgcolor=blue;textcolor=white]button[7,8.59;1.2,1;send;|==>]"
 
 local st={
-	description="Ocular Logistics Controller\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the probe message service."),
+	description="Multi-Purpose Tablet\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the Data Netwok console."),
 	inventory_image="poly_disk2.png",
 	not_in_creative_inventory=1,
 	stack_max=1,
@@ -334,13 +334,11 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 						output=ocular_networks.netCommands[commandElems[#commandElems-1]].func(commandElems[#commandElems])
 					end
 					minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\n"..output_..output..ef)
-					print("[OUCULAR NETWORKS]: player "..player:get_player_name().." executed command "..commandElems[#commandElems-1].." with the arguments "..commandElems[#commandElems])
 				else
 					minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nCommand '"..fields.cmd.." does not exist."..ef)
 				end
 			elseif fields.cmd=="help" then
-				--print("[OUCULAR NETWORKS]: player "..player:get_player_name().." queried help")
-				output=ocular_networks.netCommands[fields.cmd].func()
+				output=ocular_networks.netCommands["help"].func()
 				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\n"..output..ef)
 			else
 				minetest.show_formspec(player:get_player_name(), "Poly_disk2IO", prb.."$ "..fields.cmd.."\nSyntax error"..ef)
@@ -389,7 +387,7 @@ local nodespec=""..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe", {
-	description="Channel Probe (Uplink)\n"..minetest.colorize("#00affa", "Can be configured to read fields from the node below, and send them to the channel network."),
+	description="Data Network Uplink\n"..minetest.colorize("#00affa", "Can be configured to read fields from the node below, and send them to the Data Network."),
 	tiles={"poly_uplink3.png", "poly_battery_bottom.png", "poly_uplink_side3.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
@@ -504,7 +502,7 @@ local nodespec2=""..
 "button_exit[0.74,5;8,1;save;Save]"
 
 minetest.register_node("ocular_networks:networkprobe2", {
-	description="Channel Probe (Downlink)\n"..minetest.colorize("#00affa", "Can be configured to enable or disable the node below,\nor send a mesecon signal."),
+	description="Data Network Downlink\n"..minetest.colorize("#00affa", "Reads fields from the Data Network and can\ncontrol mesecon signals based on the data."),
 	tiles={"poly_uplink4.png", "poly_battery_bottom.png", "poly_uplink_side4.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
@@ -693,7 +691,7 @@ minetest.register_craft({
 local prb2="size[10,10;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,0.75;8.65,10;cmd;;${code}]field_close_on_enter[cmd;false]style[send;bgcolor=blue;textcolor=white]button_exit[3,9.5;4,1;send;Submit]"
 
 minetest.register_node("ocular_networks:computer", {
-	description="Channel Processor\n"..minetest.colorize("#00affa", "Repeatedly runs a series of channel commands."),
+	description="Data Network Processor\n"..minetest.colorize("#00affa", "Repeatedly runs a series of Data Network commands.\n(Supports storage)"),
 	tiles={"poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png^poly_screen.png"},
 	is_ground_content=false,
 	drawtype="nodebox",
@@ -764,6 +762,90 @@ minetest.register_node("ocular_networks:computer", {
 					output_, con = ocular_networks.netKeyWords[commandElems[1]].func(commandElems[2], commandElems)
 				end
 				if con then
+					if ocular_networks.netCommandsExtended[commandElems[#commandElems-1]] then
+						meta:set_string("infotext", ocular_networks.netCommandsExtended[commandElems[#commandElems-1]].func(commandElems[#commandElems], pos))
+					end
+				end
+			end
+		end
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.5, 0)
+	end
+})
+
+
+minetest.register_node("ocular_networks:terminal", {
+	description="Data Network Terminal\n"..minetest.colorize("#00affa", "Open access point for the Data Network.\n(Records history, supports storage)"),
+	tiles={"poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png", "poly_shimmering_block.png^poly_frame_3.png^poly_screen2.png"},
+	is_ground_content=false,
+	drawtype="nodebox",
+	paramtype2="facedir",
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+		
+		if fields.cmd then
+			meta:set_string("code", fields.cmd)
+		end
+		
+		meta:set_string("formspec", prb2)
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
+		meta:set_string("code", "")
+		meta:set_string("infotext", "Owned By: "..owner)
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.5, 0)
+		meta:set_string("history", "")
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	on_timer = function(pos, elapsed)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		local code=meta:get_string("code").."\n"
+		for line in code:gmatch("([^\r\n]*)[\r\n]") do
+			local commandElems=string.split(line, " ")
+			if #commandElems>1 then
+				local con=true
+				local output_=""
+				if ocular_networks.netKeyWords[commandElems[1]] then
+					output_, con = ocular_networks.netKeyWords[commandElems[1]].func(commandElems[2], commandElems)
+				end
+				if con then
 					if ocular_networks.netCommands[commandElems[#commandElems-1]] then
 						meta:set_string("infotext", ocular_networks.netCommands[commandElems[#commandElems-1]].func(commandElems[#commandElems]))
 					end
@@ -772,5 +854,128 @@ minetest.register_node("ocular_networks:computer", {
 		end
 		local timer=minetest.get_node_timer(pos)
 		timer:set(0.5, 0)
+	end,
+	on_rightclick = function(pos, node, clicker, itemstack)
+		local meta = minetest.get_meta(pos)
+		clicker:get_meta():set_string("OCNcurrTermPos", pos.x.." "..pos.y.." "..pos.z)
+		minetest.show_formspec(clicker:get_player_name(), "Poly_term", prb..meta:get_string("history")..ef)
+	end,
+})
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if formname=="Poly_term" then
+		if fields.cmd then
+			local pos=string.split(player:get_meta():get_string("OCNcurrTermPos"), " ")
+			pos2={}
+			pos2.x=tonumber(pos[1])
+			pos2.y=tonumber(pos[2])
+			pos2.z=tonumber(pos[3])
+			local meta=minetest.get_meta(pos2)
+			local hist=meta:get_string("history")
+			local commandElems=string.split(fields.cmd, " ")
+			if #commandElems>1 then
+				local con=true
+				local output_=""
+				if ocular_networks.netKeyWords[commandElems[1]] then
+					output_, con=ocular_networks.netKeyWords[commandElems[1]].func(commandElems[2], commandElems)
+				end
+				
+				if ocular_networks.netCommandsExtended[commandElems[#commandElems-1]] then
+					local output=""
+					if con then
+						output=ocular_networks.netCommandsExtended[commandElems[#commandElems-1]].func(commandElems[#commandElems], pos2)
+					end
+					hist="$ "..fields.cmd.."\n"..output_..output.."\n"..hist
+					minetest.show_formspec(player:get_player_name(), "Poly_term", prb..hist..ef)
+					meta:set_string("history", hist)
+				else
+					minetest.show_formspec(player:get_player_name(), "Poly_term", prb.."$ "..fields.cmd.."\nCommand '"..fields.cmd.." does not exist."..ef)
+				end
+			else
+				minetest.show_formspec(player:get_player_name(), "Poly_term", prb.."$ "..fields.cmd.."\nSyntax error"..ef)
+			end
+		end
 	end
+end)
+
+ocular_networks.netCommandsExtended=table.copy(ocular_networks.netCommands)
+
+ocular_networks.netCommandsExtended["state"]={
+	name="state",
+	desc="append : Set the environment option <elem> to the value <val> | Syntax: state <elem>:<val>", 
+	func=function(arg, pos)
+		if arg then
+			local args=string.split(arg, ":")
+			if #args==2 then
+				minetest.get_meta(pos):set_string("SETTING0_"..args[1], args[2])
+				return "Value of setting "..args[1].." set to "..args[2]
+			else
+				return "Incorrect formatting"
+			end
+		else
+			return "No arguments specified"
+		end
+		return "(This message should never show up, report immediately) [STATE]["..arg.."]"
+	end,
+}
+
+ocular_networks.netCommandsExtended["store"]={
+	name="store",
+	desc="store : Store the value <val> in the local address <addr> (<val> can be a channel name) | Syntax: store <val>=><addr>", 
+	func=function(arg, pos)
+		if arg then
+			local args=string.split(arg, "=>")
+			if #args==2 then
+				if ocular_networks.channel_states[args[1]] then args[1]=ocular_networks.channel_states[args[1]] end
+				minetest.get_meta(pos):set_string("ADDR_"..args[2], args[1])
+				return "Value of address "..args[2].." set to "..args[1]
+			else
+				return "Incorrect formatting"
+			end
+		else
+			return "No arguments specified"
+		end
+		return "(This message should never show up, report immediately) [STORE]["..arg.."]"
+	end,
+}
+
+ocular_networks.netCommandsExtended["read"]={
+	name="read",
+	desc="read : Read  the value of the local address <addr> | Syntax: read <addr>", 
+	func=function(arg, pos)
+		if arg then
+			return minetest.get_meta(pos):get_string("ADDR_"..arg)
+		else
+			return "No arguments specified"
+		end
+		return "(This message should never show up, report immediately) [STORE]["..arg.."]"
+	end,
+}
+
+ocular_networks.netCommandsExtended["send"]={
+	name="send",
+	desc="send : Send the value of the local address <addr> to the channel <ch> | Syntax: send <addr>=><ch>", 
+	func=function(arg, pos)
+		if arg then
+			local args=string.split(arg, "=>")
+			if #args==2 then
+				ocular_networks.channel_states[args[2]]=minetest.get_meta(pos):get_string("ADDR_"..args[1])
+				return "Value of channel "..args[2].." set to "..minetest.get_meta(pos):get_string("ADDR_"..args[1])
+			else
+				return "Incorrect formatting"
+			end
+		else
+			return "No arguments specified"
+		end
+		return "(This message should never show up, report immediately) [STORE]["..arg.."]"
+	end,
+}
+
+minetest.register_craft({
+	output="ocular_networks:terminal",
+	recipe={
+		{"ocular_networks:zweinium_crystal", "default:copper_ingot", "ocular_networks:zweinium_crystal"},
+		{"ocular_networks:plate_shimmering", "default:obsidian_glass", "ocular_networks:plate_shimmering"},
+		{"ocular_networks:zweinium_crystal", "default:copper_ingot", "ocular_networks:zweinium_crystal"}
+	}
 })
