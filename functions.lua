@@ -293,12 +293,39 @@ minetest.register_on_joinplayer(function(player)
 	if not tonumber(player:get_meta():get_string("personal_ocular_power")) then
 		player:get_meta():set_string("personal_ocular_power", "0")
 	end
+	player:get_meta():set_string("ocn_hud_power",player:hud_add({
+			hud_elem_type="image",
+			scale={x=3, y=3},
+			text="poly_hud2.png",
+			position={x=0.01, y=0.41},
+			name="hudbar11",
+			size="",
+			alignment={x=1, y=-1}
+		}))
+	player:get_meta():set_string("ocn_hud",player:hud_add({
+			hud_elem_type="image",
+			scale={x=3, y=3},
+			text="poly_hud1.png",
+			position={x=0.01, y=0.01},
+			name="hudbar1",
+			size="",
+			alignment={x=1, y=1}
+		}))
+	
 end)
 
 ocular_networks.register_probeCommand=function(def)
 	table.insert(ocular_networks.netCommands, {desc=def.description, func=def.func})
 end
 
+ocular_networks.meters={
+	["ocular_networks:healer"]=true,
+	["ocular_networks:blazerifle"]=true,
+	["ocular_networks:blazerifle_c"]=true,
+	["ocular_networks:erena_blaster"]=true
+}
+
+minetest.after(0, function()
 minetest.register_globalstep(function(dtime)
 	for _,player in ipairs(minetest.get_connected_players()) do
 		if tonumber(player:get_meta():get_string("personal_ocular_power")) then
@@ -308,8 +335,19 @@ minetest.register_globalstep(function(dtime)
 		else
 			player:get_meta():set_string("personal_ocular_power", "0")
 		end
+		local meta=player:get_meta()
+		if meta:get_string("ocn_hud") and  meta:get_string("ocn_hud")~=0 and meta:get_string("ocn_hud")~="" then
+			if ocular_networks.meters[player:get_wielded_item():get_name()] or player:get_inventory():contains_item("main", "ocular_networks:aurometer") then
+				player:hud_change(meta:get_string("ocn_hud"), "text", "poly_hud1.png")
+				player:hud_change(meta:get_string("ocn_hud_power"), "text", "poly_hud2.png")
+			else
+				player:hud_change(meta:get_string("ocn_hud"), "text", "poly_0.png")
+				player:hud_change(meta:get_string("ocn_hud_power"), "text", "poly_0.png")
+			end
+			player:hud_change(meta:get_string("ocn_hud_power"), "scale", {x=3,y=(3/ocular_networks.get_config("max_personal_network_power"))*meta:get_string("personal_ocular_power")})
+		end
 	end
-end)
+end)end)
 
 minetest.register_craftitem("ocular_networks:placeholder_power", {
 	description="Ocular Networks Power\n"..minetest.colorize("#00affa", "Recipe requires this much OCP"),
@@ -328,5 +366,7 @@ minetest.register_craftitem("ocular_networks:placeholder_any_item2", {
 	inventory_image="poly_item.png",
 	groups={not_in_creative_inventory=1}
 })
+
+
 
 minetest.after(0, disallow)

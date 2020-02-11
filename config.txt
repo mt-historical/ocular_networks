@@ -7,8 +7,8 @@ return {
 -- This is the general purpose config file for ocular_networks.
 
 -- LIVE SETTINGS (These can be changed at any time)
-	-- the max OCP a player's network can contain. this can prevent the hud from printing errors. default 1000000000000
-	max_personal_network_power = 1000000000000, 
+	-- the max OCP a player's network can contain. this can prevent the hud from printing errors. default 10000
+	max_personal_network_power = 10000, 
 
 	-- nodes that the laser drill cannot dig.
 	laserDrill_blacklist = { 
@@ -43,7 +43,7 @@ return {
 
 -- RUNTIME SETTINGS (Will only take effect if changed before loading)
 
-	-- Whether to load compatibility for mod such as technic and farming.
+	-- Whether to load compatibility for mods such as technic and farming.
 	load_compat = true,
 
 	-- Whether or not to load the armor.
@@ -64,8 +64,8 @@ return {
 	 -- Whether or not to load the guidebook unit.
 	load_guide = true,
 
-	-- Whether to load the lag machine (chunkloader).
-	load_forceloader = false, 
+	-- Whether to load the chunkloader module.
+	load_forceloader = true, 
 	
 -- TWEAKING (Will only take effect if changed before loading)
 	

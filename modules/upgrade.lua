@@ -630,42 +630,6 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craftitem("ocular_networks:c_arm_blade", {
-	description="Bladed Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a razor-sharp blade.\nEquip in performance controller menu\nClick with empty hand to dash-strike\nCan be used with other arms"),
-	inventory_image="poly_cyber_arm_blade.png",
-	stack_max=1
-})
-
-minetest.register_craft({
-	output="ocular_networks:c_arm_blade",
-	recipe={
-		{"ocular_networks:c_arm", "default:steel_ingot", "default:sword_steel"}
-	}
-})
-
-minetest.register_globalstep(function(dtime)
-	for _,player in ipairs(minetest.get_connected_players()) do
-		if player:get_player_control().LMB then
-			local inv=player:get_inventory() 
-			local power=tonumber(player:get_meta():get_string("personal_ocular_power"))
-			if player:get_wielded_item():get_name() == "" then
-				if inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_blade") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_gun") and not inv:contains_item("ocn_cyber_upgrades", "ocular_networks:c_arm_inspector") then
-					player:set_wielded_item({name="default:sword_steel"})
-					local userPos=player:get_pos()
-					local userDir=player:get_look_dir()
-					local node=minetest.get_node({x=userPos.x+userDir.x*10, y=userPos.y+userDir.y*10, z=userPos.z+userDir.z*10})
-					if power > 49 then
-						if node.name == "air" then
-							player:get_meta():set_string("personal_ocular_power", power-50)
-							player:set_pos({x=userPos.x+userDir.x*10, y=userPos.y+userDir.y*10, z=userPos.z+userDir.z*10})
-						end
-					end
-					player:set_wielded_item({name=""})
-				end
-			end
-		end
-	end
-end)
 
 minetest.register_craftitem("ocular_networks:c_arm_gun", {
 	description="Barreled Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a rifle barrel.\nEquip in performance controller menu\nRightClick with empty hand to fire\nCan not be used with other arms"),
