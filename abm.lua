@@ -1403,18 +1403,22 @@ minetest.register_abm({
 						if inv:contains_item("input", recipe.input) then
 							if inv:contains_item("fuel", "ocular_networks:peat") then
 								if source_power > recipe.cost-1 then
+									if inv:room_for_item("output", recipe.output) then
 									source_meta:set_int("ocular_power", source_power-recipe.cost)
 									inv:remove_item("input", recipe.input)
 									inv:remove_item("fuel", "ocular_networks:peat")
 									inv:add_item("output", recipe.output)
 									minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
+									end
 								end
 							else
 								if source_power > (recipe.cost*2)-1 then
+									if inv:room_for_item("output", recipe.output) then
 									source_meta:set_int("ocular_power", source_power-(recipe.cost*2))
 									inv:remove_item("input", recipe.input)
 									inv:add_item("output", recipe.output)
 									minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
+									end
 								end
 							end
 						end
@@ -1711,15 +1715,17 @@ minetest.register_abm({
 							if inv:room_for_item("output", result.item) then
 								for _,v in ipairs(inv:get_list("recipe")) do
 									if v and ItemStack(v) and v ~= "" then
-										if not inv:contains_item("input", ItemStack(v):get_name()) then
+										if not inv:contains_item("input", ItemStack(v):get_name().." 2") then
 											return
 										end
 									end
 								end
 								inv:add_item("output", result.item)
+								
 								for _,v in ipairs(inv:get_list("recipe")) do
 									inv:remove_item("input", ItemStack(v):get_name())
 								end
+								
 								--minetest.sound_play("OCN", {gain = 0.3, pos = pos, max_hear_distance = 10})
 								source_meta:set_int("ocular_power", source_power-50)
 							end

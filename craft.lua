@@ -437,6 +437,14 @@ ocular_networks.register_fusion({
 	cost=1000
 })
 
+ocular_networks.register_fusion({
+	item_1="default:dirt",
+	item_2="default:leaves",
+	output="default:dirt 2",
+	give_back="",
+	cost=100
+})
+
 minetest.register_craft({
 	output="ocular_networks:reservoir",
 	recipe={
@@ -1254,7 +1262,7 @@ minetest.register_craft({
 ocular_networks.register_dessicable({
 	material="default:dirt",
 	cost=100,
-	output="ocular_networks:freeElem_nitrogen 50"
+	output="ocular_networks:freeElem_nitrogen 10"
 })
 
 minetest.register_craft({
@@ -1278,7 +1286,7 @@ minetest.register_craft({
 ocular_networks.register_dessicable({
 	material="default:coal_lump",
 	cost=100,
-	output="ocular_networks:freeElem_carbon 99"
+	output="ocular_networks:freeElem_carbon 30"
 })
 
 ocular_networks.register_fusion({
@@ -1298,7 +1306,7 @@ ocular_networks.register_dessicable({
 ocular_networks.register_dessicable({
 	material="default:leaves",
 	cost=10,
-	output="ocular_networks:freeElem_hydrogen 60"
+	output="ocular_networks:freeElem_hydrogen 20"
 })
 
 ocular_networks.register_dessicable({
@@ -1310,19 +1318,19 @@ ocular_networks.register_dessicable({
 ocular_networks.register_dessicable({
 	material="default:iron_lump",
 	cost=10,
-	output="ocular_networks:freeElem_iron 99"
+	output="ocular_networks:freeElem_iron 30"
 })
 
 ocular_networks.register_dessicable({
 	material="default:gold_lump",
 	cost=10,
-	output="ocular_networks:freeElem_gold 99"
+	output="ocular_networks:freeElem_gold 30"
 })
 
 ocular_networks.register_dessicable({
 	material="default:copper_lump",
 	cost=10,
-	output="ocular_networks:freeElem_copper 99"
+	output="ocular_networks:freeElem_copper 30"
 })
 
 ocular_networks.register_dessicable({
@@ -1335,7 +1343,7 @@ ocular_networks.register_dessicable({
 ocular_networks.register_dessicable({
 	material="default:silver_sand",
 	cost=10,
-	output="ocular_networks:freeElem_silicon 50"
+	output="ocular_networks:freeElem_silicon 15"
 })
 
 minetest.register_craft({
@@ -1730,8 +1738,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:fertiliser 10",
 	recipe={
-		{"ocular_networks:mulch", "ocular_networks:gum"},
-		{"default:clay_lump", "ocular_networks:freeElem_nitrogen"}
+		{"ocular_networks:mulch", "ocular_networks:gum", "ocular_networks:freeElem_nitrogen"},
+		{"default:clay_lump", "ocular_networks:freeElem_nitrogen", "ocular_networks:freeElem_nitrogen"}
 	}
 })
 
@@ -1750,20 +1758,20 @@ ocular_networks.register_cultivateable({
 ocular_networks.register_cultivateable({
 	plant="default:papyrus",
 	output="default:papyrus",
-	cost=2500,
+	cost=250,
 })
 
 if minetest.get_modpath("farming") then
 	ocular_networks.register_cultivateable({
 		plant="farming:seed_cotton",
 		output="farming:cotton",
-		cost=2500,
+		cost=500,
 	})
 	
 	ocular_networks.register_cultivateable({
 		plant="farming:seed_wheat",
 		output="farming:wheat",
-		cost=2500,
+		cost=500,
 	})
 end
 
@@ -1808,31 +1816,31 @@ end
 ocular_networks.register_cultivateable({
 	plant="default:acacia_sapling",
 	output="default:acacia_leaves 5",
-	cost=2500,
+	cost=1000,
 })
 
 ocular_networks.register_cultivateable({
 	plant="default:aspen_sapling",
 	output="default:aspen_leaves 5",
-	cost=2500,
+	cost=1000,
 })
 
 ocular_networks.register_cultivateable({
 	plant="default:junglesapling",
 	output="default:jungleleaves 10",
-	cost=2500,
+	cost=1000,
 })
 
 ocular_networks.register_cultivateable({
 	plant="default:sapling",
 	output="default:leaves 5",
-	cost=2500,
+	cost=1000,
 })
 
 ocular_networks.register_cultivateable({
 	plant="default:pine_sapling",
 	output="default:pine_needles 5",
-	cost=2500,
+	cost=1000,
 })
 
 minetest.register_craft({
