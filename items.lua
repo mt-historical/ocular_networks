@@ -84,7 +84,7 @@ minetest.register_craftitem("ocular_networks:fuel", {
 })
 
 minetest.register_craftitem("ocular_networks:peat", {
-	description="Peat Block\n"..minetest.colorize("#00affa", "The only fuel accepted by the chemical oven."),
+	description="Peat Block\n"..minetest.colorize("#00affa", "USed by the chemical oven. When the oven has no peat,\n the cost of power will double.\n(Not placeable)"),
 	inventory_image=minetest.inventorycube("poly_peat.png"),
 })
 

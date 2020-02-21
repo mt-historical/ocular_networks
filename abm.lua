@@ -1409,6 +1409,13 @@ minetest.register_abm({
 									inv:add_item("output", recipe.output)
 									minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
 								end
+							else
+								if source_power > (recipe.cost*2)-1 then
+									source_meta:set_int("ocular_power", source_power-(recipe.cost*2))
+									inv:remove_item("input", recipe.input)
+									inv:add_item("output", recipe.output)
+									minetest.sound_play("OCN_fuser_hum", {gain = 0.3, pos = pos, max_hear_distance = 10})
+								end
 							end
 						end
 					end
@@ -1698,7 +1705,7 @@ minetest.register_abm({
 			if source_power then
 				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					local inv=meta:get_inventory()
-					if source_power  and source_power >499 then
+					if source_power  and source_power >49 then
 						local result,dec=minetest.get_craft_result({method="normal", width=3, items=inv:get_list("recipe")})
 						if result and result.item and result.item:get_name() ~= "" then
 							if inv:room_for_item("output", result.item) then
@@ -1714,7 +1721,7 @@ minetest.register_abm({
 									inv:remove_item("input", ItemStack(v):get_name())
 								end
 								--minetest.sound_play("OCN", {gain = 0.3, pos = pos, max_hear_distance = 10})
-								source_meta:set_int("ocular_power", source_power-500)
+								source_meta:set_int("ocular_power", source_power-50)
 							end
 						end
 					end
