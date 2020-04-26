@@ -1,10 +1,12 @@
+visionLib.Material.require({"luminium", "lumigold", "hekatonium", "angmallen", "silicotin", "zweinium", "shimmering"})
+
 minetest.register_craftitem("ocular_networks:lens", {
 	description="Silver Lens\n"..minetest.colorize("#00affa", "Rightclick a frame with this to make it\npower batteries under it"),
 	inventory_image="poly_silver_lens.png",
 })
 
 minetest.register_craftitem("ocular_networks:cross", {
-	description="Plated Cross\n"..minetest.colorize("#00affa", "Rightclick a frame with this to make it\na machine stucture block"),
+	description="Plated Quad Gear\n"..minetest.colorize("#00affa", "Rightclick a frame with this to make it\na machine stucture block"),
 	inventory_image="poly_cross.png",
 })
 

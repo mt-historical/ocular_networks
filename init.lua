@@ -3,12 +3,16 @@ local worldpath=minetest.get_worldpath()
 
 ocular_networks={worldpath=worldpath, modpath=modpath}
 
-minetest.register_privilege("ocular_networks_dbg", {description="Allows players to access OcuN debug commands, VERY dangerous priv to grant.", give_to_singleplayer=false})
+minetest.register_privilege("ocular_networks_dbg", {description="Allows players to access OcuN debug commands, Do not grant to anyone untrustworthy.", give_to_singleplayer=false})
 
 dofile(modpath.."/config.txt")
 
 if loadfile(worldpath.."/ocular_networks_config.txt") then
 	dofile(worldpath.."/ocular_networks_config.txt")
+end
+
+if minetest.get_modpath("wieldview") then
+	error("\nocular_networks does not currently support wieldview. Please disable it (in the 3d_armor modpack.)\n", 0)
 end
 
 dofile(modpath.."/functions.lua")

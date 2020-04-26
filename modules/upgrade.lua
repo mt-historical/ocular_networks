@@ -38,67 +38,69 @@ end)
 
 local function has_armor_prerequisites(p)
 	local inv=minetest.get_inventory({type="detached", name=p:get_player_name().."_armor"})
-	return inv:contains_item("armor", "ocular_networks:angmallen_helm") and inv:contains_item("armor", "ocular_networks:angmallen_boots") and inv:contains_item("armor", "ocular_networks:angmallen_chest") and inv:contains_item("armor", "ocular_networks:angmallen_legs") or inv:contains_item("armor", "ocular_networks:hekatonium_helm") and inv:contains_item("armor", "ocular_networks:hekatonium_boots") and inv:contains_item("armor", "ocular_networks:hekatonium_chest") and inv:contains_item("armor", "ocular_networks:hekatonium_legs")
+	return inv and inv:contains_item("armor", "ocular_networks:angmallen_helm") and inv:contains_item("armor", "ocular_networks:angmallen_boots") and inv:contains_item("armor", "ocular_networks:angmallen_chest") and inv:contains_item("armor", "ocular_networks:angmallen_legs") or inv:contains_item("armor", "ocular_networks:hekatonium_helm") and inv:contains_item("armor", "ocular_networks:hekatonium_boots") and inv:contains_item("armor", "ocular_networks:hekatonium_chest") and inv:contains_item("armor", "ocular_networks:hekatonium_legs")
 end
 
-armor:register_on_update(function(player)
-		if has_armor_prerequisites(player) then
-			local inv=player:get_inventory() 
-			local playerPhysics=player:get_physics_override()
-			if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_speed") then
-				playerPhysics.speed=2
-				player:set_physics_override(playerPhysics)
-			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_speed2") then
-				playerPhysics.speed=2.5
-				player:set_physics_override(playerPhysics)
-			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_speed3") then
-				playerPhysics.speed=3.5
-				player:set_physics_override(playerPhysics)
-			else
-				playerPhysics.speed=1
-				player:set_physics_override(playerPhysics)
+minetest.after(0, function()
+	armor:register_on_update(function(player)
+			if has_armor_prerequisites(player) then
+				local inv=player:get_inventory() 
+				local playerPhysics=player:get_physics_override()
+				if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_speed") then
+					playerPhysics.speed=2
+					player:set_physics_override(playerPhysics)
+				elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_speed2") then
+					playerPhysics.speed=2.5
+					player:set_physics_override(playerPhysics)
+				elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_speed3") then
+					playerPhysics.speed=3.5
+					player:set_physics_override(playerPhysics)
+				else
+					playerPhysics.speed=1
+					player:set_physics_override(playerPhysics)
+				end
 			end
-		end
-end)
+	end)
 
-armor:register_on_update(function(player)
-		if has_armor_prerequisites(player) then
-			local inv=player:get_inventory() 
-			local playerPhysics=player:get_physics_override()
-			if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_jump") then
-				playerPhysics.jump=1.5
-				player:set_physics_override(playerPhysics)
-			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_jump2") then
-				playerPhysics.jump=1.7
-				player:set_physics_override(playerPhysics)
-			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_jump3") then
-				playerPhysics.jump=2
-				player:set_physics_override(playerPhysics)
-			else
-				playerPhysics.jump=1
-				player:set_physics_override(playerPhysics)
+	armor:register_on_update(function(player)
+			if has_armor_prerequisites(player) then
+				local inv=player:get_inventory() 
+				local playerPhysics=player:get_physics_override()
+				if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_jump") then
+					playerPhysics.jump=1.5
+					player:set_physics_override(playerPhysics)
+				elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_jump2") then
+					playerPhysics.jump=1.7
+					player:set_physics_override(playerPhysics)
+				elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_jump3") then
+					playerPhysics.jump=2
+					player:set_physics_override(playerPhysics)
+				else
+					playerPhysics.jump=1
+					player:set_physics_override(playerPhysics)
+				end
 			end
-		end
-end)
+	end)
 
-armor:register_on_update(function(player)
-		if has_armor_prerequisites(player) then
-			local inv=player:get_inventory() 
-			local playerPhysics=player:get_physics_override()
-			if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_float") then
-				playerPhysics.gravity=0.5
-				player:set_physics_override(playerPhysics)
-			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_float2") then
-				playerPhysics.gravity=0.3
-				player:set_physics_override(playerPhysics)
-			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_float3") then
-				playerPhysics.gravity=0.2
-				player:set_physics_override(playerPhysics)
-			else
-				playerPhysics.gravity=1
-				player:set_physics_override(playerPhysics)
+	armor:register_on_update(function(player)
+			if has_armor_prerequisites(player) then
+				local inv=player:get_inventory() 
+				local playerPhysics=player:get_physics_override()
+				if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_float") then
+					playerPhysics.gravity=0.5
+					player:set_physics_override(playerPhysics)
+				elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_float2") then
+					playerPhysics.gravity=0.3
+					player:set_physics_override(playerPhysics)
+				elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_float3") then
+					playerPhysics.gravity=0.2
+					player:set_physics_override(playerPhysics)
+				else
+					playerPhysics.gravity=1
+					player:set_physics_override(playerPhysics)
+				end
 			end
-		end
+	end)
 end)
 
 minetest.register_craftitem("ocular_networks:angmallen_shield", {
@@ -149,46 +151,49 @@ armor:register_armor("ocular_networks:angmallen_shield3", {
 	stack_max=1
 })
 
-armor:register_on_update(function(player)
-		local inv2=minetest.get_inventory({type="detached", name=player:get_player_name().."_armor"})
-		local inv=player:get_inventory()
-		if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense") then
-			if inv2:contains_item("armor", "ocular_networks:angmallen_shield") or inv2:contains_item("armor", "ocular_networks:angmallen_shield2") or inv2:contains_item("armor", "ocular_networks:angmallen_shield3") then
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield1")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield2")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield3")
-				inv2:add_item("armor", "ocular_networks:angmallen_shield1")
-				armor:set_player_armor_defense(player)
+minetest.after(0, function()
+	armor:register_on_update(function(player)
+			local inv2=minetest.get_inventory({type="detached", name=player:get_player_name().."_armor"})
+			if not inv2 then return end
+			local inv=player:get_inventory()
+			if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense") then
+				if inv2:contains_item("armor", "ocular_networks:angmallen_shield") or inv2:contains_item("armor", "ocular_networks:angmallen_shield2") or inv2:contains_item("armor", "ocular_networks:angmallen_shield3") then
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield1")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield2")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield3")
+					inv2:add_item("armor", "ocular_networks:angmallen_shield1")
+					armor:set_player_armor_defense(player)
+				end
+			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense2") then
+				if inv2:contains_item("armor", "ocular_networks:angmallen_shield") or inv2:contains_item("armor", "ocular_networks:angmallen_shield1") or inv2:contains_item("armor", "ocular_networks:angmallen_shield3") then
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield1")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield2")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield3")
+					inv2:add_item("armor", "ocular_networks:angmallen_shield2")
+					armor:set_player_armor_defense(player)
+				end
+			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense3") then
+				if inv2:contains_item("armor", "ocular_networks:angmallen_shield") or inv2:contains_item("armor", "ocular_networks:angmallen_shield1") or inv2:contains_item("armor", "ocular_networks:angmallen_shield2") then
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield1")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield2")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield3")
+					inv2:add_item("armor", "ocular_networks:angmallen_shield3")
+					armor:set_player_armor_defense(player)
+				end
+			else
+				if inv2:contains_item("armor", "ocular_networks:angmallen_shield1") or inv2:contains_item("armor", "ocular_networks:angmallen_shield2") or inv2:contains_item("armor", "ocular_networks:angmallen_shield3") then
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield1")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield2")
+					inv2:remove_item("armor", "ocular_networks:angmallen_shield3")
+					inv2:add_item("armor", "ocular_networks:angmallen_shield")
+					armor:set_player_armor_defense(player)
+				end
 			end
-		elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense2") then
-			if inv2:contains_item("armor", "ocular_networks:angmallen_shield") or inv2:contains_item("armor", "ocular_networks:angmallen_shield1") or inv2:contains_item("armor", "ocular_networks:angmallen_shield3") then
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield1")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield2")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield3")
-				inv2:add_item("armor", "ocular_networks:angmallen_shield2")
-				armor:set_player_armor_defense(player)
-			end
-		elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense3") then
-			if inv2:contains_item("armor", "ocular_networks:angmallen_shield") or inv2:contains_item("armor", "ocular_networks:angmallen_shield1") or inv2:contains_item("armor", "ocular_networks:angmallen_shield2") then
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield1")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield2")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield3")
-				inv2:add_item("armor", "ocular_networks:angmallen_shield3")
-				armor:set_player_armor_defense(player)
-			end
-		else
-			if inv2:contains_item("armor", "ocular_networks:angmallen_shield1") or inv2:contains_item("armor", "ocular_networks:angmallen_shield2") or inv2:contains_item("armor", "ocular_networks:angmallen_shield3") then
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield1")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield2")
-				inv2:remove_item("armor", "ocular_networks:angmallen_shield3")
-				inv2:add_item("armor", "ocular_networks:angmallen_shield")
-				armor:set_player_armor_defense(player)
-			end
-		end
+	end) 
 end)
 
 minetest.register_craftitem("ocular_networks:hekatonium_shield", {
@@ -239,46 +244,49 @@ minetest.register_craftitem("ocular_networks:hekatonium_shield3", {
 	stack_max=1,
 })
 
-armor:register_on_update(function(player)
-		local inv2=minetest.get_inventory({type="detached", name=player:get_player_name().."_armor"})
-		local inv=player:get_inventory()
-		if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense4") then
-			if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
-				inv2:add_item("armor", "ocular_networks:hekatonium_shield1")
-				armor:set_player_armor_defense(player)
+minetest.after(0, function()
+	armor:register_on_update(function(player)
+			local inv2=minetest.get_inventory({type="detached", name=player:get_player_name().."_armor"})
+			if not inv2 then return end
+			local inv=player:get_inventory()
+			if inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense4") then
+				if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
+					inv2:add_item("armor", "ocular_networks:hekatonium_shield1")
+					armor:set_player_armor_defense(player)
+				end
+			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense5") then
+				if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
+					inv2:add_item("armor", "ocular_networks:hekatonium_shield2")
+					armor:set_player_armor_defense(player)
+				end
+			elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense6") then
+				if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") then
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
+					inv2:add_item("armor", "ocular_networks:hekatonium_shield3")
+					armor:set_player_armor_defense(player)
+				end
+			else
+				if inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
+					inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
+					inv2:add_item("armor", "ocular_networks:hekatonium_shield")
+					armor:set_player_armor_defense(player)
+				end
 			end
-		elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense5") then
-			if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
-				inv2:add_item("armor", "ocular_networks:hekatonium_shield2")
-				armor:set_player_armor_defense(player)
-			end
-		elseif inv:contains_item("ocn_armor_upgrades", "ocular_networks:upgrade_defense6") then
-			if inv2:contains_item("armor", "ocular_networks:hekatonium_shield") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") then
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
-				inv2:add_item("armor", "ocular_networks:hekatonium_shield3")
-				armor:set_player_armor_defense(player)
-			end
-		else
-			if inv2:contains_item("armor", "ocular_networks:hekatonium_shield1") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield2") or inv2:contains_item("armor", "ocular_networks:hekatonium_shield3") then
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield1")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield2")
-				inv2:remove_item("armor", "ocular_networks:hekatonium_shield3")
-				inv2:add_item("armor", "ocular_networks:hekatonium_shield")
-				armor:set_player_armor_defense(player)
-			end
-		end
+	end)
 end)
 
 ocular_networks.heal_pause=0
