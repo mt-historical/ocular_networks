@@ -1,4 +1,4 @@
-visionLib.Material.require({"luminium", "lumigold", "hekatonium", "angmallen", "silicotin", "zweinium", "shimmering"})
+visionLib.Material.require({"luminium", "lumigold", "hekatonium", "angmallen", "silicotin", "zweinium", "shimmering", "copper", "iron", "gold", "tin", "bronze"})
 
 minetest.register_craftitem("ocular_networks:lens", {
 	description="Silver Lens\n"..minetest.colorize("#00affa", "Rightclick a frame with this to make it\npower batteries under it"),
@@ -118,7 +118,7 @@ minetest.register_craftitem("ocular_networks:pipe_socket_filter", {
 })
 
 minetest.register_craftitem("ocular_networks:silicotin_bar", {
-	description="Silicotin Ingot\n"..minetest.colorize("#00affa", "A special version of the alloy SiSn\nresulting from the heat flutuations in the fuser."),
+	description="Silicotin Ingot\n"..minetest.colorize("#00affa", "A special version of the alloy SiSn\nresulting from the heat fluctuations in the fuser."),
 	inventory_image="poly_silicotin_ingot.png",
 })
 
