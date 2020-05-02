@@ -40,10 +40,10 @@ ocular_networks.netCommands={
 			else
 				local help=""
 				for _,v in pairs(ocular_networks.netCommands) do
-					help=help..v.desc.."\n\n"
+					help=help..v.desc.."\n"
 				end
 				for _,v in pairs(ocular_networks.netKeyWords) do
-					help=help..v.desc.."\n\n"
+					help=help..v.desc.."\n"
 				end
 				return help
 			end

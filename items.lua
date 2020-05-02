@@ -279,7 +279,7 @@ minetest.register_craftitem("ocular_networks:plate_shimmering", {
 })
 
 minetest.register_craftitem("ocular_networks:rubber", {
-	description="Ultra Rubber",
+	description="Insulating Rubber",
 	inventory_image="poly_rubber.png",
 })
 

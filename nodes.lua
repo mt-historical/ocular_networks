@@ -701,7 +701,7 @@ minetest.register_node("ocular_networks:melter", {
 })
 
 minetest.register_node("ocular_networks:alloyer", {
-	description="Alloy Centrifuge\n"..minetest.colorize("#00affa", "Spins liquid metal together to create alloys\nTakes Power From ABOVE"),
+	description="Mixer Centrifuge\n"..minetest.colorize("#00affa", "Spins liquid metal together to create alloys\nTakes Power From ABOVE"),
 	tiles={"poly_centrifuge.png^poly_frame.png", "poly_centrifuge_side.png^poly_frame.png", "poly_centrifuge_side.png^poly_frame.png", "poly_centrifuge_side.png^poly_frame.png", "poly_centrifuge_side.png^poly_frame.png", "poly_centrifuge_side.png^poly_frame.png"},
 	paramtype2="facedir",
 	is_ground_content=false,
