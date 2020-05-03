@@ -21,7 +21,14 @@ ocular_networks.netKeyWords={
 			else
 				return "No arguments specified", false
 			end
-			return "(This message should never show up, report immediately) [WRITE]["..arg.."]", false
+			return "(This message should never show up, report immediately) [IF]["..arg.."]", false
+		end,
+	},
+	["#"]={
+		name="#",
+		desc="# : comment",
+		func=function(arg, args_)
+			return "", false
 		end,
 	},
 }
@@ -29,7 +36,7 @@ ocular_networks.netKeyWords={
 ocular_networks.netCommands={
 	["help"]={
 		name="help",
-		desc="help : Provide help for a specified command, or list available commands. | Syntax: help all | help <cmd>",
+		desc="help : Provide help for a specified command | Syntax: help <cmd>",
 		func=function(arg)
 			if arg and arg ~= "" then
 				if ocular_networks.netCommands[arg] then
@@ -313,7 +320,7 @@ local st={
 	end,
 	
 	on_use=function(itemstack, placer, pointed_thing)
-		minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help' for a list of commands"..ef)
+		minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> enter a command or see the guide for a list"..ef)
 	end
 }
 
@@ -360,7 +367,7 @@ if ocular_networks.get_config("load_armor_upgrades") then
 				inv:set_size("ocn_cyber_upgrades", 32)
 			end
 		else
-			minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> Type 'help' for a list of commands"..ef)
+			minetest.show_formspec(placer:get_player_name(), "Poly_disk2IO", prb.."> enter a command or see the guide for a list"..ef)
 		end
 	end
 end
@@ -941,7 +948,7 @@ ocular_networks.netCommandsExtended["store"]={
 
 ocular_networks.netCommandsExtended["read"]={
 	name="read",
-	desc="read : Read  the value of the local address <addr> | Syntax: read <addr>", 
+	desc="read : Print  the value of the local address <addr> | Syntax: read <addr>", 
 	func=function(arg, pos)
 		if arg then
 			return minetest.get_meta(pos):get_string("ADDR_"..arg)

@@ -204,3 +204,82 @@ guideBooks.Common.register_page("ocular_networks:guide", "reactor", 1, {
 	]],
 	extra=[[]]
 })
+
+guideBooks.Common.register_section("ocular_networks:guide","data", {
+	description="The Data Network"
+})
+guideBooks.Common.register_page("ocular_networks:guide", "data", 1, {
+	text1=[[
+	The Data Network is a very vesatile utility for automating machines.
+	The main tools are: 
+	- network uplinks and downlinks, used to read fields from nodes or
+	activate/deactivate systems
+	- network processors and terminals, used to repeatedly run a series
+	of commands or enter commands directly
+	
+	All of these tools act on Channels, which are public and unprotected 
+	global settings that can have a string, number, or table value.
+	There are no private channels, just like there are no private radio channels.
+	In theory, anyone can use any channel.
+	]], 
+	text2=[[
+		List of Commands:
+			if : Conditionally execute a command. | Syntax: if <arg>==<arg> [command] <args> | (Both args may be channel names,
+			in which case the value of channel <arg> will be used)
+			
+			help : Provide help for a specified command | Syntax: help <cmd>
+			
+			let : Set a channel value. | Syntax: let <channel>=<val> (val can be a channel name)
+			
+			get : Print the content of a channel. | Syntax: get <channel>
+			
+			list : Turn a list of args into a table and write it to a channel. | Syntax: list <channel>=<arg1>,<arg2>,<arg3>
+			
+			dList : Print the content of a channel as an array. | Syntax: dList <channel>
+			
+			add : Add two args and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: add <channel>=<arg1>+<arg2>
+			
+			sub : Subtract arg 2 from arg 1 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: sub <channel>=<arg1>-<arg2>
+			
+			mult : Multiply arg 1 by arg 2 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: mult <channel>=<arg1>*<arg2>
+			
+			div : Divide arg 1 by arg 2 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: div <channel>=<arg1>/<arg2>
+			
+			append : Concatenate arg1 witth arg2 and write the result to a channel. (arg1 and arg2 may be channel names) | Syntax: append <channel>=<arg1>+<arg2>
+	]],
+	extra=[[]]
+})
+
+guideBooks.Common.register_page("ocular_networks:guide", "data", 2, {
+	text1=[[
+	Processors and terminals both support an extra set of commands, used
+	to write information to the storage of the node.
+	]], 
+	text2=[[
+		List of Commands:
+			store : Store the value <val> in the local address <addr> (<val> can be a channel name) | Syntax: store <val>=><addr>
+			
+			read : Print  the value of the local address <addr> | Syntax: read <addr>
+			
+			send : Send the value of the local address <addr> to the channel <ch> | Syntax: send <addr>=><ch>
+	]],
+	extra=[[]]
+})
+
+guideBooks.Common.register_page("ocular_networks:guide", "data", 3, {
+	text1=[[
+	Finally, you can comment a line using '#'.
+	A quick example of a valid program (in a terminal or processor)
+	
+	#my_program 1.1 foobar
+	let my_channel=foo
+	append channel_2=my_channel+bar
+	get channel_2
+	
+	if neither foo nor bar are already channels, this should ouput:
+	foobar
+	]], 
+	text2=[[
+	]],
+	extra=[[]]
+})
