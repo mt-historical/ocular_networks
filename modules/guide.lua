@@ -182,3 +182,25 @@ guideBooks.Common.register_page("ocular_networks:guide", "heka", 1, {
 	]],
 	extra=[[]]
 })
+
+guideBooks.Common.register_section("ocular_networks:guide","reactor", {
+	description="The Hekaton Reactor"
+})
+guideBooks.Common.register_page("ocular_networks:guide", "reactor", 1, {
+	text1=[[
+	The hekaton reactor will generate huge amounts of power, but it needs a constant
+	supply of fuel and coolant, as well as a multiblock structure.
+	
+	Firstly, place the ton core where you want it.
+	secondly, place firebricks on all faces but the top, you should need 5.
+	Next, place a pipe storage crate on top - this will be your interface point.
+	
+	To operate the reactor, place superfuel and nitrogen coolant in the crate. 
+	You need 1 coolant for every 50 superfuel, otherwise the core will
+	overheat and explode.
+	]], 
+	text2=[[
+	
+	]],
+	extra=[[]]
+})
