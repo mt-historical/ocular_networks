@@ -2644,3 +2644,102 @@ minetest.register_node("ocular_networks:faucet", {
 		return 0
 	end
 })
+
+
+minetest.register_node("ocular_networks:tank", {
+	description="Fluid Tank\n"..minetest.colorize("#00affa", "Holds a single type of fluid x99"),
+	drawtype="glasslike_framed",
+	tiles={"poly_tank.png"},
+	paramtype="light",
+	paramtype2="glasslikeliquidlevel",
+	sunlight_propagates=true,
+	is_ground_content=false,
+	groups={cracky=3, oddly_breakable_by_hand=3, ocular_networks_tank=1},
+	sounds=default.node_sound_metal_defaults(),
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
+		local inv=meta:get_inventory()
+		inv:set_list("liq", {""})
+		inv:set_size("liq", 1)
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		meta:set_string("owner", owner)
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		return 0
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		return 0
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		return 0
+	end
+})
+
+for _,v in pairs(ocular_networks.pumpable_liquids) do
+	local def=minetest.registered_nodes[_]
+	minetest.register_node("ocular_networks:tank_"..string.split(_, ":")[1].."_"..string.split(_, ":")[2], {
+		description="Tank: "..def.description,
+		drawtype="glasslike_framed",
+		tiles={"poly_tank.png"},
+		special_tiles={def.tiles[1]},
+		paramtype="light",
+		paramtype2="glasslikeliquidlevel",
+		sunlight_propagates=true,
+		is_ground_content=false,
+		groups={cracky=3, oddly_breakable_by_hand=3, ocular_networks_tank=1, not_in_creative_inventory=1},
+		sounds=default.node_sound_metal_defaults(),
+		on_dig = function(pos, node, player)
+			local m=minetest.get_meta(pos)
+			local s=m:get_inventory():get_stack("liq", 1):get_count() or 0
+			local is=ItemStack(node.name)
+			is:get_meta():set_int("liq", s)
+			is:get_meta():set_string("description", "Tank: "..def.description.." x"..s)
+			player:get_inventory():add_item("main", is)
+			minetest.node_dig(pos, node, player)
+		end,
+		on_construct=function(pos)
+			local meta=minetest.get_meta(pos)
+			local inv=meta:get_inventory()
+			inv:set_list("liq", {""})
+			inv:set_size("liq", 1)
+		end,
+		after_place_node=function(pos, placer, itemstack, pointed_thing)
+			local meta=minetest.get_meta(pos)
+			local owner=placer:get_player_name()
+			meta:set_string("owner", owner)
+			local inv=meta:get_inventory()
+			if itemstack:get_meta():get_int("liq") then
+				inv:set_stack("liq", 1, _.." "..itemstack:get_meta():get_int("liq"))
+			end
+		end,
+		drop="",
+		can_dig=function(pos, player)
+			local meta=minetest.get_meta(pos)
+			local owner=meta:get_string("owner")
+			return owner == player:get_player_name()
+		end,
+		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+			return 0
+		end,
+		allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+			return 0
+		end,
+		allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+			return 0
+		end
+	})
+	
+	minetest.register_craft({
+		type="shapeless",
+		output="ocular_networks:tank",
+		recipe={"ocular_networks:tank_"..string.split(_, ":")[1].."_"..string.split(_, ":")[2]},
+	})
+end

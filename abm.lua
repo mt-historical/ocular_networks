@@ -1969,3 +1969,23 @@ minetest.register_abm({
 		end
 	end,
 })
+
+minetest.register_abm({
+    label="tank visual",
+	nodenames={"group:ocular_networks_tank"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local inv=meta:get_inventory()
+		if ocular_networks.pumpable_liquids[inv:get_stack("liq", 1):get_name()] then
+			local _=inv:get_stack("liq", 1):get_name()
+			local cc=inv:get_stack("liq", 1):get_count()%64
+			local def=minetest.registered_nodes[_]
+			minetest.swap_node(pos, {name = "ocular_networks:tank_"..string.split(_, ":")[1].."_"..string.split(_, ":")[2], param2=cc })
+		else
+			minetest.swap_node(pos, {name = "ocular_networks:tank", param2=0 })
+		end
+	end,
+})

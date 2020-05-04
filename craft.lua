@@ -1856,7 +1856,7 @@ minetest.register_craft({
 	output="ocular_networks:pump",
 	recipe={
 		{"ocular_networks:plate_silicotin", "bucket:bucket_empty", "ocular_networks:plate_silicotin"},
-		{"", "default:chest_locked", ""},
+		{"ocular_networks:tank", "ocular_networks:tank", "ocular_networks:tank"},
 		{"ocular_networks:plate_silicotin", "ocular_networks:pipe_socket", "ocular_networks:plate_silicotin"}
 	}
 })
@@ -1871,4 +1871,13 @@ minetest.register_craft({
 	type="shapeless",
 	output="ocular_networks:pump",
 	recipe={"ocular_networks:faucet"},
+})
+
+minetest.register_craft({
+	output="ocular_networks:tank 4",
+	recipe={
+		{"ocular_networks:firebrick", "default:glass", "ocular_networks:firebrick"},
+		{"default:glass", "ocular_networks:frame", "default:glass"},
+		{"ocular_networks:firebrick", "default:glass", "ocular_networks:firebrick"}
+	}
 })

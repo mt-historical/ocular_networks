@@ -17,8 +17,8 @@ end
 
 dofile(modpath.."/functions.lua")
 dofile(modpath.."/encscripts.lua")
-dofile(modpath.."/nodes.lua")
 dofile(modpath.."/liquids.lua")
+dofile(modpath.."/nodes.lua")
 dofile(modpath.."/items.lua")
 dofile(modpath.."/tools.lua")
 dofile(modpath.."/craft.lua")
