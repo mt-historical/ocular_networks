@@ -1,4 +1,6 @@
 
+ocular_networks.pumpable_liquids={}
+
 minetest.register_node("ocular_networks:luminium_source", {
 	description="Luminium Source",
 	drawtype="liquid",
@@ -85,6 +87,8 @@ bucket.register_liquid(
 	"bucket.png^poly_luminium_liq.png",
 	"Bucket of Molten Luminium"
 )
+
+ocular_networks.pumpable_liquids["ocular_networks:luminium_source"]=true
 
 minetest.register_node("ocular_networks:lumigold_source", {
 	description="Lumigold Source",
@@ -174,6 +178,8 @@ bucket.register_liquid(
 	"Bucket of Molten Lumigold"
 )
 
+ocular_networks.pumpable_liquids["ocular_networks:lumigold_source"]=true
+
 minetest.register_node("ocular_networks:gold_source", {
 	description="Gold Source",
 	drawtype="liquid",
@@ -261,6 +267,8 @@ bucket.register_liquid(
 	"bucket.png^poly_gold_bliq.png",
 	"Bucket of Molten Gold"
 )
+
+ocular_networks.pumpable_liquids["ocular_networks:gold_source"]=true
 
 minetest.register_node("ocular_networks:steel_source", {
 	description="Steel Source",
@@ -350,6 +358,8 @@ bucket.register_liquid(
 	"Bucket of Molten Steel"
 )
 
+ocular_networks.pumpable_liquids["ocular_networks:steel_source"]=true
+
 minetest.register_node("ocular_networks:copper_source", {
 	description="Copper Source",
 	drawtype="liquid",
@@ -429,6 +439,8 @@ minetest.register_node("ocular_networks:copper_flowing", {
 	groups={liquid=2, igniter=1,
 		not_in_creative_inventory=1},
 })
+
+ocular_networks.pumpable_liquids["ocular_networks:copper_source"]=true
 
 bucket.register_liquid(
 	"ocular_networks:copper_source",
@@ -526,6 +538,8 @@ bucket.register_liquid(
 	"Bucket of Molten Bronze"
 )
 
+ocular_networks.pumpable_liquids["ocular_networks:bronze_source"]=true
+
 minetest.register_node("ocular_networks:tin_source", {
 	description="Tin Source",
 	drawtype="liquid",
@@ -613,6 +627,8 @@ bucket.register_liquid(
 	"bucket.png^poly_tin_bliq.png",
 	"Bucket of Molten Tin"
 )
+
+ocular_networks.pumpable_liquids["ocular_networks:tin_source"]=true
 
 minetest.register_node("ocular_networks:angmallen_source", {
 	description="Angmallen Source",
@@ -702,6 +718,8 @@ bucket.register_liquid(
 	"Bucket of Molten Angmallen"
 )
 
+ocular_networks.pumpable_liquids["ocular_networks:angmallen_source"]=true
+
 minetest.register_node("ocular_networks:hekatonium_source", {
 	description="Hekatonium Source",
 	drawtype="liquid",
@@ -790,6 +808,7 @@ bucket.register_liquid(
 	"Bucket of Molten Hekatonium"
 )
 
+ocular_networks.pumpable_liquids["ocular_networks:hekatonium_source"]=true
 
 minetest.register_node("ocular_networks:zweinium_source", {
 	description="Unstable Zweinium Source",
@@ -876,6 +895,8 @@ bucket.register_liquid(
 	"Bucket of Unstable Zweinium"
 )
 
+ocular_networks.pumpable_liquids["ocular_networks:zweinium_source"]=true
+
 minetest.register_node("ocular_networks:coolant_source", {
 	description="Nitrogen Coolant Source",
 	drawtype="liquid",
@@ -960,3 +981,8 @@ bucket.register_liquid(
 	"bucket.png^poly_coolant_bliq.png",
 	"Bucket of Nitrogen Coolant"
 )
+
+ocular_networks.pumpable_liquids["ocular_networks:coolant_source"]=true
+ocular_networks.pumpable_liquids["default:water_source"]=true
+ocular_networks.pumpable_liquids["default:river_water_source"]=true
+ocular_networks.pumpable_liquids["default:lava_source"]=true

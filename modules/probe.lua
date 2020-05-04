@@ -298,6 +298,18 @@ ocular_networks.netCommands={
 			return "(This message should never show up, report immediately) [APPEND]["..arg.."]"
 		end,
 	},
+	["print"]={
+		name="print",
+		desc="print : Print the value <val> | Syntax: print <val>", 
+		func=function(arg)
+			if arg then
+				return tostring(arg)
+			else
+				return "No arguments specified"
+			end
+			return "(This message should never show up, report immediately) [GET]["..arg.."]"
+		end,
+	},
 }
 
 local prb="size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,1;6.5,8;;;"

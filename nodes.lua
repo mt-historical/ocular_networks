@@ -10,6 +10,18 @@ local nodespec=""..
 "style[save;bgcolor=blue;textcolor=white]"..
 "button_exit[0.74,5;8,1;save;Save]"
 
+local pumpspec=""..
+"size[10,6]"..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
+"label[0.7,0;Source Location:]"..
+"field[1,1;2,1;sourcex;x;${sourceposx}]"..
+"field[4,1;2,1;sourcey;y;${sourceposy}]"..
+"field[7,1;2,1;sourcez;z;${sourceposz}]"..
+"label[0.7,2;positions are relative to the pump.]"..
+"list[context;liq;4,2.5;2,2;]"..
+"style[save;bgcolor=blue;textcolor=white]"..
+"button_exit[0.74,5;8,1;save;Save]"
+
 local nodespec2=""..
 "size[10,6]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
@@ -1258,6 +1270,7 @@ minetest.register_node("ocular_networks:pipe_E", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
@@ -1306,6 +1319,7 @@ minetest.register_node("ocular_networks:pipe_S", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
@@ -1354,6 +1368,7 @@ minetest.register_node("ocular_networks:pipe_W", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
@@ -1402,6 +1417,7 @@ minetest.register_node("ocular_networks:pipe_N", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 		meta:set_string("enabled", "true")
 	end,
 	can_dig=function(pos, player)
@@ -1450,6 +1466,7 @@ minetest.register_node("ocular_networks:pipe_U", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1497,6 +1514,7 @@ minetest.register_node("ocular_networks:pipe_D", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1705,6 +1723,7 @@ minetest.register_node("ocular_networks:pipe_filtered_E", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate.")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1763,6 +1782,7 @@ minetest.register_node("ocular_networks:pipe_filtered_S", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate.")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1821,6 +1841,7 @@ minetest.register_node("ocular_networks:pipe_filtered_W", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate.")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1879,6 +1900,7 @@ minetest.register_node("ocular_networks:pipe_filtered_N", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate.")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1937,6 +1959,7 @@ minetest.register_node("ocular_networks:pipe_filtered_D", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -1994,6 +2017,7 @@ minetest.register_node("ocular_networks:pipe_filtered_U", {
 		meta:set_string("infotext", "Owned By: "..owner.."\nPunch with wrench to rotate")
 		local inv=meta:get_inventory()
 		inv:set_size("pipe_buffer", 10)
+		inv:set_size("pipe_liquid_buffer", 10)
 	end,
 	can_dig=function(pos, player)
 		local meta=minetest.get_meta(pos)
@@ -2500,7 +2524,7 @@ minetest.register_node("ocular_networks:crafter", {
 		local owner=meta:get_string("owner")
 		return owner == player:get_player_name()
 	end,
-		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
 			return count 
 		else
@@ -2520,5 +2544,103 @@ minetest.register_node("ocular_networks:crafter", {
 		else
 			return 0
 		end
+	end
+})
+
+minetest.register_node("ocular_networks:pump", {
+	description="Fluid Collector\n"..minetest.colorize("#00affa", "Takes liquids from the set position"),
+	tiles={"poly_pump.png", "poly_pump.png", "poly_pump.png^bucket.png"},
+	is_ground_content=false,
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
+		local inv=meta:get_inventory()
+		inv:set_list("liq", {""})
+		inv:set_size("liq", 4)
+		meta:set_string("enabled", "true")
+		meta:set_string("formspec", pumpspec)
+		meta:set_int("sourceposx", 0)
+		meta:set_int("sourceposy", -1)
+		meta:set_int("sourceposz", 0)
+	end,
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			meta:set_int("sourceposx", tonumber(fields.sourcex) or 0)
+			meta:set_int("sourceposy", tonumber(fields.sourcey) or 0)
+			meta:set_int("sourceposz", tonumber(fields.sourcez) or 0)
+			meta:set_string("formspec", pumpspec)
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		meta:set_string("owner", owner)
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		return 0
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		return 0
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		return 0
+	end
+})
+
+minetest.register_node("ocular_networks:faucet", {
+	description="Fluid Depositor\n"..minetest.colorize("#00affa", "Places liquid at the set position"),
+	tiles={"poly_pump.png", "poly_pump.png", "poly_pump.png^(bucket.png^[transform2)"},
+	is_ground_content=false,
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
+		local inv=meta:get_inventory()
+		inv:set_list("liq", {""})
+		inv:set_size("liq", 4)
+		meta:set_string("enabled", "true")
+		meta:set_string("formspec", pumpspec)
+		meta:set_int("sourceposx", 0)
+		meta:set_int("sourceposy", -1)
+		meta:set_int("sourceposz", 0)
+	end,
+	on_receive_fields=function(pos, formname, fields, sender)
+		local meta=minetest.get_meta(pos)
+		if sender:get_player_name() == meta:get_string("owner") then
+			meta:set_int("sourceposx", tonumber(fields.sourcex) or 0)
+			meta:set_int("sourceposy", tonumber(fields.sourcey) or 0)
+			meta:set_int("sourceposz", tonumber(fields.sourcez) or 0)
+			meta:set_string("formspec", pumpspec)
+		else
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
+		end
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		meta:set_string("owner", owner)
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		return 0
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		return 0
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		return 0
 	end
 })
