@@ -2606,7 +2606,7 @@ minetest.register_node("ocular_networks:faucet", {
 		local meta=minetest.get_meta(pos)
 		local inv=meta:get_inventory()
 		inv:set_list("liq", {""})
-		inv:set_size("liq", 4)
+		inv:set_size("liq", 1)
 		meta:set_string("enabled", "true")
 		meta:set_string("formspec", pumpspec)
 		meta:set_int("sourceposx", 0)
@@ -2743,3 +2743,69 @@ for _,v in pairs(ocular_networks.pumpable_liquids) do
 		recipe={"ocular_networks:tank_"..string.split(_, ":")[1].."_"..string.split(_, ":")[2]},
 	})
 end
+
+local bucketerspec=
+"size[10,6]"..
+"background[0,0;0,0;poly_gui_formbg.png;true]"..
+"label[1,1;liquids]"..
+"label[5,1;buckets]"..
+"label[9,1;output]"..
+"list[context;liq_i;1,0;1,1;]"..
+"list[context;buckets;4.5,0;1,1;]"..
+"list[context;output;8,0;1,1;]"..
+"list[current_player;main;1,2;8,4;]"
+
+minetest.register_node("ocular_networks:bucketer", {
+	description="Fluid Transposer\n"..minetest.colorize("#00affa", "Puts liquids in buckets"),
+	drawtype="glasslike_framed",
+	tiles={"poly_bucketer.png"},
+	paramtype="light",
+	paramtype2="glasslikeliquidlevel",
+	sunlight_propagates=true,
+	is_ground_content=false,
+	groups={cracky=3, oddly_breakable_by_hand=3},
+	sounds=default.node_sound_metal_defaults(),
+	on_construct=function(pos)
+		local meta=minetest.get_meta(pos)
+		local inv=meta:get_inventory()
+		inv:set_list("liq_i", {""})
+		inv:set_size("liq_i", 1)
+		inv:set_list("buckets", {""})
+		inv:set_size("buckets", 1)
+		inv:set_list("output", {""})
+		inv:set_size("output", 1)
+		meta:set_string("formspec", bucketerspec)
+	end,
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		meta:set_string("owner", owner)
+		meta:set_string("enabled", "true")
+	end,
+	can_dig=function(pos, player)
+		local meta=minetest.get_meta(pos)
+		local owner=meta:get_string("owner")
+		return owner == player:get_player_name()
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") and from_list~="liq_i" and to_list~="liq_i" then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") and listname~="liq_i" then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") and listname~="liq_i" then 
+			return 65535
+		else
+			return 0
+		end
+	end
+})

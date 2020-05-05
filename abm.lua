@@ -715,6 +715,14 @@ minetest.register_abm({
 					end
 				end
 			end
+			if target_inv:get_list("liq_i") then
+				for i,stack in ipairs(inv:get_list("pipe_liquid_buffer")) do
+					if target_inv:room_for_item("liq_i", stack) then
+						inv:set_stack("pipe_liquid_buffer", i, {})
+						target_inv:add_item("liq_i", stack)
+					end
+				end
+			end
 		end
 		end
 	end,
@@ -813,6 +821,14 @@ minetest.register_abm({
 					if inv:room_for_item("pipe_liquid_buffer", stack) then
 						source_inv:set_stack("pipe_liquid_buffer", i, {})
 						inv:add_item("pipe_liquid_buffer", stack)
+					end
+				end
+			end
+			if target_inv:get_list("liq_i") then
+				for i,stack in ipairs(inv:get_list("pipe_liquid_buffer")) do
+					if target_inv:room_for_item("liq_i", stack) then
+						inv:set_stack("pipe_liquid_buffer", i, {})
+						target_inv:add_item("liq_i", stack)
 					end
 				end
 			end
@@ -917,6 +933,14 @@ minetest.register_abm({
 					end
 				end
 			end
+			if target_inv:get_list("liq_i") then
+				for i,stack in ipairs(inv:get_list("pipe_liquid_buffer")) do
+					if target_inv:room_for_item("liq_i", stack) then
+						inv:set_stack("pipe_liquid_buffer", i, {})
+						target_inv:add_item("liq_i", stack)
+					end
+				end
+			end
 		end
 		end
 	end,
@@ -1015,6 +1039,14 @@ minetest.register_abm({
 					if inv:room_for_item("pipe_liquid_buffer", stack) then
 						source_inv:set_stack("pipe_liquid_buffer", i, {})
 						inv:add_item("pipe_liquid_buffer", stack)
+					end
+				end
+			end
+			if target_inv:get_list("liq_i") then
+				for i,stack in ipairs(inv:get_list("pipe_liquid_buffer")) do
+					if target_inv:room_for_item("liq_i", stack) then
+						inv:set_stack("pipe_liquid_buffer", i, {})
+						target_inv:add_item("liq_i", stack)
 					end
 				end
 			end
@@ -1118,6 +1150,14 @@ minetest.register_abm({
 					end
 				end
 			end
+			if target_inv:get_list("liq_i") then
+				for i,stack in ipairs(inv:get_list("pipe_liquid_buffer")) do
+					if target_inv:room_for_item("liq_i", stack) then
+						inv:set_stack("pipe_liquid_buffer", i, {})
+						target_inv:add_item("liq_i", stack)
+					end
+				end
+			end
 		end
 	end,
 })
@@ -1214,6 +1254,14 @@ minetest.register_abm({
 					if inv:room_for_item("pipe_liquid_buffer", stack) then
 						source_inv:set_stack("pipe_liquid_buffer", i, {})
 						inv:add_item("pipe_liquid_buffer", stack)
+					end
+				end
+			end
+			if target_inv:get_list("liq_i") then
+				for i,stack in ipairs(inv:get_list("pipe_liquid_buffer")) do
+					if target_inv:room_for_item("liq_i", stack) then
+						inv:set_stack("pipe_liquid_buffer", i, {})
+						target_inv:add_item("liq_i", stack)
 					end
 				end
 			end
@@ -1955,12 +2003,12 @@ minetest.register_abm({
 					end
 					if nom < 4 then
 						if source_node.name=="air" then
-							for i=1,inv:get_size("liq") do
-								if ocular_networks.pumpable_liquids[inv:get_stack("liq", i):get_name()] then
-									minetest.set_node({x=pos.x+x, y=pos.y+y, z=pos.z+z},{name=inv:get_stack("liq", i):get_name()})
-									inv:set_stack("liq", i, nil)
-									return
-								end
+							if ocular_networks.pumpable_liquids[inv:get_stack("liq", 1):get_name()] then
+								minetest.set_node({x=pos.x+x, y=pos.y+y, z=pos.z+z},{name=inv:get_stack("liq", 1):get_name()})
+								local s=inv:get_stack("liq", 1)
+								s:take_item(1)
+								inv:set_stack("liq", 1, s)
+								return
 							end
 						end
 					end
@@ -1986,6 +2034,32 @@ minetest.register_abm({
 			minetest.swap_node(pos, {name = "ocular_networks:tank_"..string.split(_, ":")[1].."_"..string.split(_, ":")[2], param2=cc })
 		else
 			minetest.swap_node(pos, {name = "ocular_networks:tank", param2=0 })
+		end
+	end,
+})
+
+minetest.register_abm({
+    label="pumping fluids",
+	nodenames={"ocular_networks:bucketer"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		if meta:get_string("enabled")=="true" then
+			local inv=meta:get_inventory()
+			if ocular_networks.pumpable_liquids[inv:get_stack("liq_i", 1):get_name()] then
+				if inv:get_stack("buckets", 1):get_name()=="bucket:bucket_empty" then
+					local b=ocular_networks.pumpable_liquids[inv:get_stack("liq_i", 1):get_name()]
+					if inv:room_for_item("output", ItemStack(b)) then
+						local s=inv:get_stack("liq_i", 1)
+						s:take_item(1)
+						inv:set_stack("liq_i",1, s)
+						inv:remove_item("buckets", "bucket:bucket_empty")
+						inv:add_item("output", ItemStack(b))
+					end
+				end
+			end
 		end
 	end,
 })

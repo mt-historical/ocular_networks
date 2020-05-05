@@ -88,7 +88,7 @@ bucket.register_liquid(
 	"Bucket of Molten Luminium"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:luminium_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:luminium_source"]="ocular_networks:bucket_luminium"
 
 minetest.register_node("ocular_networks:lumigold_source", {
 	description="Lumigold Source",
@@ -178,7 +178,7 @@ bucket.register_liquid(
 	"Bucket of Molten Lumigold"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:lumigold_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:lumigold_source"]="ocular_networks:bucket_lumigold"
 
 minetest.register_node("ocular_networks:gold_source", {
 	description="Gold Source",
@@ -268,7 +268,7 @@ bucket.register_liquid(
 	"Bucket of Molten Gold"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:gold_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:gold_source"]="ocular_networks:bucket_gold"
 
 minetest.register_node("ocular_networks:steel_source", {
 	description="Steel Source",
@@ -358,7 +358,7 @@ bucket.register_liquid(
 	"Bucket of Molten Steel"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:steel_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:steel_source"]="ocular_networks:bucket_steel"
 
 minetest.register_node("ocular_networks:copper_source", {
 	description="Copper Source",
@@ -440,7 +440,7 @@ minetest.register_node("ocular_networks:copper_flowing", {
 		not_in_creative_inventory=1},
 })
 
-ocular_networks.pumpable_liquids["ocular_networks:copper_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:copper_source"]="ocular_networks:bucket_copper"
 
 bucket.register_liquid(
 	"ocular_networks:copper_source",
@@ -538,7 +538,7 @@ bucket.register_liquid(
 	"Bucket of Molten Bronze"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:bronze_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:bronze_source"]="ocular_networks:bucket_bronze"
 
 minetest.register_node("ocular_networks:tin_source", {
 	description="Tin Source",
@@ -628,7 +628,7 @@ bucket.register_liquid(
 	"Bucket of Molten Tin"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:tin_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:tin_source"]="ocular_networks:bucket_tin"
 
 minetest.register_node("ocular_networks:angmallen_source", {
 	description="Angmallen Source",
@@ -718,7 +718,7 @@ bucket.register_liquid(
 	"Bucket of Molten Angmallen"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:angmallen_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:angmallen_source"]="ocular_networks:bucket_angmallen"
 
 minetest.register_node("ocular_networks:hekatonium_source", {
 	description="Hekatonium Source",
@@ -808,7 +808,7 @@ bucket.register_liquid(
 	"Bucket of Molten Hekatonium"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:hekatonium_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:hekatonium_source"]="ocular_networks:bucket_hekatonium"
 
 minetest.register_node("ocular_networks:zweinium_source", {
 	description="Unstable Zweinium Source",
@@ -895,7 +895,7 @@ bucket.register_liquid(
 	"Bucket of Unstable Zweinium"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:zweinium_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:zweinium_source"]="ocular_networks:bucket_zweinium"
 
 minetest.register_node("ocular_networks:coolant_source", {
 	description="Nitrogen Coolant Source",
@@ -982,7 +982,7 @@ bucket.register_liquid(
 	"Bucket of Nitrogen Coolant"
 )
 
-ocular_networks.pumpable_liquids["ocular_networks:coolant_source"]=true
-ocular_networks.pumpable_liquids["default:water_source"]=true
-ocular_networks.pumpable_liquids["default:river_water_source"]=true
-ocular_networks.pumpable_liquids["default:lava_source"]=true
+ocular_networks.pumpable_liquids["ocular_networks:coolant_source"]="ocular_networks:bucket_coolant"
+ocular_networks.pumpable_liquids["default:water_source"]="bucket:bucket_water"
+ocular_networks.pumpable_liquids["default:river_water_source"]="bucket:bucket_river_water"
+ocular_networks.pumpable_liquids["default:lava_source"]="bucket:bucket_lava"
