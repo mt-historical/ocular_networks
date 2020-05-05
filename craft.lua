@@ -1881,3 +1881,12 @@ minetest.register_craft({
 		{"ocular_networks:firebrick", "default:glass", "ocular_networks:firebrick"}
 	}
 })
+
+minetest.register_craft({
+	output="ocular_networks:bucketer",
+	recipe={
+		{"ocular_networks:firebrick", "default:copper_ingot", "ocular_networks:firebrick"},
+		{"ocular_networks:tank", "ocular_networks:frame", "bucket:bucket_empty"},
+		{"ocular_networks:firebrick", "ocular_networks:plate_silicotin", "ocular_networks:firebrick"}
+	}
+})
