@@ -1576,7 +1576,7 @@ minetest.register_node("ocular_networks:pipe_itembuffer", {
 		local owner=meta:get_string("owner")
 		return owner == player:get_player_name()
 	end,
-		allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
 		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
 			return count 
 		else
