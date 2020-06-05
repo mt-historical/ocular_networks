@@ -480,7 +480,7 @@ minetest.register_craft({
 	output="ocular_networks:upgrade",
 	recipe={
 		{"", "ocular_networks:charged_gem", ""},
-		{"", "ocular_networks:angmallen_block_3", ""},
+		{"", "ocular_networks:angmallen_block", ""},
 		{"", "", ""}
 	},
 	replacements={{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}

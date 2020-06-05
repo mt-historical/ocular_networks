@@ -516,9 +516,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output="ocular_networks:jetring",
 	recipe={
-		{"ocular_networks:distributor_3", "default:diamondblock", "ocular_networks:distributor_3"},
-		{"ocular_networks:lumigold_block", "", "ocular_networks:lumigold_block"},
-		{"ocular_networks:distributor_3", "default:diamondblock", "ocular_networks:distributor_3"}
+		{"default:gold_lump", "ocular_networks:charged_gem", "default:gold_lump"},
+		{"ocular_networks:emitter", "ocular_networks:pipe_socket", "ocular_networks:reservoir"},
+		{"default:gold_lump", "ocular_networks:charged_gem", "default:gold_lump"}
 	}
 })
 

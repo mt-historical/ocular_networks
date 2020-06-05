@@ -18,27 +18,25 @@ minetest.register_globalstep(function(dtime)
 			playerPower=tonumber(player:get_meta():get_string("personal_ocular_power"))
 		end
 		if inv:contains_item("armor", "ocular_networks:jetring") then
-			if player:get_player_control().jump == true and not player:get_player_control().sneak then
-				if playerPower > 0 then
-					local playerPhysics=player:get_physics_override()
-					playerPhysics.gravity=-0.25
-					player:set_physics_override(playerPhysics)
-					player:get_meta():set_string("personal_ocular_power", playerPower-1)
-					local function b()
-						playerPhysics.gravity=-0.01
-						player:set_physics_override(playerPhysics)
+			if player:get_player_control().jump == true then
+				if player:get_player_control().sneak then
+					if playerPower > 0 then
+						player:get_meta():set_string("personal_ocular_power", playerPower-1)
+						local vel=player:get_player_velocity()
+						if vel.y<0 then
+							player:add_player_velocity({x=0, y=0-vel.y, z=0})
+						end
 					end
-					minetest.after(0.1, b)
+				else
+					if playerPower > 0 then
+						player:get_meta():set_string("personal_ocular_power", playerPower-1)
+						local vel=player:get_player_velocity()
+						if vel.y < 6 then
+							player:add_player_velocity({x=0, y=2.5, z=0})
+						end
+					end
 				end
-			else
-				local playerPhysics=player:get_physics_override()
-				playerPhysics.gravity=1.0
-				player:set_physics_override(playerPhysics)
 			end
-		else
-			local playerPhysics=player:get_physics_override()
-			playerPhysics.gravity=1.0
-			player:set_physics_override(playerPhysics)
 		end
 	end
 end)
