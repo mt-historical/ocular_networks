@@ -316,7 +316,7 @@ local prb="size[8,9;]background[0,0;0,0;poly_gui_formbg2.png;true]textarea[1,1;6
 local ef="]field_close_on_enter[cmd;false]field[0,8.9;7.5,1;cmd;;]style[send;bgcolor=blue;textcolor=white]button[7,8.59;1.2,1;send;|==>]"
 
 local st={
-	description="Multi-Purpose Tablet\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the Data Netwok console."),
+	description="Multi-Purpose Tablet\n"..minetest.colorize("#00affa", "Rightclick to output the metadata of a node.\nSneak-Click to open your performance tweaks.\nClick to open the Data Network console."),
 	inventory_image="poly_disk2.png",
 	not_in_creative_inventory=1,
 	stack_max=1,
