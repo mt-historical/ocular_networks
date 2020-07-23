@@ -27,12 +27,18 @@ minetest.register_globalstep(function(dtime)
 							player:add_player_velocity({x=0, y=0-vel.y, z=0})
 						end
 					end
+				elseif player:get_player_control().aux1 then
+					if playerPower > 40 then
+						player:get_meta():set_string("personal_ocular_power", playerPower-40)
+						local vel=player:get_player_velocity()
+						player:add_player_velocity({x=0, y=3, z=0})
+					end
 				else
 					if playerPower > 0 then
 						player:get_meta():set_string("personal_ocular_power", playerPower-1)
 						local vel=player:get_player_velocity()
 						if vel.y < 6 then
-							player:add_player_velocity({x=0, y=2.5, z=0})
+							player:add_player_velocity({x=0, y=2.7, z=0})
 						end
 					end
 				end
