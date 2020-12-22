@@ -1,4 +1,4 @@
-minetest.register_node("ocular_networks:tether", {
+ocular_networks.register_node("ocular_networks:tether", {
 	description=minetest.colorize("#00affa", "Universe Tether"),
 	tiles={
 		{
@@ -38,8 +38,8 @@ minetest.register_node("ocular_networks:tether", {
 minetest.register_craft({
 	output="ocular_networks:tether",
 	recipe={
-		{"ocular_networks:hekatonium_block", "ocular_networks:networkprobe", "ocular_networks:hekatonium_block"},
+		{"ocular_networks:hekatonium_bar", "ocular_networks:networkprobe", "ocular_networks:hekatonium_bar"},
 		{"ocular_networks:angmallen_block_4", "ocular_networks:erenic_block", "ocular_networks:angmallen_block_4"},
-		{"ocular_networks:hekatonium_block", "ocular_networks:angmallen_block_4", "ocular_networks:hekatonium_block"}
+		{"ocular_networks:hekatonium_bar", "ocular_networks:angmallen_block_4", "ocular_networks:hekatonium_bar"}
 	}
 })

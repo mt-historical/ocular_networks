@@ -132,7 +132,7 @@ local function register_armorType(name, nym, textNym, goodness_mult, goodness_ad
 		reciprocate_damage=true,
 	})
 
-	minetest.register_craftitem("ocular_networks:"..nym.."_shield", {
+	ocular_networks.register_item("ocular_networks:"..nym.."_shield", {
 		description=name.." Shield",
 		inventory_image="poly_shield_inv_"..textNym..".png",
 		texture="poly_shield_"..textNym..".png",

@@ -10,6 +10,16 @@ local function disallow()
 	end
 end
 
+function ocular_networks.register_item(n,d)
+	d.stack_max=d.stack_max or ocular_networks.config.stack_max
+	minetest.register_craftitem(n,d)
+end
+
+function ocular_networks.register_node(n,d)
+	d.stack_max=d.stack_max or ocular_networks.config.stack_max
+	minetest.register_node(n,d)
+end
+
 ocular_networks.registered_meltables={}
 ocular_networks.registered_alloys={}
 ocular_networks.registered_fusions={}
@@ -297,7 +307,7 @@ minetest.register_on_joinplayer(function(player)
 			hud_elem_type="image",
 			scale={x=3, y=3},
 			text="poly_hud2.png",
-			position={x=0.01, y=0.41},
+			position={x=0.01, y=0.36},
 			name="hudbar11",
 			size="",
 			alignment={x=1, y=-1}
@@ -349,19 +359,19 @@ minetest.register_globalstep(function(dtime)
 	end
 end)end)
 
-minetest.register_craftitem("ocular_networks:placeholder_power", {
+ocular_networks.register_item("ocular_networks:placeholder_power", {
 	description="Ocular Networks Power\n"..minetest.colorize("#00affa", "Recipe requires this much OCP"),
 	inventory_image="poly_gui_icon_pwr.png",
 	groups={not_in_creative_inventory=1}
 })
 
-minetest.register_craftitem("ocular_networks:placeholder_any_item", {
+ocular_networks.register_item("ocular_networks:placeholder_any_item", {
 	description="Any item\n"..minetest.colorize("#00affa", "Any item (excluding existing recipes)"),
 	inventory_image="poly_item.png",
 	groups={not_in_creative_inventory=1}
 })
 
-minetest.register_craftitem("ocular_networks:placeholder_any_item2", {
+ocular_networks.register_item("ocular_networks:placeholder_any_item2", {
 	description="Any item\n"..minetest.colorize("#00affa", "Any item"),
 	inventory_image="poly_item.png",
 	groups={not_in_creative_inventory=1}

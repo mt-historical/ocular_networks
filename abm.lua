@@ -490,7 +490,7 @@ minetest.register_abm({
 
 minetest.register_abm({
     label="reservoir updating",
-	nodenames={"ocular_networks:reservoir"},
+	nodenames={"ocular_networks:reservoir", "ocular_networks:reservoir2"},
 	interval=1,
 	chance=1,
 	catch_up=true,
@@ -514,9 +514,10 @@ minetest.register_abm({
 		local inv=meta:get_inventory()
 			for _,recipe in ipairs(ocular_networks.registered_passivecools) do
 				if inv:contains_item("input", recipe.input) then
-					if inv:room_for_item("output", recipe.output) then
+					if inv:room_for_item("output", recipe.output) and inv:room_for_item("dst", "bucket:bucket_empty") then
+						inv:remove_item("input", recipe.input)
 						inv:add_item("output", recipe.output)
-						inv:set_stack("input", 1, "bucket:bucket_empty")
+						inv:add_item("dst", "bucket:bucket_empty")
 						minetest.sound_play("OCN_steam_puff", {gain = 0.3, pos = pos, max_hear_distance = 10})
 					end
 				end
@@ -664,14 +665,16 @@ minetest.register_abm({
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("dst") then
+			end
+			if source_inv:get_list("dst") then
 				for i,stack in ipairs(source_inv:get_list("dst")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("dst", i, {})
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("main") then
+			end
+			if source_inv:get_list("main") then
 				for i,stack in ipairs(source_inv:get_list("main")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("main", i, {})
@@ -773,14 +776,16 @@ minetest.register_abm({
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("dst") then
+			end
+			if source_inv:get_list("dst") then
 				for i,stack in ipairs(source_inv:get_list("dst")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("dst", i, {})
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("main") then
+			end
+			if source_inv:get_list("main") then
 				for i,stack in ipairs(source_inv:get_list("main")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("main", i, {})
@@ -882,14 +887,16 @@ minetest.register_abm({
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("dst") then
+			end
+			if source_inv:get_list("dst") then
 				for i,stack in ipairs(source_inv:get_list("dst")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("dst", i, {})
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("main") then
+			end
+			if source_inv:get_list("main") then
 				for i,stack in ipairs(source_inv:get_list("main")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("main", i, {})
@@ -991,14 +998,16 @@ minetest.register_abm({
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("dst") then
+			end
+			if source_inv:get_list("dst") then
 				for i,stack in ipairs(source_inv:get_list("dst")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("dst", i, {})
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("main") then
+			end
+			if source_inv:get_list("main") then
 				for i,stack in ipairs(source_inv:get_list("main")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("main", i, {})
@@ -1099,14 +1108,16 @@ minetest.register_abm({
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("dst") then
+			end
+			if source_inv:get_list("dst") then
 				for i,stack in ipairs(source_inv:get_list("dst")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("dst", i, {})
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("main") then
+			end
+			if source_inv:get_list("main") then
 				for i,stack in ipairs(source_inv:get_list("main")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("main", i, {})
@@ -1206,14 +1217,16 @@ minetest.register_abm({
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("dst") then
+			end
+			if source_inv:get_list("dst") then
 				for i,stack in ipairs(source_inv:get_list("dst")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("dst", i, {})
 						inv:add_item("pipe_buffer", stack)
 					end
 				end
-			elseif source_inv:get_list("main") then
+			end
+			if source_inv:get_list("main") then
 				for i,stack in ipairs(source_inv:get_list("main")) do
 					if inv:room_for_item("pipe_buffer", stack) then
 						source_inv:set_stack("main", i, {})
@@ -2079,5 +2092,45 @@ minetest.register_abm({
 				end
 			end
 		end
+	end,
+})
+
+
+minetest.register_abm({
+    label="routing cables",
+	nodenames={"ocular_networks:router"},
+	interval=1,
+	chance=1,
+	catch_up=true,
+	action=function(pos, node)
+		local meta=minetest.get_meta(pos)
+		local power=meta:get_int("ocular_power")
+		local owner=meta:get_string("owner")
+		
+		local nw=visionLib.Schem.GetConnected(pos, {["ocular_networks:reservoir2"]=1, ["ocular_networks:router"]=1, ["ocular_networks:cable"]=1})
+		local k=1
+		
+		for _,v in pairs(nw) do
+			local vpos={x=tonumber(string.split(_," ")[1]),y=tonumber(string.split(_," ")[2]),z=tonumber(string.split(_," ")[3])}
+			local vmeta=minetest.get_meta(vpos)
+			local vowner=vmeta:get_string("owner")
+			if v.name=="ocular_networks:reservoir2" and owner==vowner then
+				k=k+1
+			end
+		end
+		
+		local d=math.floor(power/k)
+		
+		for _,v in pairs(nw) do
+			local vpos={x=tonumber(string.split(_," ")[1]),y=tonumber(string.split(_," ")[2]),z=tonumber(string.split(_," ")[3])}
+			local vmeta=minetest.get_meta(vpos)
+			local vowner=vmeta:get_string("owner")
+			if v.name=="ocular_networks:reservoir2" and owner==vowner then
+				power=power-d
+				vmeta:set_int("ocular_power",vmeta:get_int("ocular_power")+d)
+			end
+		end
+		meta:set_int("ocular_power", power)
+		meta:set_string("infotext", "Owned By: "..owner.."\nContains "..power.." power")
 	end,
 })

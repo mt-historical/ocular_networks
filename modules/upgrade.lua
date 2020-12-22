@@ -1,4 +1,4 @@
-minetest.register_craftitem("ocular_networks:armor_pendant", {
+ocular_networks.register_item("ocular_networks:armor_pendant", {
 	description="Angmallen Armor Upgrade Pendant\n"..minetest.colorize("#00affa", "Click to open your upgrade menu.\nPut Upgrade tokens in the inventory to use them."),
 	inventory_image="poly_armor_angmallen_a_upgrade_pendant.png",
 	stack_max=1,
@@ -13,7 +13,7 @@ minetest.register_craftitem("ocular_networks:armor_pendant", {
 	end
 })
 
-minetest.register_craftitem("ocular_networks:performance_controller", {
+ocular_networks.register_item("ocular_networks:performance_controller", {
 	description="Performance Controller\n"..minetest.colorize("#00affa", "Click to open your tweaks menu."),
 	inventory_image="poly_perf_controller.png",
 	stack_max=1,
@@ -103,7 +103,7 @@ minetest.after(0, function()
 	end)
 end)
 
-minetest.register_craftitem("ocular_networks:angmallen_shield", {
+ocular_networks.register_item("ocular_networks:angmallen_shield", {
 	description="Angmallen Shield",
 	inventory_image="poly_angmallen_shield.png",
 	texture="poly_angmallen_shield_real.png",
@@ -196,7 +196,7 @@ minetest.after(0, function()
 	end) 
 end)
 
-minetest.register_craftitem("ocular_networks:hekatonium_shield", {
+ocular_networks.register_item("ocular_networks:hekatonium_shield", {
 	description=minetest.colorize("#00affa", "Hekaton Defense Matrix"),
 	inventory_image="poly_hekatonic_shield.png",
 	texture="poly_hekatonic_shield_real.png",
@@ -208,7 +208,7 @@ minetest.register_craftitem("ocular_networks:hekatonium_shield", {
 	stack_max=1,
 })
 
-minetest.register_craftitem("ocular_networks:hekatonium_shield1", {
+ocular_networks.register_item("ocular_networks:hekatonium_shield1", {
 	description=minetest.colorize("#00affa", "Hekaton Defense Matrix"),
 	inventory_image="poly_hekatonic_shield.png",
 	texture="poly_hekatonic_shield_real.png",
@@ -220,7 +220,7 @@ minetest.register_craftitem("ocular_networks:hekatonium_shield1", {
 	stack_max=1,
 })
 
-minetest.register_craftitem("ocular_networks:hekatonium_shield2", {
+ocular_networks.register_item("ocular_networks:hekatonium_shield2", {
 	description=minetest.colorize("#00affa", "Hekaton Defense Matrix"),
 	inventory_image="poly_hekatonic_shield.png",
 	texture="poly_hekatonic_shield_real.png",
@@ -232,7 +232,7 @@ minetest.register_craftitem("ocular_networks:hekatonium_shield2", {
 	stack_max=1,
 })
 
-minetest.register_craftitem("ocular_networks:hekatonium_shield3", {
+ocular_networks.register_item("ocular_networks:hekatonium_shield3", {
 	description=minetest.colorize("#00affa", "Hekaton Defense Matrix"),
 	inventory_image="poly_hekatonic_shield.png",
 	texture="poly_hekatonic_shield_real.png",
@@ -486,136 +486,136 @@ minetest.register_craft({
 	replacements={{"ocular_networks:charged_gem","ocular_networks:uncharged_gem"}}
 })
 
-minetest.register_craftitem("ocular_networks:upgrade", {
+ocular_networks.register_item("ocular_networks:upgrade", {
 	description="Armor Upgrade Base\n"..minetest.colorize("#00affa", "Used to make upgrade tokens for the angmallen armor."),
 	inventory_image="poly_upgrade.png",
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_speed", {
+ocular_networks.register_item("ocular_networks:upgrade_speed", {
 	description="Speed Upgrade L1 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "2x speed multiplier"),
 	inventory_image="poly_upgrade_speed.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_speed2", {
+ocular_networks.register_item("ocular_networks:upgrade_speed2", {
 	description="Speed Upgrade L2 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "2.5x speed multiplier"),
 	inventory_image="poly_upgrade_speed.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_speed3", {
+ocular_networks.register_item("ocular_networks:upgrade_speed3", {
 	description="Speed Upgrade L3 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "3x speed multiplier"),
 	inventory_image="poly_upgrade_speed.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_jump", {
+ocular_networks.register_item("ocular_networks:upgrade_jump", {
 	description="Jump Upgrade L1 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "2x jump multiplier"),
 	inventory_image="poly_upgrade_jump.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_jump2", {
+ocular_networks.register_item("ocular_networks:upgrade_jump2", {
 	description="Jump Upgrade L2 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "3x jump multiplier"),
 	inventory_image="poly_upgrade_jump.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_jump3", {
+ocular_networks.register_item("ocular_networks:upgrade_jump3", {
 	description="Jump Upgrade L3 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "4x jump multiplier"),
 	inventory_image="poly_upgrade_jump.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_float", {
+ocular_networks.register_item("ocular_networks:upgrade_float", {
 	description="Hover Upgrade L1 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "0.5x gravity modifier"),
 	inventory_image="poly_upgrade_float.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_float2", {
+ocular_networks.register_item("ocular_networks:upgrade_float2", {
 	description="Hover Upgrade L2 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "0.3x gravity modifier"),
 	inventory_image="poly_upgrade_float.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_float3", {
+ocular_networks.register_item("ocular_networks:upgrade_float3", {
 	description="Hover Upgrade L3 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "0.2x gravity modifier"),
 	inventory_image="poly_upgrade_float.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_defense", {
+ocular_networks.register_item("ocular_networks:upgrade_defense", {
 	description="Shield Upgrade L1 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen shield.\n")..minetest.colorize("#ff0000", "+5 defense"),
 	inventory_image="poly_upgrade_defense.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_defense2", {
+ocular_networks.register_item("ocular_networks:upgrade_defense2", {
 	description="Shield Upgrade L2 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen shield.\n")..minetest.colorize("#ff0000", "+10 defense"),
 	inventory_image="poly_upgrade_defense.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_defense3", {
+ocular_networks.register_item("ocular_networks:upgrade_defense3", {
 	description="Shield Upgrade L3 \n"..minetest.colorize("#00affa", "Upgrade token for the angmallen shield.\n")..minetest.colorize("#ff0000", "+20 defense"),
 	inventory_image="poly_upgrade_defense.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_defense4", {
+ocular_networks.register_item("ocular_networks:upgrade_defense4", {
 	description="Shield Upgrade L4 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+20 defense"),
 	inventory_image="poly_upgrade_defense2.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_defense5", {
+ocular_networks.register_item("ocular_networks:upgrade_defense5", {
 	description="Shield Upgrade L5 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+40 defense"),
 	inventory_image="poly_upgrade_defense2.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_defense6", {
+ocular_networks.register_item("ocular_networks:upgrade_defense6", {
 	description="Shield Upgrade L6 \n"..minetest.colorize("#00affa", "Upgrade token for the hekatonic shield.\n")..minetest.colorize("#ff0000", "+80 defense"),
 	inventory_image="poly_upgrade_defense2.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_heal", {
+ocular_networks.register_item("ocular_networks:upgrade_heal", {
 	description="Healing Module\n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "+1 HP/50 OCP"),
 	inventory_image="poly_upgrade_heal.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:upgrade_heal2", {
+ocular_networks.register_item("ocular_networks:upgrade_heal2", {
 	description="Healing Module L2\n"..minetest.colorize("#00affa", "Upgrade token for the angmallen armor.\n")..minetest.colorize("#ff0000", "+2 HP/50 OCP"),
 	inventory_image="poly_upgrade_heal.png",
 	groups={ocp_upgrade=1},
 	stack_max=1
 })
 
-minetest.register_craftitem("ocular_networks:c_arm", {
+ocular_networks.register_item("ocular_networks:c_arm", {
 	description="Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm"),
 	inventory_image="poly_cyber_arm.png",
 })
 
-minetest.register_craftitem("ocular_networks:c_core", {
+ocular_networks.register_item("ocular_networks:c_core", {
 	description="Cybernetic Core\n"..minetest.colorize("#00affa", "A cybernetic core"),
 	inventory_image="poly_cyber_core.png",
 })
@@ -639,7 +639,7 @@ minetest.register_craft({
 })
 
 
-minetest.register_craftitem("ocular_networks:c_arm_gun", {
+ocular_networks.register_item("ocular_networks:c_arm_gun", {
 	description="Barreled Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a rifle barrel.\nEquip in performance controller menu\nRightClick with empty hand to fire\nCan not be used with other arms"),
 	inventory_image="poly_cyber_arm_gun.png",
 	stack_max=1
@@ -687,7 +687,7 @@ minetest.register_globalstep(function(dtime)
 	end
 end)
 
-minetest.register_craftitem("ocular_networks:c_arm_wrench", {
+ocular_networks.register_item("ocular_networks:c_arm_wrench", {
 	description="Clamped Cybernetic Arm\n"..minetest.colorize("#00affa", "A pneumatic arm with a wrench.\nEquip in performance controller menu\nClick to use in place of pipe wrench\nCan be used with other arms"),
 	inventory_image="poly_cyber_arm_wrench.png",
 	stack_max=1
@@ -700,7 +700,7 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craftitem("ocular_networks:c_core_air", {
+ocular_networks.register_item("ocular_networks:c_core_air", {
 	description="Ventilated Cybernetic Core\n"..minetest.colorize("#00affa", "A cybernetic core which can synthesise oxygen from water.\nEquip in performance controller menu\nPrevents air loss for 1 OCP/step"),
 	inventory_image="poly_cyber_core_air.png",
 })

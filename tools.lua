@@ -1,4 +1,4 @@
-minetest.register_craftitem("ocular_networks:inspector", {
+ocular_networks.register_item("ocular_networks:inspector", {
 	description="Ocular Inspection Tool\n"..minetest.colorize("#00affa", "Sneak and rightclick on a node to \ninspect it"),
 	inventory_image="poly_inspector.png",
 	stack_max=1,
@@ -14,7 +14,7 @@ minetest.register_craftitem("ocular_networks:inspector", {
 	end
 })
 
-minetest.register_craftitem("ocular_networks:save_disk", {
+ocular_networks.register_item("ocular_networks:save_disk", {
 	description="Aministrator Metadata Probe\n"..minetest.colorize("#00affa", "Sneak and rightclick on a node to \nsave it's metadata.\nClick on a node to load meta to it from the disk.\nhold 'use', and rightclick to view saved meta."),
 	inventory_image="poly_disk.png",
 	stack_max=1,
@@ -44,7 +44,7 @@ minetest.register_craftitem("ocular_networks:save_disk", {
 	end,
 })
 
-minetest.register_craftitem("ocular_networks:healer", {
+ocular_networks.register_item("ocular_networks:healer", {
 	description="Suspicious Healing Gimble\n"..minetest.colorize("#00affa", "click to heal yourself, uses personal power network.\nIt looks suspicious, like it has more to it."),
 	inventory_image="poly_gimble.png",
 	stack_max=1,
@@ -105,7 +105,7 @@ minetest.register_tool("ocular_networks:angmallen_sword", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_craftitem("ocular_networks:pipe_wrench", {
+ocular_networks.register_item("ocular_networks:pipe_wrench", {
 	description="C-Type Square Wrench\n"..minetest.colorize("#00affa", "This wrench can be used to rotate pipes."),
 	inventory_image="poly_wrench.png",
 	stack_max=1,
@@ -504,7 +504,7 @@ minetest.register_tool("ocular_networks:zweinium_sword", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_craftitem("ocular_networks:aurometer", {
+ocular_networks.register_item("ocular_networks:aurometer", {
 	description="Network Aurometer\n"..minetest.colorize("#00affa", "Shows your network power."),
 	inventory_image="poly_aurometer.png",
 	stack_max=1,

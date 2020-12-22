@@ -45,7 +45,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:frame 4",
+	output="ocular_networks:frame 8",
 	recipe={
 		{"ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3"},
 		{"ocular_networks:luminium_bar_3", "", "ocular_networks:luminium_bar_3"},
@@ -446,7 +446,7 @@ ocular_networks.register_fusion({
 })
 
 minetest.register_craft({
-	output="ocular_networks:reservoir",
+	output="ocular_networks:reservoir 4",
 	recipe={
 		{"", "default:copper_ingot", ""},
 		{"", "default:chest_locked", ""},
@@ -1047,8 +1047,8 @@ minetest.register_craft({
 	output="ocular_networks:luminium_pick",
 	recipe={
 		{"ocular_networks:luminium_bar", "ocular_networks:luminium_bar", "ocular_networks:luminium_bar"},
-		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1056,8 +1056,8 @@ minetest.register_craft({
 	output="ocular_networks:lumigold_pick",
 	recipe={
 		{"ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3"},
-		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1065,8 +1065,8 @@ minetest.register_craft({
 	output="ocular_networks:silicotin_pick",
 	recipe={
 		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar"},
-		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1074,8 +1074,8 @@ minetest.register_craft({
 	output="ocular_networks:shimmering_pick",
 	recipe={
 		{"ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar"},
-		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1083,8 +1083,8 @@ minetest.register_craft({
 	output="ocular_networks:luminium_axe",
 	recipe={
 		{"ocular_networks:luminium_bar", "ocular_networks:luminium_bar", ""},
-		{"ocular_networks:luminium_bar", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"ocular_networks:luminium_bar", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1092,8 +1092,8 @@ minetest.register_craft({
 	output="ocular_networks:lumigold_axe",
 	recipe={
 		{"ocular_networks:luminium_bar_3", "ocular_networks:luminium_bar_3", ""},
-		{"ocular_networks:luminium_bar_3", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"ocular_networks:luminium_bar_3", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1101,8 +1101,8 @@ minetest.register_craft({
 	output="ocular_networks:silicotin_axe",
 	recipe={
 		{"ocular_networks:silicotin_bar", "ocular_networks:silicotin_bar", ""},
-		{"ocular_networks:silicotin_bar", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"ocular_networks:silicotin_bar", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1110,8 +1110,8 @@ minetest.register_craft({
 	output="ocular_networks:shimmering_axe",
 	recipe={
 		{"ocular_networks:shimmering_bar", "ocular_networks:shimmering_bar", ""},
-		{"ocular_networks:shimmering_bar", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"ocular_networks:shimmering_bar", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1119,8 +1119,8 @@ minetest.register_craft({
 	output="ocular_networks:luminium_shovel",
 	recipe={
 		{"", "ocular_networks:luminium_bar", ""},
-		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1128,8 +1128,8 @@ minetest.register_craft({
 	output="ocular_networks:lumigold_shovel",
 	recipe={
 		{"", "ocular_networks:luminium_bar_3", ""},
-		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1137,8 +1137,8 @@ minetest.register_craft({
 	output="ocular_networks:silicotin_shovel",
 	recipe={
 		{"", "ocular_networks:silicotin_bar", ""},
-		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1146,8 +1146,8 @@ minetest.register_craft({
 	output="ocular_networks:shimmering_shovel",
 	recipe={
 		{"", "ocular_networks:shimmering_bar", ""},
-		{"", "ocular_networks:lumigold_rod", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""},
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1156,7 +1156,7 @@ minetest.register_craft({
 	recipe={
 		{"", "ocular_networks:luminium_bar", ""},
 		{"", "ocular_networks:luminium_bar", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1165,7 +1165,7 @@ minetest.register_craft({
 	recipe={
 		{"", "ocular_networks:luminium_bar_3", ""},
 		{"", "ocular_networks:luminium_bar_3", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1174,7 +1174,7 @@ minetest.register_craft({
 	recipe={
 		{"", "ocular_networks:silicotin_bar", ""},
 		{"", "ocular_networks:silicotin_bar", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1183,7 +1183,7 @@ minetest.register_craft({
 	recipe={
 		{"", "ocular_networks:shimmering_bar", ""},
 		{"", "ocular_networks:shimmering_bar", ""},
-		{"", "ocular_networks:lumigold_rod", ""}
+		{"", "group:stick", ""}
 	}
 })
 
@@ -1696,7 +1696,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:rubber",
+	output="ocular_networks:rubber 6",
 	recipe={
 		{"ocular_networks:freeElem_silicon", "ocular_networks:freeElem_hydrogen", "ocular_networks:freeElem_silicon"},
 		{"ocular_networks:freeElem_carbon", "ocular_networks:freeElem_sulfur", "ocular_networks:freeElem_carbon"},
@@ -1736,7 +1736,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output="ocular_networks:fertiliser 10",
+	output="ocular_networks:fertiliser 20",
 	recipe={
 		{"ocular_networks:mulch", "ocular_networks:gum", "ocular_networks:freeElem_nitrogen"},
 		{"default:clay_lump", "ocular_networks:freeElem_nitrogen", "ocular_networks:freeElem_nitrogen"}
@@ -1888,5 +1888,33 @@ minetest.register_craft({
 		{"ocular_networks:firebrick", "default:copper_ingot", "ocular_networks:firebrick"},
 		{"ocular_networks:tank", "ocular_networks:frame", "bucket:bucket_empty"},
 		{"ocular_networks:firebrick", "ocular_networks:plate_silicotin", "ocular_networks:firebrick"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:cable 15",
+	recipe={
+		{"ocular_networks:rubber", "ocular_networks:rubber", "ocular_networks:rubber"},
+		{"ocular_networks:emitter", "ocular_networks:luminium_bar_2", "ocular_networks:lens"},
+		{"ocular_networks:rubber", "ocular_networks:rubber", "ocular_networks:rubber"}
+	}
+})
+
+minetest.register_craft({
+	output="ocular_networks:router",
+	recipe={
+		{"ocular_networks:rubber", "ocular_networks:plate_luminium", "ocular_networks:rubber"},
+		{"ocular_networks:plate_luminium", "ocular_networks:frame", "ocular_networks:plate_luminium"},
+		{"ocular_networks:rubber", "ocular_networks:cable", "ocular_networks:rubber"}
+	}
+})
+
+
+minetest.register_craft({
+	output="ocular_networks:reservoir2",
+	recipe={
+		{"ocular_networks:rubber", "", "ocular_networks:rubber"},
+		{"ocular_networks:plate_luminium", "ocular_networks:reservoir", "ocular_networks:plate_luminium"},
+		{"", "ocular_networks:cable", ""}
 	}
 })

@@ -8,7 +8,7 @@ return {
 
 -- LIVE SETTINGS (These can be changed at any time)
 	-- the max OCP a player's network can contain. this can prevent the hud from printing errors. default 10000
-	max_personal_network_power = 10000, 
+	max_personal_network_power = 1000000, 
 
 	-- nodes that the laser drill cannot dig.
 	laserDrill_blacklist = { 
@@ -67,10 +67,17 @@ return {
 	-- Whether to load the chunkloader module.
 	load_forceloader = true, 
 	
+	-- Whether to load the decoration module.
+	load_decor = true, 
+	
+	-- Maximum stack size for ocular_networks items.
+	stack_max = 100,
+	
 -- TWEAKING (Will only take effect if changed before loading)
 	
 	-- how many hp the healer returns
 	healer_quality=3, 
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Don't change this bit
 }

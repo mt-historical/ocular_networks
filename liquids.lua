@@ -1,7 +1,7 @@
 
 ocular_networks.pumpable_liquids={}
 
-minetest.register_node("ocular_networks:luminium_source", {
+ocular_networks.register_node("ocular_networks:luminium_source", {
 	description="Luminium Source",
 	drawtype="liquid",
 	tiles={
@@ -33,7 +33,7 @@ minetest.register_node("ocular_networks:luminium_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:luminium_flowing", {
+ocular_networks.register_node("ocular_networks:luminium_flowing", {
 	description="Flowing Luminium",
 	drawtype="flowingliquid",
 	tiles={"poly_lumi_liq.png"},
@@ -90,7 +90,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:luminium_source"]="ocular_networks:bucket_luminium"
 
-minetest.register_node("ocular_networks:lumigold_source", {
+ocular_networks.register_node("ocular_networks:lumigold_source", {
 	description="Lumigold Source",
 	drawtype="liquid",
 	tiles={
@@ -123,7 +123,7 @@ minetest.register_node("ocular_networks:lumigold_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:lumigold_flowing", {
+ocular_networks.register_node("ocular_networks:lumigold_flowing", {
 	description="Flowing Lumigold",
 	drawtype="flowingliquid",
 	tiles={"poly_lumig_liq.png"},
@@ -180,7 +180,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:lumigold_source"]="ocular_networks:bucket_lumigold"
 
-minetest.register_node("ocular_networks:gold_source", {
+ocular_networks.register_node("ocular_networks:gold_source", {
 	description="Gold Source",
 	drawtype="liquid",
 	tiles={
@@ -213,7 +213,7 @@ minetest.register_node("ocular_networks:gold_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:gold_flowing", {
+ocular_networks.register_node("ocular_networks:gold_flowing", {
 	description="Flowing Gold",
 	drawtype="flowingliquid",
 	tiles={"poly_gold_liq.png"},
@@ -270,7 +270,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:gold_source"]="ocular_networks:bucket_gold"
 
-minetest.register_node("ocular_networks:steel_source", {
+ocular_networks.register_node("ocular_networks:steel_source", {
 	description="Steel Source",
 	drawtype="liquid",
 	tiles={
@@ -303,7 +303,7 @@ minetest.register_node("ocular_networks:steel_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:steel_flowing", {
+ocular_networks.register_node("ocular_networks:steel_flowing", {
 	description="Flowing Steel",
 	drawtype="flowingliquid",
 	tiles={"poly_steel_liq.png"},
@@ -360,7 +360,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:steel_source"]="ocular_networks:bucket_steel"
 
-minetest.register_node("ocular_networks:copper_source", {
+ocular_networks.register_node("ocular_networks:copper_source", {
 	description="Copper Source",
 	drawtype="liquid",
 	tiles={
@@ -393,7 +393,7 @@ minetest.register_node("ocular_networks:copper_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:copper_flowing", {
+ocular_networks.register_node("ocular_networks:copper_flowing", {
 	description="Flowing Copper",
 	drawtype="flowingliquid",
 	tiles={"poly_copper_liq.png"},
@@ -450,7 +450,7 @@ bucket.register_liquid(
 	"Bucket of Molten Copper"
 )
 
-minetest.register_node("ocular_networks:bronze_source", {
+ocular_networks.register_node("ocular_networks:bronze_source", {
 	description="Bronze Source",
 	drawtype="liquid",
 	tiles={
@@ -483,7 +483,7 @@ minetest.register_node("ocular_networks:bronze_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:bronze_flowing", {
+ocular_networks.register_node("ocular_networks:bronze_flowing", {
 	description="Flowing Bronze",
 	drawtype="flowingliquid",
 	tiles={"poly_bronze_liq.png"},
@@ -540,7 +540,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:bronze_source"]="ocular_networks:bucket_bronze"
 
-minetest.register_node("ocular_networks:tin_source", {
+ocular_networks.register_node("ocular_networks:tin_source", {
 	description="Tin Source",
 	drawtype="liquid",
 	tiles={
@@ -573,7 +573,7 @@ minetest.register_node("ocular_networks:tin_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:tin_flowing", {
+ocular_networks.register_node("ocular_networks:tin_flowing", {
 	description="Flowing Tin",
 	drawtype="flowingliquid",
 	tiles={"poly_tin_liq.png"},
@@ -630,7 +630,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:tin_source"]="ocular_networks:bucket_tin"
 
-minetest.register_node("ocular_networks:angmallen_source", {
+ocular_networks.register_node("ocular_networks:angmallen_source", {
 	description="Angmallen Source",
 	drawtype="liquid",
 	tiles={
@@ -663,7 +663,7 @@ minetest.register_node("ocular_networks:angmallen_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:angmallen_flowing", {
+ocular_networks.register_node("ocular_networks:angmallen_flowing", {
 	description="Flowing Angmallen",
 	drawtype="flowingliquid",
 	tiles={"poly_angmallen_liq.png"},
@@ -720,7 +720,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:angmallen_source"]="ocular_networks:bucket_angmallen"
 
-minetest.register_node("ocular_networks:hekatonium_source", {
+ocular_networks.register_node("ocular_networks:hekatonium_source", {
 	description="Hekatonium Source",
 	drawtype="liquid",
 	tiles={
@@ -753,7 +753,7 @@ minetest.register_node("ocular_networks:hekatonium_source", {
 	groups={liquid=2, igniter=1},
 })
 
-minetest.register_node("ocular_networks:hekatonium_flowing", {
+ocular_networks.register_node("ocular_networks:hekatonium_flowing", {
 	description="Flowing Hekatonium",
 	drawtype="flowingliquid",
 	tiles={"poly_hekatonium_liq.png"},
@@ -810,7 +810,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:hekatonium_source"]="ocular_networks:bucket_hekatonium"
 
-minetest.register_node("ocular_networks:zweinium_source", {
+ocular_networks.register_node("ocular_networks:zweinium_source", {
 	description="Unstable Zweinium Source",
 	drawtype="liquid",
 	tiles={
@@ -842,7 +842,7 @@ minetest.register_node("ocular_networks:zweinium_source", {
 	groups={liquid=2},
 })
 
-minetest.register_node("ocular_networks:zweinium_flowing", {
+ocular_networks.register_node("ocular_networks:zweinium_flowing", {
 	description="Flowing Unstable Zweinium",
 	drawtype="flowingliquid",
 	tiles={"poly_zweinium_flux_b.png"},
@@ -897,7 +897,7 @@ bucket.register_liquid(
 
 ocular_networks.pumpable_liquids["ocular_networks:zweinium_source"]="ocular_networks:bucket_zweinium"
 
-minetest.register_node("ocular_networks:coolant_source", {
+ocular_networks.register_node("ocular_networks:coolant_source", {
 	description="Nitrogen Coolant Source",
 	drawtype="liquid",
 	tiles={
@@ -929,7 +929,7 @@ minetest.register_node("ocular_networks:coolant_source", {
 	groups={liquid=2},
 })
 
-minetest.register_node("ocular_networks:coolant_flowing", {
+ocular_networks.register_node("ocular_networks:coolant_flowing", {
 	description="Flowing Nitrogen Coolant",
 	drawtype="flowingliquid",
 	tiles={"poly_coolant_b.png"},

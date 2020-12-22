@@ -27,7 +27,7 @@ if minetest.get_modpath("basic_machines") then
 	"list[context;dst;3.5,2;1,1;]"..
 	"list[current_player;main;0,5;8,4;]"
 	
-	minetest.register_node("ocular_networks:power_converter_BMPC", {
+	ocular_networks.register_node("ocular_networks:power_converter_BMPC", {
 		description="Power Cell Packager\n"..minetest.colorize("#00affa", "Used to convert OCP into basic_machines power cells.\nTakes power from BELOW"),
 		tiles={"poly_power_converter_vert.png", "poly_power_converter_vert.png", "poly_power_converter_BMPC_side.png"},
 
@@ -91,7 +91,7 @@ end
 
 if minetest.get_modpath("technic") then
 	
-	minetest.register_node("ocular_networks:power_converter_EU", {
+	ocular_networks.register_node("ocular_networks:power_converter_EU", {
 		description="MV Electrofraction Generator\n"..minetest.colorize("#00affa", "Used to convert OCP into technic MV EU\n Takes power from BELOW"),
 		tiles={"poly_power_converter_vert.png", "poly_power_converter_vert.png", "poly_power_converter_EU_side.png"},
 
@@ -202,7 +202,7 @@ if minetest.get_modpath("technic") then
 end
 
 if minetest.get_modpath("mobs") then
-	minetest.register_node("ocular_networks:distributor_broken", {
+	ocular_networks.register_node("ocular_networks:distributor_broken", {
 		description="Broken Power Collector\n"..minetest.colorize("#00affa", "A distributor whose core has been eaten by a network jammer."),
 		tiles={"poly_node_coreless.png"},
 		is_ground_content=false,

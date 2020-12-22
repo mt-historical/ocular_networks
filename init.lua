@@ -5,10 +5,10 @@ ocular_networks={worldpath=worldpath, modpath=modpath}
 
 minetest.register_privilege("ocular_networks_dbg", {description="Allows players to access OcuN debug commands, Do not grant to anyone untrustworthy.", give_to_singleplayer=false})
 
-dofile(modpath.."/config.txt")
+ocular_networks.config=dofile(modpath.."/config.txt")
 
 if loadfile(worldpath.."/ocular_networks_config.txt") then
-	dofile(worldpath.."/ocular_networks_config.txt")
+	ocular_networks.config=dofile(worldpath.."/ocular_networks_config.txt")
 end
 
 if minetest.get_modpath("wieldview") then
@@ -54,4 +54,8 @@ end
 
 if ocular_networks.get_config("load_guide") and minetest.get_modpath("guidebooks") then
 	dofile(modpath.."/modules/guide.lua")
+end
+
+if ocular_networks.get_config("load_decor")  then
+	dofile(modpath.."/modules/decor.lua")
 end
