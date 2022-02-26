@@ -81,9 +81,9 @@ ocular_networks.register_node("ocular_networks:luminium_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:luminium_source",
-	"ocular_networks:luminium_flowing",
-	"ocular_networks:bucket_luminium",
+	":ocular_networks:luminium_source",
+	":ocular_networks:luminium_flowing",
+	":ocular_networks:bucket_luminium",
 	"bucket.png^poly_luminium_liq.png",
 	"Bucket of Molten Luminium"
 )
@@ -171,9 +171,9 @@ ocular_networks.register_node("ocular_networks:lumigold_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:lumigold_source",
-	"ocular_networks:lumigold_flowing",
-	"ocular_networks:bucket_lumigold",
+	":ocular_networks:lumigold_source",
+	":ocular_networks:lumigold_flowing",
+	":ocular_networks:bucket_lumigold",
 	"bucket.png^poly_lumigold_liq.png",
 	"Bucket of Molten Lumigold"
 )
@@ -261,9 +261,9 @@ ocular_networks.register_node("ocular_networks:gold_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:gold_source",
-	"ocular_networks:gold_flowing",
-	"ocular_networks:bucket_gold",
+	":ocular_networks:gold_source",
+	":ocular_networks:gold_flowing",
+	":ocular_networks:bucket_gold",
 	"bucket.png^poly_gold_bliq.png",
 	"Bucket of Molten Gold"
 )
@@ -351,9 +351,9 @@ ocular_networks.register_node("ocular_networks:steel_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:steel_source",
-	"ocular_networks:steel_flowing",
-	"ocular_networks:bucket_steel",
+	":ocular_networks:steel_source",
+	":ocular_networks:steel_flowing",
+	":ocular_networks:bucket_steel",
 	"bucket.png^poly_steel_bliq.png",
 	"Bucket of Molten Steel"
 )
@@ -443,9 +443,9 @@ ocular_networks.register_node("ocular_networks:copper_flowing", {
 ocular_networks.pumpable_liquids["ocular_networks:copper_source"]="ocular_networks:bucket_copper"
 
 bucket.register_liquid(
-	"ocular_networks:copper_source",
-	"ocular_networks:copper_flowing",
-	"ocular_networks:bucket_copper",
+	":ocular_networks:copper_source",
+	":ocular_networks:copper_flowing",
+	":ocular_networks:bucket_copper",
 	"bucket.png^poly_copper_bliq.png",
 	"Bucket of Molten Copper"
 )
@@ -531,9 +531,9 @@ ocular_networks.register_node("ocular_networks:bronze_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:bronze_source",
-	"ocular_networks:bronze_flowing",
-	"ocular_networks:bucket_bronze",
+	":ocular_networks:bronze_source",
+	":ocular_networks:bronze_flowing",
+	":ocular_networks:bucket_bronze",
 	"bucket.png^poly_bronze_bliq.png",
 	"Bucket of Molten Bronze"
 )
@@ -621,9 +621,9 @@ ocular_networks.register_node("ocular_networks:tin_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:tin_source",
-	"ocular_networks:tin_flowing",
-	"ocular_networks:bucket_tin",
+	":ocular_networks:tin_source",
+	":ocular_networks:tin_flowing",
+	":ocular_networks:bucket_tin",
 	"bucket.png^poly_tin_bliq.png",
 	"Bucket of Molten Tin"
 )
@@ -711,9 +711,9 @@ ocular_networks.register_node("ocular_networks:angmallen_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:angmallen_source",
-	"ocular_networks:angmallen_flowing",
-	"ocular_networks:bucket_angmallen",
+	":ocular_networks:angmallen_source",
+	":ocular_networks:angmallen_flowing",
+	":ocular_networks:bucket_angmallen",
 	"bucket.png^poly_angmallen_bliq.png",
 	"Bucket of Molten Angmallen"
 )
@@ -801,9 +801,9 @@ ocular_networks.register_node("ocular_networks:hekatonium_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:hekatonium_source",
-	"ocular_networks:hekatonium_flowing",
-	"ocular_networks:bucket_hekatonium",
+	":ocular_networks:hekatonium_source",
+	":ocular_networks:hekatonium_flowing",
+	":ocular_networks:bucket_hekatonium",
 	"bucket.png^poly_hekatonium_bliq.png",
 	"Bucket of Molten Hekatonium"
 )
@@ -888,9 +888,9 @@ ocular_networks.register_node("ocular_networks:zweinium_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:zweinium_source",
-	"ocular_networks:zweinium_flowing",
-	"ocular_networks:bucket_zweinium",
+	":ocular_networks:zweinium_source",
+	":ocular_networks:zweinium_flowing",
+	":ocular_networks:bucket_zweinium",
 	"bucket.png^poly_zwei_bliq.png",
 	"Bucket of Unstable Zweinium"
 )
@@ -975,9 +975,9 @@ ocular_networks.register_node("ocular_networks:coolant_flowing", {
 })
 
 bucket.register_liquid(
-	"ocular_networks:coolant_source",
-	"ocular_networks:coolant_flowing",
-	"ocular_networks:bucket_coolant",
+	":ocular_networks:coolant_source",
+	":ocular_networks:coolant_flowing",
+	":ocular_networks:bucket_coolant",
 	"bucket.png^poly_coolant_bliq.png",
 	"Bucket of Nitrogen Coolant"
 )

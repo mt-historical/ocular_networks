@@ -12,12 +12,12 @@ end
 
 function ocular_networks.register_item(n,d)
 	d.stack_max=d.stack_max or ocular_networks.config.stack_max
-	minetest.register_craftitem(n,d)
+	minetest.register_craftitem(':'..n,d)
 end
 
 function ocular_networks.register_node(n,d)
 	d.stack_max=d.stack_max or ocular_networks.config.stack_max
-	minetest.register_node(n,d)
+	minetest.register_node(':'..n,d)
 end
 
 ocular_networks.registered_meltables={}
@@ -288,7 +288,7 @@ else
 end
 
 ocular_networks.get_config=function(nam)
-	local con=dofile(MP.."/config.txt")
+	local con=dofile(ocular_networks.modpath.."/config.txt")
 	if loadfile(ocular_networks.worldpath.."/ocular_networks_config.txt") then
 		con=dofile(ocular_networks.worldpath.."/ocular_networks_config.txt")
 	end

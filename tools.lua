@@ -56,7 +56,7 @@ ocular_networks.register_item("ocular_networks:healer", {
 	end
 })
 
-minetest.register_tool("ocular_networks:angmallen_hammer", {
+minetest.register_tool(":ocular_networks:angmallen_hammer", {
 	description=minetest.colorize("#00affa", "Angmallen Destroyer"),
 	inventory_image="poly_angmallen_hammer.png",
 	range=10,
@@ -73,7 +73,7 @@ minetest.register_tool("ocular_networks:angmallen_hammer", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:angmallen_axe", {
+minetest.register_tool(":ocular_networks:angmallen_axe", {
 	description=minetest.colorize("#00affa", "Angmallen Deforester"),
 	inventory_image="poly_angmallen_axe.png",
 	range=10,
@@ -89,7 +89,7 @@ minetest.register_tool("ocular_networks:angmallen_axe", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:angmallen_sword", {
+minetest.register_tool(":ocular_networks:angmallen_sword", {
 	description=minetest.colorize("#00affa", "Angmallen Decapitator\n")..minetest.colorize("#ff0000", "290 Melee Damage"),
 	inventory_image="poly_angmallen_sword.png",
 	range=10,
@@ -111,7 +111,7 @@ ocular_networks.register_item("ocular_networks:pipe_wrench", {
 	stack_max=1,
 })
 
-minetest.register_tool("ocular_networks:hekaton_hammer", {
+minetest.register_tool(":ocular_networks:hekaton_hammer", {
 	description=minetest.colorize("#00affa", "4k Tonne Drumel"),
 	inventory_image="poly_hekaton_hammer.png",
 	wield_scale={x=3.0, y=3.0, z=1.0},
@@ -128,7 +128,7 @@ minetest.register_tool("ocular_networks:hekaton_hammer", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:hekaton_axe", {
+minetest.register_tool(":ocular_networks:hekaton_axe", {
 	description=minetest.colorize("#00affa", "Erenic Axaw"),
 	inventory_image="poly_hekaton_axe.png",
 	range=20,
@@ -144,7 +144,7 @@ minetest.register_tool("ocular_networks:hekaton_axe", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:hekaton_sword", {
+minetest.register_tool(":ocular_networks:hekaton_sword", {
 	description=minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "20 Melee Damage")..minetest.colorize("#00affa", "\nRightclick to enable"),
 	inventory_image="poly_hekaton_sword_off.png",
 	wield_scale={x=3.0, y=3.0, z=1.0},
@@ -163,7 +163,7 @@ minetest.register_tool("ocular_networks:hekaton_sword", {
 	end
 })
 
-minetest.register_tool("ocular_networks:hekaton_sword_on", {
+minetest.register_tool(":ocular_networks:hekaton_sword_on", {
 	description=minetest.colorize("#00affa", "Erenic Crindblade\n")..minetest.colorize("#ff0000", "500 Melee Damage")..minetest.colorize("#00affa", "\nRightclick to switch to lancet"),
 	inventory_image="poly_hekaton_sword.png",
 	wield_scale={x=3.0, y=3.0, z=1.0},
@@ -183,7 +183,7 @@ minetest.register_tool("ocular_networks:hekaton_sword_on", {
 	end
 })
 
-minetest.register_tool("ocular_networks:hekaton_garus", {
+minetest.register_tool(":ocular_networks:hekaton_garus", {
 	description=minetest.colorize("#00affa", "Erenic Lancet\n")..minetest.colorize("#ff0000", "350 Melee Damage\n+25 Reach")..minetest.colorize("#00affa", "\nRightclick to disable"),
 	inventory_image="poly_hekaton_garus.png",
 	wield_scale={x=3.0, y=3.0, z=1.0},
@@ -204,7 +204,7 @@ minetest.register_tool("ocular_networks:hekaton_garus", {
 	end
 })
 
-minetest.register_tool("ocular_networks:luminium_pick", {
+minetest.register_tool(":ocular_networks:luminium_pick", {
 	description="Luminium Pickaxe",
 	inventory_image="poly_pick_lumi.png",
 	tool_capabilities={
@@ -218,7 +218,7 @@ minetest.register_tool("ocular_networks:luminium_pick", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:luminium_shovel", {
+minetest.register_tool(":ocular_networks:luminium_shovel", {
 	description="Luminium Shovel",
 	inventory_image="poly_shovel_lumi.png",
 	wield_image="poly_shovel_lumi.png^[transformR90",
@@ -233,7 +233,7 @@ minetest.register_tool("ocular_networks:luminium_shovel", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:luminium_axe", {
+minetest.register_tool(":ocular_networks:luminium_axe", {
 	description="Luminium Axe",
 	inventory_image="poly_axe_lumi.png",
 	tool_capabilities={
@@ -247,7 +247,7 @@ minetest.register_tool("ocular_networks:luminium_axe", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:luminium_sword", {
+minetest.register_tool(":ocular_networks:luminium_sword", {
 	description="Luminium Cleaver",
 	inventory_image="poly_sword_lumi.png",
 	tool_capabilities={
@@ -261,7 +261,7 @@ minetest.register_tool("ocular_networks:luminium_sword", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:lumigold_pick", {
+minetest.register_tool(":ocular_networks:lumigold_pick", {
 	description="Lumigold Pickaxe",
 	inventory_image="poly_pick_lumig.png",
 	tool_capabilities={
@@ -275,7 +275,7 @@ minetest.register_tool("ocular_networks:lumigold_pick", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:lumigold_shovel", {
+minetest.register_tool(":ocular_networks:lumigold_shovel", {
 	description="Lumigold Shovel",
 	inventory_image="poly_shovel_lumig.png",
 	wield_image="poly_shovel_lumig.png^[transformR90",
@@ -290,7 +290,7 @@ minetest.register_tool("ocular_networks:lumigold_shovel", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:lumigold_axe", {
+minetest.register_tool(":ocular_networks:lumigold_axe", {
 	description="Lumigold Axe",
 	inventory_image="poly_axe_lumig.png",
 	tool_capabilities={
@@ -304,7 +304,7 @@ minetest.register_tool("ocular_networks:lumigold_axe", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:lumigold_sword", {
+minetest.register_tool(":ocular_networks:lumigold_sword", {
 	description="Lumigold Scimitar",
 	inventory_image="poly_sword_lumig.png",
 	tool_capabilities={
@@ -318,7 +318,7 @@ minetest.register_tool("ocular_networks:lumigold_sword", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:silicotin_pick", {
+minetest.register_tool(":ocular_networks:silicotin_pick", {
 	description="Silicotin Pickaxe",
 	inventory_image="poly_pick_silicotin.png",
 	tool_capabilities={
@@ -332,7 +332,7 @@ minetest.register_tool("ocular_networks:silicotin_pick", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:silicotin_shovel", {
+minetest.register_tool(":ocular_networks:silicotin_shovel", {
 	description="Silicotin Shovel",
 	inventory_image="poly_shovel_silicotin.png",
 	wield_image="poly_shovel_silicotin.png^[transformR90",
@@ -347,7 +347,7 @@ minetest.register_tool("ocular_networks:silicotin_shovel", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:silicotin_axe", {
+minetest.register_tool(":ocular_networks:silicotin_axe", {
 	description="Silicotin Axe",
 	inventory_image="poly_axe_silicotin.png",
 	tool_capabilities={
@@ -361,7 +361,7 @@ minetest.register_tool("ocular_networks:silicotin_axe", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:silicotin_sword", {
+minetest.register_tool(":ocular_networks:silicotin_sword", {
 	description="Silicotin Glaive",
 	inventory_image="poly_sword_silicotin.png",
 	tool_capabilities={
@@ -375,7 +375,7 @@ minetest.register_tool("ocular_networks:silicotin_sword", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:shimmering_pick", {
+minetest.register_tool(":ocular_networks:shimmering_pick", {
 	description="Shimmering Alloy Pickaxe",
 	inventory_image="poly_pick_shimmering.png",
 	tool_capabilities={
@@ -389,7 +389,7 @@ minetest.register_tool("ocular_networks:shimmering_pick", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:shimmering_shovel", {
+minetest.register_tool(":ocular_networks:shimmering_shovel", {
 	description="Shimmering Alloy Shovel",
 	inventory_image="poly_shovel_shimmering.png",
 	wield_image="poly_shovel_shimmering.png^[transformR90",
@@ -404,7 +404,7 @@ minetest.register_tool("ocular_networks:shimmering_shovel", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:shimmering_axe", {
+minetest.register_tool(":ocular_networks:shimmering_axe", {
 	description="Shimmering Alloy Axe",
 	inventory_image="poly_axe_shimmering.png",
 	tool_capabilities={
@@ -418,7 +418,7 @@ minetest.register_tool("ocular_networks:shimmering_axe", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:shimmering_sword", {
+minetest.register_tool(":ocular_networks:shimmering_sword", {
 	description="Shimmering Alloy Rapier",
 	inventory_image="poly_sword_shimmering.png",
 	tool_capabilities={
@@ -432,7 +432,7 @@ minetest.register_tool("ocular_networks:shimmering_sword", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:composite_scythe", {
+minetest.register_tool(":ocular_networks:composite_scythe", {
 	description="Composite Alloy Scythe",
 	inventory_image="poly_composite_scythe.png",
 	wield_scale={x=2.0, y=2.0, z=1.0},
@@ -447,7 +447,7 @@ minetest.register_tool("ocular_networks:composite_scythe", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:zweinium_pick", {
+minetest.register_tool(":ocular_networks:zweinium_pick", {
 	description="Zweinium Pickaxe",
 	inventory_image="poly_pick_zwei.png",
 	tool_capabilities={
@@ -461,7 +461,7 @@ minetest.register_tool("ocular_networks:zweinium_pick", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:zweinium_shovel", {
+minetest.register_tool(":ocular_networks:zweinium_shovel", {
 	description="Zweinium Shovel",
 	inventory_image="poly_shovel_zwei.png",
 	wield_image="poly_shovel_zwei.png^[transformR90",
@@ -476,7 +476,7 @@ minetest.register_tool("ocular_networks:zweinium_shovel", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:zweinium_axe", {
+minetest.register_tool(":ocular_networks:zweinium_axe", {
 	description="Zweinium Axe",
 	inventory_image="poly_axe_zwei.png",
 	tool_capabilities={
@@ -490,7 +490,7 @@ minetest.register_tool("ocular_networks:zweinium_axe", {
 	sound={breaks="default_tool_breaks"},
 })
 
-minetest.register_tool("ocular_networks:zweinium_sword", {
+minetest.register_tool(":ocular_networks:zweinium_sword", {
 	description="Zweinium Zweihander",
 	inventory_image="poly_sword_zwei.png",
 	tool_capabilities={

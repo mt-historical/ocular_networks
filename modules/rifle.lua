@@ -1,4 +1,4 @@
-minetest.register_tool("ocular_networks:blazerifle", {
+minetest.register_tool(":ocular_networks:blazerifle", {
 	description="OCP Blaze Rifle\n"..minetest.colorize("#00affa", "uses 100 power from your personal network\n(displayed in the top left)\n")..minetest.colorize("#ff0000", "15 Ranged Damage"),
 	wield_scale={x=0.75,y=0.75,z=0.85},
 	inventory_image="poly_blazerifle.png",
@@ -85,9 +85,9 @@ proj.on_step=function(self, dtime)
 	})
 end
 
-minetest.register_entity("ocular_networks:power_projectile", proj )
+minetest.register_entity(":ocular_networks:power_projectile", proj )
 
-minetest.register_tool("ocular_networks:blazerifle_c", {
+minetest.register_tool(":ocular_networks:blazerifle_c", {
 	description="Supercharged OCP Blaze Rifle\n"..minetest.colorize("#00affa", "uses 500 power from your personal network\n(displayed in the top left)\n")..minetest.colorize("#ff0000", "45 Ranged Damage"),
 	wield_scale={x=0.75,y=0.75,z=0.85},
 	inventory_image="poly_blazerifle_c.png",
@@ -197,9 +197,9 @@ proj2.on_step=function(self, dtime)
 	})
 end
 
-minetest.register_entity("ocular_networks:power_projectile_2", proj2 )
+minetest.register_entity(":ocular_networks:power_projectile_2", proj2 )
 
-minetest.register_tool("ocular_networks:erena_blaster", {
+minetest.register_tool(":ocular_networks:erena_blaster", {
 	description="Erena Blaster\n"..minetest.colorize("#00affa", "uses 500 power from your personal network\n(displayed in the top left)\n")..minetest.colorize("#ff0000", "200 Ranged Damage"),
 	wield_scale={x=0.75,y=0.75,z=0.85},
 	inventory_image="poly_blazerifle_d.png",
@@ -310,4 +310,4 @@ proj3.on_step=function(self, dtime)
 	})
 end
 
-minetest.register_entity("ocular_networks:power_projectile_3", proj3 )
+minetest.register_entity(":ocular_networks:power_projectile_3", proj3 )

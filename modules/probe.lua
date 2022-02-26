@@ -477,7 +477,7 @@ local nodespec=""..
 "size[10,6]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "label[0.9,0;data to read:]"..
-"dropdown[1,1;4,1;mode;inventory,metadata,nodename,mesecon;${mode}]"..
+"dropdown[1,1;4,1;mode;inventory,metadata,nodename,mesecon;${modeidx}]"..
 "field[1,2.7;8,1;attr;Inventory name or metadata field:;${attr}]"..
 "field[1,4.4;8,1;channel;channel to use:;${channel}]"..
 "style[save;bgcolor=blue;textcolor=white]"..
@@ -498,15 +498,28 @@ ocular_networks.register_node("ocular_networks:networkprobe", {
 		meta:set_string("mode", "")
 		meta:set_string("attr", "")
 		meta:set_string("formspec", nodespec)
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.1, 0)
 	end,
 	on_receive_fields=function(pos, formname, fields, sender)
 		local meta=minetest.get_meta(pos)
 		if sender:get_player_name() == meta:get_string("owner") then
 			meta:set_string("channel", fields.channel or "")
 			meta:set_string("mode", fields.mode)
+			local midx={
+					["inventory"]=1,
+			 		["metadata"]=2,
+					["nodename"]=3,
+					["mesecon"]=4,
+			 }
+			if midx[fields.mode] then
+				meta:set_int("modeidx", midx[fields.mode])
+			else
+				meta:set_int("modeidx", 1)
+			end
 			meta:set_string("attr", fields.attr or "")
 		else
-			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by ".."$"..meta:get_string("owner").."!")
+			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
 		end
 	end,
 	mesecons={effector={rules=mesecon.rules.default,
@@ -539,16 +552,8 @@ ocular_networks.register_node("ocular_networks:networkprobe", {
 					{-5 / 16, -0.5, -3 / 16, 5 / 16, -0.4, 3 / 16},
 					{-3 / 16, -0.5, -5 / 16, 3 / 16, -0.4, 5 / 16},
 					{-1 / 16, -0.5, -1 / 16, 1 / 16, 0.4, 1 / 16}}
-	}
-})
-
-minetest.register_abm({
-    label="uplink probe",
-	nodenames={"ocular_networks:networkprobe"},
-	interval=1,
-	chance=1,
-	catch_up=true,
-	action=function(pos, node)
+	},
+	on_timer = function(pos, elapsed)
 		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
 		local meta=minetest.get_meta(pos)
 		local meta2=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
@@ -576,7 +581,9 @@ minetest.register_abm({
 				ocular_networks.channel_states["$"..meta:get_string("channel")]="false"
 			end
 		end
-	end,
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.1, 0)
+	end
 })
 
 minetest.register_craft({
@@ -592,7 +599,7 @@ local nodespec2=""..
 "size[10,6]"..
 "background[0,0;0,0;poly_gui_formbg.png;true]"..
 "label[0.9,0;data to modify:]"..
-"dropdown[1,1;4,1;mode;switch,mesecon;${mode}]"..
+"dropdown[1,1;4,1;mode;switch,mesecon;${modeidx}]"..
 "field[1,2.7;8,1;attr;channel value required:;${attr}]"..
 "field[1,4.4;8,1;channel;channel to use:;${channel}]"..
 "style[save;bgcolor=blue;textcolor=white]"..
@@ -619,12 +626,23 @@ ocular_networks.register_node("ocular_networks:networkprobe2", {
 		meta:set_string("mode", "")
 		meta:set_string("attr", "")
 		meta:set_string("formspec", nodespec2)
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.1, 0)
 	end,
 	on_receive_fields=function(pos, formname, fields, sender)
 		local meta=minetest.get_meta(pos)
 		if sender:get_player_name() == meta:get_string("owner") then
 			meta:set_string("channel", fields.channel or "")
 			meta:set_string("mode", fields.mode)
+			local midx={
+			 ["switch"]=1,
+			 ["mesecon"]=2
+			 }
+			if midx[fields.mode] then
+				meta:set_int("modeidx", midx[fields.mode])
+			else
+				meta:set_int("modeidx", 1)
+			end
 			meta:set_string("attr", fields.attr or "")
 		else
 			minetest.chat_send_player(sender:get_player_name(), "This mechanism is owned by "..meta:get_string("owner").."!")
@@ -651,7 +669,34 @@ ocular_networks.register_node("ocular_networks:networkprobe2", {
 					{-5 / 16, -0.5, -3 / 16, 5 / 16, -0.4, 3 / 16},
 					{-3 / 16, -0.5, -5 / 16, 3 / 16, -0.4, 5 / 16},
 					{-1 / 16, -0.5, -1 / 16, 1 / 16, 0.4, 1 / 16}}
-	}
+	},
+	on_timer = function(pos, elapsed)
+		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
+		local meta=minetest.get_meta(pos)
+		local meta2=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
+		local owner=meta:get_string("owner")
+		meta:set_string("infotext", "Receiving data over channel:".."$"..meta:get_string("channel").."\nOwned By: "..owner)
+		if meta:get_string("mode") == "switch" then
+			local verifstates={
+				["on"]=true,
+				["HIGH"]=true,
+				["true"]=true,
+				["1"]=true,
+			}
+			if verifstates[ocular_networks.channel_states["$"..meta:get_string("channel")]] then
+				meta2:set_string("enabled", "false")
+			else
+				meta2:set_string("enabled", "true")
+			end
+		elseif meta:get_string("mode") == "mesecon" then
+			if ocular_networks.channel_states["$"..meta:get_string("channel")] == meta:get_string("attr") then
+				minetest.swap_node(pos, {name="ocular_networks:networkprobe2_MCON"})
+				mesecon.receptor_on(pos, mesecon.rules.default)
+			end
+		end
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.1, 0)
+	end
 })
 
 ocular_networks.register_node("ocular_networks:networkprobe2_MCON", {
@@ -675,6 +720,8 @@ ocular_networks.register_node("ocular_networks:networkprobe2_MCON", {
 		meta:set_string("attr", "")
 		meta:set_int("modeidx",1)
 		meta:set_string("formspec", nodespec2)
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.1, 0)
 	end,
 	on_receive_fields=function(pos, formname, fields, sender)
 		local meta=minetest.get_meta(pos)
@@ -713,48 +760,7 @@ ocular_networks.register_node("ocular_networks:networkprobe2_MCON", {
 	},
 	groups={not_in_creative_inventory=1, cracky=1},
 	drop="ocular_networks:networkprobe2",
-})
-
-minetest.register_abm({
-    label="downlink probe",
-	nodenames={"ocular_networks:networkprobe2"},
-	interval=1,
-	chance=1,
-	catch_up=true,
-	action=function(pos, node)
-		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
-		local meta=minetest.get_meta(pos)
-		local meta2=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
-		local owner=meta:get_string("owner")
-		meta:set_string("infotext", "Receiving data over channel:".."$"..meta:get_string("channel").."\nOwned By: "..owner)
-		if meta:get_string("mode") == "switch" then
-			local verifstates={
-				["on"]=true,
-				["HIGH"]=true,
-				["true"]=true,
-				["1"]=true,
-			}
-			if verifstates[ocular_networks.channel_states["$"..meta:get_string("channel")]] then
-				meta2:set_string("enabled", "false")
-			else
-				meta2:set_string("enabled", "true")
-			end
-		elseif meta:get_string("mode") == "mesecon" then
-			if ocular_networks.channel_states["$"..meta:get_string("channel")] == meta:get_string("attr") then
-				minetest.swap_node(pos, {name="ocular_networks:networkprobe2_MCON"})
-				mesecon.receptor_on(pos, mesecon.rules.default)
-			end
-		end
-	end,
-})
-
-minetest.register_abm({
-    label="downlink probe",
-	nodenames={"ocular_networks:networkprobe2_MCON"},
-	interval=1,
-	chance=1,
-	catch_up=true,
-	action=function(pos, node)
+	on_timer = function(pos, elapsed)
 		local node_below=minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z})
 		local meta=minetest.get_meta(pos)
 		local meta2=minetest.get_meta({x=pos.x, y=pos.y-1, z=pos.z})
@@ -764,8 +770,11 @@ minetest.register_abm({
 			minetest.swap_node(pos, {name="ocular_networks:networkprobe2"})
 			mesecon.receptor_off(pos, mesecon.rules.default)
 		end
-	end,
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.1, 0)
+	end
 })
+
 
 minetest.register_craft({
 	output="ocular_networks:networkprobe2",

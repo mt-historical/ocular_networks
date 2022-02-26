@@ -1,4 +1,4 @@
-local modpath=minetest.get_modpath("ocular_networks")
+local modpath=minetest.get_modpath("ocular_networks_old")
 local worldpath=minetest.get_worldpath()
 
 ocular_networks={worldpath=worldpath, modpath=modpath}
@@ -9,10 +9,6 @@ ocular_networks.config=dofile(modpath.."/config.txt")
 
 if loadfile(worldpath.."/ocular_networks_config.txt") then
 	ocular_networks.config=dofile(worldpath.."/ocular_networks_config.txt")
-end
-
-if minetest.get_modpath("wieldview") then
-	error("\nocular_networks does not currently support wieldview. Please disable it (in the 3d_armor modpack.)\n", 0)
 end
 
 dofile(modpath.."/functions.lua")

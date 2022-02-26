@@ -426,17 +426,15 @@ minetest.register_abm({
 			if source_power then
 				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					if minetest.get_player_by_name(owner) then
-						if minetest.get_player_by_name(owner):is_player_connected(owner) then
-							local player=minetest.get_player_by_name(owner)
-							if player:get_meta():get_string("personal_ocular_power") then
-								local playerPower=tonumber(player:get_meta():get_string("personal_ocular_power"))
-								player:get_meta():set_string("personal_ocular_power", tostring(playerPower+source_power))
-								source_meta:set_int("ocular_power", 0)
-							else
-								player:get_meta():set_string("personal_ocular_power", tostring(source_power))
-								source_meta:set_int("ocular_power", 0)
-							end
-						end
+                        local player=minetest.get_player_by_name(owner)
+                        if player:get_meta():get_string("personal_ocular_power") then
+                            local playerPower=tonumber(player:get_meta():get_string("personal_ocular_power"))
+                            player:get_meta():set_string("personal_ocular_power", tostring(playerPower+source_power))
+                            source_meta:set_int("ocular_power", 0)
+                        else
+                            player:get_meta():set_string("personal_ocular_power", tostring(source_power))
+                            source_meta:set_int("ocular_power", 0)
+                        end
 					end
 				end
 			end
@@ -463,22 +461,20 @@ minetest.register_abm({
 			if source_power then
 				if owner == source_owner or ocular_networks.get_config("moderator_whitelist") then
 					if minetest.get_player_by_name(owner) then
-						if minetest.get_player_by_name(owner):is_player_connected(owner) then
-							local player=minetest.get_player_by_name(owner)
-							if player:get_meta():get_string("personal_ocular_power") then
-								local playerPower=tonumber(player:get_meta():get_string("personal_ocular_power"))
-								if playerPower < rate-1 then
-									source_meta:set_int("ocular_power", source_power+playerPower)
-									player:get_meta():set_string("personal_ocular_power", tostring(0))
-								else
-									player:get_meta():set_string("personal_ocular_power", tostring(playerPower-rate))
-									source_meta:set_int("ocular_power", source_power+rate)
-								end
-							else
-								return 0
-							end
-						end
-					end
+                        local player=minetest.get_player_by_name(owner)
+                        if player:get_meta():get_string("personal_ocular_power") then
+                            local playerPower=tonumber(player:get_meta():get_string("personal_ocular_power"))
+                            if playerPower < rate-1 then
+                                source_meta:set_int("ocular_power", source_power+playerPower)
+                                player:get_meta():set_string("personal_ocular_power", tostring(0))
+                            else
+                                player:get_meta():set_string("personal_ocular_power", tostring(playerPower-rate))
+                                source_meta:set_int("ocular_power", source_power+rate)
+                            end
+                        else
+                            return 0
+                        end
+                    end
 				end
 			end 
 		local function b()	meta:set_string("infotext", "Owned By: "..owner) end

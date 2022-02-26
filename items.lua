@@ -1,5 +1,3 @@
-visionLib.Material.require({"luminium", "lumigold", "hekatonium", "angmallen", "silicotin", "zweinium", "shimmering", "copper", "iron", "gold", "tin", "bronze"})
-
 ocular_networks.register_item("ocular_networks:lens", {
 	description="Silver Lens\n"..minetest.colorize("#00affa", "Rightclick a frame with this to make it\npower batteries under it"),
 	inventory_image="poly_silver_lens.png",

@@ -115,7 +115,7 @@ ocular_networks.register_item("ocular_networks:angmallen_shield", {
 	stack_max=1,
 })
 
-armor:register_armor("ocular_networks:angmallen_shield1", {
+armor:register_armor(":ocular_networks:angmallen_shield1", {
 	description="Angmallen Shield",
 	inventory_image="poly_angmallen_shield.png",
 	texture="poly_angmallen_shield_real.png",
@@ -127,7 +127,7 @@ armor:register_armor("ocular_networks:angmallen_shield1", {
 	stack_max=1,
 })
 
-armor:register_armor("ocular_networks:angmallen_shield2", {
+armor:register_armor(":ocular_networks:angmallen_shield2", {
 	description="Angmallen Shield",
 	inventory_image="poly_angmallen_shield.png",
 	texture="poly_angmallen_shield_real.png",
@@ -139,7 +139,7 @@ armor:register_armor("ocular_networks:angmallen_shield2", {
 	stack_max=1
 })
 
-armor:register_armor("ocular_networks:angmallen_shield3", {
+armor:register_armor(":ocular_networks:angmallen_shield3", {
 	description="Angmallen Shield",
 	inventory_image="poly_angmallen_shield.png",
 	texture="poly_angmallen_shield_real.png",

@@ -1,4 +1,4 @@
-armor:register_armor("ocular_networks:angmallen_helm", {
+armor:register_armor(":ocular_networks:angmallen_helm", {
 	description="Angmallen Helm",
 	inventory_image="poly_armor_angmallen_inv_helmet.png",
 	texture="poly_armor_helmet_angmallen",
@@ -9,7 +9,7 @@ armor:register_armor("ocular_networks:angmallen_helm", {
 	reciprocate_damage=true
 })
 
-armor:register_armor("ocular_networks:angmallen_chest", {
+armor:register_armor(":ocular_networks:angmallen_chest", {
 	description="Angmallen Chestplate",
 	inventory_image="poly_armor_angmallen_inv_chestplate.png",
 	texture="poly_armor_chestplate_angmallen",
@@ -20,7 +20,7 @@ armor:register_armor("ocular_networks:angmallen_chest", {
 	reciprocate_damage=true
 })
 
-armor:register_armor("ocular_networks:angmallen_legs", {
+armor:register_armor(":ocular_networks:angmallen_legs", {
 	description="Angmallen Greaves",
 	inventory_image="poly_armor_angmallen_inv_leggings.png",
 	texture="poly_armor_leggings_angmallen",
@@ -31,7 +31,7 @@ armor:register_armor("ocular_networks:angmallen_legs", {
 	reciprocate_damage=true
 })
 
-armor:register_armor("ocular_networks:angmallen_boots", {
+armor:register_armor(":ocular_networks:angmallen_boots", {
 	description="Angmallen Boots",
 	inventory_image="poly_armor_angmallen_inv_boots.png",
 	texture="poly_armor_boots_angmallen",
@@ -42,7 +42,7 @@ armor:register_armor("ocular_networks:angmallen_boots", {
 	reciprocate_damage=true,
 })
 
-armor:register_armor("ocular_networks:hekatonium_helm", {
+armor:register_armor(":ocular_networks:hekatonium_helm", {
 	description=minetest.colorize("#00affa", "Hekaton Helm"),
 	inventory_image="poly_armor_hekatonic_inv_helmet.png",
 	texture="poly_armor_helmet_hekatonic",
@@ -53,7 +53,7 @@ armor:register_armor("ocular_networks:hekatonium_helm", {
 	reciprocate_damage=true
 })
 
-armor:register_armor("ocular_networks:hekatonium_chest", {
+armor:register_armor(":ocular_networks:hekatonium_chest", {
 	description=minetest.colorize("#00affa", "Hekaton Plate"),
 	inventory_image="poly_armor_hekatonic_inv_chestplate.png",
 	texture="poly_armor_chestplate_hekatonic",
@@ -64,7 +64,7 @@ armor:register_armor("ocular_networks:hekatonium_chest", {
 	reciprocate_damage=true
 })
 
-armor:register_armor("ocular_networks:hekatonium_legs", {
+armor:register_armor(":ocular_networks:hekatonium_legs", {
 	description=minetest.colorize("#00affa", "Hekaton Greaves"),
 	inventory_image="poly_armor_hekatonic_inv_leggings.png",
 	texture="poly_armor_leggings_hekatonic",
@@ -75,7 +75,7 @@ armor:register_armor("ocular_networks:hekatonium_legs", {
 	reciprocate_damage=true
 })
 
-armor:register_armor("ocular_networks:hekatonium_boots", {
+armor:register_armor(":ocular_networks:hekatonium_boots", {
 	description=minetest.colorize("#00affa", "Hekaton Boots"),
 	inventory_image="poly_armor_hekatonic_inv_boots.png",
 	texture="poly_armor_boots_hekatonic",
@@ -88,7 +88,7 @@ armor:register_armor("ocular_networks:hekatonium_boots", {
 
 -- begin non-up
 local function register_armorType(name, nym, textNym, goodness_mult, goodness_add, mat, pyr)
-	armor:register_armor("ocular_networks:"..nym.."_helm", {
+	armor:register_armor(":ocular_networks:"..nym.."_helm", {
 		description=name.." Helm",
 		inventory_image="poly_armor_inv_helmet_"..textNym..".png",
 		texture="poly_armor_helmet_"..textNym,
@@ -99,7 +99,7 @@ local function register_armorType(name, nym, textNym, goodness_mult, goodness_ad
 		reciprocate_damage=true
 	})
 
-	armor:register_armor("ocular_networks:"..nym.."_chest", {
+	armor:register_armor(":ocular_networks:"..nym.."_chest", {
 		description=name.." Chestplate",
 		inventory_image="poly_armor_inv_chestplate_"..textNym..".png",
 		texture="poly_armor_chestplate_"..textNym,
@@ -110,7 +110,7 @@ local function register_armorType(name, nym, textNym, goodness_mult, goodness_ad
 		reciprocate_damage=true
 	})
 
-	armor:register_armor("ocular_networks:"..nym.."_legs", {
+	armor:register_armor(":ocular_networks:"..nym.."_legs", {
 		description=name.." Greaves",
 		inventory_image="poly_armor_inv_leggings_"..textNym..".png",
 		texture="poly_armor_leggings_"..textNym,
@@ -121,7 +121,7 @@ local function register_armorType(name, nym, textNym, goodness_mult, goodness_ad
 		reciprocate_damage=true
 	})
 
-	armor:register_armor("ocular_networks:"..nym.."_boots", {
+	armor:register_armor(":ocular_networks:"..nym.."_boots", {
 		description=name.." Boots",
 		inventory_image="poly_armor_inv_boots_"..textNym..".png",
 		texture="poly_armor_boots_"..textNym,
